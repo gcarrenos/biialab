@@ -20,67 +20,52 @@ export interface AIGroupingResult {
   courses: SuggestedCourse[];
   ungroupedVideos: string[];
   summary: string;
+  totalVideosAnalyzed: number;
+  wasLimited: boolean;
 }
+
+// Maximum videos to analyze at once (to stay within token limits)
+const MAX_VIDEOS_PER_ANALYSIS = 50;
 
 // Analyze videos and suggest course groupings using OpenAI
 export async function analyzeAndGroupVideos(
   videos: YouTubeVideo[],
   apiKey: string
 ): Promise<AIGroupingResult> {
-  // Prepare video data for AI analysis
-  const videoData = videos.map(v => ({
+  if (!apiKey) {
+    throw new Error('OpenAI API key is required');
+  }
+
+  // Limit videos to prevent token overflow
+  const wasLimited = videos.length > MAX_VIDEOS_PER_ANALYSIS;
+  const videosToAnalyze = wasLimited 
+    ? videos.slice(0, MAX_VIDEOS_PER_ANALYSIS) 
+    : videos;
+
+  // Prepare video data for AI analysis (compact format to save tokens)
+  const videoData = videosToAnalyze.map(v => ({
     id: v.id,
     title: v.title,
-    description: v.description?.slice(0, 500) || '', // Limit description length
-    duration: v.duration,
-    viewCount: v.viewCount,
-    tags: v.tags?.slice(0, 10) || [],
+    desc: v.description?.slice(0, 200) || '', // Shorter descriptions
+    dur: v.duration,
+    views: v.viewCount,
   }));
 
-  const prompt = `Analyze these YouTube videos and group them into logical courses. 
-Each course should have videos that teach related topics or form a learning path.
+  const prompt = `Analyze ${videosToAnalyze.length} YouTube videos and group them into courses.
 
-Videos to analyze:
-${JSON.stringify(videoData, null, 2)}
+Videos (id, title, description excerpt, duration, views):
+${videoData.map(v => `- ${v.id}: "${v.title}" | ${v.desc.slice(0, 100)}... | ${v.dur} | ${v.views} views`).join('\n')}
 
-Create course groupings based on:
-1. Topic similarity (titles, descriptions, tags)
-2. Learning progression (beginner to advanced)
-3. Thematic connections
-4. Series or related content
+Group by topic similarity, themes, and learning progression.
 
-For each suggested course, provide:
-- A compelling course title (in the same language as the videos)
-- A brief description (2-3 sentences, same language)
-- Category (e.g., Personal Development, Psychology, Business, Leadership, Finance, Health & Wellness, Technology)
-- Level (Beginner, Intermediate, or Advanced)
-- Which videos belong and WHY
-- Confidence score (0-100)
+Return ONLY valid JSON:
+{"courses":[{"title":"Course Title","description":"2-3 sentence description","category":"Category","level":"Beginner|Intermediate|Advanced","videos":[{"id":"video_id","title":"Title","reason":"Why it fits"}],"confidence":85}],"ungroupedVideos":["id1"],"summary":"How grouped"}
 
-Return ONLY valid JSON in this exact format:
-{
-  "courses": [
-    {
-      "title": "Course Title",
-      "description": "Course description...",
-      "category": "Category Name",
-      "level": "Beginner",
-      "videos": [
-        {"id": "video_id", "title": "Video Title", "reason": "Why this video fits"}
-      ],
-      "confidence": 85
-    }
-  ],
-  "ungroupedVideos": ["video_id_1", "video_id_2"],
-  "summary": "Brief summary of how videos were grouped"
-}
-
-Important:
-- A video can only belong to ONE course
-- Minimum 2 videos per course, ideally 3-10
-- If videos don't fit any group well, put them in ungroupedVideos
-- Be creative but logical with groupings
-- Keep titles and descriptions in the SAME LANGUAGE as the original videos`;
+Rules:
+- Each video in ONE course only
+- 2-10 videos per course
+- Use SAME LANGUAGE as videos
+- Categories: Personal Development, Psychology, Business, Leadership, Finance, Health & Wellness, Technology`;
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -126,18 +111,28 @@ Important:
       jsonContent = content.split('```')[1].split('```')[0];
     }
 
-    const result = JSON.parse(jsonContent.trim()) as AIGroupingResult;
+    const parsed = JSON.parse(jsonContent.trim());
 
-    // Add videoIds array for convenience
-    result.courses = result.courses.map(course => ({
-      ...course,
-      videoIds: course.videos.map(v => v.id),
-    }));
+    // Build result with additional metadata
+    const result: AIGroupingResult = {
+      courses: (parsed.courses || []).map((course: any) => ({
+        ...course,
+        videoIds: (course.videos || []).map((v: any) => v.id),
+      })),
+      ungroupedVideos: parsed.ungroupedVideos || [],
+      summary: parsed.summary || 'Videos grouped by topic similarity',
+      totalVideosAnalyzed: videosToAnalyze.length,
+      wasLimited,
+    };
 
     return result;
   } catch (error) {
     console.error('AI grouping error:', error);
-    throw error;
+    // Return a more helpful error message
+    if (error instanceof Error) {
+      throw new Error(`AI Analysis failed: ${error.message}`);
+    }
+    throw new Error('AI Analysis failed. Please check your API key and try again.');
   }
 }
 

@@ -153,10 +153,20 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
               <div className="bg-purple-900/20 border border-purple-800 rounded-lg p-4">
                 <h3 className="text-sm font-medium text-purple-400 mb-2">How it works</h3>
                 <p className="text-sm text-text-secondary">
-                  AI will analyze your video titles, descriptions, and tags to suggest logical course groupings.
+                  AI will analyze your video titles and descriptions to suggest logical course groupings.
                   Videos with similar topics, themes, or learning progressions will be grouped together.
                 </p>
               </div>
+
+              {videos.length > 50 && (
+                <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
+                  <h3 className="text-sm font-medium text-yellow-400 mb-2">⚠️ Large video library</h3>
+                  <p className="text-sm text-text-secondary">
+                    You have <strong>{videos.length}</strong> videos. Due to AI token limits, only the first <strong>50 videos</strong> will be analyzed.
+                    For best results, select specific videos first using the checkboxes in the dashboard, then use &quot;Import Selected&quot;.
+                  </p>
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-2">
@@ -218,8 +228,13 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
           {step === 'results' && result && (
             <div className="space-y-6">
               <div className="bg-green-900/20 border border-green-800 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-green-400 mb-2">Analysis Complete</h3>
+                <h3 className="text-sm font-medium text-green-400 mb-2">✓ Analysis Complete</h3>
                 <p className="text-sm text-text-secondary">{result.summary}</p>
+                {result.wasLimited && (
+                  <p className="text-xs text-yellow-400 mt-2">
+                    Note: Analyzed {result.totalVideosAnalyzed} of {videos.length} videos (limited for performance)
+                  </p>
+                )}
               </div>
 
               <div className="space-y-4">
