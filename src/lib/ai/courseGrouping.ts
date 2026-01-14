@@ -24,16 +24,16 @@ export interface AIGroupingResult {
   wasLimited: boolean;
 }
 
-// Maximum videos to analyze at once (to stay within token limits)
-const MAX_VIDEOS_PER_ANALYSIS = 50;
+// Maximum videos to analyze at once (Gemini can handle more than OpenAI)
+const MAX_VIDEOS_PER_ANALYSIS = 100;
 
-// Analyze videos and suggest course groupings using OpenAI
+// Analyze videos and suggest course groupings using Google Gemini
 export async function analyzeAndGroupVideos(
   videos: YouTubeVideo[],
   apiKey: string
 ): Promise<AIGroupingResult> {
   if (!apiKey) {
-    throw new Error('OpenAI API key is required');
+    throw new Error('Gemini API key is required');
   }
 
   // Limit videos to prevent token overflow
@@ -42,11 +42,11 @@ export async function analyzeAndGroupVideos(
     ? videos.slice(0, MAX_VIDEOS_PER_ANALYSIS) 
     : videos;
 
-  // Prepare video data for AI analysis (compact format to save tokens)
+  // Prepare video data for AI analysis
   const videoData = videosToAnalyze.map(v => ({
     id: v.id,
     title: v.title,
-    desc: v.description?.slice(0, 200) || '', // Shorter descriptions
+    desc: v.description?.slice(0, 300) || '',
     dur: v.duration,
     views: v.viewCount,
   }));
@@ -68,36 +68,40 @@ Rules:
 - Categories: Personal Development, Psychology, Business, Leadership, Finance, Health & Wellness, Technology`;
 
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert educational content curator. You analyze video content and create logical, engaging course structures. Always respond with valid JSON only.',
+    // Use Google Gemini API
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `You are an expert educational content curator. Analyze video content and create logical course structures. Always respond with valid JSON only.\n\n${prompt}`,
+                },
+              ],
+            },
+          ],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 8000,
+            responseMimeType: 'application/json',
           },
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
-        temperature: 0.7,
-        max_tokens: 4000,
-      }),
-    });
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error = await response.text();
-      throw new Error(`OpenAI API error: ${response.status} - ${error}`);
+      throw new Error(`Gemini API error: ${response.status} - ${error}`);
     }
 
     const data = await response.json();
-    const content = data.choices[0]?.message?.content;
+    const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!content) {
       throw new Error('No response from AI');

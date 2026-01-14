@@ -158,11 +158,11 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
                 </p>
               </div>
 
-              {videos.length > 50 && (
+              {videos.length > 100 && (
                 <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
                   <h3 className="text-sm font-medium text-yellow-400 mb-2">⚠️ Large video library</h3>
                   <p className="text-sm text-text-secondary">
-                    You have <strong>{videos.length}</strong> videos. Due to AI token limits, only the first <strong>50 videos</strong> will be analyzed.
+                    You have <strong>{videos.length}</strong> videos. Due to AI limits, the first <strong>100 videos</strong> will be analyzed.
                     For best results, select specific videos first using the checkboxes in the dashboard, then use &quot;Import Selected&quot;.
                   </p>
                 </div>
@@ -170,19 +170,19 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
 
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-2">
-                  OpenAI API Key
+                  Google Gemini API Key
                 </label>
                 <input
                   type="password"
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="sk-..."
+                  placeholder="AIza..."
                   className="w-full px-4 py-3 bg-background border border-gray-800 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
                 <p className="text-xs text-text-secondary mt-2">
-                  Your API key is not stored. Get one at{' '}
-                  <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">
-                    platform.openai.com
+                  Your API key is not stored. Get a FREE key at{' '}
+                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">
+                    aistudio.google.com/apikey
                   </a>
                 </p>
               </div>
