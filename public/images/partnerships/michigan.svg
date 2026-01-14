@@ -1,0 +1,7 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="80" fill="#F5F5F5"/>
+  <path d="M50 25H60V55H50V25Z" fill="#E50914"/>
+  <path d="M70 25H80V55H70V25Z" fill="#E50914"/>
+  <path d="M90 25H100V55H90V25Z" fill="#E50914"/>
+  <text x="110" y="45" font-family="Arial" font-size="14" font-weight="bold" fill="#E50914">MICHIGAN</text>
+</svg> 

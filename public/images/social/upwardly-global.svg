@@ -1,0 +1,5 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="80" fill="#F5F5F5"/>
+  <path d="M60 50L80 30L100 50L120 30L140 50" stroke="#E50914" stroke-width="3"/>
+  <text x="55" y="65" font-family="Arial" font-size="10" font-weight="bold" fill="#E50914">UPWARDLY GLOBAL</text>
+</svg> 

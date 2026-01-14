@@ -1,0 +1,7 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="80" fill="#F5F5F5"/>
+  <circle cx="50" cy="40" r="20" fill="#E50914"/>
+  <text x="40" y="45" font-family="Arial" font-size="14" font-weight="bold" fill="white">IC</text>
+  <text x="85" y="40" font-family="Arial" font-size="12" font-weight="bold" fill="#333">IMPERIAL</text>
+  <text x="85" y="55" font-family="Arial" font-size="10" fill="#333">COLLEGE LONDON</text>
+</svg> 

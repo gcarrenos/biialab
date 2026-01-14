@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BiiAMind Educational Platform
+
+BiiAMind is a modern, Masterclass-inspired educational platform for high-quality courses in AI, technology, and professional development.
+
+![BiiAMind Platform](public/images/readme-screenshot.png)
+
+## Features
+
+- **Comprehensive Course Library**: Browse and filter courses by category and difficulty level
+- **Immersive Learning Experience**: Video lessons with supplemental resources
+- **User Progress Tracking**: Track completed lessons and course progress
+- **Certificates**: Earn certificates upon course completion
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices
+- **Dark Mode Interface**: Modern, eye-friendly dark theme
+
+## Pages & Functionality
+
+- **Home**: Featured courses and platform introduction
+- **Courses**: Browsable catalog with filtering capabilities
+- **Course Detail**: In-depth course information and curriculum
+- **Lesson Player**: Video player with resources and progress tracking
+- **Account**: User profile and course progress management
+- **Admin Dashboard**: Course, user and content management
+- **Social Impact**: Information about educational initiatives
+- **Partnerships**: University and industry partnership opportunities
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js 15.3 with TypeScript
+- **Styling**: Tailwind CSS 4
+- **Icons**: Heroicons, React Icons
+- **PDF Generation**: React PDF Renderer
+- **Animation**: Framer Motion
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.x or later
+- npm 8.x or later
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/biialab.git
+cd biialab
+
+# Install dependencies
+npm install
+
+# Start the development server with Turbopack
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Create an optimized production build
+npm run build
 
-## Learn More
+# Start the production server
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+biialab/
+├── public/             # Static assets
+├── src/
+│   ├── app/            # Pages and routes
+│   ├── components/     # Reusable UI components
+│   ├── lib/            # Utilities and data
+│   └── types/          # TypeScript type definitions
+├── .eslintrc.json      # ESLint configuration
+├── next.config.js      # Next.js configuration
+└── tailwind.config.js  # Tailwind CSS configuration
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is proprietary software.
+
+## Contact
+
+For inquiries, please contact [your-email@example.com](mailto:your-email@example.com)
