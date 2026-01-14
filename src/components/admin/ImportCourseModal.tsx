@@ -94,8 +94,12 @@ export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: I
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-background-light border border-gray-800 rounded-lg w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/95 backdrop-blur-sm" onClick={onClose} />
+      
+      {/* Modal */}
+      <div className="relative bg-background-light border border-gray-800 rounded-lg w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
         {/* Header */}
         <div className="p-6 border-b border-gray-800 flex items-center justify-between">
           <div>
