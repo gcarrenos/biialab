@@ -1,65 +1,107 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { usePathname, notFound } from 'next/navigation';
+import { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { courses, currentUser } from '@/lib/data';
+import { courses as staticCourses, currentUser } from '@/lib/data';
 import { Lesson, Module, Course, QuizQuestion } from '@/lib/types';
-import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon } from '@heroicons/react/24/outline';
+import { getCourseBySlugOrId, CourseWithDetails } from '@/lib/db/actions/courses';
+import { YouTubeEmbed } from '@/components/video/YouTubeEmbed';
 
 interface LessonPageProps {
-  params: {
+  params: Promise<{
     id: string;
     lessonId: string;
-  };
+  }>;
 }
 
 export default function LessonPage({ params }: LessonPageProps) {
+  // Unwrap params using React.use()
+  const { id, lessonId } = use(params);
+  
   const [activeTab, setActiveTab] = useState<'video' | 'notes' | 'resources' | 'quiz'>('video');
-  const [course, setCourse] = useState<Course | null>(null);
-  const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
-  const [currentModule, setCurrentModule] = useState<Module | null>(null);
+  const [course, setCourse] = useState<Course | CourseWithDetails | null>(null);
+  const [currentLesson, setCurrentLesson] = useState<Lesson | CourseWithDetails['modules'][0]['lessons'][0] | null>(null);
+  const [currentModule, setCurrentModule] = useState<Module | CourseWithDetails['modules'][0] | null>(null);
   const [userProgress, setUserProgress] = useState<string[]>([]);
   const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<{[key: string]: number}>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [userNotes, setUserNotes] = useState('');
-  const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(true);
   
   // Find the current course, module, and lesson
   useEffect(() => {
-    const foundCourse = courses.find(c => c.id === params.id);
-    if (!foundCourse || !foundCourse.modules) {
-      return;
-    }
-    
-    setCourse(foundCourse);
-    
-    // Find the current module and lesson
-    let foundLesson: Lesson | null = null;
-    let foundModule: Module | null = null;
-    
-    foundCourse.modules.forEach(module => {
-      const lesson = module.lessons.find(l => l.id === params.lessonId);
-      if (lesson) {
-        foundLesson = lesson;
-        foundModule = module;
+    const fetchCourse = async () => {
+      setIsLoading(true);
+      
+      // Try database first
+      const dbCourse = await getCourseBySlugOrId(id);
+      
+      if (dbCourse && dbCourse.modules.length > 0) {
+        setCourse(dbCourse as any);
+        
+        // Find lesson in database course
+        let foundLesson = null;
+        let foundModule = null;
+        
+        for (const mod of dbCourse.modules) {
+          const lesson = mod.lessons.find(l => l.id === lessonId);
+          if (lesson) {
+            foundLesson = lesson;
+            foundModule = mod;
+            break;
+          }
+        }
+        
+        if (foundLesson && foundModule) {
+          setCurrentLesson(foundLesson as any);
+          setCurrentModule(foundModule as any);
+        }
+        
+        setIsLoading(false);
+        return;
       }
-    });
+      
+      // Fallback to static data
+      const foundCourse = staticCourses.find(c => c.id === id);
+      if (!foundCourse || !foundCourse.modules) {
+        setIsLoading(false);
+        return;
+      }
+      
+      setCourse(foundCourse);
+      
+      // Find the current module and lesson
+      let foundLesson: Lesson | null = null;
+      let foundModule: Module | null = null;
+      
+      foundCourse.modules.forEach(module => {
+        const lesson = module.lessons.find(l => l.id === lessonId);
+        if (lesson) {
+          foundLesson = lesson;
+          foundModule = module;
+        }
+      });
+      
+      if (foundLesson && foundModule) {
+        setCurrentLesson(foundLesson);
+        setCurrentModule(foundModule);
+      }
+      
+      // Get user progress
+      const userCourseProgress = currentUser.progress.find(p => p.courseId === id);
+      if (userCourseProgress && userCourseProgress.completedLessons) {
+        setUserProgress(userCourseProgress.completedLessons);
+      }
+      
+      setIsLoading(false);
+    };
     
-    if (foundLesson && foundModule) {
-      setCurrentLesson(foundLesson);
-      setCurrentModule(foundModule);
-    }
-    
-    // Get user progress
-    const userCourseProgress = currentUser.progress.find(p => p.courseId === params.id);
-    if (userCourseProgress && userCourseProgress.completedLessons) {
-      setUserProgress(userCourseProgress.completedLessons);
-    }
-  }, [params.id, params.lessonId]);
+    fetchCourse();
+  }, [id, lessonId]);
   
-  if (!course || !currentLesson || !currentModule) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background text-text-primary">
         <div className="text-center">
@@ -70,25 +112,46 @@ export default function LessonPage({ params }: LessonPageProps) {
     );
   }
   
+  if (!course || !currentLesson || !currentModule) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background text-text-primary">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Lesson not found</h2>
+          <Link href={`/courses/${id}`} className="text-accent hover:underline">
+            Back to course
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  
+  // Get modules array (works for both types)
+  const modules = 'modules' in course ? course.modules : [];
+  const courseSlug = 'slug' in course ? course.slug : course.id;
+  const instructor = 'instructor' in course ? course.instructor : null;
+  const duration = 'duration' in course ? course.duration : '';
+  
   // Find previous and next lessons for navigation
   const findAdjacentLessons = () => {
-    if (!course.modules) return { prevLesson: null, nextLesson: null };
+    if (!modules || modules.length === 0) return { prevLesson: null, nextLesson: null };
     
     let prevLesson: { moduleId: string; lessonId: string } | null = null;
     let nextLesson: { moduleId: string; lessonId: string } | null = null;
     let foundCurrent = false;
     
-    for (let m = 0; m < course.modules.length; m++) {
-      const module = course.modules[m];
-      for (let l = 0; l < module.lessons.length; l++) {
-        const lesson = module.lessons[l];
+    for (let m = 0; m < modules.length; m++) {
+      const module = modules[m];
+      const moduleLessons = 'lessons' in module ? module.lessons : [];
+      
+      for (let l = 0; l < moduleLessons.length; l++) {
+        const lesson = moduleLessons[l];
         
         if (foundCurrent) {
           nextLesson = { moduleId: module.id, lessonId: lesson.id };
           break;
         }
         
-        if (lesson.id === params.lessonId) {
+        if (lesson.id === lessonId) {
           foundCurrent = true;
         } else {
           prevLesson = { moduleId: module.id, lessonId: lesson.id };
@@ -103,23 +166,30 @@ export default function LessonPage({ params }: LessonPageProps) {
   
   const { prevLesson, nextLesson } = findAdjacentLessons();
   
+  // Get lesson properties safely
+  const lessonTitle = 'title' in currentLesson ? currentLesson.title : '';
+  const lessonVideoUrl = 'videoUrl' in currentLesson ? currentLesson.videoUrl : null;
+  const lessonYoutubeId = 'youtubeVideoId' in currentLesson ? currentLesson.youtubeVideoId : null;
+  const lessonResources = 'resources' in currentLesson ? currentLesson.resources : [];
+  const lessonQuizzes = 'quizzes' in currentLesson ? currentLesson.quizzes : [];
+  const lessonDuration = 'duration' in currentLesson ? currentLesson.duration : '';
+  
   // Handle quiz submission
   const handleQuizSubmit = () => {
-    if (!currentLesson.quizzes || !currentLesson.quizzes[0]) return;
+    if (!lessonQuizzes || lessonQuizzes.length === 0) return;
     
     setQuizSubmitted(true);
-    // In a real app, you would send this to the server
     console.log("Quiz answers submitted:", selectedQuizAnswers);
   };
   
   // Calculate quiz score
   const calculateQuizScore = () => {
-    if (!currentLesson.quizzes || !currentLesson.quizzes[0]) return 0;
+    if (!lessonQuizzes || lessonQuizzes.length === 0) return 0;
     
-    const quiz = currentLesson.quizzes[0];
+    const quiz = lessonQuizzes[0];
     let correctAnswers = 0;
     
-    quiz.questions.forEach(question => {
+    quiz.questions.forEach((question: QuizQuestion) => {
       if (selectedQuizAnswers[question.id] === question.correctOptionIndex) {
         correctAnswers++;
       }
@@ -128,8 +198,8 @@ export default function LessonPage({ params }: LessonPageProps) {
     return Math.round((correctAnswers / quiz.questions.length) * 100);
   };
   
-  const isLessonCompleted = (lessonId: string) => {
-    return userProgress.includes(lessonId);
+  const isLessonCompleted = (lessonIdToCheck: string) => {
+    return userProgress.includes(lessonIdToCheck);
   };
   
   return (
@@ -138,7 +208,7 @@ export default function LessonPage({ params }: LessonPageProps) {
         {/* Sidebar */}
         <div className="w-full lg:w-80 bg-background-light border-r border-gray-800 overflow-y-auto">
           <div className="p-4 border-b border-gray-800">
-            <Link href={`/courses/${course.id}`} className="flex items-center text-text-secondary hover:text-text-primary">
+            <Link href={`/courses/${courseSlug}`} className="flex items-center text-text-secondary hover:text-text-primary">
               <ChevronLeftIcon className="h-5 w-5 mr-2" />
               <span>Back to course</span>
             </Link>
@@ -147,56 +217,62 @@ export default function LessonPage({ params }: LessonPageProps) {
           <div className="p-4">
             <h1 className="text-xl font-bold mb-1">{course.title}</h1>
             <p className="text-text-secondary text-sm mb-4">
-              {course.instructor.name} • {course.duration}
+              {instructor?.name || 'Instructor'} • {duration}
             </p>
             
             <div className="space-y-6">
-              {course.modules.map((module, moduleIndex) => (
-                <div key={module.id} className="space-y-2">
-                  <h3 className="font-medium text-md flex items-center">
-                    <span className="mr-2">{moduleIndex + 1}.</span>
-                    {module.title}
-                  </h3>
-                  
-                  <ul className="space-y-2 pl-6">
-                    {module.lessons.map((lesson, lessonIndex) => {
-                      const isCurrentLesson = lesson.id === params.lessonId;
-                      const isLocked = lesson.isLocked && !isLessonCompleted(lesson.id);
-                      
-                      return (
-                        <li key={lesson.id}>
-                          <Link
-                            href={isLocked ? '#' : `/courses/${course.id}/lessons/${lesson.id}`}
-                            className={`flex items-center py-2 px-3 rounded group transition-colors ${
-                              isCurrentLesson 
-                                ? 'bg-accent text-white' 
-                                : isLocked 
-                                  ? 'text-gray-500 cursor-not-allowed'
-                                  : 'hover:bg-background-light hover:text-accent'
-                            }`}
-                          >
-                            <div className="w-6 h-6 flex-shrink-0 mr-2">
-                              {isLessonCompleted(lesson.id) ? (
-                                <CheckCircleIcon className={`w-5 h-5 ${isCurrentLesson ? 'text-white' : 'text-green-500'}`} />
-                              ) : isLocked ? (
-                                <LockClosedIcon className="w-5 h-5 text-gray-500" />
-                              ) : (
-                                <div className={`w-5 h-5 rounded-full border ${isCurrentLesson ? 'border-white' : 'border-gray-600'} flex items-center justify-center text-xs`}>
-                                  {moduleIndex + 1}.{lessonIndex + 1}
-                                </div>
+              {modules.map((module, moduleIndex) => {
+                const moduleLessons = 'lessons' in module ? module.lessons : [];
+                
+                return (
+                  <div key={module.id} className="space-y-2">
+                    <h3 className="font-medium text-md flex items-center">
+                      <span className="mr-2">{moduleIndex + 1}.</span>
+                      {module.title}
+                    </h3>
+                    
+                    <ul className="space-y-2 pl-6">
+                      {moduleLessons.map((lesson, lessonIndex) => {
+                        const isCurrentLesson = lesson.id === lessonId;
+                        const isLocked = 'isLocked' in lesson && lesson.isLocked && !isLessonCompleted(lesson.id);
+                        
+                        return (
+                          <li key={lesson.id}>
+                            <Link
+                              href={isLocked ? '#' : `/courses/${courseSlug}/lessons/${lesson.id}`}
+                              className={`flex items-center py-2 px-3 rounded group transition-colors ${
+                                isCurrentLesson 
+                                  ? 'bg-accent text-white' 
+                                  : isLocked 
+                                    ? 'text-gray-500 cursor-not-allowed'
+                                    : 'hover:bg-background-light hover:text-accent'
+                              }`}
+                            >
+                              <div className="w-6 h-6 flex-shrink-0 mr-2">
+                                {isLessonCompleted(lesson.id) ? (
+                                  <CheckCircleIcon className={`w-5 h-5 ${isCurrentLesson ? 'text-white' : 'text-green-500'}`} />
+                                ) : isLocked ? (
+                                  <LockClosedIcon className="w-5 h-5 text-gray-500" />
+                                ) : (
+                                  <div className={`w-5 h-5 rounded-full border ${isCurrentLesson ? 'border-white' : 'border-gray-600'} flex items-center justify-center text-xs`}>
+                                    {moduleIndex + 1}.{lessonIndex + 1}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex-1 truncate">
+                                <span className={`${isLocked ? 'text-gray-500' : ''}`}>{lesson.title}</span>
+                              </div>
+                              {'duration' in lesson && lesson.duration && (
+                                <span className="text-xs text-gray-500 ml-2">{lesson.duration}</span>
                               )}
-                            </div>
-                            <div className="flex-1 truncate">
-                              <span className={`${isLocked ? 'text-gray-500' : ''}`}>{lesson.title}</span>
-                            </div>
-                            <span className="text-xs text-gray-500 ml-2">{lesson.duration}</span>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -205,7 +281,7 @@ export default function LessonPage({ params }: LessonPageProps) {
         <div className="flex-1 flex flex-col overflow-y-auto">
           {/* Video player header */}
           <div className="bg-black p-4 flex items-center justify-between">
-            <h2 className="text-lg font-medium text-white truncate">{currentLesson.title}</h2>
+            <h2 className="text-lg font-medium text-white truncate">{lessonTitle}</h2>
             <div className="flex gap-2">
               <button 
                 onClick={() => setActiveTab('video')}
@@ -225,7 +301,7 @@ export default function LessonPage({ params }: LessonPageProps) {
               >
                 Notes
               </button>
-              {currentLesson.quizzes && currentLesson.quizzes.length > 0 && (
+              {lessonQuizzes && lessonQuizzes.length > 0 && (
                 <button 
                   onClick={() => setActiveTab('quiz')}
                   className={`px-3 py-1 rounded text-sm ${activeTab === 'quiz' ? 'bg-accent text-white' : 'bg-gray-800 text-gray-300'}`}
@@ -240,23 +316,31 @@ export default function LessonPage({ params }: LessonPageProps) {
           <div className="flex-1 overflow-y-auto">
             {activeTab === 'video' && (
               <div className="aspect-video bg-black relative">
-                <video 
-                  className="w-full h-full" 
-                  controls 
-                  src={currentLesson.videoUrl}
-                  poster="https://picsum.photos/800/450?random=video"
-                >
-                  Your browser does not support the video tag.
-                </video>
+                {lessonYoutubeId ? (
+                  <YouTubeEmbed videoId={lessonYoutubeId} title={lessonTitle} />
+                ) : lessonVideoUrl ? (
+                  <video 
+                    className="w-full h-full" 
+                    controls 
+                    src={lessonVideoUrl}
+                    poster="https://picsum.photos/800/450?random=video"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-text-secondary">
+                    <p>No video available for this lesson</p>
+                  </div>
+                )}
               </div>
             )}
             
             {activeTab === 'resources' && (
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-6">Resources</h3>
-                {currentLesson.resources && currentLesson.resources.length > 0 ? (
+                {lessonResources && lessonResources.length > 0 ? (
                   <div className="grid gap-4 md:grid-cols-2">
-                    {currentLesson.resources.map(resource => (
+                    {lessonResources.map((resource: any) => (
                       <div key={resource.id} className="bg-background-light rounded-lg p-4 flex items-start">
                         <div className="mr-4 mt-1">
                           {resource.type === 'pdf' ? (
@@ -304,9 +388,9 @@ export default function LessonPage({ params }: LessonPageProps) {
               </div>
             )}
             
-            {activeTab === 'quiz' && currentLesson.quizzes && currentLesson.quizzes.length > 0 && (
+            {activeTab === 'quiz' && lessonQuizzes && lessonQuizzes.length > 0 && (
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{currentLesson.quizzes[0].title}</h3>
+                <h3 className="text-xl font-bold mb-2">{lessonQuizzes[0].title}</h3>
                 <p className="text-text-secondary mb-6">Test your knowledge from this lesson</p>
                 
                 {quizSubmitted ? (
@@ -319,7 +403,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                     </div>
                     
                     <div className="space-y-6">
-                      {currentLesson.quizzes[0].questions.map((question: QuizQuestion) => (
+                      {lessonQuizzes[0].questions.map((question: QuizQuestion) => (
                         <div key={question.id} className="border-b border-gray-800 pb-6">
                           <p className="font-medium text-text-primary mb-3">{question.question}</p>
                           <div className="space-y-2">
@@ -365,7 +449,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                     }}
                     className="space-y-6"
                   >
-                    {currentLesson.quizzes[0].questions.map((question: QuizQuestion, qIndex: number) => (
+                    {lessonQuizzes[0].questions.map((question: QuizQuestion, qIndex: number) => (
                       <div key={question.id} className="bg-background-light p-6 rounded-lg">
                         <p className="font-medium text-text-primary mb-4">
                           {qIndex + 1}. {question.question}
@@ -409,7 +493,7 @@ export default function LessonPage({ params }: LessonPageProps) {
           <div className="bg-background-light border-t border-gray-800 p-4 flex justify-between">
             {prevLesson ? (
               <Link 
-                href={`/courses/${course.id}/lessons/${prevLesson.lessonId}`}
+                href={`/courses/${courseSlug}/lessons/${prevLesson.lessonId}`}
                 className="flex items-center text-text-secondary hover:text-text-primary"
               >
                 <ChevronLeftIcon className="h-5 w-5 mr-2" />
@@ -421,7 +505,7 @@ export default function LessonPage({ params }: LessonPageProps) {
             
             {nextLesson ? (
               <Link 
-                href={`/courses/${course.id}/lessons/${nextLesson.lessonId}`}
+                href={`/courses/${courseSlug}/lessons/${nextLesson.lessonId}`}
                 className="flex items-center text-text-secondary hover:text-text-primary ml-auto"
               >
                 <span>Next Lesson</span>
@@ -429,7 +513,7 @@ export default function LessonPage({ params }: LessonPageProps) {
               </Link>
             ) : (
               <Link 
-                href={`/courses/${course.id}`}
+                href={`/courses/${courseSlug}`}
                 className="flex items-center text-text-secondary hover:text-text-primary ml-auto"
               >
                 <span>Complete Course</span>
@@ -441,4 +525,4 @@ export default function LessonPage({ params }: LessonPageProps) {
       </div>
     </div>
   );
-} 
+}
