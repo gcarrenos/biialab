@@ -158,13 +158,6 @@ export default function YouTubeDashboard() {
     setIsFromCache(false);
   };
 
-  // Auto-load videos when configured
-  useEffect(() => {
-    if (isConfigured && videos.length === 0 && !isLoading) {
-      fetchVideos();
-    }
-  }, [isConfigured, videos.length, isLoading, fetchVideos]);
-
   // Fetch videos (with caching)
   const fetchVideos = useCallback(async (forceRefresh = false) => {
     if (!apiKey || !channelId) {
@@ -216,6 +209,13 @@ export default function YouTubeDashboard() {
     clearCache();
     fetchVideos(true);
   };
+
+  // Auto-load videos when configured
+  useEffect(() => {
+    if (isConfigured && videos.length === 0 && !isLoading) {
+      fetchVideos();
+    }
+  }, [isConfigured, videos.length, isLoading, fetchVideos]);
 
   // Processed videos with filters and sorting
   const processedVideos = useMemo(() => {
