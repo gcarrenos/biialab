@@ -13,6 +13,19 @@ import {
 import { relations } from 'drizzle-orm';
 
 // ============================================
+// WAITLIST / EMAIL SUBSCRIBERS
+// ============================================
+
+export const waitlist = pgTable('waitlist', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  source: varchar('source', { length: 50 }).default('coming-soon'), // where they signed up
+  subscribedAt: timestamp('subscribed_at').defaultNow().notNull(),
+  isVerified: boolean('is_verified').default(false),
+  metadata: jsonb('metadata').$type<Record<string, any>>(), // extra data like referrer, etc
+});
+
+// ============================================
 // USERS & AUTHENTICATION
 // ============================================
 
