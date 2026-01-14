@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import {
   getAllChannelVideos,
@@ -23,6 +23,70 @@ type ViewMode = 'grid' | 'list' | 'stats';
 const ENV_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || '';
 const ENV_CHANNEL_ID = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID || '';
 
+// Cache configuration
+const CACHE_KEY = 'youtube_dashboard_cache';
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+interface CachedData {
+  channel: YouTubeChannel;
+  videos: YouTubeVideo[];
+  timestamp: number;
+  channelId: string;
+}
+
+// Cache utility functions
+const getCache = (channelId: string): CachedData | null => {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
+    
+    const data: CachedData = JSON.parse(cached);
+    const now = Date.now();
+    const age = now - data.timestamp;
+    
+    // Check if cache is for the same channel and not expired
+    if (data.channelId === channelId && age < CACHE_DURATION_MS) {
+      return data;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+const setCache = (channelId: string, channel: YouTubeChannel, videos: YouTubeVideo[]): void => {
+  try {
+    const data: CachedData = {
+      channel,
+      videos,
+      timestamp: Date.now(),
+      channelId,
+    };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.warn('Failed to cache YouTube data:', err);
+  }
+};
+
+const clearCache = (): void => {
+  try {
+    localStorage.removeItem(CACHE_KEY);
+  } catch {
+    // Ignore errors
+  }
+};
+
+const formatCacheAge = (timestamp: number): string => {
+  const age = Date.now() - timestamp;
+  const minutes = Math.floor(age / (1000 * 60));
+  const hours = Math.floor(age / (1000 * 60 * 60));
+  
+  if (minutes < 1) return 'just now';
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  return 'over 24h ago';
+};
+
 export default function YouTubeDashboard() {
   // API Configuration - prefer env vars, fallback to localStorage
   const [apiKey, setApiKey] = useState(ENV_API_KEY);
@@ -36,6 +100,10 @@ export default function YouTubeDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
   const [error, setError] = useState<string | null>(null);
+
+  // Cache state
+  const [cacheTimestamp, setCacheTimestamp] = useState<number | null>(null);
+  const [isFromCache, setIsFromCache] = useState(false);
 
   // UI states
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
@@ -79,24 +147,47 @@ export default function YouTubeDashboard() {
       localStorage.removeItem('youtube_api_key');
       localStorage.removeItem('youtube_channel_id');
     }
+    clearCache();
     setApiKey(ENV_API_KEY);
     setChannelId(ENV_CHANNEL_ID);
     setIsConfigured(!!ENV_API_KEY && !!ENV_CHANNEL_ID);
     setUseEnvVars(!!ENV_API_KEY && !!ENV_CHANNEL_ID);
     setChannel(null);
     setVideos([]);
+    setCacheTimestamp(null);
+    setIsFromCache(false);
   };
 
-  // Fetch videos
-  const fetchVideos = async () => {
+  // Auto-load videos when configured
+  useEffect(() => {
+    if (isConfigured && videos.length === 0 && !isLoading) {
+      fetchVideos();
+    }
+  }, [isConfigured, videos.length, isLoading, fetchVideos]);
+
+  // Fetch videos (with caching)
+  const fetchVideos = useCallback(async (forceRefresh = false) => {
     if (!apiKey || !channelId) {
       setError('Please provide API Key and Channel ID');
       return;
     }
 
+    // Check cache first (unless force refresh)
+    if (!forceRefresh) {
+      const cached = getCache(channelId);
+      if (cached) {
+        setChannel(cached.channel);
+        setVideos(cached.videos);
+        setCacheTimestamp(cached.timestamp);
+        setIsFromCache(true);
+        return;
+      }
+    }
+
     setIsLoading(true);
     setError(null);
     setLoadingProgress({ loaded: 0, total: 0 });
+    setIsFromCache(false);
 
     try {
       // Fetch channel info
@@ -109,11 +200,21 @@ export default function YouTubeDashboard() {
       });
 
       setVideos(allVideos);
+      
+      // Cache the results
+      setCache(channelId, channelInfo, allVideos);
+      setCacheTimestamp(Date.now());
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
+  }, [apiKey, channelId]);
+
+  // Force refresh (bypass cache)
+  const forceRefresh = () => {
+    clearCache();
+    fetchVideos(true);
   };
 
   // Processed videos with filters and sorting
@@ -264,8 +365,18 @@ export default function YouTubeDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Cache status indicator */}
+          {isFromCache && cacheTimestamp && (
+            <span className="px-3 py-2 bg-blue-900/30 border border-blue-800 rounded-md text-xs text-blue-400 flex items-center gap-2">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Cached {formatCacheAge(cacheTimestamp)}
+            </span>
+          )}
+
           <button
-            onClick={fetchVideos}
+            onClick={() => fetchVideos(false)}
             disabled={isLoading}
             className="px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
           >
@@ -282,10 +393,25 @@ export default function YouTubeDashboard() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                {videos.length > 0 ? 'Refresh' : 'Fetch Videos'}
+                {videos.length > 0 ? 'Load' : 'Fetch Videos'}
               </>
             )}
           </button>
+
+          {/* Force refresh button (bypasses cache) */}
+          {videos.length > 0 && (
+            <button
+              onClick={forceRefresh}
+              disabled={isLoading}
+              className="px-4 py-2 bg-background hover:bg-gray-800 text-text-secondary hover:text-text-primary border border-gray-800 rounded-md text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+              title="Force refresh from YouTube API"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Refresh API
+            </button>
+          )}
 
           {useEnvVars && (
             <span className="px-3 py-2 bg-green-900/30 border border-green-800 rounded-md text-xs text-green-400">
