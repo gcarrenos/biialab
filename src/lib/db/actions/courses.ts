@@ -4,6 +4,11 @@ import { db } from '@/lib/db';
 import { courses, modules, lessons, instructors, youtubeVideos } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
 
+// Check if database is configured
+const isDatabaseConfigured = () => {
+  return !!process.env.DATABASE_URL;
+};
+
 export interface CourseWithDetails {
   id: string;
   slug: string;
@@ -44,11 +49,18 @@ export interface CourseWithDetails {
 
 // Get all published courses
 export async function getAllCourses(): Promise<CourseWithDetails[]> {
-  const coursesData = await db
-    .select()
-    .from(courses)
-    .where(eq(courses.status, 'published'))
-    .orderBy(desc(courses.createdAt));
+  // Return empty if database not configured
+  if (!isDatabaseConfigured()) {
+    console.warn('Database not configured, returning empty courses');
+    return [];
+  }
+
+  try {
+    const coursesData = await db
+      .select()
+      .from(courses)
+      .where(eq(courses.status, 'published'))
+      .orderBy(desc(courses.createdAt));
 
   const coursesWithDetails: CourseWithDetails[] = [];
 
@@ -122,16 +134,26 @@ export async function getAllCourses(): Promise<CourseWithDetails[]> {
     });
   }
 
-  return coursesWithDetails;
+    return coursesWithDetails;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    return [];
+  }
 }
 
 // Get a single course by slug or ID (returns any status - draft or published)
 export async function getCourseBySlugOrId(slugOrId: string): Promise<CourseWithDetails | null> {
-  // Try to find by slug first, then by ID
-  let [course] = await db
-    .select()
-    .from(courses)
-    .where(eq(courses.slug, slugOrId));
+  // Return null if database not configured
+  if (!isDatabaseConfigured()) {
+    return null;
+  }
+
+  try {
+    // Try to find by slug first, then by ID
+    let [course] = await db
+      .select()
+      .from(courses)
+      .where(eq(courses.slug, slugOrId));
 
   if (!course) {
     // Try by ID (UUID)
@@ -200,32 +222,45 @@ export async function getCourseBySlugOrId(slugOrId: string): Promise<CourseWithD
     });
   }
 
-  return {
-    id: course.id,
-    slug: course.slug,
-    title: course.title,
-    description: course.description,
-    shortDescription: course.shortDescription,
-    thumbnail: course.thumbnail,
-    category: course.category,
-    level: course.level,
-    duration: course.duration,
-    totalLessons: course.totalLessons,
-    status: course.status,
-    isFeatured: course.isFeatured,
-    instructor,
-    modules: modulesWithLessons,
-  };
+    return {
+      id: course.id,
+      slug: course.slug,
+      title: course.title,
+      description: course.description,
+      shortDescription: course.shortDescription,
+      thumbnail: course.thumbnail,
+      category: course.category,
+      level: course.level,
+      duration: course.duration,
+      totalLessons: course.totalLessons,
+      status: course.status,
+      isFeatured: course.isFeatured,
+      instructor,
+      modules: modulesWithLessons,
+    };
+  } catch (error) {
+    console.error('Error fetching course:', error);
+    return null;
+  }
 }
 
 // Get YouTube video details for a lesson
 export async function getYouTubeVideoForLesson(youtubeVideoId: string) {
-  const [video] = await db
-    .select()
-    .from(youtubeVideos)
-    .where(eq(youtubeVideos.id, youtubeVideoId));
-  
-  return video || null;
+  if (!isDatabaseConfigured()) {
+    return null;
+  }
+
+  try {
+    const [video] = await db
+      .select()
+      .from(youtubeVideos)
+      .where(eq(youtubeVideos.id, youtubeVideoId));
+    
+    return video || null;
+  } catch (error) {
+    console.error('Error fetching YouTube video:', error);
+    return null;
+  }
 }
 
 // Publish all draft courses
