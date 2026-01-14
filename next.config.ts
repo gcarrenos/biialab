@@ -1,14 +1,25 @@
 import type { NextConfig } from "next";
 
-// next.config.js or next.config.ts
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
-    domains: ['picsum.photos', 'media.licdn.com', 'i.ytimg.com', 'yt3.ggpht.com'],
-  },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yt3.ggpht.com',
+      },
+    ],
   },
   typescript: {
     // Warning: This allows production builds to successfully complete even if
@@ -18,4 +29,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
