@@ -187,8 +187,9 @@ export async function createCourseFromVideos(
       level: courseData.level,
       duration: durationString,
       totalLessons: videosToImport.length,
-      status: 'draft',
+      status: 'published',
       isFeatured: false,
+      publishedAt: new Date(),
     }).returning();
 
     const courseId = newCourse[0].id;
