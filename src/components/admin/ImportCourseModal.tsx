@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { YouTubeVideo, YouTubeCommentThread } from '@/lib/types';
 import { createCourseFromVideos, importVideoComments } from '@/lib/db/actions/youtube';
@@ -13,13 +13,52 @@ interface ImportCourseModalProps {
   apiKey: string;
 }
 
+// Helper to detect category from video title/description
+function detectCategory(text: string): string {
+  const lowerText = text.toLowerCase();
+  if (lowerText.includes('inteligencia artificial') || lowerText.includes('ai') || lowerText.includes('machine learning') || lowerText.includes('ml')) {
+    return 'AI & Machine Learning';
+  }
+  if (lowerText.includes('neuro') || lowerText.includes('cerebro') || lowerText.includes('mente') || lowerText.includes('psicolog')) {
+    return 'Psychology';
+  }
+  if (lowerText.includes('negocio') || lowerText.includes('emprendimiento') || lowerText.includes('ventas') || lowerText.includes('marketing')) {
+    return 'Business';
+  }
+  if (lowerText.includes('liderazgo') || lowerText.includes('líder') || lowerText.includes('equipo')) {
+    return 'Leadership';
+  }
+  if (lowerText.includes('emocional') || lowerText.includes('emociones') || lowerText.includes('felicidad')) {
+    return 'Personal Development';
+  }
+  if (lowerText.includes('financ') || lowerText.includes('dinero') || lowerText.includes('inversión') || lowerText.includes('riqueza')) {
+    return 'Finance';
+  }
+  if (lowerText.includes('salud') || lowerText.includes('bienestar') || lowerText.includes('fitness')) {
+    return 'Health & Wellness';
+  }
+  return 'Personal Development';
+}
+
+// Helper to detect level from description
+function detectLevel(text: string): 'Beginner' | 'Intermediate' | 'Advanced' {
+  const lowerText = text.toLowerCase();
+  if (lowerText.includes('avanzado') || lowerText.includes('experto') || lowerText.includes('profesional')) {
+    return 'Advanced';
+  }
+  if (lowerText.includes('intermedio')) {
+    return 'Intermediate';
+  }
+  return 'Beginner';
+}
+
 export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: ImportCourseModalProps) {
   const [step, setStep] = useState<'details' | 'comments' | 'importing' | 'success'>('details');
   const [courseData, setCourseData] = useState({
     title: '',
     description: '',
     shortDescription: '',
-    category: 'Technology',
+    category: 'Personal Development',
     level: 'Beginner' as 'Beginner' | 'Intermediate' | 'Advanced',
     instructorName: '',
     instructorTitle: '',
@@ -29,6 +68,55 @@ export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: I
   const [maxCommentsPerVideo, setMaxCommentsPerVideo] = useState(100);
   const [importProgress, setImportProgress] = useState({ current: 0, total: 0, status: '' });
   const [result, setResult] = useState<{ courseId?: string; courseSlug?: string; lessonsCreated?: number; commentsImported?: number } | null>(null);
+
+  // Prefill data from selected videos
+  useEffect(() => {
+    if (selectedVideos.length > 0 && isOpen) {
+      const firstVideo = selectedVideos[0];
+      const allTitles = selectedVideos.map(v => v.title).join(' ');
+      const allDescriptions = selectedVideos.map(v => v.description).join(' ');
+      
+      // For single video, use video title; for multiple, create a course title
+      let title = '';
+      if (selectedVideos.length === 1) {
+        title = firstVideo.title;
+      } else {
+        // Try to find common theme or use channel name
+        title = `Curso: ${firstVideo.channelTitle || 'BiiALab'}`;
+      }
+
+      // Use first video's description, truncated if needed
+      const description = firstVideo.description || '';
+      const shortDesc = description.slice(0, 200).trim();
+
+      // Detect category and level from content
+      const combinedText = allTitles + ' ' + allDescriptions;
+      const detectedCategory = detectCategory(combinedText);
+      const detectedLevel = detectLevel(combinedText);
+
+      // Get instructor from channel
+      const instructorName = firstVideo.channelTitle || '';
+
+      setCourseData(prev => ({
+        ...prev,
+        title,
+        description,
+        shortDescription: shortDesc,
+        category: detectedCategory,
+        level: detectedLevel,
+        instructorName,
+      }));
+    }
+  }, [selectedVideos, isOpen]);
+
+  // Reset state when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setStep('details');
+      setResult(null);
+      setImportProgress({ current: 0, total: 0, status: '' });
+    }
+  }, [isOpen]);
 
   // Calculate totals
   const totalViews = selectedVideos.reduce((sum, v) => sum + v.viewCount, 0);
@@ -197,14 +285,16 @@ export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: I
                       onChange={(e) => setCourseData({ ...courseData, category: e.target.value })}
                       className="w-full px-4 py-3 bg-background border border-gray-800 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
                     >
-                      <option value="Technology">Technology</option>
+                      <option value="Personal Development">Personal Development</option>
+                      <option value="Psychology">Psychology</option>
+                      <option value="Leadership">Leadership</option>
+                      <option value="Business">Business</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Health & Wellness">Health & Wellness</option>
                       <option value="AI & Machine Learning">AI & Machine Learning</option>
+                      <option value="Technology">Technology</option>
                       <option value="Data Science">Data Science</option>
                       <option value="Web Development">Web Development</option>
-                      <option value="Mobile Development">Mobile Development</option>
-                      <option value="Cloud Computing">Cloud Computing</option>
-                      <option value="Cybersecurity">Cybersecurity</option>
-                      <option value="Business">Business</option>
                       <option value="Design">Design</option>
                       <option value="Other">Other</option>
                     </select>
