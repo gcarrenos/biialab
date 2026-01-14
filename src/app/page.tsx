@@ -203,7 +203,7 @@ export default function ComingSoonPage() {
           href="/home"
           className="fixed bottom-4 right-4 z-50 px-3 py-1.5 text-xs text-white/30 hover:text-white/70 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm border border-white/10 transition-all"
         >
-          Entrar →
+            &nbsp;
         </Link>
       </div>
 
