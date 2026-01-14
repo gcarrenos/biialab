@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AdminAuthGate } from '@/components/admin/AdminAuthGate';
 
 export default function AdminLayout({
   children,
@@ -15,6 +16,7 @@ export default function AdminLayout({
   };
 
   return (
+    <AdminAuthGate>
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <div className="w-64 bg-background-light text-text-primary border-r border-gray-800">
@@ -116,5 +118,6 @@ export default function AdminLayout({
         </main>
       </div>
     </div>
+    </AdminAuthGate>
   );
 } 
