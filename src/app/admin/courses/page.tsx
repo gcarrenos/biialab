@@ -11,6 +11,28 @@ export default function CoursesAdmin() {
   const [courses, setCourses] = useState<CourseWithDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [migrateStatus, setMigrateStatus] = useState<'idle' | 'running' | 'done' | 'error'>('idle');
+  const [certTestStatus, setCertTestStatus] = useState<'idle' | 'running' | 'error'>('idle');
+
+  const handleTestCertificate = async () => {
+    setCertTestStatus('running');
+    try {
+      const password = sessionStorage.getItem('biialab_admin_auth');
+      const res = await fetch('/api/admin/test-certificate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, courseSlug: filteredCourses[0]?.slug }),
+      });
+      const data = await res.json();
+      if (data.success && data.url) {
+        window.open(data.url, '_blank', 'noopener');
+        setCertTestStatus('idle');
+      } else {
+        setCertTestStatus('error');
+      }
+    } catch {
+      setCertTestStatus('error');
+    }
+  };
 
   const fetchCourses = useCallback(async () => {
     setIsLoading(true);
@@ -72,12 +94,22 @@ export default function CoursesAdmin() {
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-text-primary">Courses</h1>
-        <Link
-          href="/admin/youtube"
-          className="px-4 py-2 bg-accent text-white rounded-md text-sm font-medium hover:bg-accent/90 transition-colors"
-        >
-          Importar desde YouTube
-        </Link>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleTestCertificate}
+            disabled={certTestStatus === 'running'}
+            title="Emite un certificado de prueba para el primer curso filtrado y abre su página de verificación con el botón de LinkedIn"
+            className="px-4 py-2 border border-gray-300 text-text-primary rounded-md text-sm font-medium hover:border-accent hover:text-accent transition-colors disabled:opacity-50"
+          >
+            {certTestStatus === 'running' ? 'Generando…' : certTestStatus === 'error' ? 'Error — reintentar' : 'Probar certificado (LinkedIn)'}
+          </button>
+          <Link
+            href="/admin/youtube"
+            className="px-4 py-2 bg-accent text-white rounded-md text-sm font-medium hover:bg-accent/90 transition-colors"
+          >
+            Importar desde YouTube
+          </Link>
+        </div>
       </div>
 
       {/* Filters */}
