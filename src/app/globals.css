@@ -71,3 +71,24 @@ body {
     animation: none;
   }
 }
+
+/* Editorial art direction (v3): outlined "ghost" typography used for the
+   Top-10 ranking numbers and the oversized category/word backdrops. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-text-secondary);
+}
+
+/* Scroll-reveal primitive used by <Reveal>. Default state is hidden; the
+   component flips these to the "in" values once the element intersects
+   the viewport (or immediately if prefers-reduced-motion is set). */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
