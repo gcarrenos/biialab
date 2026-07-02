@@ -28,24 +28,32 @@ export async function subscribeToWaitlist(email: string, source: string = 'comin
   }
 }
 
-export async function getWaitlistCount() {
+export async function submitContactMessage(email: string, message: string) {
   try {
-    const result = await db.query.waitlist.findMany();
-    return { success: true, count: result.length };
+    const trimmed = message.trim().slice(0, 2000);
+    if (!trimmed) {
+      return { success: false, message: 'empty' };
+    }
+
+    await db
+      .insert(waitlist)
+      .values({
+        email: email.toLowerCase(),
+        source: 'contact',
+        metadata: { message: trimmed },
+      })
+      .onConflictDoUpdate({
+        target: waitlist.email,
+        set: { metadata: { message: trimmed }, source: 'contact' },
+      });
+
+    return { success: true, message: 'sent' };
   } catch (error) {
-    console.error('Error getting waitlist count:', error);
-    return { success: false, count: 0 };
+    console.error('Error submitting contact message:', error);
+    return { success: false, message: 'error' };
   }
 }
 
-export async function getWaitlistEmails() {
-  try {
-    const result = await db.query.waitlist.findMany({
-      orderBy: (waitlist, { desc }) => [desc(waitlist.subscribedAt)],
-    });
-    return { success: true, emails: result };
-  } catch (error) {
-    console.error('Error getting waitlist emails:', error);
-    return { success: false, emails: [] };
-  }
-}
+// NOTE: waitlist reads happen only through /api/admin/waitlist, which verifies
+// the admin password server-side. Do not add unauthenticated read actions here —
+// server actions are publicly callable endpoints.
