@@ -108,7 +108,15 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
               Tu puntaje: <strong className="text-text-primary">{result.score}%</strong> ({result.correctCount}/{result.total} correctas)
               {!result.passed && ` — necesitas ${exam.passingScore}%.`}
             </p>
-            <div className="mt-4 flex gap-3">
+            <div className="mt-4 flex flex-wrap gap-3">
+              {result.passed && result.certificateNumber && (
+                <Link
+                  href={`/verify/${result.certificateNumber}`}
+                  className="px-5 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-500 transition-colors"
+                >
+                  🎓 Ver mi certificado
+                </Link>
+              )}
               {!result.passed && (
                 <button onClick={handleRetry} className="px-5 py-2.5 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 transition-colors">
                   Intentar de nuevo
