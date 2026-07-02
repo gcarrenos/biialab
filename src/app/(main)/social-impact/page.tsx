@@ -139,6 +139,35 @@ export default function SocialImpactPage() {
         </div>
       </section>
 
+      {/* Case Study: PlanVoyager */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-background-light p-8 md:p-12 rounded-xl border border-gray-800 max-w-4xl">
+            <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent mb-4">
+              Caso de estudio
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
+              IA de interés público: PlanVoyager
+            </h2>
+            <p className="text-text-secondary mb-6">
+              Tecnología con impacto social en la práctica: cómo se construyó una
+              herramienta gratuita que usa IA para ayudar a las familias en EE.UU.
+              — incluida la comunidad hispana — a comparar planes de salud y
+              calcular sus subsidios con datos oficiales.
+            </p>
+            <Link
+              href="/casos/planvoyager"
+              className="inline-flex items-center px-4 py-2 bg-accent text-white font-medium rounded-md hover:bg-accent/90 transition-colors"
+            >
+              Leer el caso de estudio
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Global Program Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-7xl mx-auto">
