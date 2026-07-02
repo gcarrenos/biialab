@@ -12,6 +12,24 @@ interface CoursePageProps {
   }>;
 }
 
+export async function generateMetadata({ params }: CoursePageProps) {
+  const { id } = await params;
+  const course = await getCourseBySlugOrId(id);
+  if (!course) return { title: 'Curso | BiiALab' };
+  const description = course.shortDescription ?? course.description?.slice(0, 160) ?? undefined;
+  return {
+    title: `${course.title} | BiiALab`,
+    description,
+    alternates: { canonical: `https://www.biialab.org/courses/${course.slug}` },
+    openGraph: {
+      title: course.title,
+      description,
+      type: 'website',
+      images: course.thumbnail ? [{ url: course.thumbnail }] : undefined,
+    },
+  };
+}
+
 export default async function CoursePage({ params }: CoursePageProps) {
   const { id } = await params;
   
@@ -19,6 +37,22 @@ export default async function CoursePage({ params }: CoursePageProps) {
   let course = await getCourseBySlugOrId(id);
   const examRes = await getCourseExam(id).catch(() => ({ exam: null }));
   const hasExam = !!examRes.exam;
+
+  const courseJsonLd = course ? {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: course.title,
+    description: ('shortDescription' in course ? course.shortDescription : null) ?? course.description ?? undefined,
+    provider: { '@type': 'Organization', name: 'BiiA LAB', url: 'https://www.biialab.org' },
+    isAccessibleForFree: true,
+    inLanguage: 'es',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    hasCourseInstance: {
+      '@type': 'CourseInstance',
+      courseMode: 'online',
+      courseWorkload: 'PT3H',
+    },
+  } : null;
   
   // Fallback to static data if not in database
   if (!course) {
@@ -82,6 +116,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
   
   return (
     <div className="bg-background min-h-screen">
+      {courseJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }} />
+      )}
       {/* Course Header */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center">
