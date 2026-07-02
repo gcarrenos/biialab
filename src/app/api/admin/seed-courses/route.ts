@@ -32,19 +32,32 @@ const slugify = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 
-// Seeds the curated AI course catalog (src/lib/db/seed/ai-courses.json).
+// Seeds courses. By default uses the committed curated catalog
+// (src/lib/db/seed/ai-courses.json); a "courses" array in the POST body
+// (same shape) seeds that instead — used for bulk channel imports.
 // Idempotent: courses whose slug already exists are skipped, so re-running
 // never duplicates and never overwrites admin edits.
 export async function POST(request: Request) {
   try {
-    const { password, featuredCount = 6 } = await request.json();
+    const { password, featuredCount = 6, courses: bodyCourses } = await request.json();
 
     const adminPassword = process.env.ADMIN_PASSWORD || 'biialab2026';
     if (password !== adminPassword) {
       return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
     }
 
-    const courseSeeds = (seedData as { courses: SeedCourse[] }).courses;
+    let courseSeeds = (seedData as { courses: SeedCourse[] }).courses;
+    if (Array.isArray(bodyCourses) && bodyCourses.length > 0) {
+      const valid = bodyCourses.every((c: SeedCourse) =>
+        c && typeof c.title === 'string' && c.title.length > 0 &&
+        Array.isArray(c.lessons) && c.lessons.length > 0 &&
+        c.lessons.every((l: SeedLesson) => /^[A-Za-z0-9_-]{11}$/.test(l.youtubeVideoId ?? '') && typeof l.title === 'string')
+      );
+      if (!valid) {
+        return NextResponse.json({ success: false, message: 'Invalid courses payload' }, { status: 400 });
+      }
+      courseSeeds = bodyCourses as SeedCourse[];
+    }
     const results: { title: string; status: 'created' | 'skipped' | 'failed'; error?: string }[] = [];
     let createdCount = 0;
 
