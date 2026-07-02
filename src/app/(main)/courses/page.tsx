@@ -28,7 +28,7 @@ interface DisplayCourse {
 // Course card component that works with both types
 function CourseCard({ course }: { course: DisplayCourse }) {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-lg bg-background-light shadow-lg transition-all hover:shadow-xl">
+    <div className="group relative flex flex-col overflow-hidden rounded-lg bg-surface border border-gray-700/50 shadow-lg transition-all hover:shadow-xl">
       <Link href={`/courses/${course.slug}`} className="absolute inset-0 z-10" aria-label={course.title}></Link>
 
       <div className="relative overflow-hidden aspect-video">
@@ -82,8 +82,10 @@ function CourseCard({ course }: { course: DisplayCourse }) {
 function CourseContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
+  const queryParam = searchParams.get('q');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>(queryParam ?? '');
   const [allCourses, setAllCourses] = useState<DisplayCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<DisplayCourse[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -140,17 +142,25 @@ function CourseContent() {
   // Apply filters
   useEffect(() => {
     let result = allCourses;
-    
+
     if (selectedCategory) {
       result = result.filter(course => course.category === selectedCategory);
     }
-    
+
     if (selectedLevel) {
       result = result.filter(course => course.level === selectedLevel);
     }
-    
+
+    if (searchTerm.trim()) {
+      const q = searchTerm.trim().toLowerCase();
+      result = result.filter(course =>
+        course.title.toLowerCase().includes(q) ||
+        course.description.toLowerCase().includes(q)
+      );
+    }
+
     setFilteredCourses(result);
-  }, [selectedCategory, selectedLevel, allCourses]);
+  }, [selectedCategory, selectedLevel, searchTerm, allCourses]);
   
   const handleCategoryChange = (category: string | null) => {
     setSelectedCategory(category === selectedCategory ? null : category);

@@ -10,7 +10,8 @@
   --color-primary: #000000;
   --color-accent: #e50914;
   --color-background: #0a0a0a;
-  --color-background-light: #1a1a1a;
+  --color-background-light: #181a1f;
+  --color-surface: #1f2229;
   --color-text-primary: #ffffff;
   --color-text-secondary: #a0a0a0;
 }
@@ -34,4 +35,39 @@ body {
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
+}
+
+/* Hero mosaic: slow ambient float on the thumbnail columns. Pure CSS so the
+   hero section can stay a server component. */
+@keyframes hero-mosaic-drift-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4%);
+  }
+}
+
+@keyframes hero-mosaic-drift-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(4%);
+  }
+}
+
+.hero-mosaic-col-up {
+  animation: hero-mosaic-drift-up 30s ease-in-out infinite alternate;
+}
+
+.hero-mosaic-col-down {
+  animation: hero-mosaic-drift-down 30s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mosaic-col-up,
+  .hero-mosaic-col-down {
+    animation: none;
+  }
 }
