@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { signOut } from '@/lib/auth';
+import { signOut } from '@/lib/auth-client';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -37,13 +37,13 @@ export function UserMenu() {
           href="/sign-in"
           className="text-sm text-text-secondary hover:text-text-primary transition-colors"
         >
-          Sign in
+          Entrar
         </Link>
         <Link
           href="/sign-up"
           className="px-4 py-2 bg-accent hover:bg-accent/90 text-white text-sm font-medium rounded-md transition-colors"
         >
-          Sign up
+          Crear cuenta
         </Link>
       </div>
     );

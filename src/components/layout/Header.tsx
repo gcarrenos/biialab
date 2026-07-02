@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { UserMenu } from '@/components/auth/UserMenu';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -44,7 +45,9 @@ export default function Header() {
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end" />
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <UserMenu />
+        </div>
       </nav>
       
       {/* Mobile menu */}
