@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { courses as staticCourses } from '@/lib/data';
 import { getAllCourses, CourseWithDetails } from '@/lib/db/actions/courses';
 
 // Unified course type for display
@@ -42,7 +41,7 @@ function CourseCard({ course }: { course: DisplayCourse }) {
         />
         {course.isFeatured && (
           <div className="absolute top-2 right-2 bg-accent text-white px-2 py-1 text-xs font-semibold rounded z-20">
-            Featured
+            Destacado
           </div>
         )}
       </div>
@@ -84,15 +83,15 @@ function CourseCard({ course }: { course: DisplayCourse }) {
         
         <div className="mt-4 pt-4 border-t border-gray-800 grid grid-cols-3 text-xs text-text-secondary">
           <div className="flex flex-col">
-            <span className="font-medium">Duration</span>
-            <span>{course.duration || 'Self-paced'}</span>
+            <span className="font-medium">Duración</span>
+            <span>{course.duration || 'A tu ritmo'}</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-medium">Level</span>
-            <span>{course.level || 'All levels'}</span>
+            <span className="font-medium">Nivel</span>
+            <span>{course.level || 'Todos los niveles'}</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-medium">Lessons</span>
+            <span className="font-medium">Lecciones</span>
             <span>{course.lessons}</span>
           </div>
         </div>
@@ -110,7 +109,7 @@ function CourseContent() {
   const [filteredCourses, setFilteredCourses] = useState<DisplayCourse[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
-  const levels = ['Beginner', 'Intermediate', 'Advanced'];
+  const levels = ['Principiante', 'Intermedio', 'Avanzado'];
   
   // Convert database course to display format
   const dbToDisplay = (course: CourseWithDetails): DisplayCourse => ({
@@ -120,8 +119,8 @@ function CourseContent() {
     description: course.description || course.shortDescription || '',
     thumbnail: course.thumbnail || 'https://picsum.photos/800/450?random=' + course.id,
     category: course.category || 'General',
-    level: course.level || 'All levels',
-    duration: course.duration || 'Self-paced',
+    level: course.level || 'Todos los niveles',
+    duration: course.duration || 'A tu ritmo',
     lessons: course.modules.reduce((sum, m) => sum + m.lessons.length, 0) || course.totalLessons || 0,
     isFeatured: course.isFeatured || false,
     instructor: course.instructor ? {
@@ -135,57 +134,24 @@ function CourseContent() {
     },
   });
   
-  // Convert static course to display format
-  const staticToDisplay = (course: typeof staticCourses[0]): DisplayCourse => ({
-    id: course.id,
-    slug: course.id,
-    title: course.title,
-    description: course.description,
-    thumbnail: course.thumbnail,
-    category: course.category,
-    level: course.level,
-    duration: course.duration,
-    lessons: course.lessons,
-    isFeatured: course.isFeatured || false,
-    instructor: {
-      name: course.instructor.name,
-      title: course.instructor.title,
-      avatar: course.instructor.avatar,
-    },
-  });
-  
-  // Fetch courses from database
+  // Fetch courses from database (published catalog is DB-only; no sample-data fallback)
   useEffect(() => {
     const fetchCourses = async () => {
       setIsLoading(true);
       try {
-        // Fetch from database
         const dbCourses = await getAllCourses();
         const dbDisplayCourses = dbCourses.map(dbToDisplay);
-        
-        // Convert static courses
-        const staticDisplayCourses = staticCourses.map(staticToDisplay);
-        
-        // Merge - database courses first, then static (avoiding duplicates by title)
-        const dbTitles = new Set(dbDisplayCourses.map(c => c.title.toLowerCase()));
-        const uniqueStaticCourses = staticDisplayCourses.filter(
-          c => !dbTitles.has(c.title.toLowerCase())
-        );
-        
-        const merged = [...dbDisplayCourses, ...uniqueStaticCourses];
-        setAllCourses(merged);
-        setFilteredCourses(merged);
+        setAllCourses(dbDisplayCourses);
+        setFilteredCourses(dbDisplayCourses);
       } catch (error) {
         console.error('Error fetching courses:', error);
-        // Fallback to static courses
-        const staticDisplayCourses = staticCourses.map(staticToDisplay);
-        setAllCourses(staticDisplayCourses);
-        setFilteredCourses(staticDisplayCourses);
+        setAllCourses([]);
+        setFilteredCourses([]);
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     fetchCourses();
   }, []);
   
@@ -225,7 +191,7 @@ function CourseContent() {
       <div className="bg-background min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-t-accent border-gray-800 rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading courses...</p>
+          <p className="mt-4 text-text-secondary">Cargando cursos...</p>
         </div>
       </div>
     );
@@ -235,12 +201,12 @@ function CourseContent() {
     <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="border-b border-gray-800 pb-8 mb-8">
-          <h1 className="text-3xl font-bold text-text-primary">Courses</h1>
+          <h1 className="text-3xl font-bold text-text-primary">Cursos</h1>
           <p className="mt-2 text-lg text-text-secondary">
-            Explore all our courses and find the perfect one for you.
+            Explora nuestros cursos y encuentra el ideal para ti.
           </p>
           <p className="mt-1 text-sm text-text-secondary">
-            {allCourses.length} course{allCourses.length !== 1 ? 's' : ''} available
+            {allCourses.length} curso{allCourses.length !== 1 ? 's' : ''} disponible{allCourses.length !== 1 ? 's' : ''}
           </p>
         </div>
         
@@ -248,7 +214,7 @@ function CourseContent() {
           {/* Filters */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold text-text-primary mb-4">Categories</h3>
+              <h3 className="text-lg font-semibold text-text-primary mb-4">Categorías</h3>
               <div className="space-y-2">
                 {categories.map(category => (
                   <button
@@ -267,7 +233,7 @@ function CourseContent() {
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold text-text-primary mb-4">Level</h3>
+              <h3 className="text-lg font-semibold text-text-primary mb-4">Nivel</h3>
               <div className="space-y-2">
                 {levels.map(level => (
                   <button
@@ -290,7 +256,7 @@ function CourseContent() {
                 onClick={resetFilters}
                 className="w-full px-4 py-2 bg-background-light text-text-primary text-sm rounded hover:bg-gray-800 transition-colors"
               >
-                Reset Filters
+                Limpiar filtros
               </button>
             )}
           </div>
@@ -305,8 +271,12 @@ function CourseContent() {
               </div>
             ) : (
               <div className="text-center py-12">
-                <h3 className="text-xl font-medium text-text-primary">No courses found</h3>
-                <p className="mt-2 text-text-secondary">Try adjusting your filters</p>
+                <h3 className="text-xl font-medium text-text-primary">
+                  {allCourses.length === 0 ? 'Muy pronto publicaremos los primeros cursos' : 'No hay cursos con esos filtros'}
+                </h3>
+                <p className="mt-2 text-text-secondary">
+                  {allCourses.length === 0 ? 'Déjanos tu correo en la página de inicio y te avisamos.' : 'Prueba ajustando los filtros.'}
+                </p>
               </div>
             )}
           </div>
@@ -322,7 +292,7 @@ export default function CoursesPage() {
       <div className="bg-background min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-t-accent border-gray-800 rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading courses...</p>
+          <p className="mt-4 text-text-secondary">Cargando cursos...</p>
         </div>
       </div>
     }>
