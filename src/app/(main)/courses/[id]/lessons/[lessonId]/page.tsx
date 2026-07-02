@@ -4,6 +4,8 @@ import { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { courses as staticCourses, currentUser } from '@/lib/data';
+import { useAuth } from '@/hooks/useAuth';
+import { enrollInCourse, getCourseProgress, markLessonComplete } from '@/lib/db/actions/progress';
 import { Lesson, Module, Course, QuizQuestion } from '@/lib/types';
 import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon } from '@heroicons/react/24/outline';
 import { getCourseBySlugOrId, CourseWithDetails } from '@/lib/db/actions/courses';
@@ -25,6 +27,9 @@ export default function LessonPage({ params }: LessonPageProps) {
   const [currentLesson, setCurrentLesson] = useState<Lesson | CourseWithDetails['modules'][0]['lessons'][0] | null>(null);
   const [currentModule, setCurrentModule] = useState<Module | CourseWithDetails['modules'][0] | null>(null);
   const [userProgress, setUserProgress] = useState<string[]>([]);
+  const [dbCourseId, setDbCourseId] = useState<string | null>(null);
+  const [savingProgress, setSavingProgress] = useState(false);
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<{[key: string]: number}>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [userNotes, setUserNotes] = useState('');
@@ -58,7 +63,14 @@ export default function LessonPage({ params }: LessonPageProps) {
           setCurrentLesson(foundLesson as any);
           setCurrentModule(foundModule as any);
         }
-        
+
+        setDbCourseId(dbCourse.id);
+        // Real progress + auto-enroll (server actions no-op when signed out)
+        enrollInCourse(dbCourse.id).catch(() => {});
+        getCourseProgress(dbCourse.id).then((res) => {
+          if (res.success) setUserProgress(res.completedLessonIds);
+        }).catch(() => {});
+
         setIsLoading(false);
         return;
       }
@@ -200,6 +212,20 @@ export default function LessonPage({ params }: LessonPageProps) {
   
   const isLessonCompleted = (lessonIdToCheck: string) => {
     return userProgress.includes(lessonIdToCheck);
+  };
+
+  const handleToggleComplete = async () => {
+    if (!currentLesson || !dbCourseId || savingProgress) return;
+    const lessonKey = currentLesson.id;
+    const nowCompleted = !isLessonCompleted(lessonKey);
+    setSavingProgress(true);
+    const res = await markLessonComplete(lessonKey, nowCompleted);
+    if (res.success) {
+      setUserProgress((prev) =>
+        nowCompleted ? [...prev, lessonKey] : prev.filter((l) => l !== lessonKey)
+      );
+    }
+    setSavingProgress(false);
   };
   
   return (
@@ -491,13 +517,33 @@ export default function LessonPage({ params }: LessonPageProps) {
           
           {/* Navigation footer */}
           <div className="bg-background-light border-t border-gray-800 p-4 flex justify-between">
+            {dbCourseId && !authLoading && !isAuthenticated && (
+              <div className="w-full mb-3 p-3 rounded-md bg-accent/10 border border-accent/30 text-sm text-text-secondary">
+                <Link href="/sign-up" className="text-accent hover:underline font-medium">Crea tu cuenta gratis</Link>{' '}
+                para guardar tu progreso y obtener tu certificado.
+              </div>
+            )}
+            {dbCourseId && isAuthenticated && currentLesson && (
+              <button
+                onClick={handleToggleComplete}
+                disabled={savingProgress}
+                className={`mb-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50 ${
+                  isLessonCompleted(currentLesson.id)
+                    ? 'bg-green-600/20 text-green-400 border border-green-700 hover:bg-green-600/30'
+                    : 'bg-accent text-white hover:bg-accent/90'
+                }`}
+              >
+                <CheckCircleIcon className="h-5 w-5" />
+                {savingProgress ? 'Guardando…' : isLessonCompleted(currentLesson.id) ? 'Lección completada ✓' : 'Marcar como completada'}
+              </button>
+            )}
             {prevLesson ? (
               <Link 
                 href={`/courses/${courseSlug}/lessons/${prevLesson.lessonId}`}
                 className="flex items-center text-text-secondary hover:text-text-primary"
               >
                 <ChevronLeftIcon className="h-5 w-5 mr-2" />
-                <span>Previous Lesson</span>
+                <span>Lección anterior</span>
               </Link>
             ) : (
               <div></div>
@@ -508,7 +554,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                 href={`/courses/${courseSlug}/lessons/${nextLesson.lessonId}`}
                 className="flex items-center text-text-secondary hover:text-text-primary ml-auto"
               >
-                <span>Next Lesson</span>
+                <span>Siguiente lección</span>
                 <ChevronRightIcon className="h-5 w-5 ml-2" />
               </Link>
             ) : (
@@ -516,7 +562,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                 href={`/courses/${courseSlug}`}
                 className="flex items-center text-text-secondary hover:text-text-primary ml-auto"
               >
-                <span>Complete Course</span>
+                <span>Volver al curso</span>
                 <CheckCircleIcon className="h-5 w-5 ml-2" />
               </Link>
             )}
