@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCourses, CourseWithDetails } from '@/lib/db/actions/courses';
 import { WaitlistForm } from '@/components/WaitlistForm';
-import { HeroMedia } from '@/components/home/HeroMedia';
+import { Testimonials } from '@/components/home/Testimonials';
+import socialProof from '@/lib/data/social-proof.json';
 
 export const revalidate = 300;
 
@@ -47,37 +48,81 @@ export default async function HomePage() {
 
   const hasCourses = courses.length > 0;
 
+  // Build a 3-column thumbnail mosaic from real course thumbnails for the hero.
+  const mosaicThumbnails = courses
+    .map((c) => c.thumbnail)
+    .filter((t): t is string => Boolean(t))
+    .slice(0, 9);
+  const mosaicColumns: string[][] = [[], [], []];
+  mosaicThumbnails.forEach((thumb, i) => {
+    mosaicColumns[i % 3].push(thumb);
+  });
+
   return (
     <div className="bg-background">
       {/* Hero */}
-      <section className="relative min-h-[85vh] flex items-center py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <HeroMedia />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h1 className="font-display uppercase text-5xl md:text-7xl font-bold text-text-primary mb-6 tracking-tight leading-[0.95]">
-            Aprende de los mejores,{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
-              en español
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10">
-            Cursos de inteligencia artificial, machine learning y tecnología de
-            vanguardia dictados por expertos de Latinoamérica. Gratis para
-            empezar.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/courses"
-              className="px-8 py-4 rounded-lg bg-accent hover:bg-accent/90 text-white font-semibold text-lg transition-colors"
-            >
-              Explorar cursos
-            </Link>
-            <Link
-              href="/social-impact"
-              className="px-8 py-4 rounded-lg border border-gray-700 text-text-primary hover:border-accent hover:text-accent font-semibold text-lg transition-colors"
-            >
-              Nuestra misión
-            </Link>
+      <section className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: copy */}
+          <div className="text-center lg:text-left">
+            <h1 className="font-display uppercase text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary mb-6 tracking-tight leading-[0.95]">
+              Aprende de los mejores, en español.
+            </h1>
+            <p className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto lg:mx-0 mb-10">
+              Cursos de inteligencia artificial, machine learning y tecnología de
+              vanguardia dictados por expertos de Latinoamérica. Gratis para
+              empezar.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link
+                href="/courses"
+                className="px-8 py-4 rounded-lg bg-accent hover:bg-accent/90 text-white font-semibold text-lg transition-colors"
+              >
+                Explorar cursos
+              </Link>
+              <Link
+                href="/sign-up"
+                className="px-8 py-4 rounded-lg border border-gray-700 text-text-primary hover:border-accent hover:text-accent font-semibold text-lg transition-colors"
+              >
+                Crear cuenta gratis
+              </Link>
+            </div>
           </div>
+
+          {/* Right: thumbnail mosaic */}
+          {mosaicThumbnails.length > 0 && (
+            <div className="relative h-[420px] sm:h-[520px] lg:h-[560px] overflow-hidden">
+              <div className="grid grid-cols-3 gap-3 h-full">
+                {mosaicColumns.map((col, colIndex) => (
+                  <div
+                    key={colIndex}
+                    className={`flex flex-col gap-3 ${
+                      colIndex === 1 ? 'hero-mosaic-col-down mt-10' : 'hero-mosaic-col-up'
+                    }`}
+                  >
+                    {col.map((thumb, i) => (
+                      <div
+                        key={i}
+                        className="relative w-full aspect-[3/4] overflow-hidden rounded-xl bg-surface flex-shrink-0"
+                      >
+                        <Image
+                          src={thumb}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 33vw, 16vw"
+                          priority={colIndex === 0 && i === 0}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              {/* Gradient masks top/bottom */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
+            </div>
+          )}
         </div>
       </section>
 
@@ -105,7 +150,7 @@ export default async function HomePage() {
                       href={`/courses/${course.slug}`}
                       className="group flex-shrink-0 w-72 snap-start"
                     >
-                      <div className="relative aspect-video overflow-hidden rounded-md bg-gray-900">
+                      <div className="relative aspect-video overflow-hidden rounded-md bg-surface">
                         {course.thumbnail && (
                           <Image
                             src={course.thumbnail}
@@ -153,9 +198,9 @@ export default async function HomePage() {
                     <Link
                       key={course.id}
                       href={`/courses/${course.slug}`}
-                      className="group flex flex-col overflow-hidden rounded-lg bg-background-light border border-gray-800 hover:border-accent/50 transition-all"
+                      className="group flex flex-col overflow-hidden rounded-lg bg-surface border border-gray-700/50 hover:border-accent/50 transition-all"
                     >
-                      <div className="relative aspect-video overflow-hidden bg-gray-900">
+                      <div className="relative aspect-video overflow-hidden bg-surface">
                         {course.thumbnail && (
                           <Image
                             src={course.thumbnail}
@@ -190,7 +235,7 @@ export default async function HomePage() {
       ) : (
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mx-auto">
-            <div className="bg-background-light border border-gray-800 rounded-xl p-8">
+            <div className="bg-surface border border-gray-700/50 rounded-xl p-8">
               <h3 className="text-xl font-semibold text-text-primary mb-2">
                 Sé el primero en enterarte
               </h3>
@@ -204,6 +249,46 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Stats strip */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-700/50">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <p className="font-display text-3xl md:text-4xl font-bold text-accent tracking-tight">
+              {socialProof.stats.subscribers}
+            </p>
+            <p className="mt-1 text-sm text-text-secondary">{socialProof.stats.subscribersLabel}</p>
+          </div>
+          <div>
+            <p className="font-display text-3xl md:text-4xl font-bold text-accent tracking-tight">
+              {socialProof.stats.videos}
+            </p>
+            <p className="mt-1 text-sm text-text-secondary">{socialProof.stats.videosLabel}</p>
+          </div>
+          <div>
+            <p className="font-display text-3xl md:text-4xl font-bold text-accent tracking-tight">
+              {socialProof.stats.courses}
+            </p>
+            <p className="mt-1 text-sm text-text-secondary">{socialProof.stats.coursesLabel}</p>
+          </div>
+          <div>
+            <p className="font-display text-3xl md:text-4xl font-bold text-accent tracking-tight">
+              {socialProof.stats.lessons}
+            </p>
+            <p className="mt-1 text-sm text-text-secondary">{socialProof.stats.lessonsLabel}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-display uppercase text-2xl md:text-3xl font-semibold text-text-primary tracking-tight mb-10 text-center">
+            Lo que dice nuestra comunidad.
+          </h2>
+          <Testimonials testimonials={socialProof.testimonials} />
+        </div>
+      </section>
+
       {/* Instructores */}
       {instructors.length > 0 && (
         <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -216,7 +301,7 @@ export default async function HomePage() {
                 <Link
                   key={instructor.name}
                   href={`/courses?category=${encodeURIComponent(instructor.category)}`}
-                  className="group relative aspect-[3/4] overflow-hidden rounded-md bg-gray-900"
+                  className="group relative aspect-[3/4] overflow-hidden rounded-md bg-surface"
                 >
                   {(instructor.avatar || instructor.thumbnail) && (
                     <Image
@@ -244,7 +329,7 @@ export default async function HomePage() {
       )}
 
       {/* Mission strip */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-800">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-700/50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="font-display uppercase text-2xl md:text-3xl font-semibold text-text-primary mb-4 tracking-tight">
@@ -263,7 +348,7 @@ export default async function HomePage() {
               Leer el caso de estudio
             </Link>
           </div>
-          <div className="bg-background rounded-xl border border-gray-800 p-8">
+          <div className="bg-surface rounded-xl border border-gray-700/50 p-8">
             <h3 className="font-display uppercase text-lg font-semibold text-text-primary mb-2 tracking-tight">
               Nuevos cursos, directo a tu correo
             </h3>
