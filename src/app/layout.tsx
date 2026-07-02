@@ -7,10 +7,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+// Condensed display face for uppercase headlines; exposed as the
+// `font-display` utility via @theme in globals.css.
 const oswald = Oswald({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
-  variable: "--font-display",
+  variable: "--font-oswald",
 });
 
 export const metadata: Metadata = {

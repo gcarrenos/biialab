@@ -12,7 +12,6 @@ export default function Header() {
     { name: 'Inicio', href: '/' },
     { name: 'Cursos', href: '/courses' },
     { name: 'Impacto social', href: '/social-impact' },
-    { name: 'Caso de estudio', href: '/casos/planvoyager' },
   ];
 
   return (
@@ -39,7 +38,7 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-text-primary hover:text-accent transition-colors"
+              className="whitespace-nowrap text-sm font-semibold leading-6 text-text-primary hover:text-accent transition-colors"
             >
               {item.name}
             </Link>
