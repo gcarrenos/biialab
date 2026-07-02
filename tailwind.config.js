@@ -1,4 +1,10 @@
-/** @type {import('tailwindcss').Config} */
+/**
+ * NOTE: Tailwind v4 does not read this file (no @config directive in
+ * globals.css). The brand theme lives in src/app/globals.css via @theme.
+ * Kept only as documentation of the palette.
+ *
+ * @type {import('tailwindcss').Config}
+ */
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -21,6 +27,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
       },
     },
   },

@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+// Condensed display face for uppercase headlines; exposed as the
+// `font-display` utility via @theme in globals.css.
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-oswald",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="h-full" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans min-h-screen bg-background text-text-primary`}>
+      <body className={`${inter.variable} ${oswald.variable} font-sans min-h-screen bg-background text-text-primary`}>
         {children}
       </body>
     </html>
