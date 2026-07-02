@@ -83,18 +83,17 @@ export default async function HomePage() {
 
   return (
     <div className="bg-background">
-      {/* Hero */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Hero: full-bleed dark band */}
+      <section className="bg-[#17181c] px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 md:py-28 min-h-[520px]">
           {/* Left: copy */}
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-6 tracking-tight leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.05]">
               Aprende de los mejores, en español.
             </h1>
-            <p className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto lg:mx-0 mb-10">
-              Cursos de inteligencia artificial, machine learning y tecnología de
-              vanguardia dictados por expertos de Latinoamérica. Gratis para
-              empezar.
+            <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 mb-10">
+              Cursos de desarrollo personal, negocios, ventas e inteligencia
+              artificial dictados por los referentes de Latinoamérica. Gratis.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link
@@ -105,33 +104,50 @@ export default async function HomePage() {
               </Link>
               <Link
                 href="/sign-up"
-                className="px-8 py-4 rounded-lg border border-gray-300 text-text-primary hover:border-accent hover:text-accent font-semibold text-lg transition-colors"
+                className="px-8 py-4 rounded-lg border border-white/20 text-white hover:border-white/50 font-semibold text-lg transition-colors"
               >
                 Crear cuenta gratis
               </Link>
             </div>
           </div>
 
-          {/* Right: tidy 2x2 grid of course covers */}
+          {/* Right: offset course-cover mosaic */}
           {heroThumbnails.length > 0 && (
-            <div className="hidden lg:grid grid-cols-2 gap-4">
-              {heroThumbnails.map((thumb, i) => (
-                <div
-                  key={i}
-                  className="relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-background-light"
-                >
-                  <Image
-                    src={thumb}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="20vw"
-                    priority={i === 0}
-                  />
+            <div className="hidden lg:grid grid-cols-2 gap-4 items-start">
+              {[0, 1].map((col) => (
+                <div key={col} className={`grid gap-4 ${col === 1 ? 'translate-y-8' : ''}`}>
+                  {heroThumbnails.filter((_, i) => i % 2 === col).map((thumb, i) => (
+                    <div
+                      key={i}
+                      className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-white/10 bg-white/5"
+                    >
+                      <Image
+                        src={thumb}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="22vw"
+                        priority={col === 0 && i === 0}
+                      />
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Stat counter band: directly under the dark hero */}
+      <section className="py-14 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="flex items-center justify-center gap-2 text-5xl sm:text-6xl md:text-7xl font-bold text-text-primary tracking-tight">
+            2.000.000+
+            <span className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-accent" aria-hidden="true" />
+          </p>
+          <p className="mt-4 text-base md:text-lg text-text-secondary">
+            personas aprenden con BiiA LAB en YouTube
+          </p>
         </div>
       </section>
 
@@ -167,21 +183,6 @@ export default async function HomePage() {
           </section>
         </Reveal>
       )}
-
-      {/* Stat counter band: single huge number, real YouTube reach */}
-      <Reveal>
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-200">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="flex items-center justify-center gap-2 text-5xl sm:text-6xl md:text-7xl font-bold text-text-primary tracking-tight">
-              2.000.000+
-              <span className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-accent" aria-hidden="true" />
-            </p>
-            <p className="mt-4 text-base md:text-lg text-text-secondary">
-              personas aprenden con BiiA LAB en YouTube
-            </p>
-          </div>
-        </section>
-      </Reveal>
 
       {/* Bento feature cards */}
       <Reveal>
