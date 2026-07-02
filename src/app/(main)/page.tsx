@@ -5,6 +5,8 @@ import { WaitlistForm } from '@/components/WaitlistForm';
 import { Testimonials } from '@/components/home/Testimonials';
 import { Reveal } from '@/components/home/Reveal';
 import { CourseGrid, GridCourse } from '@/components/home/CourseGrid';
+import { LogoMark } from '@/components/brand/Logo';
+import { IconChevronRight, IconCheck } from '@/components/icons';
 import socialProof from '@/lib/data/social-proof.json';
 
 export const revalidate = 300;
@@ -14,28 +16,34 @@ function countLessons(course: CourseWithDetails): number {
   return course.modules.reduce((sum, m) => sum + m.lessons.length, 0);
 }
 
-/** Left-aligned section header: bold sentence-case title with an optional
- * "Ver todos" link on the same row. */
+/** Left-aligned section header: bold title, gray subtitle underneath, and
+ * an optional bordered "Ver todos" pill button on the same row. */
 function SectionHeader({
   title,
+  subtitle,
   href,
   linkLabel = 'Ver todos',
 }: {
   title: string;
+  subtitle?: string;
   href?: string;
   linkLabel?: string;
 }) {
   return (
     <div className="flex items-end justify-between gap-4 mb-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-text-primary tracking-tight">
-        {title}
-      </h2>
+      <div>
+        <h2 className="text-2xl md:text-3xl font-bold text-text-primary tracking-tight">
+          {title}
+        </h2>
+        {subtitle && <p className="mt-1.5 text-sm md:text-base text-text-secondary">{subtitle}</p>}
+      </div>
       {href && (
         <Link
           href={href}
-          className="text-accent hover:underline text-sm font-medium whitespace-nowrap mb-1"
+          className="inline-flex items-center gap-1.5 flex-shrink-0 px-4 py-2 rounded-full border border-gray-300 text-sm font-semibold text-text-primary hover:border-accent hover:text-accent transition-colors whitespace-nowrap"
         >
-          {linkLabel} →
+          {linkLabel}
+          <IconChevronRight size={16} />
         </Link>
       )}
     </div>
@@ -64,6 +72,14 @@ export default async function HomePage() {
     .map((c) => c.thumbnail)
     .filter((t): t is string => Boolean(t))
     .slice(0, 4);
+
+  // Bento card B mosaic: 4 more course covers (falls back to the hero set
+  // when there aren't enough courses to give each mosaic its own images).
+  const bentoThumbnails = courses
+    .map((c) => c.thumbnail)
+    .filter((t): t is string => Boolean(t))
+    .slice(4, 8);
+  const bentoMosaic = bentoThumbnails.length === 4 ? bentoThumbnails : heroThumbnails;
 
   return (
     <div className="bg-background">
@@ -124,7 +140,11 @@ export default async function HomePage() {
         <Reveal>
           <section className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-              <SectionHeader title="Explora los cursos" href="/courses" />
+              <SectionHeader
+                title="Explora los cursos"
+                subtitle="Contenido curado y verificado por el equipo de BiiA LAB."
+                href="/courses"
+              />
               <CourseGrid courses={gridCourses} limit={12} />
             </div>
           </section>
@@ -147,6 +167,84 @@ export default async function HomePage() {
           </section>
         </Reveal>
       )}
+
+      {/* Stat counter band: single huge number, real YouTube reach */}
+      <Reveal>
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-200">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="flex items-center justify-center gap-2 text-5xl sm:text-6xl md:text-7xl font-bold text-text-primary tracking-tight">
+              2.000.000+
+              <span className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-accent" aria-hidden="true" />
+            </p>
+            <p className="mt-4 text-base md:text-lg text-text-secondary">
+              personas aprenden con BiiA LAB en YouTube
+            </p>
+          </div>
+        </section>
+      </Reveal>
+
+      {/* Bento feature cards */}
+      <Reveal>
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card A: certificate */}
+            <div className="rounded-2xl bg-gradient-to-br from-orange-50 to-white border border-gray-200 p-8 flex flex-col">
+              <h3 className="text-xl md:text-2xl font-bold text-text-primary tracking-tight mb-2">
+                Certifícate y compártelo en LinkedIn
+              </h3>
+              <p className="text-text-secondary text-sm md:text-base mb-6 max-w-sm">
+                Aprueba el examen de cada curso y obtén un certificado digital
+                verificable, listo para agregar a tu perfil profesional.
+              </p>
+              <div className="mt-auto">
+                <div className="rounded-xl bg-white border border-gray-200 shadow-sm p-6 max-w-sm">
+                  <div className="flex items-center gap-3 mb-4">
+                    <LogoMark size={28} />
+                    <div>
+                      <p className="text-xs font-semibold text-text-primary">Certificado de finalización</p>
+                      <p className="text-[11px] text-text-secondary">BiiA LAB</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-2.5 rounded-full bg-background-light w-full" />
+                    <div className="h-2.5 rounded-full bg-background-light w-4/5" />
+                    <div className="h-2.5 rounded-full bg-background-light w-2/3" />
+                  </div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-[11px] text-text-secondary">Verificado</span>
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-white">
+                      <IconCheck size={11} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card B: Spanish-language courses from top instructors */}
+            <div className="rounded-2xl bg-gradient-to-br from-violet-50 to-white border border-gray-200 p-8 flex flex-col">
+              <h3 className="text-xl md:text-2xl font-bold text-text-primary tracking-tight mb-2">
+                Aprende de los mejores, en español
+              </h3>
+              <p className="text-text-secondary text-sm md:text-base mb-6 max-w-sm">
+                Cursos gratuitos dictados por expertos de Latinoamérica, con
+                certificado al aprobar el examen de cada curso.
+              </p>
+              {bentoMosaic.length > 0 && (
+                <div className="mt-auto grid grid-cols-2 gap-3 max-w-sm">
+                  {bentoMosaic.map((thumb, i) => (
+                    <div
+                      key={i}
+                      className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 bg-background-light"
+                    >
+                      <Image src={thumb} alt="" fill className="object-cover" sizes="200px" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </Reveal>
 
       {/* Stats strip */}
       <Reveal>

@@ -161,7 +161,7 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
 
               {videos.length > 100 && (
                 <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
-                  <h3 className="text-sm font-medium text-yellow-400 mb-2">⚠️ Large video library</h3>
+                  <h3 className="text-sm font-medium text-yellow-400 mb-2">Large video library</h3>
                   <p className="text-sm text-text-secondary">
                     You have <strong>{videos.length}</strong> videos. Due to AI limits, the first <strong>100 videos</strong> will be analyzed.
                     For best results, select specific videos first using the checkboxes in the dashboard, then use &quot;Import Selected&quot;.

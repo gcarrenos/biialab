@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { UserMenu } from '@/components/auth/UserMenu';
+import { Logo } from '@/components/brand/Logo';
+import { IconSearch } from '@/components/icons';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,10 +18,14 @@ export default function Header() {
     { name: 'Impacto social', href: '/social-impact' },
   ];
 
-  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== 'Enter') return;
+  const handleSearchSubmit = () => {
     const trimmed = searchValue.trim();
     router.push(trimmed ? `/courses?q=${encodeURIComponent(trimmed)}` : '/courses');
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter') return;
+    handleSearchSubmit();
   };
 
   return (
@@ -28,7 +34,7 @@ export default function Header() {
         <div className="flex items-center gap-6 flex-shrink-0">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">BiiALab</span>
-            <h1 className="text-xl font-bold tracking-tight text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
+            <Logo />
           </Link>
           <div className="hidden lg:flex lg:items-center lg:gap-6">
             <Link
@@ -53,15 +59,22 @@ export default function Header() {
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:max-w-md">
           <div className="relative w-full">
-            <MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" aria-hidden="true" />
             <input
               type="search"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={handleSearchKeyDown}
               placeholder="Busca cursos: 'ventas', 'IA'…"
-              className="w-full rounded-full bg-background-light border border-gray-200 py-2 pl-9 pr-4 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full rounded-full bg-background-light border border-gray-200 py-2 pl-4 pr-10 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent"
             />
+            <button
+              type="button"
+              onClick={handleSearchSubmit}
+              className="absolute right-1 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full text-text-secondary hover:bg-white hover:text-accent transition-colors"
+            >
+              <span className="sr-only">Buscar</span>
+              <IconSearch size={16} />
+            </button>
           </div>
         </div>
 
@@ -83,7 +96,7 @@ export default function Header() {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <div className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl border border-gray-200">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-xl font-bold tracking-tight text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
+                  <Logo />
                   <button
                     type="button"
                     className="text-text-secondary hover:text-text-primary"
@@ -95,7 +108,7 @@ export default function Header() {
                 </div>
                 <div className="mt-6">
                   <div className="relative">
-                    <MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" aria-hidden="true" />
+                    <IconSearch size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" />
                     <input
                       type="search"
                       value={searchValue}
