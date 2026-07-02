@@ -6,11 +6,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { getMyLearning, LearningEntry } from '@/lib/db/actions/progress';
+import { getMyCertificates, MyCertificate } from '@/lib/db/actions/certificates';
 
 export default function AccountPage() {
   const router = useRouter();
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const [entries, setEntries] = useState<LearningEntry[]>([]);
+  const [certs, setCerts] = useState<MyCertificate[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,9 +21,12 @@ export default function AccountPage() {
       router.push('/sign-in');
       return;
     }
-    getMyLearning()
-      .then((res) => setEntries(res.entries))
-      .catch(() => setEntries([]))
+    Promise.all([getMyLearning(), getMyCertificates()])
+      .then(([learning, certificates]) => {
+        setEntries(learning.entries);
+        setCerts(certificates.certificates);
+      })
+      .catch(() => { setEntries([]); setCerts([]); })
       .finally(() => setLoading(false));
   }, [authLoading, isAuthenticated, router]);
 
@@ -111,9 +116,32 @@ export default function AccountPage() {
 
         {/* Certificates */}
         <h2 className="text-xl font-semibold text-text-primary mt-14 mb-6">Mis certificados</h2>
-        <div className="bg-background-light border border-gray-800 rounded-xl p-8 text-center text-text-secondary">
-          Aún no tienes certificados. Completa un curso y aprueba su examen final para obtener el tuyo.
-        </div>
+        {certs.length === 0 ? (
+          <div className="bg-background-light border border-gray-800 rounded-xl p-8 text-center text-text-secondary">
+            Aún no tienes certificados. Completa un curso y aprueba su examen final para obtener el tuyo.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {certs.map((cert) => (
+              <div key={cert.certificateNumber} className="bg-background-light border border-accent/30 rounded-xl p-6">
+                <p className="text-xs text-accent uppercase tracking-wider mb-2">Certificado</p>
+                <h3 className="font-semibold text-text-primary line-clamp-2">{cert.courseTitle}</h3>
+                <p className="mt-1 text-xs text-text-secondary">
+                  {new Date(cert.issuedAt).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  {' · '}<span className="font-mono">{cert.certificateNumber}</span>
+                </p>
+                <div className="mt-4 flex gap-3">
+                  <Link
+                    href={`/verify/${cert.certificateNumber}`}
+                    className="px-4 py-2 bg-accent text-white text-xs font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+                  >
+                    Ver y compartir
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

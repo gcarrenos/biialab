@@ -5,6 +5,7 @@ import { and, eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { quizzes, quizQuestions, quizAttempts, courses } from '@/lib/db/schema';
+import { issueCertificateForUser } from '@/lib/db/actions/certificates';
 
 async function getSessionUser() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -97,7 +98,18 @@ export async function submitExamAttempt(quizId: string, answers: Record<string, 
       answers,
     });
 
-    return { success: true as const, score, passed, correctCount: correct, total: questions.length, feedback };
+    // Passing the final exam earns the course certificate (idempotent)
+    let certificateNumber: string | null = null;
+    if (passed && quiz.courseId) {
+      try {
+        const cert = await issueCertificateForUser(user.id, quiz.courseId);
+        certificateNumber = cert.certificateNumber;
+      } catch (error) {
+        console.error('certificate issuance error:', error);
+      }
+    }
+
+    return { success: true as const, score, passed, correctCount: correct, total: questions.length, feedback, certificateNumber };
   } catch (error) {
     console.error('submitExamAttempt error:', error);
     return { success: false as const, error: 'server' as const };
