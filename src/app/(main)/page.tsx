@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCourses } from '@/lib/db/actions/courses';
 import { WaitlistForm } from '@/components/WaitlistForm';
+import { HeroMedia } from '@/components/home/HeroMedia';
 
 export const revalidate = 300;
 
@@ -13,8 +14,9 @@ export default async function HomePage() {
   return (
     <div className="bg-background">
       {/* Hero */}
-      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background-light to-background overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <HeroMedia />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-6 tracking-tight">
             Aprende IA y tecnología,{' '}
             <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
