@@ -1,148 +1,92 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Impacto Social | BiiALab',
+  description:
+    'Creemos que la educación en inteligencia artificial y tecnología debe estar al alcance de toda Latinoamérica. Conoce nuestra visión de impacto social y proyectos de tecnología de interés público.',
+};
 
 export default function SocialImpactPage() {
-  // Partner organizations
-  const partners = [
-    { name: 'USO', logo: '/images/social/uso.svg' },
-    { name: 'TENT', logo: '/images/social/tent.svg' },
-    { name: 'GGL', logo: '/images/social/ggl.svg' },
-    { name: 'HIAS', logo: '/images/social/hias.svg' },
-    { name: 'Upwardly Global', logo: '/images/social/upwardly-global.svg' },
-    { name: 'IRC', logo: '/images/social/irc.svg' },
-    { name: 'Minds Matter', logo: '/images/social/minds-matter.svg' },
-    { name: 'Act Now', logo: '/images/social/act-now.svg' },
-    { name: 'Goodwill', logo: '/images/social/goodwill.svg' },
-  ];
-
   return (
     <div className="bg-background">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background-light to-background overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-text-primary mb-6">
-            Empowering underserved communities through education
+            Tecnología y educación al servicio de nuestra comunidad
           </h1>
-          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-12">
-            BiiAMind promotes global social equity and economic opportunity by giving communities in need access to the transformational power of learning.
+          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">
+            La inteligencia artificial está transformando la economía global.
+            Nuestra misión es que Latinoamérica no se quede mirando: que
+            cualquier persona, sin importar dónde nació o cuánto puede pagar,
+            tenga acceso a formación tecnológica de clase mundial en español.
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
-              <div className="text-4xl font-bold text-accent mb-2">200,000+</div>
-              <div className="text-text-secondary">Social Impact learners served</div>
-            </div>
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
-              <div className="text-4xl font-bold text-accent mb-2">100+</div>
-              <div className="text-text-secondary">Nonprofit partners</div>
-            </div>
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
-              <div className="text-4xl font-bold text-accent mb-2">140+</div>
-              <div className="text-text-secondary">Country partners</div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Partners Section */}
+      {/* Pillars Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
-            Trusted by 100+ nonprofit and community organizations
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-12 text-center">
+            Nuestros pilares
           </h2>
-          <p className="text-text-secondary max-w-3xl mx-auto mb-12">
-            To enable social change, universal access to world-class learning is critical. That's why our Social Impact team's mission is to guide BiiAMind's integrated social impact strategy and donate licenses to organizations that help underserved communities transform their lives through learning.
-          </p>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
-            {partners.map((partner) => (
-              <div key={partner.name} className="flex items-center justify-center h-16 bg-background-light rounded-lg p-4 grayscale hover:grayscale-0 transition-all">
-                <div className="h-12 w-full relative">
-                  <Image 
-                    src={partner.logo} 
-                    alt={partner.name} 
-                    fill
-                    className="object-contain"
-                    unoptimized={true}
-                  />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Coursera Cares Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-800">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">BiiAMind Cares</h2>
-              <h3 className="text-xl text-text-primary mb-4">Employee donation matching and volunteering program</h3>
-              <p className="text-text-secondary mb-6">
-                BiiAMind employees can participate in BiiAMind Cares to maximize the impact of their volunteer time and donations to nonprofit organizations. The company matches employees' donations to amplify our impact in local and global communities. Our team also has access to a wide range of on-site and virtual volunteer opportunities across the world.
+              <h3 className="text-xl text-text-primary font-medium mb-2">
+                Educación en español
+              </h3>
+              <p className="text-text-secondary">
+                El mejor contenido sobre IA y tecnología está casi siempre en
+                inglés. Producimos formación de vanguardia en nuestro idioma,
+                para cerrar esa brecha antes de que se vuelva un abismo.
               </p>
             </div>
-            <div className="relative h-64 w-full rounded-lg overflow-hidden">
-              <Image 
-                src="/images/social/cares.jpg" 
-                alt="BiiAMind Cares" 
-                fill
-                className="object-cover"
-                unoptimized={true}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Mission Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 relative h-64 w-full rounded-lg overflow-hidden">
-              <Image 
-                src="/images/social/b-corp.jpg" 
-                alt="Certified B Corp" 
-                fill
-                className="object-cover"
-                unoptimized={true}
-              />
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">Our mission is deeply rooted in our business</h2>
-              <p className="text-text-secondary mb-6">
-                Our mission and values are deeply integrated into our operations, processes, and culture. BiiAMind is a public benefit corporation and Certified B Corp, underscoring our deep commitment to making a positive impact on society while meeting rigorous standards of social and environmental performance, accountability, and transparency, including impact assessments. Our approach to ESG is focused on creating long-term value while demonstrating BiiAMind's impact on the individuals, institutions, and communities we serve around the world.
+            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl text-text-primary font-medium mb-2">
+                Acceso sin barreras
+              </h3>
+              <p className="text-text-secondary">
+                El talento está distribuido por igual; las oportunidades no.
+                Trabajamos para que el costo y la geografía dejen de decidir
+                quién puede aprender a construir con tecnología.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonial Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-800">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-background p-8 md:p-12 rounded-xl border border-gray-800">
-            <blockquote className="text-lg md:text-xl text-text-secondary italic mb-6">
-              &quot;Though I retired from the Air Force two years ago, &apos;Making Your Military Transition a Transformation&apos; made me reassess some of my professional priorities. I recently changed roles in my company and can honestly say that this course impacted my approach to my new role. Although I&apos;m retired from a 30-year military career and am 50-plus years of age, I never, ever want to stop learning, growing, and challenging myself. Education plays a central role in my professional future, without question.&quot;
-            </blockquote>
-            <div className="flex items-center">
-              <div className="h-12 w-12 rounded-full bg-accent flex items-center justify-center text-white text-xl font-bold mr-4">
-                TH
+            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
               </div>
-              <div>
-                <p className="text-text-primary font-medium">Timothy Horn</p>
-                <p className="text-text-secondary text-sm">United Service Organizations (USO)</p>
-              </div>
+              <h3 className="text-xl text-text-primary font-medium mb-2">
+                Tecnología de interés público
+              </h3>
+              <p className="text-text-secondary">
+                Enseñamos construyendo. Aplicamos IA a problemas reales que
+                afectan a nuestra gente — salud, acceso a la información,
+                oportunidad económica — y documentamos lo aprendido.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Case Study: PlanVoyager */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-800">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-background-light p-8 md:p-12 rounded-xl border border-gray-800 max-w-4xl">
+          <div className="bg-background p-8 md:p-12 rounded-xl border border-gray-800 max-w-4xl mx-auto">
             <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent mb-4">
               Caso de estudio
             </span>
@@ -168,31 +112,30 @@ export default function SocialImpactPage() {
         </div>
       </section>
 
-      {/* Global Program Section */}
+      {/* Partner CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">Our global Social Impact Program</h2>
-          <p className="text-text-secondary mb-12 max-w-4xl">
-            BiiAMind has worked with global nonprofit organizations to offer learners in need access to free, high-quality education that supports their personal development, career advancement, and economic opportunity. We provide access to education for underserved communities including refugees, students, veterans, and women and girls. More than 200,000 underserved learners have collectively logged more than 900,000 course enrollments.
-          </p>
-          
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800 max-w-4xl">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-800 max-w-4xl mx-auto">
             <div className="flex items-start">
-              <div className="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-6">
+              <div className="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-6 flex-shrink-0">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl text-text-primary font-medium mb-2">Make a difference as a social impact partner</h3>
+                <h3 className="text-xl text-text-primary font-medium mb-2">
+                  ¿Trabajas en una organización con misión social?
+                </h3>
                 <p className="text-text-secondary mb-4">
-                  For nonprofits supporting education and career development, discover how to partner with BiiAMind and share your interest.
+                  Si tu organización apoya la educación o el desarrollo
+                  profesional en Latinoamérica y quieres explorar una
+                  colaboración, nos encantaría escucharte.
                 </p>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="inline-flex items-center px-4 py-2 bg-accent text-white font-medium rounded-md hover:bg-accent/90 transition-colors"
                 >
-                  Become a Partner
+                  Conversemos
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -204,4 +147,4 @@ export default function SocialImpactPage() {
       </section>
     </div>
   );
-} 
+}
