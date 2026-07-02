@@ -265,7 +265,9 @@ export const lessonResources = pgTable('lesson_resources', {
 
 export const quizzes = pgTable('quizzes', {
   id: uuid('id').defaultRandom().primaryKey(),
-  lessonId: uuid('lesson_id').notNull().references(() => lessons.id, { onDelete: 'cascade' }),
+  // Lesson quizzes reference a lesson; course final exams reference a course.
+  lessonId: uuid('lesson_id').references(() => lessons.id, { onDelete: 'cascade' }),
+  courseId: uuid('course_id').references(() => courses.id, { onDelete: 'cascade' }),
   title: varchar('title', { length: 255 }).notNull(),
   description: text('description'),
   passingScore: integer('passing_score').default(70), // Percentage

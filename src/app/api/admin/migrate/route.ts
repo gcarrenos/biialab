@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
-import { MIGRATION_SQL, MIGRATION_SQL_0001 } from '@/lib/db/migration-sql';
+import { MIGRATION_SQL, MIGRATION_SQL_0001, MIGRATION_SQL_0002 } from '@/lib/db/migration-sql';
 
 export const maxDuration = 60;
 
@@ -59,6 +59,9 @@ export async function POST(request: Request) {
       results.push(...await runStatements(MIGRATION_SQL_0001));
       authReshapeRan = true;
     }
+
+    // 0002: idempotent quiz alterations (duplicate constraint errors are skipped)
+    results.push(...await runStatements(MIGRATION_SQL_0002));
 
     const failed = results.filter((r) => r.status === 'failed');
     return NextResponse.json({
