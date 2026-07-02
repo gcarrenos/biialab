@@ -192,6 +192,16 @@ export default function ComingSoonPage() {
             </a>
           </div>
 
+          {/* Explore links */}
+          <div className="flex items-center gap-6 mb-4 animate-fade-in-delay-4">
+            <Link href="/social-impact" className="text-white/60 hover:text-white text-sm transition-colors underline-offset-4 hover:underline">
+              Impacto social
+            </Link>
+            <Link href="/casos/planvoyager" className="text-white/60 hover:text-white text-sm transition-colors underline-offset-4 hover:underline">
+              Caso de estudio: PlanVoyager
+            </Link>
+          </div>
+
           {/* Copyright */}
           <p className="text-white/40 text-sm animate-fade-in-delay-4">
             © 2026 BiiALab. Todos los derechos reservados.
