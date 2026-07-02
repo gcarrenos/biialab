@@ -357,3 +357,20 @@ export async function getAllCoursesAdmin(): Promise<CourseWithDetails[]> {
 
   return coursesWithDetails;
 }
+
+// Delete a course (modules/lessons cascade via FK). Server actions are public
+// endpoints, so this requires the admin password like the /api/admin routes.
+export async function deleteCourse(courseId: string, adminPassword?: string) {
+  const expected = process.env.ADMIN_PASSWORD || 'biialab2026';
+  if (adminPassword !== expected) {
+    return { success: false, error: 'Unauthorized' };
+  }
+
+  try {
+    await db.delete(courses).where(eq(courses.id, courseId));
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting course:', error);
+    return { success: false, error: String(error) };
+  }
+}
