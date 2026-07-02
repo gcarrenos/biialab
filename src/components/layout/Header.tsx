@@ -16,12 +16,12 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-background border-b border-gray-800">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className="bg-background/80 backdrop-blur sticky top-0 z-50 border-b border-gray-800/60">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">BiiALab</span>
-            <h1 className="text-2xl font-bold text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
+            <h1 className="font-display text-xl font-semibold uppercase tracking-tight text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -34,10 +34,10 @@ export default function Header() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:gap-x-10">
           {navigation.map((item) => (
-            <Link 
-              key={item.name} 
+            <Link
+              key={item.name}
               href={item.href}
               className="text-sm font-semibold leading-6 text-text-primary hover:text-accent transition-colors"
             >
@@ -57,7 +57,7 @@ export default function Header() {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <div className="w-full max-w-md overflow-hidden rounded-2xl bg-background-light p-6 text-left align-middle shadow-xl">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-xl font-bold text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
+                  <h1 className="font-display text-xl font-semibold uppercase tracking-tight text-text-primary">BiiA<span className="text-accent">Lab</span></h1>
                   <button
                     type="button"
                     className="text-gray-400 hover:text-gray-500"
