@@ -5,15 +5,20 @@
  * read by Tailwind v4, so the brand palette lives here as @theme variables:
  * they generate the bg-background, bg-background-light, bg-accent,
  * text-text-primary / text-text-secondary utilities used across the app.
+ *
+ * v4: Whop-style light marketplace theme. White canvas, orange accent.
+ * The display font (Oswald) is still available as font-display but is now
+ * reserved for the certificate page only — section titles use the body
+ * font in sentence case.
  */
 @theme {
-  --color-primary: #000000;
-  --color-accent: #e50914;
-  --color-background: #0a0a0a;
-  --color-background-light: #181a1f;
-  --color-surface: #1f2229;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
+  --color-primary: #131316;
+  --color-accent: #ff4d14;
+  --color-background: #ffffff;
+  --color-background-light: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-text-primary: #131316;
+  --color-text-secondary: #62626c;
 }
 
 /* Fonts come from next/font variables defined in src/app/layout.tsx */
@@ -21,6 +26,10 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-oswald), var(--font-inter), ui-sans-serif,
     sans-serif;
+}
+
+:root {
+  color-scheme: light;
 }
 
 body {
@@ -35,48 +44,6 @@ body {
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
-}
-
-/* Hero mosaic: slow ambient float on the thumbnail columns. Pure CSS so the
-   hero section can stay a server component. */
-@keyframes hero-mosaic-drift-up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-4%);
-  }
-}
-
-@keyframes hero-mosaic-drift-down {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(4%);
-  }
-}
-
-.hero-mosaic-col-up {
-  animation: hero-mosaic-drift-up 30s ease-in-out infinite alternate;
-}
-
-.hero-mosaic-col-down {
-  animation: hero-mosaic-drift-down 30s ease-in-out infinite alternate;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-mosaic-col-up,
-  .hero-mosaic-col-down {
-    animation: none;
-  }
-}
-
-/* Editorial art direction (v3): outlined "ghost" typography used for the
-   Top-10 ranking numbers and the oversized category/word backdrops. */
-.text-outline {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-text-secondary);
 }
 
 /* Scroll-reveal primitive used by <Reveal>. Default state is hidden; the

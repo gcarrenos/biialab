@@ -100,8 +100,8 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
 
         {/* Result banner */}
         {result && (
-          <div className={`mt-6 p-6 rounded-xl border ${result.passed ? 'bg-green-900/20 border-green-700' : 'bg-red-900/20 border-red-800'}`}>
-            <h2 className={`text-xl font-bold ${result.passed ? 'text-green-400' : 'text-red-400'}`}>
+          <div className={`mt-6 p-6 rounded-xl border ${result.passed ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'}`}>
+            <h2 className={`text-xl font-bold ${result.passed ? 'text-green-700' : 'text-red-700'}`}>
               {result.passed ? '¡Aprobado! 🎉' : 'No aprobado'}
             </h2>
             <p className="text-text-secondary mt-1">
@@ -122,7 +122,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
                   Intentar de nuevo
                 </button>
               )}
-              <Link href={`/courses/${exam.courseSlug}`} className="px-5 py-2.5 border border-gray-700 text-text-primary text-sm font-medium rounded-lg hover:border-accent transition-colors">
+              <Link href={`/courses/${exam.courseSlug}`} className="px-5 py-2.5 border border-gray-300 text-text-primary text-sm font-medium rounded-lg hover:border-accent transition-colors">
                 Volver al curso
               </Link>
             </div>
@@ -134,7 +134,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
           {questions.map((q, qi) => {
             const fb = feedbackByQ.get(q.id);
             return (
-              <div key={q.id} className="bg-background-light border border-gray-800 rounded-xl p-6">
+              <div key={q.id} className="bg-surface border border-gray-200 rounded-xl shadow-sm p-6">
                 <p className="font-medium text-text-primary mb-4">
                   <span className="text-accent mr-2">{qi + 1}.</span>
                   {q.question}
@@ -142,11 +142,11 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
                 <div className="space-y-2">
                   {q.options.map((opt, oi) => {
                     const selected = answers[q.id] === oi;
-                    let cls = selected ? 'border-accent bg-accent/10 text-text-primary' : 'border-gray-800 text-text-secondary hover:border-gray-600';
+                    let cls = selected ? 'border-accent bg-accent/5 text-text-primary' : 'border-gray-300 bg-white text-text-secondary hover:border-gray-400';
                     if (fb) {
-                      if (oi === fb.correctOptionIndex) cls = 'border-green-600 bg-green-900/20 text-green-300';
-                      else if (selected && !fb.correct) cls = 'border-red-700 bg-red-900/20 text-red-300';
-                      else cls = 'border-gray-800 text-text-secondary opacity-60';
+                      if (oi === fb.correctOptionIndex) cls = 'border-green-400 bg-green-50 text-green-700';
+                      else if (selected && !fb.correct) cls = 'border-red-400 bg-red-50 text-red-700';
+                      else cls = 'border-gray-200 text-text-secondary opacity-60';
                     }
                     return (
                       <button
@@ -161,7 +161,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
                   })}
                 </div>
                 {fb?.explanation && (
-                  <p className="mt-3 text-xs text-text-secondary border-t border-gray-800 pt-3">💡 {fb.explanation}</p>
+                  <p className="mt-3 text-xs text-text-secondary border-t border-gray-200 pt-3">💡 {fb.explanation}</p>
                 )}
               </div>
             );

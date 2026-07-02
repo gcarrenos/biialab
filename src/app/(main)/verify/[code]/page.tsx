@@ -53,10 +53,10 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
     <div className="bg-background min-h-screen py-16 px-4">
       <div className="mx-auto max-w-3xl">
         {/* Validity banner (hidden on print) */}
-        <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-green-900/20 border border-green-700">
-          <span className="text-green-400 text-2xl">✓</span>
+        <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-300">
+          <span className="text-green-700 text-2xl">✓</span>
           <div>
-            <p className="text-green-400 font-semibold">Certificado verificado</p>
+            <p className="text-green-700 font-semibold">Certificado verificado</p>
             <p className="text-text-secondary text-sm">
               Emitido por BiiA LAB · Credencial {certificate.certificateNumber}
             </p>
@@ -64,7 +64,7 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
         </div>
 
         {/* The certificate */}
-        <div className="rounded-2xl border-2 border-accent/40 bg-background-light p-10 md:p-14 text-center print:border-black">
+        <div className="rounded-2xl border-2 border-accent/40 bg-white shadow-sm p-10 md:p-14 text-center print:border-black">
           <p className="font-display uppercase tracking-[0.3em] text-accent text-sm mb-6">Certificado</p>
           <h2 className="text-2xl font-bold text-text-primary mb-1">
             BiiA<span className="text-accent">Lab</span>
@@ -108,7 +108,7 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
           <PrintButton />
           <Link
             href={`/courses/${certificate.courseSlug}`}
-            className="px-6 py-3 rounded-lg border border-gray-700 text-text-primary hover:border-accent font-medium transition-colors"
+            className="px-6 py-3 rounded-lg border border-gray-300 text-text-primary hover:border-accent font-medium transition-colors"
           >
             Ver el curso
           </Link>

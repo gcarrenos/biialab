@@ -83,34 +83,28 @@ export default async function CoursePage({ params }: CoursePageProps) {
   return (
     <div className="bg-background min-h-screen">
       {/* Course Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: full-bleed thumbnail */}
-        <div className="relative aspect-video lg:aspect-auto lg:min-h-[420px] bg-black overflow-hidden">
-          {course.thumbnail && (
-            <Image
-              src={course.thumbnail}
-              alt={course.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          )}
-        </div>
-
-        {/* Right: title, meta, CTAs */}
-        <div className="flex flex-col justify-center bg-background-light px-6 sm:px-10 lg:px-16 py-12 lg:py-16">
-          <div className="space-y-5 max-w-xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center">
+          {/* Left: category, title, meta, CTAs */}
+          <div className="lg:col-span-3 space-y-5">
             {course.category && (
-              <p className="text-accent font-semibold text-sm uppercase tracking-wide">{course.category}</p>
+              <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent font-semibold text-xs tracking-wide">
+                {course.category}
+              </span>
             )}
-            <h1 className="font-display uppercase text-4xl md:text-6xl font-bold text-text-primary leading-[0.95] tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-text-primary leading-[1.05] tracking-tight">
               {course.title}
             </h1>
 
             {course.instructor && (
-              <p className="text-text-secondary">
-                Con <span className="text-text-primary font-medium">{course.instructor.name}</span>
-              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-white text-sm font-semibold flex-shrink-0">
+                  {course.instructor.name.charAt(0).toUpperCase()}
+                </div>
+                <p className="text-text-secondary">
+                  Con <span className="text-text-primary font-medium">{course.instructor.name}</span>
+                </p>
+              </div>
             )}
 
             {course.description && (
@@ -123,7 +117,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {firstLesson && (
                 <Link
                   href={`/courses/${course.slug}/lessons/${firstLesson.id}`}
-                  className="inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white rounded-md font-semibold hover:bg-accent/90 transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors"
                 >
                   Comenzar curso
                 </Link>
@@ -131,10 +125,25 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {hasExam && (
                 <Link
                   href={`/courses/${'slug' in course ? course.slug : id}/examen`}
-                  className="inline-flex items-center justify-center px-8 py-3.5 border border-gray-700 text-text-primary rounded-md font-semibold hover:border-accent hover:text-accent transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3.5 border border-gray-300 text-text-primary rounded-lg font-semibold hover:border-accent hover:text-accent transition-colors"
                 >
                   Presentar examen
                 </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Right: rounded cover image */}
+          <div className="lg:col-span-2">
+            <div className="relative aspect-video overflow-hidden rounded-2xl border border-gray-200 bg-background-light">
+              {course.thumbnail && (
+                <Image
+                  src={course.thumbnail}
+                  alt={course.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
               )}
             </div>
           </div>
@@ -142,7 +151,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
       </div>
 
       {/* Meta strip */}
-      <div className="border-y border-gray-800/60">
+      <div className="border-y border-gray-200 bg-background-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             <div>
@@ -172,18 +181,18 @@ export default async function CoursePage({ params }: CoursePageProps) {
             <div className="space-y-12">
               {/* About */}
               <section>
-                <h2 className="font-display uppercase text-2xl font-semibold text-text-primary mb-6 tracking-tight">Sobre este curso</h2>
-                <div className="prose prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 tracking-tight">Sobre este curso</h2>
+                <div className="prose max-w-none">
                   <p className="text-text-secondary whitespace-pre-line">
                     {course.description}
                   </p>
                 </div>
               </section>
-              
+
               {/* Final exam */}
               {hasExam && (
                 <section>
-                  <div className="bg-background-light border border-accent/30 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="bg-surface border border-accent/30 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4">
                     <div className="flex-1">
                       <h2 className="text-xl font-bold text-text-primary">Examen final</h2>
                       <p className="text-text-secondary text-sm mt-1">
@@ -202,17 +211,17 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
               {/* Curriculum */}
               <section id="curriculum">
-                <h2 className="font-display uppercase text-2xl font-semibold text-text-primary mb-6 tracking-tight">Contenido del curso</h2>
+                <h2 className="text-2xl font-bold text-text-primary mb-6 tracking-tight">Contenido del curso</h2>
                 <div className="space-y-4">
                   {course.modules.length > 0 ? (
                     course.modules.map((module, moduleIndex) => (
-                      <div key={module.id} className="border border-gray-800 rounded-lg overflow-hidden">
+                      <div key={module.id} className="border border-gray-200 rounded-xl overflow-hidden bg-surface shadow-sm">
                         <div className="bg-background-light p-4">
                           <h3 className="text-lg font-semibold text-text-primary">
                             Módulo {moduleIndex + 1}: {module.title}
                           </h3>
                         </div>
-                        <div className="divide-y divide-gray-800">
+                        <div className="divide-y divide-gray-200">
                           {module.lessons.map((lesson) => (
                             <div key={lesson.id} className="p-4 flex justify-between items-center">
                               <div className="flex-1">
@@ -221,7 +230,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                                   <p className="text-sm text-text-secondary">{lesson.duration}</p>
                                 )}
                               </div>
-                              <Link 
+                              <Link
                                 href={`/courses/${course.slug}/lessons/${lesson.id}`}
                                 className="text-accent hover:text-accent/80 transition-colors ml-4"
                               >
@@ -246,13 +255,13 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {/* Instructor */}
               {course.instructor && (
                 <section>
-                  <h2 className="font-display uppercase text-2xl font-semibold text-text-primary mb-6 tracking-tight">Tu instructor</h2>
-                  <div className="bg-background-light rounded-lg p-6">
+                  <h2 className="text-2xl font-bold text-text-primary mb-6 tracking-tight">Tu instructor</h2>
+                  <div className="bg-surface border border-gray-200 rounded-xl shadow-sm p-6">
                     <div className="flex flex-col sm:flex-row gap-6">
-                      <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-gray-800">
+                      <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-background-light">
                         {course.instructor.avatar ? (
-                          <Image 
-                            src={course.instructor.avatar} 
+                          <Image
+                            src={course.instructor.avatar}
                             alt={course.instructor.name}
                             fill
                             className="object-cover"
@@ -278,11 +287,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
               )}
             </div>
           </div>
-          
+
           {/* Sidebar */}
           <div className="space-y-8">
-            <div className="bg-background-light rounded-lg p-6">
-              <h3 className="font-display uppercase text-xl font-semibold text-text-primary mb-4 tracking-tight">Qué vas a aprender</h3>
+            <div className="bg-surface border border-gray-200 rounded-xl shadow-sm p-6">
+              <h3 className="text-xl font-bold text-text-primary mb-4 tracking-tight">Qué vas a aprender</h3>
               <ul className="space-y-3">
                 {Array.from({ length: 5 }, (_, i) => (
                   <li key={i} className="flex items-start">
@@ -304,20 +313,20 @@ export default async function CoursePage({ params }: CoursePageProps) {
             </div>
 
             {relatedCourses.length > 0 && (
-              <div className="bg-background-light rounded-lg p-6">
-                <h3 className="font-display uppercase text-xl font-semibold text-text-primary mb-4 tracking-tight">Cursos relacionados</h3>
+              <div className="bg-surface border border-gray-200 rounded-xl shadow-sm p-6">
+                <h3 className="text-xl font-bold text-text-primary mb-4 tracking-tight">Cursos relacionados</h3>
                 <div className="space-y-4">
                   {relatedCourses.map(relatedCourse => (
-                    <Link 
-                      href={`/courses/${relatedCourse.slug}`} 
+                    <Link
+                      href={`/courses/${relatedCourse.slug}`}
                       key={relatedCourse.id}
                       className="block group"
                     >
                       <div className="flex gap-4">
                         {relatedCourse.thumbnail && (
-                          <div className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded">
-                            <Image 
-                              src={relatedCourse.thumbnail} 
+                          <div className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg">
+                            <Image
+                              src={relatedCourse.thumbnail}
                               alt={relatedCourse.title}
                               fill
                               className="object-cover"

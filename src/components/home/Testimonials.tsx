@@ -24,7 +24,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
 
   return (
     <div className="relative">
-      <div className="rounded-2xl bg-surface border border-gray-700/50 p-8 sm:p-10">
+      <div className="rounded-2xl bg-surface border border-gray-200 shadow-sm p-8 sm:p-10">
         <blockquote className="text-lg sm:text-xl text-text-primary leading-relaxed mb-6">
           &ldquo;{current.text}&rdquo;
         </blockquote>
@@ -50,7 +50,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
           type="button"
           onClick={goPrev}
           aria-label="Testimonio anterior"
-          className="rounded-full p-2 text-text-secondary hover:text-accent hover:bg-surface transition-colors"
+          className="rounded-full p-2 text-text-secondary hover:text-accent hover:bg-background-light transition-colors"
         >
           <ChevronLeftIcon className="h-6 w-6" aria-hidden="true" />
         </button>
@@ -63,7 +63,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
               onClick={() => setIndex(i)}
               aria-label={`Ir al testimonio ${i + 1}`}
               className={`h-2 w-2 rounded-full transition-colors ${
-                i === index ? 'bg-accent' : 'bg-gray-700'
+                i === index ? 'bg-accent' : 'bg-gray-300'
               }`}
             />
           ))}
@@ -73,7 +73,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
           type="button"
           onClick={goNext}
           aria-label="Siguiente testimonio"
-          className="rounded-full p-2 text-text-secondary hover:text-accent hover:bg-surface transition-colors"
+          className="rounded-full p-2 text-text-secondary hover:text-accent hover:bg-background-light transition-colors"
         >
           <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
         </button>

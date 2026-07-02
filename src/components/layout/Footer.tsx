@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-background-light text-text-secondary mt-auto">
+    <footer className="bg-background-light text-text-secondary border-t border-gray-200 mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div className="space-y-4">
@@ -19,17 +19,17 @@ export default function Footer() {
             <h3 className="text-sm font-semibold leading-6 text-text-primary">Explora</h3>
             <ul role="list" className="mt-6 space-y-4">
               <li>
-                <Link href="/courses" className="text-sm leading-6 text-gray-400 hover:text-accent">
+                <Link href="/courses" className="text-sm leading-6 text-text-secondary hover:text-accent">
                   Cursos
                 </Link>
               </li>
               <li>
-                <Link href="/social-impact" className="text-sm leading-6 text-gray-400 hover:text-accent">
+                <Link href="/social-impact" className="text-sm leading-6 text-text-secondary hover:text-accent">
                   Impacto social
                 </Link>
               </li>
               <li>
-                <Link href="/casos/planvoyager" className="text-sm leading-6 text-gray-400 hover:text-accent">
+                <Link href="/casos/planvoyager" className="text-sm leading-6 text-text-secondary hover:text-accent">
                   Caso de estudio: PlanVoyager
                 </Link>
               </li>
@@ -40,7 +40,7 @@ export default function Footer() {
             <h3 className="text-sm font-semibold leading-6 text-text-primary">Contacto</h3>
             <ul role="list" className="mt-6 space-y-4">
               <li>
-                <Link href="/contact" className="text-sm leading-6 text-gray-400 hover:text-accent">
+                <Link href="/contact" className="text-sm leading-6 text-text-secondary hover:text-accent">
                   Escríbenos
                 </Link>
               </li>
@@ -48,8 +48,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-gray-800 pt-8">
-          <p className="text-xs leading-5 text-gray-400">
+        <div className="mt-16 border-t border-gray-200 pt-8">
+          <p className="text-xs leading-5 text-text-secondary">
             &copy; {new Date().getFullYear()} BiiALab. Todos los derechos reservados.
           </p>
         </div>
