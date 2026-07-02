@@ -57,7 +57,7 @@ export default function Header() {
           </button>
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:max-w-md">
+        <div className="hidden lg:block lg:flex-1 lg:max-w-xl">
           <div className="relative w-full">
             <input
               type="search"
@@ -78,7 +78,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:flex-shrink-0 lg:items-center lg:gap-6 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-shrink-0 lg:items-center lg:gap-6 lg:ml-auto">
           <Link
             href="/social-impact"
             className="whitespace-nowrap text-sm font-semibold leading-6 text-text-primary hover:text-accent transition-colors"
