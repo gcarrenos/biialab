@@ -64,7 +64,7 @@ export default function AccountPage() {
             <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
           </div>
         ) : entries.length === 0 ? (
-          <div className="bg-background-light border border-gray-800 rounded-xl p-10 text-center">
+          <div className="bg-surface border border-gray-200 rounded-xl shadow-sm p-10 text-center">
             <h3 className="text-lg font-medium text-text-primary mb-2">Aún no estás inscrito en ningún curso</h3>
             <p className="text-text-secondary mb-6">
               Abre cualquier lección y quedarás inscrito automáticamente. Tu progreso se guarda aquí.
@@ -86,9 +86,9 @@ export default function AccountPage() {
                 <Link
                   key={entry.courseId}
                   href={`/courses/${entry.slug}`}
-                  className="group flex gap-4 bg-background-light border border-gray-800 hover:border-accent/50 rounded-xl p-4 transition-all"
+                  className="group flex gap-4 bg-surface border border-gray-200 shadow-sm hover:border-accent/50 hover:shadow-md rounded-xl p-4 transition-all"
                 >
-                  <div className="relative h-20 w-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-900">
+                  <div className="relative h-20 w-32 flex-shrink-0 overflow-hidden rounded-lg bg-background-light">
                     {entry.thumbnail && (
                       <Image src={entry.thumbnail} alt={entry.title} fill className="object-cover" />
                     )}
@@ -103,7 +103,7 @@ export default function AccountPage() {
                         <span>{entry.completedLessons}/{entry.totalLessons} lecciones</span>
                         <span>{pct}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
+                      <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
                         <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
@@ -117,13 +117,13 @@ export default function AccountPage() {
         {/* Certificates */}
         <h2 className="text-xl font-semibold text-text-primary mt-14 mb-6">Mis certificados</h2>
         {certs.length === 0 ? (
-          <div className="bg-background-light border border-gray-800 rounded-xl p-8 text-center text-text-secondary">
+          <div className="bg-surface border border-gray-200 rounded-xl shadow-sm p-8 text-center text-text-secondary">
             Aún no tienes certificados. Completa un curso y aprueba su examen final para obtener el tuyo.
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {certs.map((cert) => (
-              <div key={cert.certificateNumber} className="bg-background-light border border-accent/30 rounded-xl p-6">
+              <div key={cert.certificateNumber} className="bg-surface border border-accent/30 shadow-sm rounded-xl p-6">
                 <p className="text-xs text-accent uppercase tracking-wider mb-2">Certificado</p>
                 <h3 className="font-semibold text-text-primary line-clamp-2">{cert.courseTitle}</h3>
                 <p className="mt-1 text-xs text-text-secondary">

@@ -52,7 +52,7 @@ export default function SignUpPage() {
           <p className="mt-2 text-text-secondary">Crea tu cuenta gratis</p>
         </div>
 
-        <div className="bg-background-light rounded-lg border border-gray-800 p-8">
+        <div className="bg-surface rounded-xl border border-gray-200 shadow-sm p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-text-secondary mb-2">
@@ -65,7 +65,7 @@ export default function SignUpPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 autoComplete="name"
-                className="w-full px-4 py-3 bg-background border border-gray-800 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
             <div>
@@ -79,7 +79,7 @@ export default function SignUpPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="w-full px-4 py-3 bg-background border border-gray-800 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
             <div>
@@ -94,12 +94,12 @@ export default function SignUpPage() {
                 required
                 minLength={8}
                 autoComplete="new-password"
-                className="w-full px-4 py-3 bg-background border border-gray-800 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
 
             {error && (
-              <div className="p-3 bg-red-900/20 border border-red-800 rounded-md text-red-400 text-sm text-center">
+              <div className="p-3 bg-red-50 border border-red-300 rounded-md text-red-600 text-sm text-center">
                 {error}
               </div>
             )}

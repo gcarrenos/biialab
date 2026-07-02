@@ -32,7 +32,7 @@ export default function SocialImpactPage() {
             Nuestros pilares
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+            <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm">
               <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -48,7 +48,7 @@ export default function SocialImpactPage() {
               </p>
             </div>
 
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+            <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm">
               <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -64,7 +64,7 @@ export default function SocialImpactPage() {
               </p>
             </div>
 
-            <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+            <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm">
               <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -84,9 +84,9 @@ export default function SocialImpactPage() {
       </section>
 
       {/* Case Study: PlanVoyager */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-800">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light border-y border-gray-200">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-background p-8 md:p-12 rounded-xl border border-gray-800 max-w-4xl mx-auto">
+          <div className="bg-background p-8 md:p-12 rounded-xl border border-gray-200 shadow-sm max-w-4xl mx-auto">
             <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent mb-4">
               Caso de estudio
             </span>
@@ -115,7 +115,7 @@ export default function SocialImpactPage() {
       {/* Partner CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800 max-w-4xl mx-auto">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm max-w-4xl mx-auto">
             <div className="flex items-start">
               <div className="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-6 flex-shrink-0">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

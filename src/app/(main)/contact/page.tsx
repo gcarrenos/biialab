@@ -35,11 +35,11 @@ export default function ContactPage() {
 
   return (
     <div className="bg-background min-h-[70vh] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl rounded-2xl bg-background-light p-8 sm:p-12">
+      <div className="mx-auto max-w-3xl rounded-2xl bg-surface border border-gray-200 shadow-sm p-8 sm:p-12">
         <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-3">
           Conecta con nosotros
         </p>
-        <h1 className="font-display uppercase text-3xl md:text-4xl font-semibold text-text-primary mb-4 tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4 tracking-tight">
           Cuéntanos qué necesitas.
         </h1>
         <p className="text-text-secondary mb-10">
@@ -48,8 +48,8 @@ export default function ContactPage() {
         </p>
 
         {status === 'success' ? (
-          <div className="p-6 rounded-xl bg-green-500/10 border border-green-500/30 text-center">
-            <span className="text-green-400 text-lg font-medium">
+          <div className="p-6 rounded-xl bg-green-50 border border-green-300 text-center">
+            <span className="text-green-700 text-lg font-medium">
               ✓ Mensaje recibido. Te contactaremos pronto.
             </span>
           </div>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                   onChange={(e) => setNombre(e.target.value)}
                   required
                   disabled={status === 'loading'}
-                  className="w-full px-4 py-3 bg-surface border border-gray-700/50 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                 />
               </div>
               <div>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={status === 'loading'}
-                  className="w-full px-4 py-3 bg-surface border border-gray-700/50 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                 />
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                 value={asunto}
                 onChange={(e) => setAsunto(e.target.value)}
                 disabled={status === 'loading'}
-                className="w-full px-4 py-3 bg-surface border border-gray-700/50 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
               >
                 {ASUNTOS.map((option) => (
                   <option key={option} value={option}>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                 rows={6}
                 maxLength={2000}
                 disabled={status === 'loading'}
-                className="w-full px-4 py-3 bg-surface border border-gray-700/50 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
               />
             </div>
 
@@ -127,13 +127,13 @@ export default function ContactPage() {
                 checked={optIn}
                 onChange={(e) => setOptIn(e.target.checked)}
                 disabled={status === 'loading'}
-                className="h-4 w-4 rounded border-gray-700/50 bg-surface text-accent focus:ring-accent focus:ring-offset-0 disabled:opacity-50"
+                className="h-4 w-4 rounded border-gray-300 bg-white text-accent focus:ring-accent focus:ring-offset-0 disabled:opacity-50"
               />
               Mantenerme al día con nuevos cursos
             </label>
 
             {status === 'error' && (
-              <p className="text-red-400 text-sm">Hubo un error enviando el mensaje. Intenta de nuevo.</p>
+              <p className="text-red-600 text-sm">Hubo un error enviando el mensaje. Intenta de nuevo.</p>
             )}
             <button
               type="submit"

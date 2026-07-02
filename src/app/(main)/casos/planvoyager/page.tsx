@@ -54,15 +54,15 @@ export default function PlanVoyagerCaseStudyPage() {
       {/* Stats */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800 text-center">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm text-center">
             <div className="text-4xl font-bold text-accent mb-2">4.000+</div>
             <div className="text-text-secondary">planes de salud analizados</div>
           </div>
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800 text-center">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm text-center">
             <div className="text-4xl font-bold text-accent mb-2">30</div>
             <div className="text-text-secondary">estados cubiertos</div>
           </div>
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800 text-center">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm text-center">
             <div className="text-4xl font-bold text-accent mb-2">3,7M</div>
             <div className="text-text-secondary">registros oficiales procesados</div>
           </div>
@@ -213,7 +213,7 @@ export default function PlanVoyagerCaseStudyPage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-background-light p-8 rounded-lg border border-gray-800">
+          <div className="bg-background-light p-8 rounded-lg border border-gray-200 shadow-sm">
             <h3 className="text-xl text-text-primary font-medium mb-2">
               Explora el proyecto
             </h3>
