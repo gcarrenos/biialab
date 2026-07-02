@@ -29,13 +29,14 @@ export const waitlist = pgTable('waitlist', {
 // USERS & AUTHENTICATION
 // ============================================
 
+// Auth tables follow better-auth's expected shape (uuid ids via
+// advanced.database.generateId in src/lib/auth.ts).
 export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
-  name: varchar('name', { length: 255 }),
-  avatar: text('avatar'),
-  passwordHash: text('password_hash'), // For email/password auth
-  emailVerified: boolean('email_verified').default(false),
+  emailVerified: boolean('email_verified').notNull().default(false),
+  image: text('image'),
   role: varchar('role', { length: 50 }).default('user'), // user, admin, instructor
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
@@ -45,12 +46,17 @@ export const users = pgTable('users', {
 export const accounts = pgTable('accounts', {
   id: uuid('id').defaultRandom().primaryKey(),
   userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
-  provider: varchar('provider', { length: 50 }).notNull(), // google, github, etc
-  providerAccountId: varchar('provider_account_id', { length: 255 }).notNull(),
+  accountId: text('account_id').notNull(),
+  providerId: text('provider_id').notNull(),
   accessToken: text('access_token'),
   refreshToken: text('refresh_token'),
-  expiresAt: timestamp('expires_at'),
+  idToken: text('id_token'),
+  accessTokenExpiresAt: timestamp('access_token_expires_at'),
+  refreshTokenExpiresAt: timestamp('refresh_token_expires_at'),
+  scope: text('scope'),
+  password: text('password'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 // Sessions for authentication
@@ -59,7 +65,19 @@ export const sessions = pgTable('sessions', {
   userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   token: text('token').notNull().unique(),
   expiresAt: timestamp('expires_at').notNull(),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+export const verifications = pgTable('verifications', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  identifier: text('identifier').notNull(),
+  value: text('value').notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 // ============================================
