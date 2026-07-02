@@ -5,6 +5,13 @@ import { youtubeVideos, youtubeComments, courses, modules, lessons, instructors 
 import { YouTubeVideo, YouTubeCommentThread } from '@/lib/types';
 import { eq } from 'drizzle-orm';
 
+// Server actions are publicly callable endpoints; every mutation below
+// requires the admin password (same secret as /api/admin/*).
+function isAdminAuthorized(password: string | undefined): boolean {
+  const adminPassword = process.env.ADMIN_PASSWORD || 'biialab2026';
+  return password === adminPassword;
+}
+
 // Import a single YouTube video to the database
 export async function importYouTubeVideo(video: YouTubeVideo) {
   try {
@@ -65,8 +72,11 @@ export async function importYouTubeVideos(videos: YouTubeVideo[]) {
 }
 
 // Import comments for a video
-export async function importVideoComments(videoId: string, comments: YouTubeCommentThread[]) {
+export async function importVideoComments(videoId: string, comments: YouTubeCommentThread[], adminPassword?: string) {
   try {
+    if (!isAdminAuthorized(adminPassword)) {
+      return { success: false, error: 'Unauthorized' };
+    }
     const commentsToInsert = comments.flatMap(thread => {
       const topComment = {
         id: thread.topLevelComment.id,
@@ -128,9 +138,13 @@ export async function createCourseFromVideos(
     instructorBio?: string;
   },
   videoIds: string[],
-  existingVideos: YouTubeVideo[]
+  existingVideos: YouTubeVideo[],
+  adminPassword?: string
 ) {
   try {
+    if (!isAdminAuthorized(adminPassword)) {
+      return { success: false, error: 'Unauthorized' };
+    }
     // First, import all selected videos to youtube_videos table
     const videosToImport = existingVideos.filter(v => videoIds.includes(v.id));
     await importYouTubeVideos(videosToImport);

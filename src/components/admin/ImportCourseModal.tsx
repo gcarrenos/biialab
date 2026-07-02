@@ -129,10 +129,12 @@ export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: I
 
     try {
       // Step 1: Create the course with videos
+      const adminPassword = sessionStorage.getItem('biialab_admin_auth') ?? undefined;
       const courseResult = await createCourseFromVideos(
         courseData,
         selectedVideos.map(v => v.id),
-        selectedVideos
+        selectedVideos,
+        adminPassword
       );
 
       if (!courseResult.success) {
@@ -156,7 +158,7 @@ export function ImportCourseModal({ isOpen, onClose, selectedVideos, apiKey }: I
           try {
             const comments = await getAllVideoComments(apiKey, video.id, maxCommentsPerVideo);
             if (comments.length > 0) {
-              await importVideoComments(video.id, comments);
+              await importVideoComments(video.id, comments, adminPassword);
               totalCommentsImported += comments.length;
             }
           } catch (err) {

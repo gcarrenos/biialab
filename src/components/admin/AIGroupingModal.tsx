@@ -86,7 +86,8 @@ export function AIGroupingModal({ isOpen, onClose, videos, openAIKey, onCoursesC
             instructorBio: '',
           },
           course.videoIds,
-          courseVideos
+          courseVideos,
+          sessionStorage.getItem('biialab_admin_auth') ?? undefined
         );
 
         setCreatedCourses(prev => [...prev, course.title]);
