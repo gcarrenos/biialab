@@ -1,0 +1,321 @@
+{
+  "courses": [
+    {
+      "title": "Fundamentos de Inteligencia Artificial",
+      "description": "Descubre qué es realmente la inteligencia artificial, sus conceptos clave y su evolución histórica. Un recorrido claro y visual de la mano de Dot CSV, uno de los divulgadores de IA más reconocidos en español.",
+      "shortDescription": "Conceptos esenciales de la IA: qué es, cómo aprende una máquina y hacia dónde vamos, explicado por Dot CSV.",
+      "category": "Inteligencia Artificial",
+      "level": "Principiante",
+      "instructorName": "Dot CSV",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "i1wGMQ3TjzA", "title": "Lo que YA sabes sobre Inteligencia Artificial | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "KytW151dpqU", "title": "¿Qué es el Machine Learning?¿Y Deep Learning? Un mapa conceptual | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "oT3arRRB2Cw", "title": "¿Qué es el Aprendizaje Supervisado y No Supervisado? | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "yAF3bopYMGk", "title": "Pasado, Presente y Futuro de la IA - ¡Del Deep Learning 1.0 a Google Gemini!", "channel": "Dot CSV"}
+      ]
+    },
+    {
+      "title": "Machine Learning desde cero",
+      "description": "Aprende los fundamentos del aprendizaje automático paso a paso: qué es, cómo clasifican los algoritmos y cómo funciona la regresión. Una serie práctica ideal para dar tus primeros pasos en Machine Learning.",
+      "shortDescription": "Serie introductoria de Machine Learning: conceptos base, clasificación con KNN y algoritmos de regresión.",
+      "category": "Machine Learning",
+      "level": "Principiante",
+      "instructorName": "AMP Tech",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "wXVkIdF4D4I", "title": "Machine learning (Aprendizaje automático) Ep. 0", "channel": "AMP Tech"},
+        {"youtubeVideoId": "hzOCDgfsSSQ", "title": "Machine Learning Episodio #1: Clasificación con KNN", "channel": "AMP Tech"},
+        {"youtubeVideoId": "38rBECdCv3A", "title": "Machine Learning episodio 2 Algoritmos de regresión", "channel": "AMP Tech"}
+      ]
+    },
+    {
+      "title": "Deep Learning y redes neuronales",
+      "description": "Entiende cómo funcionan las redes neuronales desde la neurona hasta el backpropagation, y conoce la arquitectura Transformer que revolucionó la IA moderna. La serie más celebrada de Dot CSV sobre deep learning.",
+      "shortDescription": "De la neurona al Transformer: la serie de Dot CSV que explica las redes neuronales y el deep learning en profundidad.",
+      "category": "Inteligencia Artificial",
+      "level": "Intermedio",
+      "instructorName": "Dot CSV",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "MRIv2IwFTPg", "title": "¿Qué es una Red Neuronal?  Parte 1 : La Neurona | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "uwbHOpp9xkc", "title": "¿Qué es una Red Neuronal? Parte 2 : La Red | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "eNIqz_noix8", "title": "¿Qué es una Red Neuronal? Parte 3 : Backpropagation | DotCSV", "channel": "Dot CSV"},
+        {"youtubeVideoId": "aL-EmKuB078", "title": "¿Qué es un TRANSFORMER? La Red Neuronal que lo cambió TODO!", "channel": "Dot CSV"}
+      ]
+    },
+    {
+      "title": "Procesamiento de Lenguaje Natural (NLP)",
+      "description": "Aprende cómo las máquinas entienden el lenguaje humano: de palabras a vectores, n-gramas, TF-IDF y un curso completo de NLP con Python. Técnicas fundamentales para trabajar con texto en proyectos de IA.",
+      "shortDescription": "De palabras a vectores: técnicas de NLP con Python explicadas en español, desde n-gramas hasta TF-IDF.",
+      "category": "Inteligencia Artificial",
+      "level": "Intermedio",
+      "instructorName": "Codigo Maquina",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "Tg1MjMIVArc", "title": "🔴 INTRO al Natural Language Processing (NLP) #1 - ¡De PALABRAS a VECTORES!", "channel": "Dot CSV"},
+        {"youtubeVideoId": "46Q-SxVCPEU", "title": "N-gramas: Procesamiento de Lenguaje Natural con Python", "channel": "Codigo Maquina"},
+        {"youtubeVideoId": "4QsG4oNcGpM", "title": "TF-IDF: Vectorización de Documentos para NLP con Python", "channel": "Codigo Maquina"},
+        {"youtubeVideoId": "9x1QtYNLJRY", "title": "Curso Completo de Procesamiento de Lenguaje Natural (NLP) con Python 🧠🚀", "channel": "Código Espinoza - IA y Machine Learning"}
+      ]
+    },
+    {
+      "title": "Visión por computadora",
+      "description": "Enseña a las máquinas a ver: construye tu primer clasificador de imágenes, domina las redes convolucionales (CNN) y da tus primeros pasos con OpenCV en Python. Proyectos prácticos de visión artificial en español.",
+      "shortDescription": "Clasificación de imágenes, redes convolucionales y OpenCV con Python: visión por computadora práctica.",
+      "category": "Machine Learning",
+      "level": "Intermedio",
+      "instructorName": "Ringa Tech",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "j6eGHROLKP8", "title": "Tu primer clasificador de imágenes con Python y Tensorflow", "channel": "Ringa Tech"},
+        {"youtubeVideoId": "4sWhhQwHqug", "title": "Redes Neuronales Convolucionales - Clasificación avanzada de imágenes con IA / ML (CNN)", "channel": "Ringa Tech"},
+        {"youtubeVideoId": "VLV7B7mjLB8", "title": "1.1. Aprendiendo OpenCV con Python - Introducción a la Visión por computador OpenCV.", "channel": "ABCR17"},
+        {"youtubeVideoId": "Pqd0e_Vvx7g", "title": "1.2. Aprendiendo OpenCv con Python - ¿Qué es una imagen digital?", "channel": "ABCR17"}
+      ]
+    },
+    {
+      "title": "Prompt Engineering",
+      "description": "Domina el arte de comunicarte con modelos de IA: aprende cómo funcionan los modelos de texto y las técnicas para escribir prompts efectivos. Cursos gratuitos en español para sacar el máximo partido a ChatGPT y otros LLMs.",
+      "shortDescription": "Técnicas de prompt engineering en español: cómo funcionan los modelos de texto y cómo escribir prompts efectivos.",
+      "category": "Productividad",
+      "level": "Principiante",
+      "instructorName": "Joaquín Barberá - Inteligencia Artificial",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "gAoVIsOlRJg", "title": "🎓CURSO PROMPT ENGINEERING  en Español  - GRATIS - 🤖CLASE 01- Introducción a los modelos de texto", "channel": "Joaquín Barberá - Inteligencia Artificial"},
+        {"youtubeVideoId": "H2rFWyUQWuA", "title": "🎓CURSO PROMPT ENGINEERING  en Español  - GRATIS - 🤖CLASE 02- Cómo funcionan las I.A. de texto", "channel": "Joaquín Barberá - Inteligencia Artificial"},
+        {"youtubeVideoId": "x-iTco25VGI", "title": "Aprende Prompt Engineering ahora! curso tutorial gratuito desde cero", "channel": "HolaMundo"},
+        {"youtubeVideoId": "8Wqgr7Ry3dk", "title": "Curso gratis de prompt engineering (2026)", "channel": "EDteam"}
+      ]
+    },
+    {
+      "title": "LLMs: cómo funcionan",
+      "description": "Entiende qué hay dentro de un modelo de lenguaje grande: cómo se entrenan, cómo generan texto y por qué ChatGPT funciona como funciona. Explicaciones visuales y rigurosas en español.",
+      "shortDescription": "Qué es un LLM y cómo funciona ChatGPT por dentro: entrenamiento, generación de texto y desafíos.",
+      "category": "Inteligencia Artificial",
+      "level": "Intermedio",
+      "instructorName": "Dot CSV",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "Sz4qacFBHLk", "title": "¿Qué es un LLM? Enormes Modelos del Lenguaje | Large Language Models", "channel": "Dot CSV"},
+        {"youtubeVideoId": "lVGV5-5TdTU", "title": "Así funciona ChatGPT (explicado visualmente)", "channel": "Benjamín Cordero"},
+        {"youtubeVideoId": "ndT-3ACvnsQ", "title": "ChatGPT - el Hype, los Desafíos y el Futuro", "channel": "Dot CSV"}
+      ]
+    },
+    {
+      "title": "Agentes de IA",
+      "description": "Pasa de chatbots a agentes que trabajan por ti: aprende qué es un agente de IA, cómo darles memoria y habilidades, y cómo construirlos paso a paso con herramientas como n8n. El siguiente nivel de la IA aplicada.",
+      "shortDescription": "Qué son los agentes de IA y cómo construirlos: memoria, skills, subagentes y automatización con n8n.",
+      "category": "Inteligencia Artificial",
+      "level": "Intermedio",
+      "instructorName": "Gentleman Programming",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "E27uI269piY", "title": "🔴 Curso Agentes de IA Gratis: De ChatGPT a Agentes que trabajan por ti", "channel": "Inteligencia Artificial"},
+        {"youtubeVideoId": "SOxuW5K2FFY", "title": "Cómo ser TONY STARK con IA: Agentes, Subagentes, Memoria y Skills | Curso Completo", "channel": "Gentleman Programming"},
+        {"youtubeVideoId": "AJfd-eVf5eU", "title": "Tutorial de n8n para Principiantes 2026: Crea Agentes de IA Paso a Paso", "channel": "Metics Media | Español"}
+      ]
+    },
+    {
+      "title": "IA generativa: imágenes y video",
+      "description": "Descubre cómo la IA genera imágenes desde texto: del origen con VQGAN+CLIP a Stable Diffusion y Dreambooth. Incluye tutoriales prácticos para entrenar modelos con tus propias fotos y ejecutar IA generativa en local.",
+      "shortDescription": "De VQGAN+CLIP a Stable Diffusion: cómo funciona la IA que genera imágenes y video, con tutoriales prácticos.",
+      "category": "Inteligencia Artificial",
+      "level": "Intermedio",
+      "instructorName": "Dot CSV",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "90QDe6DQXF4", "title": "El Origen de las IAs que GENERAN Imágenes desde TEXTO (VQGAN+CLIP)", "channel": "Dot CSV"},
+        {"youtubeVideoId": "_0GzTdr-EYs", "title": "Stable Diffusion es MEJOR que DALL·E 2...  y puedes probarlo!", "channel": "Dot CSV"},
+        {"youtubeVideoId": "rgKBjRLvjLs", "title": "TUTORIAL 👉 ¡Entrena a la IA con tu CARA! - 100% GRATIS Y SIN GPUs  (Stable Diffusion y Dreambooth)", "channel": "Dot CSV"},
+        {"youtubeVideoId": "kVQjUXHJZkE", "title": "EJECUTA IA en LOCAL GRATIS 👉 ¡Genera Código, Vídeo, Imágenes y Texto!", "channel": "Dot CSV Lab "}
+      ]
+    },
+    {
+      "title": "Python para IA",
+      "description": "Python es el lenguaje de la inteligencia artificial. Aprende desde cero con los cursos completos más populares en español: sintaxis, estructuras de datos y programación intermedia para preparar tu camino hacia la IA.",
+      "shortDescription": "Cursos completos de Python en español desde cero hasta nivel intermedio: la base imprescindible para la IA.",
+      "category": "Programación",
+      "level": "Principiante",
+      "instructorName": "MoureDev by Brais Moure",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "DLikpfc64cA", "title": "Aprende Python - Curso de Python desde Cero", "channel": "freeCodeCamp Español"},
+        {"youtubeVideoId": "Kp4Mvapo5kc", "title": "Curso COMPLETO de PYTHON desde CERO para PRINCIPIANTES", "channel": "MoureDev by Brais Moure"},
+        {"youtubeVideoId": "TbcEqkabAWU", "title": "Curso COMPLETO de PYTHON desde CERO para PRINCIPIANTES [Intermedio]", "channel": "MoureDev by Brais Moure"},
+        {"youtubeVideoId": "tQZy0U8s9LY", "title": "Aprende Python ahora! curso completo e intensivo desde cero", "channel": "HolaMundo"}
+      ]
+    },
+    {
+      "title": "Matemáticas para Machine Learning",
+      "description": "Descubre qué matemáticas necesitas realmente para Machine Learning: álgebra lineal, cálculo, probabilidad y estadística. Explicaciones claras en español para perder el miedo a la teoría detrás de los modelos.",
+      "shortDescription": "Álgebra lineal, cálculo y estadística: las matemáticas esenciales para entender Machine Learning.",
+      "category": "Machine Learning",
+      "level": "Intermedio",
+      "instructorName": "AprendeIA con Ligdi Gonzalez",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "W5OMPkI72uI", "title": "¿LAS MATEMÁTICAS SON IMPORTANTES EN MACHINE LEARNING? | Aprende matemáticas para ML | AprendeIA", "channel": "AprendeIA con Ligdi Gonzalez"},
+        {"youtubeVideoId": "BBAr__onkjY", "title": "CONOCE LAS MATEMÁTICAS NECESARIAS PARA MACHINE LEARNING | Aprende matemáticas para ML | AprendeIA", "channel": "AprendeIA con Ligdi Gonzalez"},
+        {"youtubeVideoId": "gxplttTfMdQ", "title": "Matemáticas Esenciales para Dominar Machine Learning y Deep Learning", "channel": "Codigo Maquina"},
+        {"youtubeVideoId": "w9_NikDj3Ro", "title": "1 ¿Qué es el Álgebra Lineal y cuál es su importancia en la Ciencia de Datos y el Machine Learning", "channel": "Aprendiendo Ciencia de la Computacion "}
+      ]
+    },
+    {
+      "title": "Ciencia de datos con Python",
+      "description": "El stack esencial del científico de datos: Python, NumPy y Pandas. Aprende a manipular arrays, analizar datos tabulares y preparar tu entorno de trabajo con estos cursos prácticos en español.",
+      "shortDescription": "Python, NumPy y Pandas para análisis de datos: el kit de herramientas del científico de datos.",
+      "category": "Data Science",
+      "level": "Principiante",
+      "instructorName": "Frank Andrade",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "SotEpuRViGA", "title": "Python para Data Science Explicado en 5 Minutos | Aprende Python para Data Science", "channel": "Frank Andrade"},
+        {"youtubeVideoId": "nN_TYjT_KiI", "title": "INTRODUCCIÓN - [Curso Básico de la librería NumPy de Python]", "channel": "Ágora - Escuela de IA y Programación"},
+        {"youtubeVideoId": "yhKW4XsXa5c", "title": "LOS ARRAYS DE NUMPY - [Curso Básico de la librería NumPy de Python]", "channel": "Ágora - Escuela de IA y Programación"},
+        {"youtubeVideoId": "2KCQQHpi2Qk", "title": "CURSO de PYTHON con PANDAS Para Ciencia de Datos", "channel": "yacklyon"}
+      ]
+    },
+    {
+      "title": "Ética y riesgos de la IA",
+      "description": "Reflexiona sobre el lado humano de la inteligencia artificial: sesgos en los modelos, privacidad, impacto social y los dilemas éticos que plantea esta tecnología. Perspectivas en español de expertas y divulgadores.",
+      "shortDescription": "Sesgos, privacidad y dilemas éticos de la IA: una mirada crítica y en español a los riesgos de esta tecnología.",
+      "category": "Inteligencia Artificial",
+      "level": "Principiante",
+      "instructorName": "Geek Educativo | Profe Herrera",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "PsCnW9NI40o", "title": "⚖ Ética e Inteligencia Artificial: ¿riesgo o avance? 🤖", "channel": "Geek Educativo | Profe Herrera"},
+        {"youtubeVideoId": "PXzX2IcChjM", "title": "IA con impacto: sesgos, ética y bien social | Lorena Fernández y Carmen Torrijos", "channel": "Fair Saturday"},
+        {"youtubeVideoId": "a_ZuMbKat7c", "title": "Consultoría de IA: la verdad incómoda de los sesgos en los LLMs | Frecuencia CEO #35 - Gemma Galdon", "channel": "Frecuencia CEO"},
+        {"youtubeVideoId": "vyZ_dkUpwEw", "title": "⚠️ Por qué la IA es MALA ? (Sus RIESGOS y PELIGROS )", "channel": "Pablo Martínez"}
+      ]
+    },
+    {
+      "title": "IA para negocios",
+      "description": "Aplica la inteligencia artificial a tu empresa o emprendimiento: herramientas prácticas, casos de transformación real y cursos pensados para negocios. Aprende a generar valor con IA sin necesidad de programar.",
+      "shortDescription": "Cursos y herramientas de IA aplicada a negocios y emprendimiento: casos reales y aplicaciones prácticas.",
+      "category": "Negocios",
+      "level": "Principiante",
+      "instructorName": "Cursos de inteligencia artificial IA University",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "wtnxxLQJKuc", "title": "Curso de Inteligencia Artificial para Negocios y Emprendedores 2025", "channel": "Cursos de inteligencia artificial IA University"},
+        {"youtubeVideoId": "VthK-A4C3WI", "title": "Curso de Inteligencia Artificial para Emprendedores", "channel": "Cursos de inteligencia artificial IA University"},
+        {"youtubeVideoId": "3oValE3WeEo", "title": "10 Herramientas de Inteligencia Artificial para NEGOCIOS | 🤖 Nosotros las usamos", "channel": "Aprendamos Marketing"},
+        {"youtubeVideoId": "fcIBacQhHw4", "title": "¿Cómo transformar a las empresas con Inteligencia Artificial? (Con Clínica Internacional)", "channel": "EDteam"}
+      ]
+    },
+    {
+      "title": "Automatización con IA",
+      "description": "Automatiza tareas y procesos completos combinando IA con n8n: desde la instalación hasta crear y vender agentes automatizados. Cursos prácticos en español para construir flujos de trabajo inteligentes.",
+      "shortDescription": "Automatiza procesos con n8n e IA: cursos completos en español para crear flujos y agentes automatizados.",
+      "category": "Productividad",
+      "level": "Intermedio",
+      "instructorName": "Agustín Medina | AI Agency Academy",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "tfYQSvWTA68", "title": "Curso GRATIS de Automatización n8n en 1 hora (Sin Humo)", "channel": "Agustín Medina | AI Agency Academy "},
+        {"youtubeVideoId": "7Z-vRvIUqNs", "title": "Curso Completo De N8N: Cómo Crear y Vender Automatizaciones IA", "channel": "Adrián Sáenz"},
+        {"youtubeVideoId": "9rM1QQIEhkg", "title": "AGENTES IA en n8n: Curso Completo para Automatizar TODO en 2025", "channel": "Migue Baena IA"},
+        {"youtubeVideoId": "SF8Ddp0RaF8", "title": "N8N CURSO COMPLETO 6 HORAS – Automatiza, Crea y Vende Agentes IA", "channel": "Agustín Medina | AI Agency Academy "}
+      ]
+    },
+    {
+      "title": "ChatGPT y productividad",
+      "description": "Domina ChatGPT desde cero y transforma tu forma de trabajar: cursos completos y actualizados en español con casos de uso reales para estudiar, trabajar y crear contenido de manera más eficiente.",
+      "shortDescription": "Cursos completos de ChatGPT en español: de principiante a experto para multiplicar tu productividad.",
+      "category": "Productividad",
+      "level": "Principiante",
+      "instructorName": "EDteam",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "AjWCPTHMXgk", "title": "Curso gratis: Aprende ChatGPT desde cero y cambia tu forma de trabajar", "channel": "EDteam"},
+        {"youtubeVideoId": "wHP7JgppWfM", "title": "👍 Curso de ChatGPT GRATIS desde CERO (2026)", "channel": "Pablo Martínez"},
+        {"youtubeVideoId": "Jr4aLb-8fOA", "title": "Curso Completo ChatGPT de cero (Actualizado 2025)", "channel": "Daxus Latam"},
+        {"youtubeVideoId": "KrWZkffbzV8", "title": "Cómo Utilizar ChatGPT Para Principiantes | Tutorial 2026", "channel": "Adrián Sáenz"}
+      ]
+    },
+    {
+      "title": "RAG y bases vectoriales",
+      "description": "Aprende Retrieval-Augmented Generation: qué es RAG, cómo funcionan los embeddings, los chunks y las bases de datos vectoriales. La técnica clave para conectar LLMs con tus propios datos, explicada con código.",
+      "shortDescription": "RAG explicado con código: embeddings, chunks y bases de datos vectoriales para conectar LLMs con tus datos.",
+      "category": "Inteligencia Artificial",
+      "level": "Avanzado",
+      "instructorName": "EvoAcademy",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "uAsd9pOIcLg", "title": "¿Qué es RAG? - Clase con código y ejemplo", "channel": "EvoAcademy"},
+        {"youtubeVideoId": "Uozfvms-yzs", "title": "AI RAG explicado fácil: Chunks, Embeddings y Bases de Datos Vectoriales", "channel": "Felipe M."},
+        {"youtubeVideoId": "ngqf2r7eHX4", "title": "Cómo FUNCIONAN las BASES DE DATOS VECTORIALES", "channel": "Vida MRR - Programacion web"},
+        {"youtubeVideoId": "rNuPLPeQE7I", "title": "Bases de datos vectoriales, embeddings y RAG explicados", "channel": "Jose Diaz"}
+      ]
+    },
+    {
+      "title": "Introducción a MLOps",
+      "description": "Lleva tus modelos de Machine Learning a producción: qué es MLOps, en qué se diferencia de DevOps, y cómo monitorear y re-entrenar modelos desplegados. El puente entre el notebook y el mundo real.",
+      "shortDescription": "MLOps en español: del entrenamiento al despliegue, monitoreo y re-entrenamiento de modelos en producción.",
+      "category": "Machine Learning",
+      "level": "Avanzado",
+      "instructorName": "Codificando Bits",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/5474028/pexels-photo-5474028.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "xxymj6IzjII", "title": "¿Que es MLOps? - DevOps vs MLOps", "channel": "Datademia"},
+        {"youtubeVideoId": "df0jc41ycFo", "title": "Todo sobre MLOps en 9 minutos", "channel": "Ricardo Santos Diaz"},
+        {"youtubeVideoId": "KaqDvrNMNRc", "title": "MLOps: ¿qué es el MONITOREO de un modelo de Machine Learning?", "channel": "Codificando Bits"},
+        {"youtubeVideoId": "MRs2LOAM0ns", "title": "MLOps: ¿cómo RE-ENTRENAR un modelo de Machine Learning?", "channel": "Codificando Bits"}
+      ]
+    },
+    {
+      "title": "TensorFlow y PyTorch",
+      "description": "Domina los dos frameworks más importantes del deep learning: construye tu primera red neuronal con TensorFlow y da tus primeros pasos con PyTorch desde cero. Tutoriales prácticos con código en español.",
+      "shortDescription": "Tu primera red neuronal con TensorFlow y PyTorch desde cero: los frameworks esenciales del deep learning.",
+      "category": "Programación",
+      "level": "Intermedio",
+      "instructorName": "Ringa Tech",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "CU24iC3grq8", "title": "Cómo funcionan las redes neuronales - Inteligencia Artificial", "channel": "Ringa Tech"},
+        {"youtubeVideoId": "iX_on3VxZzk", "title": "Tu primera red neuronal en Python y Tensorflow", "channel": "Ringa Tech"},
+        {"youtubeVideoId": "QetoD5LXlEg", "title": "Tutorial: ¡PYTORCH DESDE CERO!", "channel": "Codificando Bits"},
+        {"youtubeVideoId": "MfvckutxjNM", "title": "Pytorch en 2 minutos", "channel": "A2 Capacitación: Excel"}
+      ]
+    },
+    {
+      "title": "Carrera profesional en IA",
+      "description": "Orienta tu futuro profesional hacia la inteligencia artificial: qué estudiar, qué ruta de aprendizaje seguir y qué certificaciones gratuitas existen. Consejos prácticos en español para entrar al sector con más demanda.",
+      "shortDescription": "Qué estudiar y qué ruta seguir para trabajar en IA: orientación profesional y cursos gratuitos recomendados.",
+      "category": "Negocios",
+      "level": "Principiante",
+      "instructorName": "EDteam",
+      "instructorTitle": "Creador de contenido — YouTube",
+      "thumbnail": "https://images.pexels.com/photos/5926382/pexels-photo-5926382.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "2VI4JepFtWQ", "title": "¡Sigue esta ruta para aprender Inteligencia artificial!", "channel": "EDteam"},
+        {"youtubeVideoId": "fmNUH9Gg3Ho", "title": "▷ Trabajar en el Sector de la INTELIGENCIA ARTIFICIAL | Requisitos y Qué estudiar (2023)", "channel": "Conquer Blocks"},
+        {"youtubeVideoId": "qX8bJN-kwHg", "title": "10 cursos de Google para aprender IA GENERATIVA", "channel": "MoureDev by Brais Moure"},
+        {"youtubeVideoId": "-idMBeCCCzs", "title": "Curso de IA de Google para principiantes (Resumen en 10 minutos)", "channel": "DonebyLaura"}
+      ]
+    }
+  ]
+}
