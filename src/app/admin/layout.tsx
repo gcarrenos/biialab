@@ -29,7 +29,7 @@ export default function AdminLayout({
               <Link 
                 href="/admin" 
                 className={`flex items-center p-3 text-sm rounded-md transition-colors ${
-                  isActive('/admin') && !isActive('/admin/courses') && !isActive('/admin/users')
+                  isActive('/admin') && !isActive('/admin/courses') && !isActive('/admin/users') && !isActive('/admin/waitlist')
                     ? 'bg-accent text-white' 
                     : 'text-text-secondary hover:text-text-primary hover:bg-background'
                 }`}
@@ -71,8 +71,23 @@ export default function AdminLayout({
               </Link>
             </li>
             <li>
-              <Link 
-                href="/admin/youtube" 
+              <Link
+                href="/admin/waitlist"
+                className={`flex items-center p-3 text-sm rounded-md transition-colors ${
+                  isActive('/admin/waitlist')
+                    ? 'bg-accent text-white'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-background'
+                }`}
+              >
+                <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Waitlist
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/youtube"
                 className={`flex items-center p-3 text-sm rounded-md transition-colors ${
                   isActive('/admin/youtube')
                     ? 'bg-red-600 text-white' 

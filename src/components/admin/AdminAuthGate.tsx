@@ -13,7 +13,8 @@ export function AdminAuthGate({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Check if already authenticated
     const storedAuth = sessionStorage.getItem(ADMIN_PASSWORD_KEY);
-    if (storedAuth === 'true') {
+    // Legacy sessions stored the literal flag 'true' (no password) — force re-login
+    if (storedAuth && storedAuth !== 'true') {
       setIsAuthenticated(true);
     }
     setIsLoading(false);
@@ -34,7 +35,8 @@ export function AdminAuthGate({ children }: { children: React.ReactNode }) {
     const data = await response.json();
 
     if (data.success) {
-      sessionStorage.setItem(ADMIN_PASSWORD_KEY, 'true');
+      // Keep the password so admin data endpoints can re-verify it server-side
+      sessionStorage.setItem(ADMIN_PASSWORD_KEY, password);
       setIsAuthenticated(true);
     } else {
       setError('Contraseña incorrecta');
