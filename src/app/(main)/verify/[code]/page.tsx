@@ -15,7 +15,7 @@ function linkedInAddUrl(cert: { certificateNumber: string; courseTitle: string; 
   const params = new URLSearchParams({
     startTask: 'CERTIFICATION_NAME',
     name: cert.courseTitle,
-    organizationName: 'BiiA LAB',
+    organizationId: '9339183', // BiiA LAB LinkedIn Company Page — attaches the page logo
     issueYear: String(issued.getFullYear()),
     issueMonth: String(issued.getMonth() + 1),
     certUrl: `${BASE_URL}/verify/${cert.certificateNumber}`,
