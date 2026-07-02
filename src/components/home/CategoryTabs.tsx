@@ -1,22 +1,8 @@
 'use client';
 
-const CATEGORY_EMOJI: Record<string, string> = {
-  'Desarrollo Personal': '🧠',
-  'Negocios': '💼',
-  'Inteligencia Artificial': '🤖',
-  'Machine Learning': '📊',
-  'Productividad': '⚡',
-  'Data Science': '📈',
-  'Programación': '💻',
-};
-
-const DEFAULT_EMOJI = '📚';
+import { categoryIcon, IconSparkle } from '@/components/icons';
 
 export const ALL_CATEGORY = 'Todos';
-
-export function categoryEmoji(category: string): string {
-  return CATEGORY_EMOJI[category] ?? DEFAULT_EMOJI;
-}
 
 interface CategoryTabsProps {
   categories: string[];
@@ -25,8 +11,8 @@ interface CategoryTabsProps {
 }
 
 /** Horizontally scrollable chip tabs, one per course category plus "Todos".
- * The active chip gets an accent underline; clicking filters the grid
- * client-side via the onChange callback. */
+ * The active chip gets accent text plus a 2px accent underline; clicking
+ * filters the grid client-side via the onChange callback. */
 export function CategoryTabs({ categories, active, onChange }: CategoryTabsProps) {
   const items = [ALL_CATEGORY, ...categories];
 
@@ -34,6 +20,7 @@ export function CategoryTabs({ categories, active, onChange }: CategoryTabsProps
     <div className="flex gap-2 overflow-x-auto scrollbar-hidden -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       {items.map((category) => {
         const isActive = category === active;
+        const Icon = category === ALL_CATEGORY ? IconSparkle : categoryIcon(category);
         return (
           <button
             key={category}
@@ -45,9 +32,7 @@ export function CategoryTabs({ categories, active, onChange }: CategoryTabsProps
                 : 'text-text-secondary border-transparent hover:text-text-primary'
             }`}
           >
-            <span aria-hidden="true">
-              {category === ALL_CATEGORY ? '✨' : categoryEmoji(category)}
-            </span>
+            <Icon size={18} className="flex-shrink-0" />
             {category}
           </button>
         );

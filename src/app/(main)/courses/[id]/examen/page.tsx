@@ -102,7 +102,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
         {result && (
           <div className={`mt-6 p-6 rounded-xl border ${result.passed ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'}`}>
             <h2 className={`text-xl font-bold ${result.passed ? 'text-green-700' : 'text-red-700'}`}>
-              {result.passed ? '¡Aprobado! 🎉' : 'No aprobado'}
+              {result.passed ? '¡Aprobado!' : 'No aprobado'}
             </h2>
             <p className="text-text-secondary mt-1">
               Tu puntaje: <strong className="text-text-primary">{result.score}%</strong> ({result.correctCount}/{result.total} correctas)
@@ -114,7 +114,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
                   href={`/verify/${result.certificateNumber}`}
                   className="px-5 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-500 transition-colors"
                 >
-                  🎓 Ver mi certificado
+                  Ver mi certificado
                 </Link>
               )}
               {!result.passed && (
@@ -161,7 +161,7 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
                   })}
                 </div>
                 {fb?.explanation && (
-                  <p className="mt-3 text-xs text-text-secondary border-t border-gray-200 pt-3">💡 {fb.explanation}</p>
+                  <p className="mt-3 text-xs text-text-secondary border-t border-gray-200 pt-3">{fb.explanation}</p>
                 )}
               </div>
             );

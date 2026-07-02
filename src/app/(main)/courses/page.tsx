@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCourses, CourseWithDetails } from '@/lib/db/actions/courses';
+import { IconCheck } from '@/components/icons';
 
 // Unified course type for display
 interface DisplayCourse {
@@ -29,6 +30,7 @@ interface DisplayCourse {
 function CourseCard({ course }: { course: DisplayCourse }) {
   const initial = course.instructor.name.charAt(0).toUpperCase();
   const hue = course.instructor.name.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % 360;
+  const tags = [course.category, course.level].filter((t): t is string => Boolean(t)).slice(0, 2);
 
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-xl bg-surface border border-gray-200 shadow-sm transition-all hover:shadow-md">
@@ -61,14 +63,33 @@ function CourseCard({ course }: { course: DisplayCourse }) {
           <h3 className="flex-1 min-w-0 text-sm font-bold text-text-primary line-clamp-1 group-hover:text-accent transition-colors">
             {course.title}
           </h3>
+          <span
+            className="flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white flex-shrink-0"
+            aria-label="Curso verificado"
+          >
+            <IconCheck size={10} />
+          </span>
         </div>
 
         <p className="text-sm text-text-secondary line-clamp-1 mb-3">
           {course.description}
         </p>
 
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-md bg-background-light text-text-secondary text-[11px] font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="mt-auto flex items-center justify-between text-xs text-text-secondary">
-          <span>{course.lessons} lecciones · {course.level || 'Todos los niveles'}</span>
+          <span>{course.lessons} lecciones</span>
           <span className="font-bold text-accent">Gratis</span>
         </div>
       </div>
