@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getCourseBySlugOrId, getAllCourses } from '@/lib/db/actions/courses';
+import { getCourseExam } from '@/lib/db/actions/exams';
 import { courses as staticCourses } from '@/lib/data';
 import { YouTubeEmbed } from '@/components/video/YouTubeEmbed';
 
@@ -16,6 +17,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
   
   // Try to get from database first
   let course = await getCourseBySlugOrId(id);
+  const examRes = await getCourseExam(id).catch(() => ({ exam: null }));
+  const hasExam = !!examRes.exam;
   
   // Fallback to static data if not in database
   if (!course) {
@@ -189,6 +192,26 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 </div>
               </section>
               
+              {/* Final exam */}
+              {hasExam && (
+                <section>
+                  <div className="bg-background-light border border-accent/30 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-text-primary">Examen final</h2>
+                      <p className="text-text-secondary text-sm mt-1">
+                        Demuestra lo aprendido y obtén tu certificado al aprobar.
+                      </p>
+                    </div>
+                    <Link
+                      href={`/courses/${'slug' in course ? course.slug : id}/examen`}
+                      className="px-6 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-colors text-center"
+                    >
+                      Presentar examen
+                    </Link>
+                  </div>
+                </section>
+              )}
+
               {/* Curriculum */}
               <section id="curriculum">
                 <h2 className="text-2xl font-bold text-text-primary mb-6">Course Curriculum</h2>

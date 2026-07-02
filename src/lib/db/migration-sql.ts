@@ -301,3 +301,9 @@ ALTER TABLE "instructors" ADD CONSTRAINT "instructors_user_id_users_id_fk" FOREI
 ALTER TABLE "lesson_progress" ADD CONSTRAINT "lesson_progress_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "quiz_attempts" ADD CONSTRAINT "quiz_attempts_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
 `;
+
+// Migration 0002: course-level final exams — quizzes gain course_id and
+// lesson_id becomes optional. Idempotent (IF NOT EXISTS / DROP NOT NULL).
+export const MIGRATION_SQL_0002 = `ALTER TABLE "quizzes" ALTER COLUMN "lesson_id" DROP NOT NULL;--> statement-breakpoint
+ALTER TABLE "quizzes" ADD COLUMN IF NOT EXISTS "course_id" uuid;--> statement-breakpoint
+ALTER TABLE "quizzes" ADD CONSTRAINT "quizzes_course_id_courses_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."courses"("id") ON DELETE cascade ON UPDATE no action;`;
