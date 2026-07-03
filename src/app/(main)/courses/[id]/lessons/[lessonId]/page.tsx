@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useRef, useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { courses as staticCourses, currentUser } from '@/lib/data';
 import { useAuth } from '@/hooks/useAuth';
-import { enrollInCourse, getCourseProgress, markLessonComplete } from '@/lib/db/actions/progress';
+import { enrollInCourse, getCourseProgress, markLessonComplete, saveWatchPosition, getWatchPosition } from '@/lib/db/actions/progress';
 import { Lesson, Module, Course, QuizQuestion } from '@/lib/types';
-import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { getCourseBySlugOrId, CourseWithDetails } from '@/lib/db/actions/courses';
-import { YouTubeEmbed } from '@/components/video/YouTubeEmbed';
+import { LessonPlayer } from '@/components/video/LessonPlayer';
 
 interface LessonPageProps {
   params: Promise<{
@@ -34,12 +34,17 @@ export default function LessonPage({ params }: LessonPageProps) {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [userNotes, setUserNotes] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [resumeSeconds, setResumeSeconds] = useState<number | null>(null);
+  const [sidebarHidden, setSidebarHidden] = useState(false);
+  const autoCompletedRef = useRef(false);
   
   // Find the current course, module, and lesson
   useEffect(() => {
     const fetchCourse = async () => {
       setIsLoading(true);
-      
+      setResumeSeconds(null);
+      autoCompletedRef.current = false;
+
       // Try database first
       const dbCourse = await getCourseBySlugOrId(id);
       
@@ -62,6 +67,12 @@ export default function LessonPage({ params }: LessonPageProps) {
         if (foundLesson && foundModule) {
           setCurrentLesson(foundLesson as any);
           setCurrentModule(foundModule as any);
+          // Saved playback position for Netflix-style resume (no-op signed out)
+          getWatchPosition(foundLesson.id).then((res) => {
+            setResumeSeconds(res.success ? res.watchedSeconds : 0);
+          }).catch(() => setResumeSeconds(0));
+        } else {
+          setResumeSeconds(0);
         }
 
         setDbCourseId(dbCourse.id);
@@ -100,7 +111,8 @@ export default function LessonPage({ params }: LessonPageProps) {
         setCurrentLesson(foundLesson);
         setCurrentModule(foundModule);
       }
-      
+      setResumeSeconds(0);
+
       // Get user progress
       const userCourseProgress = currentUser.progress.find(p => p.courseId === id);
       if (userCourseProgress && userCourseProgress.completedLessons) {
@@ -214,6 +226,28 @@ export default function LessonPage({ params }: LessonPageProps) {
     return userProgress.includes(lessonIdToCheck);
   };
 
+  // Persists the playback position (throttled by the player) and auto-marks
+  // the lesson complete once 95% has been watched.
+  const handleWatchProgress = (seconds: number, videoDuration: number) => {
+    if (!dbCourseId || !isAuthenticated || !currentLesson) return;
+    const lessonKey = currentLesson.id;
+    saveWatchPosition(lessonKey, seconds).catch(() => {});
+
+    if (
+      videoDuration > 0 &&
+      seconds / videoDuration >= 0.95 &&
+      !autoCompletedRef.current &&
+      !isLessonCompleted(lessonKey)
+    ) {
+      autoCompletedRef.current = true;
+      markLessonComplete(lessonKey, true).then((res) => {
+        if (res.success) {
+          setUserProgress((prev) => (prev.includes(lessonKey) ? prev : [...prev, lessonKey]));
+        }
+      }).catch(() => {});
+    }
+  };
+
   const handleToggleComplete = async () => {
     if (!currentLesson || !dbCourseId || savingProgress) return;
     const lessonKey = currentLesson.id;
@@ -232,7 +266,7 @@ export default function LessonPage({ params }: LessonPageProps) {
     <div className="bg-background min-h-screen text-text-primary">
       <div className="flex flex-col lg:flex-row h-screen">
         {/* Sidebar */}
-        <div className="w-full lg:w-80 bg-background-light border-r border-gray-800 overflow-y-auto">
+        <div className={`${sidebarHidden ? 'hidden' : 'w-full lg:w-80'} bg-background-light border-r border-gray-800 overflow-y-auto`}>
           <div className="p-4 border-b border-gray-800">
             <Link href={`/courses/${courseSlug}`} className="flex items-center text-text-secondary hover:text-text-primary">
               <ChevronLeftIcon className="h-5 w-5 mr-2" />
@@ -306,8 +340,16 @@ export default function LessonPage({ params }: LessonPageProps) {
         {/* Main content */}
         <div className="flex-1 flex flex-col overflow-y-auto">
           {/* Video player header */}
-          <div className="bg-black p-4 flex items-center justify-between">
-            <h2 className="text-lg font-medium text-white truncate">{lessonTitle}</h2>
+          <div className="bg-black p-4 flex items-center justify-between gap-2">
+            <button
+              onClick={() => setSidebarHidden((prev) => !prev)}
+              aria-label={sidebarHidden ? 'Mostrar temario' : 'Ocultar temario'}
+              title={sidebarHidden ? 'Mostrar temario' : 'Ocultar temario'}
+              className={`p-1.5 rounded flex-shrink-0 transition-colors ${sidebarHidden ? 'bg-accent text-white' : 'bg-gray-800 text-gray-300 hover:text-white'}`}
+            >
+              <Bars3Icon className="h-5 w-5" />
+            </button>
+            <h2 className="text-lg font-medium text-white truncate flex-1">{lessonTitle}</h2>
             <div className="flex gap-2">
               <button 
                 onClick={() => setActiveTab('video')}
@@ -343,7 +385,14 @@ export default function LessonPage({ params }: LessonPageProps) {
             {activeTab === 'video' && (
               <div className="aspect-video bg-black relative">
                 {lessonYoutubeId ? (
-                  <YouTubeEmbed videoId={lessonYoutubeId} title={lessonTitle} />
+                  resumeSeconds !== null && (
+                    <LessonPlayer
+                      videoId={lessonYoutubeId}
+                      title={lessonTitle}
+                      initialSeconds={resumeSeconds}
+                      onProgress={handleWatchProgress}
+                    />
+                  )
                 ) : lessonVideoUrl ? (
                   <video 
                     className="w-full h-full" 
