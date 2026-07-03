@@ -59,6 +59,52 @@ export async function markLessonComplete(lessonId: string, completed: boolean = 
   }
 }
 
+// Netflix-style resume: persists the last playback position without touching
+// the completed flag.
+export async function saveWatchPosition(lessonId: string, seconds: number) {
+  const user = await getSessionUser();
+  if (!user) return { success: false as const, error: 'unauthenticated' };
+  if (!Number.isFinite(seconds) || seconds < 0) return { success: false as const, error: 'invalid' };
+
+  const watchedSeconds = Math.floor(seconds);
+  try {
+    const existing = await db.query.lessonProgress.findFirst({
+      where: and(eq(lessonProgress.userId, user.id), eq(lessonProgress.lessonId, lessonId)),
+    });
+
+    if (existing) {
+      await db.update(lessonProgress)
+        .set({ watchedSeconds, updatedAt: new Date() })
+        .where(eq(lessonProgress.id, existing.id));
+    } else {
+      await db.insert(lessonProgress).values({ userId: user.id, lessonId, watchedSeconds });
+    }
+    return { success: true as const };
+  } catch (error) {
+    console.error('saveWatchPosition error:', error);
+    return { success: false as const, error: 'server' };
+  }
+}
+
+export async function getWatchPosition(lessonId: string) {
+  const user = await getSessionUser();
+  if (!user) return { success: false as const, error: 'unauthenticated' };
+
+  try {
+    const row = await db.query.lessonProgress.findFirst({
+      where: and(eq(lessonProgress.userId, user.id), eq(lessonProgress.lessonId, lessonId)),
+    });
+    return {
+      success: true as const,
+      watchedSeconds: row?.watchedSeconds ?? 0,
+      completed: row?.completed ?? false,
+    };
+  } catch (error) {
+    console.error('getWatchPosition error:', error);
+    return { success: false as const, error: 'server' };
+  }
+}
+
 // Lesson ids belonging to a course (via its modules)
 async function courseLessonIds(courseId: string): Promise<string[]> {
   const mods = await db.query.modules.findMany({ where: eq(modules.courseId, courseId) });
