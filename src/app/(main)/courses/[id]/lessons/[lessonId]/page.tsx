@@ -10,6 +10,7 @@ import { Lesson, Module, Course, QuizQuestion } from '@/lib/types';
 import { ChevronRightIcon, CheckCircleIcon, LockClosedIcon, ChevronLeftIcon, DocumentTextIcon, LinkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { getCourseBySlugOrId, CourseWithDetails } from '@/lib/db/actions/courses';
 import { LessonPlayer } from '@/components/video/LessonPlayer';
+import { track } from '@/lib/analytics';
 
 interface LessonPageProps {
   params: Promise<{
@@ -37,6 +38,7 @@ export default function LessonPage({ params }: LessonPageProps) {
   const [resumeSeconds, setResumeSeconds] = useState<number | null>(null);
   const [sidebarHidden, setSidebarHidden] = useState(false);
   const autoCompletedRef = useRef(false);
+  const firedMilestonesRef = useRef<Set<number>>(new Set());
   
   // Find the current course, module, and lesson
   useEffect(() => {
@@ -44,6 +46,7 @@ export default function LessonPage({ params }: LessonPageProps) {
       setIsLoading(true);
       setResumeSeconds(null);
       autoCompletedRef.current = false;
+      firedMilestonesRef.current = new Set();
 
       // Try database first
       const dbCourse = await getCourseBySlugOrId(id);
@@ -77,7 +80,9 @@ export default function LessonPage({ params }: LessonPageProps) {
 
         setDbCourseId(dbCourse.id);
         // Real progress + auto-enroll (server actions no-op when signed out)
-        enrollInCourse(dbCourse.id).catch(() => {});
+        enrollInCourse(dbCourse.id).then((res) => {
+          if (res.success && !res.alreadyEnrolled) track('course_enroll', { course: dbCourse.slug });
+        }).catch(() => {});
         getCourseProgress(dbCourse.id).then((res) => {
           if (res.success) setUserProgress(res.completedLessonIds);
         }).catch(() => {});
@@ -226,9 +231,20 @@ export default function LessonPage({ params }: LessonPageProps) {
     return userProgress.includes(lessonIdToCheck);
   };
 
-  // Persists the playback position (throttled by the player) and auto-marks
-  // the lesson complete once 95% has been watched.
+  // Persists the playback position (throttled by the player), fires GA
+  // milestones, and auto-marks the lesson complete once 95% has been watched.
   const handleWatchProgress = (seconds: number, videoDuration: number) => {
+    // Milestones fire for everyone, signed in or not
+    if (videoDuration > 0) {
+      const percent = (seconds / videoDuration) * 100;
+      for (const milestone of [25, 50, 75, 95]) {
+        if (percent >= milestone && !firedMilestonesRef.current.has(milestone)) {
+          firedMilestonesRef.current.add(milestone);
+          track('video_progress', { percent: milestone, course: String(courseSlug), lesson: lessonTitle });
+        }
+      }
+    }
+
     if (!dbCourseId || !isAuthenticated || !currentLesson) return;
     const lessonKey = currentLesson.id;
     saveWatchPosition(lessonKey, seconds).catch(() => {});
@@ -243,6 +259,7 @@ export default function LessonPage({ params }: LessonPageProps) {
       markLessonComplete(lessonKey, true).then((res) => {
         if (res.success) {
           setUserProgress((prev) => (prev.includes(lessonKey) ? prev : [...prev, lessonKey]));
+          track('lesson_complete', { method: 'auto', course: String(courseSlug), lesson: lessonTitle });
         }
       }).catch(() => {});
     }
@@ -258,6 +275,9 @@ export default function LessonPage({ params }: LessonPageProps) {
       setUserProgress((prev) =>
         nowCompleted ? [...prev, lessonKey] : prev.filter((l) => l !== lessonKey)
       );
+      if (nowCompleted) {
+        track('lesson_complete', { method: 'manual', course: String(courseSlug), lesson: lessonTitle });
+      }
     }
     setSavingProgress(false);
   };
@@ -391,6 +411,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                       title={lessonTitle}
                       initialSeconds={resumeSeconds}
                       onProgress={handleWatchProgress}
+                      onStart={() => track('lesson_start', { course: String(courseSlug), lesson: lessonTitle })}
                     />
                   )
                 ) : lessonVideoUrl ? (

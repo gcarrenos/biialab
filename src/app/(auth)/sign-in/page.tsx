@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from '@/lib/auth-client';
+import { track } from '@/lib/analytics';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function SignInPage() {
       return;
     }
 
+    track('login', { method: 'email' });
     router.push('/');
     router.refresh();
   };

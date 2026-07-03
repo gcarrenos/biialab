@@ -63,7 +63,8 @@ passes it to these:
 
 `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `ADMIN_PASSWORD`,
 `NEXT_PUBLIC_YOUTUBE_API_KEY`, `NEXT_PUBLIC_YOUTUBE_CHANNEL_ID` (channel `UCNV3OUmerDvoj-PQIArnTkw`, @BiiALAB),
-`RESEND_API_KEY` (NOT yet set — password reset fails until it is; verify biialab.org domain in Resend first).
+`RESEND_API_KEY` (NOT yet set — password reset fails until it is; verify biialab.org domain in Resend first),
+`NEXT_PUBLIC_GA_ID` (GA4 measurement id — analytics code no-ops until it is set).
 Env changes require a redeploy. The Vercel CLI (`npx vercel`) has been used with `env add` from this repo.
 
 ## Conventions
@@ -83,7 +84,7 @@ Env changes require a redeploy. The Vercel CLI (`npx vercel`) has been used with
 - Lesson player page still has the old dark design + client-only notes + mock quiz tab; no auto
   watch-progress (`lesson_progress.watched_seconds` unused).
 - No "continue learning" section for signed-in users on the homepage.
-- No analytics (GA4) wired. Waitlist subscribers never got a launch email.
+- GA4 wired (`src/lib/analytics.ts` + `GoogleAnalytics` in root layout, custom events on auth/lessons/exams/certs) but `NEXT_PUBLIC_GA_ID` is not set yet. Waitlist subscribers never got a launch email.
 - `/certificate/[id]` is an unreferenced legacy page with pre-rebrand "BiiAMind" branding — `/verify/[code]`
   is the real one; consider deleting.
 - Google Search Console: verify biialab.org + submit `/sitemap.xml`.

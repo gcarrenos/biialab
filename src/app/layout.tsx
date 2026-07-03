@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
+import { Suspense } from "react";
+import { GoogleAnalytics, PageViewTracker } from "@/components/analytics/GoogleAnalytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,6 +30,11 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.variable} ${oswald.variable} font-sans min-h-screen bg-background text-text-primary`}>
+        <GoogleAnalytics />
+        {/* useSearchParams requires a Suspense boundary at the root */}
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
         {children}
       </body>
     </html>
