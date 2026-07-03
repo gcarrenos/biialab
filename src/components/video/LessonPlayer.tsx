@@ -125,6 +125,10 @@ export function LessonPlayer({
           iv_load_policy: 3, // no annotations/cards overlay
           modestbranding: 1,
           playsinline: 1,
+          // Without an explicit origin the postMessage handshake with the
+          // nocookie host fails silently: no onStateChange, no getCurrentTime,
+          // and therefore no progress saves.
+          origin: window.location.origin,
         },
         events: {
           onStateChange: (event: { data: number }) => {
@@ -142,20 +146,37 @@ export function LessonPlayer({
       });
     });
 
+    // Last-chance save when the tab is closed or backgrounded — the 10s
+    // interval alone loses up to 10s, and closing the tab skips unmount.
+    const onPageHide = () => reportProgress();
+    window.addEventListener('pagehide', onPageHide);
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') reportProgress();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     return () => {
       cancelled = true;
       reportProgress();
       stopSaving();
+      window.removeEventListener('pagehide', onPageHide);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       playerRef.current?.destroy();
       playerRef.current = null;
     };
   }, [videoId, startAt]);
 
   // Thumbnail gate: nothing loads (and no YouTube widgets appear) until the
-  // user picks where to start.
+  // user picks where to start. The whole surface plays (resuming when there's
+  // a saved position); "Empezar de nuevo" is the only exception.
   if (startAt === null) {
     return (
-      <div className={`relative aspect-video bg-black group ${className}`}>
+      <div
+        onClick={() => begin(canResume ? Math.max(0, initialSeconds - 3) : 0)}
+        role="button"
+        aria-label={canResume ? `Continuar ${title} desde ${formatTime(initialSeconds)}` : `Reproducir ${title}`}
+        className={`relative aspect-video bg-black group cursor-pointer ${className}`}
+      >
         <Image
           src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
           alt={title}
@@ -166,32 +187,28 @@ export function LessonPlayer({
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-3">
           {canResume ? (
             <>
-              <button
-                onClick={() => begin(Math.max(0, initialSeconds - 3))}
-                className="flex items-center gap-3 px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors shadow-lg"
-              >
+              <span className="flex items-center gap-3 px-6 py-3 bg-accent text-white rounded-lg font-medium group-hover:bg-accent/90 transition-colors shadow-lg">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
                 Continuar desde {formatTime(initialSeconds)}
-              </button>
+              </span>
               <button
-                onClick={() => begin(0)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  begin(0);
+                }}
                 className="px-4 py-2 text-sm text-white/90 hover:text-white underline underline-offset-4"
               >
                 Empezar de nuevo
               </button>
             </>
           ) : (
-            <button
-              onClick={() => begin(0)}
-              aria-label={`Reproducir ${title}`}
-              className="w-20 h-14 bg-accent rounded-xl flex items-center justify-center hover:bg-accent/90 transition-colors shadow-lg"
-            >
+            <span className="w-20 h-14 bg-accent rounded-xl flex items-center justify-center group-hover:bg-accent/90 transition-colors shadow-lg">
               <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
-            </button>
+            </span>
           )}
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
