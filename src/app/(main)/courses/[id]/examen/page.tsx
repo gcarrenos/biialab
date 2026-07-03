@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { getCourseExam, submitExamAttempt, PublicExamQuestion } from '@/lib/db/actions/exams';
+import { track } from '@/lib/analytics';
 
 type Exam = NonNullable<Awaited<ReturnType<typeof getCourseExam>>['exam']>;
 type Result = Extract<Awaited<ReturnType<typeof submitExamAttempt>>, { success: true }>;
@@ -37,7 +38,10 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
       return;
     }
     getCourseExam(id)
-      .then((res) => setExam(res.exam))
+      .then((res) => {
+        setExam(res.exam);
+        if (res.exam) track('exam_start', { course: id });
+      })
       .finally(() => setLoading(false));
   }, [id, authLoading, isAuthenticated, router]);
 
@@ -75,7 +79,10 @@ export default function ExamPage({ params }: { params: Promise<{ id: string }> }
     if (!allAnswered || submitting) return;
     setSubmitting(true);
     const res = await submitExamAttempt(exam.quizId, answers);
-    if (res.success) setResult(res);
+    if (res.success) {
+      setResult(res);
+      track('exam_submit', { course: id, passed: res.passed, score: res.score });
+    }
     setSubmitting(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

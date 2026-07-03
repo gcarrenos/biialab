@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signUp } from '@/lib/auth-client';
+import { track } from '@/lib/analytics';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function SignUpPage() {
       return;
     }
 
+    track('sign_up', { method: 'email' });
     router.push('/');
     router.refresh();
   };

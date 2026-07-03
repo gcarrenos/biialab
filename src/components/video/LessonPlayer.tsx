@@ -61,6 +61,8 @@ interface LessonPlayerProps {
   initialSeconds?: number;
   /** Called with the current position every ~10s while playing, and on pause/end/unmount. */
   onProgress?: (seconds: number, duration: number) => void;
+  /** Called once when the user starts the video (play or resume). */
+  onStart?: () => void;
   className?: string;
 }
 
@@ -69,6 +71,7 @@ export function LessonPlayer({
   title = 'YouTube Video',
   initialSeconds = 0,
   onProgress,
+  onStart,
   className = '',
 }: LessonPlayerProps) {
   const [startAt, setStartAt] = useState<number | null>(null);
@@ -79,6 +82,11 @@ export function LessonPlayer({
   onProgressRef.current = onProgress;
 
   const canResume = initialSeconds > RESUME_THRESHOLD_SECONDS;
+
+  const begin = (seconds: number) => {
+    onStart?.();
+    setStartAt(seconds);
+  };
 
   useEffect(() => {
     if (startAt === null || !containerRef.current) return;
@@ -159,7 +167,7 @@ export function LessonPlayer({
           {canResume ? (
             <>
               <button
-                onClick={() => setStartAt(Math.max(0, initialSeconds - 3))}
+                onClick={() => begin(Math.max(0, initialSeconds - 3))}
                 className="flex items-center gap-3 px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors shadow-lg"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -168,7 +176,7 @@ export function LessonPlayer({
                 Continuar desde {formatTime(initialSeconds)}
               </button>
               <button
-                onClick={() => setStartAt(0)}
+                onClick={() => begin(0)}
                 className="px-4 py-2 text-sm text-white/90 hover:text-white underline underline-offset-4"
               >
                 Empezar de nuevo
@@ -176,7 +184,7 @@ export function LessonPlayer({
             </>
           ) : (
             <button
-              onClick={() => setStartAt(0)}
+              onClick={() => begin(0)}
               aria-label={`Reproducir ${title}`}
               className="w-20 h-14 bg-accent rounded-xl flex items-center justify-center hover:bg-accent/90 transition-colors shadow-lg"
             >
