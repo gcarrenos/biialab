@@ -316,6 +316,24 @@
         {"youtubeVideoId": "qX8bJN-kwHg", "title": "10 cursos de Google para aprender IA GENERATIVA", "channel": "MoureDev by Brais Moure"},
         {"youtubeVideoId": "-idMBeCCCzs", "title": "Curso de IA de Google para principiantes (Resumen en 10 minutos)", "channel": "DonebyLaura"}
       ]
+    },
+    {
+      "title": "IA para SEO",
+      "description": "Aprende a integrar la inteligencia artificial en tu estrategia SEO de principio a fin: qué usos de ChatGPT funcionan (y cuáles te penalizan), cómo hacer keyword research y redactar contenidos que posicionan, y cómo aplicar el nuevo SEO para IA (GEO) para que tu marca aparezca en las respuestas de ChatGPT, Google AI Overviews y Perplexity. Curso curado por Gustavo Carreno.",
+      "shortDescription": "Domina ChatGPT y el GEO aplicados al SEO: keyword research, contenidos que posicionan y cómo aparecer en las respuestas de la IA.",
+      "category": "Marketing Digital",
+      "level": "Intermedio",
+      "instructorName": "Gustavo Carreno",
+      "instructorTitle": "Especialista en SEO e Inteligencia Artificial",
+      "thumbnail": "https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "lessons": [
+        {"youtubeVideoId": "owfSVnCUMZA", "title": "Malos y buenos usos de ChatGPT para el SEO - BIGSEO Podcast #008 con Romuald Fons y Javier Martínez", "channel": "The BIG"},
+        {"youtubeVideoId": "hRna4XBd_F0", "title": "Como hacer Estudio de Palabras Clave con ChatGPT (IA)", "channel": "David Zamora"},
+        {"youtubeVideoId": "45ZIRveYI08", "title": "Crea TEXTOS SEO para tu Blog con ChatGPT (usa este Prompt)", "channel": "Romuald Fons"},
+        {"youtubeVideoId": "isnhdQ0g7CQ", "title": "Este GPT crea textos INCREIBLES que posicionan en Google! (SEO con ChatGPT 5)", "channel": "Romuald Fons"},
+        {"youtubeVideoId": "9q6JcEQTzXs", "title": "Cómo Hacer SEO para IA y que te Recomiende ChatGPT y Google", "channel": "David Ayala - SEO Rosa"},
+        {"youtubeVideoId": "lhhzNNGXXJg", "title": "Masterclass de SEO para IA (GEO - Generative Engine Optimization) Avanzada", "channel": "Asier López Ruiz"}
+      ]
     }
   ]
 }
