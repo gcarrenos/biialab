@@ -11,7 +11,8 @@ export type AnalyticsEvent =
   | 'lesson_complete' // params: { method: 'auto' | 'manual' }
   | 'exam_start'
   | 'exam_submit' // params: { passed, score }
-  | 'certificate_linkedin_share';
+  | 'certificate_linkedin_share'
+  | 'certificate_download';
 
 type Gtag = (command: 'event', eventName: string, params?: Record<string, unknown>) => void;
 

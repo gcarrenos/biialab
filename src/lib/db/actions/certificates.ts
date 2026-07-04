@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { and, eq, inArray } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
-import { certificates, courses, users } from '@/lib/db/schema';
+import { certificates, courses, users, instructors } from '@/lib/db/schema';
 
 async function getSessionUser() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -89,6 +89,10 @@ export async function getCertificateByNumber(certificateNumber: string) {
     ]);
     if (!course || !user) return { success: true as const, certificate: null };
 
+    const instructor = course.instructorId
+      ? await db.query.instructors.findFirst({ where: eq(instructors.id, course.instructorId) })
+      : null;
+
     return {
       success: true as const,
       certificate: {
@@ -99,6 +103,8 @@ export async function getCertificateByNumber(certificateNumber: string) {
         courseCategory: course.category,
         totalLessons: course.totalLessons,
         studentName: user.name,
+        instructorName: instructor?.name ?? null,
+        instructorTitle: instructor?.title ?? null,
       },
     };
   } catch (error) {

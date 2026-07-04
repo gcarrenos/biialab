@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getCertificateByNumber } from '@/lib/db/actions/certificates';
-import { PrintButton } from '@/components/certificates/PrintButton';
+import { DownloadPdfButton } from '@/components/certificates/DownloadPdfButton';
 import { LinkedInAddButton } from '@/components/certificates/LinkedInAddButton';
 
 export const metadata: Metadata = {
@@ -52,7 +52,7 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
 
   return (
     <div className="bg-background min-h-screen py-16 px-4">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-4xl">
         {/* Validity banner (hidden on print) */}
         <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-300">
           <span className="text-green-700 text-2xl">✓</span>
@@ -64,31 +64,67 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
           </div>
         </div>
 
-        {/* The certificate */}
-        <div className="rounded-2xl border-2 border-accent/40 bg-white shadow-sm p-10 md:p-14 text-center print:border-black">
-          <p className="font-display uppercase tracking-[0.3em] text-accent text-sm mb-6">Certificado</p>
-          <h2 className="text-2xl font-bold text-text-primary mb-1">
-            BiiA<span className="text-accent">Lab</span>
-          </h2>
-          <p className="text-text-secondary text-sm mb-10">certifica que</p>
+        {/* The certificate — mirrors the downloadable PDF layout */}
+        <div className="border border-accent bg-white shadow-sm p-1.5 print:border-black">
+          <div className="border border-accent/30 flex flex-col md:flex-row">
+            {/* Main panel */}
+            <div className="flex-1 p-8 md:p-12 text-left">
+              <p className="text-sm text-text-secondary mb-6">{issued}</p>
+              <h2 className="text-3xl font-bold text-text-primary leading-none">
+                BiiA<span className="text-accent">Lab</span>
+              </h2>
+              <p className="text-[10px] tracking-[0.25em] text-text-secondary mt-1">BIIALAB.ORG</p>
 
-          <p className="font-display uppercase text-3xl md:text-5xl font-bold text-text-primary mb-10">
-            {certificate.studentName}
-          </p>
+              <p className="text-text-secondary text-sm mt-10 mb-3">certifica que</p>
+              <p className="font-display uppercase text-3xl md:text-5xl font-bold text-text-primary mb-6">
+                {certificate.studentName}
+              </p>
 
-          <p className="text-text-secondary text-sm mb-2">completó satisfactoriamente el curso</p>
-          <p className="font-display uppercase text-xl md:text-3xl font-semibold text-text-primary mb-10">
-            {certificate.courseTitle}
-          </p>
+              <p className="text-text-secondary text-sm mb-2">completó satisfactoriamente el curso</p>
+              <p className="font-display uppercase text-xl md:text-3xl font-semibold text-text-primary mb-2">
+                {certificate.courseTitle}
+              </p>
+              <p className="text-xs text-text-secondary">
+                {['Curso online gratuito de BiiA LAB', certificate.courseCategory, certificate.totalLessons ? `${certificate.totalLessons} lecciones` : null]
+                  .filter(Boolean).join(' · ')}
+              </p>
 
-          <div className="flex items-center justify-center gap-10 text-sm text-text-secondary">
-            <div>
-              <p className="font-medium text-text-primary">{issued}</p>
-              <p>Fecha de emisión</p>
+              <div className="mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+                <div>
+                  <p className="text-sm font-semibold text-text-primary border-t border-text-primary pt-2 min-w-44">
+                    {certificate.instructorName ?? 'BiiA LAB'}
+                  </p>
+                  <p className="text-xs text-text-secondary mt-1">
+                    {certificate.instructorName ? 'Instructor del curso' : 'Plataforma educativa'}
+                  </p>
+                </div>
+                <div className="sm:text-right">
+                  <p className="font-mono text-sm font-semibold text-text-primary mb-1">{certificate.certificateNumber}</p>
+                  <p className="text-[11px] text-text-secondary leading-relaxed max-w-60">
+                    Verifica esta credencial en www.biialab.org/verify/{certificate.certificateNumber}.
+                    Emitido tras aprobar el examen final del curso.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="font-mono font-medium text-text-primary">{certificate.certificateNumber}</p>
-              <p>Credencial</p>
+
+            {/* Ribbon panel */}
+            <div className="md:w-52 bg-[#faf6f2] border-t md:border-t-0 md:border-l border-[#eaded4] flex flex-row md:flex-col items-center justify-center md:justify-start gap-6 md:gap-0 p-6 md:pt-12">
+              <div className="text-center">
+                <p className="font-display uppercase tracking-[0.25em] text-text-primary font-semibold">Certificado</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-text-secondary mt-1">de curso</p>
+              </div>
+              <div className="md:mt-14" aria-hidden="true">
+                <svg width="110" height="110" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="56" stroke="#ff4d14" strokeWidth="2" fill="none" />
+                  <circle cx="60" cy="60" r="49" stroke="#f3b9a4" strokeWidth="1" fill="none" />
+                  <circle cx="60" cy="60" r="34" fill="#ff4d14" />
+                  <path d="M46 60 L56 70 L76 50" stroke="#fff" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <p className="hidden md:block text-[9px] tracking-[0.2em] uppercase text-text-secondary mt-4">
+                Educación gratuita
+              </p>
             </div>
           </div>
         </div>
@@ -96,7 +132,7 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
         {/* Actions (hidden on print) */}
         <div className="print:hidden mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <LinkedInAddButton href={linkedInAddUrl(certificate)} courseSlug={certificate.courseSlug} />
-          <PrintButton />
+          <DownloadPdfButton certificateNumber={certificate.certificateNumber} courseSlug={certificate.courseSlug} />
           <Link
             href={`/courses/${certificate.courseSlug}`}
             className="px-6 py-3 rounded-lg border border-gray-300 text-text-primary hover:border-accent font-medium transition-colors"
