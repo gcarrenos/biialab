@@ -206,25 +206,84 @@ if (!fs.existsSync(videoFile)) {
 }
 
 // -------------------------------------------------------------------- cuts
-// Homebrew's ffmpeg 8 formula dropped libass, so caption burning is optional:
-// detect the subtitles filter and fall back to clean 9:16 clips without it.
-// (For burned captions: brew tap homebrew-ffmpeg/ffmpeg && brew install
-// homebrew-ffmpeg/ffmpeg/ffmpeg --with-libass)
-const hasSubtitlesFilter = (() => {
+// Text rendering needs libass (ffmpeg from the homebrew-ffmpeg tap; the core
+// formula dropped it). When available, each clip gets:
+//   - the hook line: big yellow text, top of frame, first 3 seconds
+//   - word-tight captions: Whisper re-transcribes the clip's own audio into
+//     short chunks (proper punctuation, no [__] censoring)
+// Without libass, clips are cut clean and per-clip .srt files remain.
+// Skip text entirely with --no-text (A/B testing).
+const noText = argv.includes('--no-text');
+const hasLibass = (() => {
   try {
     return execFileSync('ffmpeg', ['-hide_banner', '-filters'], { encoding: 'utf8' })
-      .split('\n').some((l) => /\bsubtitles\b/.test(l));
+      .split('\n').some((l) => /\bass\b/.test(l));
   } catch {
     return false;
   }
 })();
-if (!hasSubtitlesFilter) {
-  console.log('   NOTE: this ffmpeg build lacks the subtitles filter (no libass) — cutting without burned captions. Per-clip .srt files are still written.');
+const whisperModel = path.join(import.meta.dirname, 'models', 'ggml-large-v3-turbo.bin');
+const hasWhisper = fs.existsSync(whisperModel) && (() => {
+  try { execFileSync('which', ['whisper-cli'], { stdio: 'ignore' }); return true; } catch { return false; }
+})();
+const renderText = !noText && hasLibass;
+if (!noText && !hasLibass) {
+  console.log('   NOTE: this ffmpeg lacks libass — cutting without on-screen text. Install: brew install homebrew-ffmpeg/ffmpeg/ffmpeg');
 }
-console.log(`4/4 Cutting vertical clips${hasSubtitlesFilter ? ' with burned captions' : ''}…`);
+console.log(`4/4 Cutting vertical clips${renderText ? ' with hook + captions' : ''}…`);
+
 function srtTime(sec) {
   const d = new Date(Math.max(0, sec) * 1000);
   return d.toISOString().slice(11, 23).replace('.', ',');
+}
+function assTime(sec) {
+  const s = Math.max(0, sec);
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+  return `${h}:${String(m).padStart(2, '0')}:${(s % 60).toFixed(2).padStart(5, '0')}`;
+}
+const assEscape = (t) => t.replace(/[{}\\]/g, '').replace(/\n/g, '\\N');
+
+// Two-style ASS track: Hook (top, first 3s) + Caption (short chunks, lower third)
+function buildAss(hook, chunks) {
+  const header = `[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Hook,Arial,64,&H0000E8FF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,4,1,8,60,60,290,1
+Style: Caption,Arial,62,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,60,60,430,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+`;
+  const lines = [];
+  if (hook) lines.push(`Dialogue: 1,0:00:00.00,0:00:03.00,Hook,,0,0,0,,${assEscape(hook)}`);
+  for (const c of chunks) {
+    lines.push(`Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Caption,,0,0,0,,${assEscape(c.text)}`);
+  }
+  return header + lines.join('\n') + '\n';
+}
+
+// Whisper the clip's own audio into short caption chunks (clip-local timing).
+// -ml 24 caps segment length so captions come out 2-5 words at a time.
+function whisperChunks(clipVideo, n) {
+  const wav = path.join(outDir, `clip-${n}.wav`);
+  const prefix = path.join(outDir, `clip-${n}.whisper`);
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', clipVideo, '-vn', '-ar', '16000', '-ac', '1', wav]);
+  execFileSync('whisper-cli', ['-m', whisperModel, '-f', wav, '-l', 'es', '-ml', '24', '-sow', '-ovtt', '-of', prefix], { stdio: 'ignore' });
+  fs.unlinkSync(wav);
+  const text = fs.readFileSync(`${prefix}.vtt`, 'utf8');
+  fs.unlinkSync(`${prefix}.vtt`);
+  const chunks = [];
+  for (const block of text.split(/\n\n+/)) {
+    const m = block.match(/([\d:.]+) --> ([\d:.]+)/);
+    if (!m) continue;
+    const t = block.slice(block.indexOf('\n') + 1).replace(/\s+/g, ' ').trim();
+    if (t) chunks.push({ start: parseTime(m[1]), end: parseTime(m[2]), text: t });
+  }
+  return chunks;
 }
 
 const metadata = [];
@@ -233,31 +292,39 @@ clips.forEach((clip, i) => {
   const clipFile = path.join(outDir, `clip-${n}.mp4`);
   const srtFile = path.join(outDir, `clip-${n}.srt`);
 
-  // Per-clip SRT, offset to the clip's own timeline
+  // Per-clip SRT from the source transcript (upload as YouTube closed captions)
   const clipCues = cues.filter((c) => c.end > clip.start_seconds && c.start < clip.end_seconds);
   fs.writeFileSync(srtFile, clipCues.map((c, j) =>
     `${j + 1}\n${srtTime(c.start - clip.start_seconds)} --> ${srtTime(c.end - clip.start_seconds)}\n${c.text}\n`
   ).join('\n'));
 
-  // 9:16: blurred, scaled background + centered original (+ captions if libass)
-  let filter =
+  // Pass 1 — clean 9:16 cut: blurred pad + centered video
+  const baseFilter =
     '[0:v]split[bg][fg];' +
     '[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=20[bgb];' +
     '[fg]scale=1080:-2[fgs];[bgb][fgs]overlay=(W-w)/2:(H-h)/2';
-  if (hasSubtitlesFilter) {
-    // Quote only the force_style value — a quoted filename breaks the graph parser
-    filter += `,subtitles=${srtFile}:force_style='FontSize=16,Bold=1,Outline=2,MarginV=60'`;
-  }
-
+  const rawFile = renderText ? path.join(outDir, `clip-${n}.raw.mp4`) : clipFile;
   execFileSync('ffmpeg', [
-    '-y',
-    '-ss', String(clip.start_seconds),
-    '-to', String(clip.end_seconds),
-    '-i', videoFile,
-    '-vf', filter,
+    '-y', '-ss', String(clip.start_seconds), '-to', String(clip.end_seconds),
+    '-i', videoFile, '-vf', baseFilter,
     '-c:a', 'aac', '-c:v', 'libx264', '-preset', 'fast', '-crf', '21',
-    clipFile,
+    rawFile,
   ], { stdio: ['ignore', 'ignore', 'inherit'] });
+
+  // Pass 2 — burn hook + captions
+  if (renderText) {
+    const chunks = hasWhisper
+      ? whisperChunks(rawFile, n)
+      : clipCues.map((c) => ({ start: c.start - clip.start_seconds, end: c.end - clip.start_seconds, text: c.text }));
+    const assFile = path.join(outDir, `clip-${n}.ass`);
+    fs.writeFileSync(assFile, buildAss(clip.hook, chunks));
+    execFileSync('ffmpeg', [
+      '-y', '-i', rawFile, '-vf', `ass=${assFile}`,
+      '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '21',
+      clipFile,
+    ], { stdio: ['ignore', 'ignore', 'inherit'] });
+    fs.unlinkSync(rawFile);
+  }
 
   metadata.push({
     file: path.basename(clipFile),
