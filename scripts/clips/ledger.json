@@ -1,0 +1,190 @@
+{
+  "note": "Record of every Short produced from the archive: source video, segment used, YouTube id, schedule. upload.mjs appends automatically; clip.mjs warns when a plan overlaps a used segment.",
+  "uploads": [
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "sourceTitle": "Cómo Vender Más, Técnicas Científicas con Jürgen Klarić",
+      "segment": [
+        504,
+        560
+      ],
+      "youtubeId": "FYr5shHuuoI",
+      "title": "Tu vendedor estrella es tu secuestrador | Jürgen Klarić",
+      "style": "clean",
+      "publishAt": "2026-08-12 (published early, live)",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "sourceTitle": "Cómo Vender Más, Técnicas Científicas con Jürgen Klarić",
+      "segment": [
+        437,
+        497
+      ],
+      "youtubeId": "-vHm0hzSoSw",
+      "title": "Llegué a MI oficina y un policía me negó la entrada | Jürgen Klarić",
+      "style": "clean",
+      "publishAt": "2026-08-14T15:00:00Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "sourceTitle": "Cómo Vender Más, Técnicas Científicas con Jürgen Klarić",
+      "segment": [
+        116,
+        165
+      ],
+      "youtubeId": "KwZcIEgQEn0",
+      "title": "Ni Apple tiene el mejor producto — pero saben vender | Jürgen Klarić",
+      "style": "clean",
+      "publishAt": "2026-08-15T15:00:00Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "sourceTitle": "Cómo Vender Más, Técnicas Científicas con Jürgen Klarić",
+      "segment": [
+        1593,
+        1650
+      ],
+      "youtubeId": "7LEN2HYtuA8",
+      "title": "Todo lo que compras es por miedo | Jürgen Klarić",
+      "style": "clean",
+      "publishAt": "2026-08-16T15:00:00Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "sourceTitle": "Cómo Vender Más, Técnicas Científicas con Jürgen Klarić",
+      "segment": [
+        1190,
+        1247
+      ],
+      "youtubeId": "7HKmCDIdoSY",
+      "title": "\"Aquí todo es buenísimo\": el peor error de un vendedor | Jürgen Klarić",
+      "style": "clean",
+      "publishAt": "2026-08-17T15:00:00Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        31,
+        80
+      ],
+      "youtubeId": "NCEfCQRrycw",
+      "title": "Latinoamérica no es pobre: es mentalmente pobre | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-18T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        413,
+        467
+      ],
+      "youtubeId": "IC3rd6aUG1U",
+      "title": "Para ser millonario tienes que pensar como millonario | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-19T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        490,
+        547
+      ],
+      "youtubeId": "NkrgwSHvERE",
+      "title": "Ser pobre no es lo que crees | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-20T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        2106,
+        2165
+      ],
+      "youtubeId": "RRhsSU09II8",
+      "title": "Salvó 5.000 vidas y murió llorando por un pin | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-21T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        2261,
+        2318
+      ],
+      "youtubeId": "mg5HDxJqd_M",
+      "title": "\"Los latinos mueren más de envidia que de cáncer\" | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-22T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        2170,
+        2226
+      ],
+      "youtubeId": "68LJpoSdzmI",
+      "title": "La \"sonrisita\" que preocupó a su mamá | Mary Cardona",
+      "style": "captioned",
+      "publishAt": "2026-08-23T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        3392,
+        3450
+      ],
+      "youtubeId": "m6eHU8nOV_8",
+      "title": "\"Aquí nadie usa zapatos\": ¿problema u oportunidad? | Mary Cardona",
+      "style": "captioned",
+      "publishAt": "2026-08-24T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        3902,
+        3958
+      ],
+      "youtubeId": "I2T656lsnFg",
+      "title": "\"Póngale la firma: esto es un cáncer\" | Mary Cardona",
+      "style": "captioned",
+      "publishAt": "2026-08-25T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        6355,
+        6410
+      ],
+      "youtubeId": "yfg5DLg7BYs",
+      "title": "Las 2 preguntas de los egipcios para entrar al cielo | Mary Cardona",
+      "style": "captioned",
+      "publishAt": "2026-08-26T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        18,
+        75
+      ],
+      "youtubeId": "3WAuFAt1f1o",
+      "title": "El mapa del éxito no existe — está en otro lado | Mary Cardona",
+      "style": "captioned",
+      "publishAt": "2026-08-27T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
+    }
+  ]
+}

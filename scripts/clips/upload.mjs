@@ -262,6 +262,22 @@ for (const [i, clip] of metadata.entries()) {
     continue;
   }
   console.log(`  → https://youtube.com/shorts/${result.id}`);
+
+  // Record in the ledger so future runs know this segment is used
+  const ledgerFile = path.join(import.meta.dirname, 'ledger.json');
+  const ledger = fs.existsSync(ledgerFile)
+    ? JSON.parse(fs.readFileSync(ledgerFile, 'utf8'))
+    : { uploads: [] };
+  ledger.uploads.push({
+    sourceVideo: videoId,
+    segment: [clip.start, clip.end],
+    youtubeId: result.id,
+    title: clip.title,
+    style: clip.hook ? 'captioned' : 'clean',
+    publishAt: slot ? slot.toISOString() : privacy,
+    uploadedAt: new Date().toISOString().slice(0, 10),
+  });
+  fs.writeFileSync(ledgerFile, JSON.stringify(ledger, null, 2));
 }
 
 console.log(publishAt

@@ -120,7 +120,23 @@ try {
 // API credentials are available.
 const planFile = argv.includes('--plan') ? argv[argv.indexOf('--plan') + 1] : null;
 
+// Segments of THIS video already turned into Shorts (ledger.json) — never
+// clip the same moment twice.
+const ledgerFile = path.join(import.meta.dirname, 'ledger.json');
+const usedSegments = (fs.existsSync(ledgerFile)
+  ? JSON.parse(fs.readFileSync(ledgerFile, 'utf8')).uploads ?? []
+  : []
+).filter((u) => u.sourceVideo === videoId).map((u) => u.segment);
+
 const clips = planFile ? loadPlan() : await pickWithClaude();
+
+for (const clip of clips) {
+  const overlap = usedSegments.find(([s, e]) => clip.start_seconds < e && clip.end_seconds > s);
+  if (overlap) {
+    console.error(`Segment ${clip.start_seconds}-${clip.end_seconds}s overlaps an already-uploaded Short (${overlap[0]}-${overlap[1]}s per ledger.json). Pick a different moment.`);
+    process.exit(1);
+  }
+}
 
 function loadPlan() {
   console.log(`2/4 Using curated plan ${planFile}…`);
@@ -177,6 +193,10 @@ const response = await client.messages.stream({
         ? 'DATOS REALES DE AUDIENCIA — los momentos más re-vistos del video según YouTube ' +
           '(prioriza clips que se solapen con estos picos, especialmente los de mayor intensidad):\n' +
           heatPeaks.map((h) => `  ${h.start}s-${h.end}s (intensidad ${h.value})`).join('\n') + '\n\n'
+        : '') +
+      (usedSegments.length
+        ? 'YA PUBLICADOS (evita cualquier solape con estos rangos):\n' +
+          usedSegments.map(([s, e]) => `  ${s}s-${e}s`).join('\n') + '\n\n'
         : '') +
       `Elige los ${maxClips} mejores momentos para Shorts. Los tiempos deben caer en límites ` +
       'de frase según las marcas. En cada descripción incluye "Curso gratis completo en https://www.biialab.org".',
