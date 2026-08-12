@@ -4,6 +4,10 @@
 //   YT_CLIENT_ID=... YT_CLIENT_SECRET=... YT_REFRESH_TOKEN=... \
 //     node scripts/clips/upload.mjs <videoId> [--privacy private]
 //
+// Drip-publish instead of reviewing manually — one clip per day from 3pm UTC:
+//   node scripts/clips/upload.mjs <videoId> --schedule 2026-08-14T15:00:00Z
+//   (add --every-hours 12 for two per day)
+//
 // Needs an OAuth client with the youtube.upload scope — an API key cannot
 // upload. One-time setup:
 //   1. Google Cloud Console → APIs & Services → Credentials → Create OAuth
@@ -67,6 +71,29 @@ if (!videoId || !YT_REFRESH_TOKEN) {
 }
 const privacy = argv.includes('--privacy') ? argv[argv.indexOf('--privacy') + 1] : 'private';
 
+// --schedule staggers the clips one per interval starting at the given time,
+// so YouTube publishes them on a daily drip without touching Studio.
+// Scheduling requires privacyStatus 'private' — YouTube flips it to public itself.
+const scheduleFrom = argv.includes('--schedule') ? argv[argv.indexOf('--schedule') + 1] : null;
+const intervalHours = Number(argv[argv.indexOf('--every-hours') + 1]) || 24;
+
+let publishAt = null;
+if (scheduleFrom) {
+  publishAt = new Date(scheduleFrom);
+  if (Number.isNaN(publishAt.getTime())) {
+    console.error(`Invalid --schedule value "${scheduleFrom}". Use an ISO timestamp, e.g. 2026-08-14T15:00:00Z`);
+    process.exit(1);
+  }
+  if (publishAt.getTime() <= Date.now()) {
+    console.error('--schedule must be in the future; YouTube rejects past publish times.');
+    process.exit(1);
+  }
+  if (privacy !== 'private') {
+    console.error('--schedule requires --privacy private (YouTube publishes it for you at publishAt).');
+    process.exit(1);
+  }
+}
+
 const outDir = path.join(import.meta.dirname, 'out', videoId);
 const metadata = JSON.parse(fs.readFileSync(path.join(outDir, 'metadata.json'), 'utf8'));
 
@@ -88,8 +115,12 @@ async function accessToken() {
 
 const token = await accessToken();
 
-for (const clip of metadata) {
+for (const [i, clip] of metadata.entries()) {
   const file = path.join(outDir, clip.file);
+  const slot = publishAt
+    ? new Date(publishAt.getTime() + i * intervalHours * 3600_000)
+    : null;
+
   const body = {
     snippet: {
       title: clip.title,
@@ -98,10 +129,15 @@ for (const clip of metadata) {
       defaultLanguage: 'es',
       defaultAudioLanguage: 'es',
     },
-    status: { privacyStatus: privacy, selfDeclaredMadeForKids: false },
+    status: {
+      privacyStatus: privacy,
+      selfDeclaredMadeForKids: false,
+      ...(slot ? { publishAt: slot.toISOString() } : {}),
+    },
   };
 
-  console.log(`Uploading ${clip.file}  (${privacy})  ${clip.title}`);
+  const when = slot ? `publishes ${slot.toISOString()}` : privacy;
+  console.log(`Uploading ${clip.file}  (${when})  ${clip.title}`);
 
   // Resumable upload: init, then PUT the bytes
   const init = await fetch(

@@ -34,6 +34,23 @@ node scripts/clips/upload.mjs <videoId>
 # 4. Publish/schedule from YouTube Studio (or --privacy public to skip review)
 ```
 
+### Drip-publishing without Studio
+
+`--schedule` staggers the batch one clip per day, so YouTube publishes them for
+you — no manual scheduling:
+
+```bash
+# first clip at 15:00 UTC on Aug 14, then one per day after
+node scripts/clips/upload.mjs <videoId> --schedule 2026-08-14T15:00:00Z
+
+# two per day instead
+node scripts/clips/upload.mjs <videoId> --schedule 2026-08-14T15:00:00Z --every-hours 12
+```
+
+The timestamp must be ISO-8601 and in the future, and scheduling only works with
+`--privacy private` (that's YouTube's rule — it flips each video public itself at
+its `publishAt` time).
+
 ## Notes
 
 - `clip.mjs` uses the video's Spanish auto-captions; if a video has none,
