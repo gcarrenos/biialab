@@ -77,6 +77,25 @@ for (const block of vtt.split(/\n\n+/)) {
 console.log(`   ${cues.length} caption cues parsed.`);
 
 // ------------------------------------------------------------- pick moments
+// --plan <file> skips the Claude call and uses a pre-curated selection
+// (same shape as the model output: {clips: [{start_seconds, end_seconds,
+// title, description, hook}]}). Useful for hand-picked batches or when no
+// API credentials are available.
+const planFile = argv.includes('--plan') ? argv[argv.indexOf('--plan') + 1] : null;
+
+const clips = planFile ? loadPlan() : await pickWithClaude();
+
+function loadPlan() {
+  console.log(`2/4 Using curated plan ${planFile}…`);
+  const plan = JSON.parse(fs.readFileSync(planFile, 'utf8'));
+  if (!Array.isArray(plan.clips) || plan.clips.length === 0) {
+    console.error('Plan file must contain {clips: [...]}.');
+    process.exit(1);
+  }
+  return plan.clips;
+}
+
+async function pickWithClaude() {
 console.log('2/4 Asking Claude to pick the best moments…');
 const transcript = cues.map((c) => `[${Math.round(c.start)}s] ${c.text}`).join('\n');
 
@@ -127,7 +146,9 @@ if (response.stop_reason === 'refusal') {
   console.error('Model declined the request:', response.stop_details?.explanation ?? '');
   process.exit(1);
 }
-const { clips } = JSON.parse(response.content.find((b) => b.type === 'text').text);
+return JSON.parse(response.content.find((b) => b.type === 'text').text).clips;
+}
+
 console.log(`   ${clips.length} clips selected.`);
 
 // ------------------------------------------------------------------- video
@@ -143,7 +164,22 @@ if (!fs.existsSync(videoFile)) {
 }
 
 // -------------------------------------------------------------------- cuts
-console.log('4/4 Cutting vertical clips with burned captions…');
+// Homebrew's ffmpeg 8 formula dropped libass, so caption burning is optional:
+// detect the subtitles filter and fall back to clean 9:16 clips without it.
+// (For burned captions: brew tap homebrew-ffmpeg/ffmpeg && brew install
+// homebrew-ffmpeg/ffmpeg/ffmpeg --with-libass)
+const hasSubtitlesFilter = (() => {
+  try {
+    return execFileSync('ffmpeg', ['-hide_banner', '-filters'], { encoding: 'utf8' })
+      .split('\n').some((l) => /\bsubtitles\b/.test(l));
+  } catch {
+    return false;
+  }
+})();
+if (!hasSubtitlesFilter) {
+  console.log('   NOTE: this ffmpeg build lacks the subtitles filter (no libass) — cutting without burned captions. Per-clip .srt files are still written.');
+}
+console.log(`4/4 Cutting vertical clips${hasSubtitlesFilter ? ' with burned captions' : ''}…`);
 function srtTime(sec) {
   const d = new Date(Math.max(0, sec) * 1000);
   return d.toISOString().slice(11, 23).replace('.', ',');
@@ -161,12 +197,15 @@ clips.forEach((clip, i) => {
     `${j + 1}\n${srtTime(c.start - clip.start_seconds)} --> ${srtTime(c.end - clip.start_seconds)}\n${c.text}\n`
   ).join('\n'));
 
-  // 9:16: blurred, scaled background + centered original + captions
-  const filter =
+  // 9:16: blurred, scaled background + centered original (+ captions if libass)
+  let filter =
     '[0:v]split[bg][fg];' +
     '[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=20[bgb];' +
-    '[fg]scale=1080:-2[fgs];[bgb][fgs]overlay=(W-w)/2:(H-h)/2,' +
-    `subtitles='${srtFile.replace(/'/g, "\\'")}':force_style='FontSize=16,Bold=1,Outline=2,MarginV=60'`;
+    '[fg]scale=1080:-2[fgs];[bgb][fgs]overlay=(W-w)/2:(H-h)/2';
+  if (hasSubtitlesFilter) {
+    // Quote only the force_style value — a quoted filename breaks the graph parser
+    filter += `,subtitles=${srtFile}:force_style='FontSize=16,Bold=1,Outline=2,MarginV=60'`;
+  }
 
   execFileSync('ffmpeg', [
     '-y',
