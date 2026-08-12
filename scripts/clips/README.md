@@ -16,8 +16,14 @@ Env vars (put in your shell profile or a local `.env` you don't commit):
 |---|---|---|
 | `YOUTUBE_API_KEY` | `list.mjs` | Existing YouTube Data API key (read-only) |
 | `ANTHROPIC_API_KEY` | `clip.mjs` | console.anthropic.com (or use `ant auth login` — no var needed) |
-| `YT_CLIENT_ID` / `YT_CLIENT_SECRET` | `upload.mjs` | Google Cloud Console → OAuth client (Desktop), enable YouTube Data API v3 |
-| `YT_REFRESH_TOKEN` | `upload.mjs` | `node scripts/clips/upload.mjs --auth` (one-time browser flow) |
+| `GOOGLE_CLIENT_SECRETS` | `upload.mjs` | Path to the `client_secret_*.json` downloaded from Google Cloud Console (OAuth Desktop client with YouTube Data API v3 enabled). Or pass `--client-secrets <path>` per run. |
+
+Authorize once (opens a browser, captures the code on localhost, stores the
+refresh token in `scripts/clips/.youtube-token.json` — gitignored, chmod 600):
+
+```bash
+node scripts/clips/upload.mjs --auth --client-secrets ~/Downloads/client_secret_*.json
+```
 
 ## Workflow
 
