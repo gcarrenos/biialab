@@ -275,8 +275,8 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Hook,Anton,78,&H0000E8FF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,1,0,1,5,2,8,70,70,280,1
-Style: Caption,Archivo Black,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,5,2,2,70,70,420,1
+Style: Hook,Anton,86,&H0000E8FF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,1,0,1,6,2,8,70,70,390,1
+Style: Caption,Archivo Black,76,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,6,2,2,70,70,620,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
