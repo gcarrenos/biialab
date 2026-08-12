@@ -185,6 +185,18 @@
       "style": "captioned",
       "publishAt": "2026-08-27T15:00:00.000Z",
       "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "segment": [
+        2282,
+        2345
+      ],
+      "youtubeId": "YGNnXOc18c8",
+      "title": "Así se vende con neuroventas: el ejemplo de Panamá | Jürgen Klarić",
+      "style": "captioned",
+      "publishAt": "2026-08-28T15:00:00.000Z",
+      "uploadedAt": "2026-08-12"
     }
   ]
 }
