@@ -64,7 +64,10 @@ passes it to these:
 `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `ADMIN_PASSWORD`,
 `NEXT_PUBLIC_YOUTUBE_API_KEY`, `NEXT_PUBLIC_YOUTUBE_CHANNEL_ID` (channel `UCNV3OUmerDvoj-PQIArnTkw`, @BiiALAB),
 `RESEND_API_KEY` (NOT yet set — password reset fails until it is; verify biialab.org domain in Resend first),
-`NEXT_PUBLIC_GA_ID` (GA4 measurement id — analytics code no-ops until it is set).
+`NEXT_PUBLIC_GA_ID` (GA4 measurement id — analytics code no-ops until it is set),
+`STRIPE_SECRET_KEY` + `CERTIFICATE_PRICE_USD` (paid-certificate flow — while EITHER is unset,
+certificates stay free/unlocked exactly as before; setting both turns on the paywall. Requires
+running `/api/admin/migrate` once first — migration 0003 adds `paid_at` and grandfathers existing certs).
 Env changes require a redeploy. The Vercel CLI (`npx vercel`) has been used with `env add` from this repo.
 
 ## Conventions

@@ -307,3 +307,10 @@ ALTER TABLE "quiz_attempts" ADD CONSTRAINT "quiz_attempts_user_id_users_id_fk" F
 export const MIGRATION_SQL_0002 = `ALTER TABLE "quizzes" ALTER COLUMN "lesson_id" DROP NOT NULL;--> statement-breakpoint
 ALTER TABLE "quizzes" ADD COLUMN IF NOT EXISTS "course_id" uuid;--> statement-breakpoint
 ALTER TABLE "quizzes" ADD CONSTRAINT "quizzes_course_id_courses_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."courses"("id") ON DELETE cascade ON UPDATE no action;`;
+
+// Migration 0003: paid certificates. The UPDATE grandfathers every certificate
+// that exists at migration time as already-unlocked, so this bundle must only
+// run once — the migrate route guards on the paid_at column not existing yet.
+export const MIGRATION_SQL_0003 = `ALTER TABLE "certificates" ADD COLUMN IF NOT EXISTS "paid_at" timestamp;--> statement-breakpoint
+ALTER TABLE "certificates" ADD COLUMN IF NOT EXISTS "stripe_session_id" text;--> statement-breakpoint
+UPDATE "certificates" SET "paid_at" = "issued_at" WHERE "paid_at" IS NULL;`;

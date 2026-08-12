@@ -1,0 +1,195 @@
+#!/usr/bin/env node
+// Turns one long BiiALAB video into N vertical Shorts with burned-in captions.
+//
+//   ANTHROPIC_API_KEY=... node scripts/clips/clip.mjs <videoIdOrUrl> [--max 5]
+//
+// Pipeline: yt-dlp (Spanish auto-subs + 720p video) → Claude Opus 5 picks the
+// most viral-worthy moments and writes Spanish hooks/titles → ffmpeg cuts each
+// clip to 9:16 (blurred pad) and burns the captions.
+//
+// Requires: yt-dlp, ffmpeg on PATH. Anthropic credentials via ANTHROPIC_API_KEY
+// or an `ant auth login` profile. Output: scripts/clips/out/<videoId>/.
+
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import Anthropic from '@anthropic-ai/sdk';
+
+const argv = process.argv.slice(2);
+const input = argv.find((a) => !a.startsWith('--'));
+if (!input) {
+  console.error('Usage: node scripts/clips/clip.mjs <videoIdOrUrl> [--max 5]');
+  process.exit(1);
+}
+const maxClips = Number(argv[argv.indexOf('--max') + 1]) || 5;
+const videoId = input.includes('http') ? new URL(input).searchParams.get('v') ?? input.split('/').pop() : input;
+const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+for (const bin of ['yt-dlp', 'ffmpeg']) {
+  try {
+    execFileSync('which', [bin], { stdio: 'ignore' });
+  } catch {
+    console.error(`${bin} not found. Install with: brew install ${bin}`);
+    process.exit(1);
+  }
+}
+
+const outDir = path.join(import.meta.dirname, 'out', videoId);
+fs.mkdirSync(outDir, { recursive: true });
+
+// ---------------------------------------------------------------- subtitles
+console.log('1/4 Downloading Spanish subtitles…');
+execFileSync('yt-dlp', [
+  '--skip-download',
+  '--write-sub', '--write-auto-sub',
+  '--sub-lang', 'es,es-419,es-orig',
+  '--sub-format', 'vtt',
+  '-o', path.join(outDir, 'source'),
+  videoUrl,
+], { stdio: 'inherit' });
+
+const vttFile = fs.readdirSync(outDir).find((f) => f.endsWith('.vtt'));
+if (!vttFile) {
+  console.error('No Spanish subtitles found for this video. Transcribe first (e.g. whisper) and retry.');
+  process.exit(1);
+}
+
+// Parse VTT → [{start, end, text}] in seconds
+function parseTime(t) {
+  const [h, m, s] = t.split(':');
+  return Number(h) * 3600 + Number(m) * 60 + Number(s.replace(',', '.'));
+}
+const cues = [];
+const vtt = fs.readFileSync(path.join(outDir, vttFile), 'utf8');
+for (const block of vtt.split(/\n\n+/)) {
+  const match = block.match(/([\d:.]+) --> ([\d:.]+)/);
+  if (!match) continue;
+  const text = block
+    .slice(block.indexOf('\n') + 1)
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!text) continue;
+  const cue = { start: parseTime(match[1]), end: parseTime(match[2]), text };
+  // auto-subs repeat lines across cues; keep only new text
+  if (cues.length === 0 || !cues[cues.length - 1].text.includes(text)) cues.push(cue);
+}
+console.log(`   ${cues.length} caption cues parsed.`);
+
+// ------------------------------------------------------------- pick moments
+console.log('2/4 Asking Claude to pick the best moments…');
+const transcript = cues.map((c) => `[${Math.round(c.start)}s] ${c.text}`).join('\n');
+
+const client = new Anthropic();
+const schema = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['clips'],
+  properties: {
+    clips: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['start_seconds', 'end_seconds', 'title', 'description', 'hook'],
+        properties: {
+          start_seconds: { type: 'integer', description: 'Clip start, at a natural sentence boundary' },
+          end_seconds: { type: 'integer', description: 'Clip end; 30-60s after start' },
+          title: { type: 'string', description: 'YouTube Shorts title in Spanish, <90 chars, high CTR, no clickbait falso' },
+          description: { type: 'string', description: 'Spanish description, 2-3 lines, ends with hashtags' },
+          hook: { type: 'string', description: 'One-line hook in Spanish shown as on-screen text, <60 chars' },
+        },
+      },
+    },
+  },
+};
+
+const response = await client.messages.stream({
+  model: 'claude-opus-5',
+  max_tokens: 16000,
+  system:
+    'Eres editor de video para BiiA LAB, el canal de Jürgen Klarić (neuroventas, ' +
+    'neuromarketing, desarrollo personal). Seleccionas momentos de videos largos que ' +
+    'funcionan como Shorts virales: ideas contraintuitivas, frases citables, historias ' +
+    'con giro, consejos accionables. Cada clip debe sostenerse solo, empezar en una ' +
+    'frase completa con gancho inmediato y durar 30-60 segundos.',
+  messages: [{
+    role: 'user',
+    content:
+      `Transcripción con marcas de tiempo del video ${videoUrl}:\n\n${transcript}\n\n` +
+      `Elige los ${maxClips} mejores momentos para Shorts. Los tiempos deben caer en límites ` +
+      'de frase según las marcas. En cada descripción incluye "Curso gratis completo en https://www.biialab.org".',
+  }],
+  output_config: { format: { type: 'json_schema', schema } },
+}).finalMessage();
+
+if (response.stop_reason === 'refusal') {
+  console.error('Model declined the request:', response.stop_details?.explanation ?? '');
+  process.exit(1);
+}
+const { clips } = JSON.parse(response.content.find((b) => b.type === 'text').text);
+console.log(`   ${clips.length} clips selected.`);
+
+// ------------------------------------------------------------------- video
+console.log('3/4 Downloading video (720p)…');
+const videoFile = path.join(outDir, 'source.mp4');
+if (!fs.existsSync(videoFile)) {
+  execFileSync('yt-dlp', [
+    '-f', 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+    '--merge-output-format', 'mp4',
+    '-o', videoFile,
+    videoUrl,
+  ], { stdio: 'inherit' });
+}
+
+// -------------------------------------------------------------------- cuts
+console.log('4/4 Cutting vertical clips with burned captions…');
+function srtTime(sec) {
+  const d = new Date(Math.max(0, sec) * 1000);
+  return d.toISOString().slice(11, 23).replace('.', ',');
+}
+
+const metadata = [];
+clips.forEach((clip, i) => {
+  const n = i + 1;
+  const clipFile = path.join(outDir, `clip-${n}.mp4`);
+  const srtFile = path.join(outDir, `clip-${n}.srt`);
+
+  // Per-clip SRT, offset to the clip's own timeline
+  const clipCues = cues.filter((c) => c.end > clip.start_seconds && c.start < clip.end_seconds);
+  fs.writeFileSync(srtFile, clipCues.map((c, j) =>
+    `${j + 1}\n${srtTime(c.start - clip.start_seconds)} --> ${srtTime(c.end - clip.start_seconds)}\n${c.text}\n`
+  ).join('\n'));
+
+  // 9:16: blurred, scaled background + centered original + captions
+  const filter =
+    '[0:v]split[bg][fg];' +
+    '[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=20[bgb];' +
+    '[fg]scale=1080:-2[fgs];[bgb][fgs]overlay=(W-w)/2:(H-h)/2,' +
+    `subtitles='${srtFile.replace(/'/g, "\\'")}':force_style='FontSize=16,Bold=1,Outline=2,MarginV=60'`;
+
+  execFileSync('ffmpeg', [
+    '-y',
+    '-ss', String(clip.start_seconds),
+    '-to', String(clip.end_seconds),
+    '-i', videoFile,
+    '-vf', filter,
+    '-c:a', 'aac', '-c:v', 'libx264', '-preset', 'fast', '-crf', '21',
+    clipFile,
+  ], { stdio: ['ignore', 'ignore', 'inherit'] });
+
+  metadata.push({
+    file: path.basename(clipFile),
+    sourceVideo: videoUrl,
+    start: clip.start_seconds,
+    end: clip.end_seconds,
+    title: clip.title,
+    description: `${clip.description}\n\nVideo completo: ${videoUrl}`,
+    hook: clip.hook,
+  });
+  console.log(`   clip-${n}.mp4  [${clip.start_seconds}s-${clip.end_seconds}s]  ${clip.title}`);
+});
+
+fs.writeFileSync(path.join(outDir, 'metadata.json'), JSON.stringify(metadata, null, 2));
+console.log(`\nDone. Output in ${outDir}`);
+console.log('Upload with: node scripts/clips/upload.mjs ' + videoId);

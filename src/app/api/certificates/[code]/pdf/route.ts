@@ -14,6 +14,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
     return NextResponse.json({ error: 'Certificado no encontrado' }, { status: 404 });
   }
 
+  if (!certificate.unlocked) {
+    return NextResponse.json(
+      { error: 'Certificado pendiente de activación' },
+      { status: 402 },
+    );
+  }
+
   try {
     // Fonts live in /public and are fetched from this same deployment, so
     // previews and production both resolve without configuration.

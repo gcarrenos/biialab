@@ -5,6 +5,7 @@ import { and, eq, inArray } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { certificates, courses, users, instructors } from '@/lib/db/schema';
+import { paymentsEnabled, certificatePriceUsd } from '@/lib/payments/stripe';
 
 async function getSessionUser() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -38,6 +39,7 @@ export interface MyCertificate {
   courseTitle: string;
   courseSlug: string;
   issuedAt: string;
+  unlocked: boolean;
 }
 
 export async function getMyCertificates() {
@@ -65,6 +67,7 @@ export async function getMyCertificates() {
           courseTitle: course.title,
           courseSlug: course.slug,
           issuedAt: r.issuedAt.toISOString(),
+          unlocked: !paymentsEnabled() || r.paidAt !== null,
         }] : [];
       }),
     };
@@ -93,11 +96,18 @@ export async function getCertificateByNumber(certificateNumber: string) {
       ? await db.query.instructors.findFirst({ where: eq(instructors.id, course.instructorId) })
       : null;
 
+    // With payments disabled every certificate is unlocked (original free flow).
+    const unlocked = !paymentsEnabled() || cert.paidAt !== null;
+    const viewer = await getSessionUser();
+
     return {
       success: true as const,
       certificate: {
         certificateNumber: cert.certificateNumber,
         issuedAt: cert.issuedAt.toISOString(),
+        unlocked,
+        isOwner: viewer?.id === cert.userId,
+        priceUsd: unlocked ? null : certificatePriceUsd(),
         courseTitle: course.title,
         courseSlug: course.slug,
         courseCategory: course.category,
