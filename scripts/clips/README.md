@@ -57,6 +57,32 @@ The timestamp must be ISO-8601 and in the future, and scheduling only works with
 `--privacy private` (that's YouTube's rule — it flips each video public itself at
 its `publishAt` time).
 
+## Extra tools
+
+```bash
+# YouTube's "most replayed" graph in your terminal — real audience data on
+# which moments to clip. clip.mjs also feeds these peaks into the selection.
+node scripts/clips/heatmap.mjs <videoId>
+
+# Download Spanish captions for ALL channel videos into scripts/clips/corpus/
+# (reusable for ebooks, chapters, RAG). Writes corpus/_missing.json for videos
+# that need Whisper.
+node scripts/clips/sweep-captions.mjs
+
+# Curated selection without an API call: write a plan JSON and cut from it
+node scripts/clips/clip.mjs <videoId> --plan path/to/plan.json
+```
+
+## Whisper fallback (videos without captions)
+
+`clip.mjs` transcribes locally when YouTube has no Spanish captions. One-time setup:
+
+```bash
+brew install whisper-cpp
+curl -L -o scripts/clips/models/ggml-large-v3-turbo.bin \
+  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin
+```
+
 ## Notes
 
 - `clip.mjs` uses the video's Spanish auto-captions; if a video has none,

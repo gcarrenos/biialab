@@ -48,10 +48,28 @@ execFileSync('yt-dlp', [
   videoUrl,
 ], { stdio: 'inherit' });
 
-const vttFile = fs.readdirSync(outDir).find((f) => f.endsWith('.vtt'));
+let vttFile = fs.readdirSync(outDir).find((f) => f.endsWith('.vtt'));
 if (!vttFile) {
-  console.error('No Spanish subtitles found for this video. Transcribe first (e.g. whisper) and retry.');
-  process.exit(1);
+  // Whisper fallback: extract audio and transcribe locally (whisper.cpp).
+  // Model: scripts/clips/models/ggml-large-v3-turbo.bin (see README).
+  const model = path.join(import.meta.dirname, 'models', 'ggml-large-v3-turbo.bin');
+  let whisperBin = null;
+  for (const bin of ['whisper-cli', 'whisper-cpp']) {
+    try { execFileSync('which', [bin], { stdio: 'ignore' }); whisperBin = bin; break; } catch {}
+  }
+  if (!whisperBin || !fs.existsSync(model)) {
+    console.error('No Spanish captions on this video and no local Whisper available.');
+    console.error('Install: brew install whisper-cpp, then download the model per scripts/clips/README.md');
+    process.exit(1);
+  }
+  console.log('   No captions on YouTube — transcribing locally with Whisper (a few minutes)…');
+  const audio = path.join(outDir, 'audio.wav');
+  execFileSync('yt-dlp', ['-f', 'bestaudio', '-x', '--audio-format', 'wav',
+    '--postprocessor-args', 'ffmpeg:-ar 16000 -ac 1', '-o', audio, videoUrl], { stdio: 'ignore' });
+  execFileSync(whisperBin, ['-m', model, '-f', audio, '-l', 'es', '-ovtt',
+    '-of', path.join(outDir, 'source.whisper')], { stdio: 'ignore' });
+  fs.unlinkSync(audio);
+  vttFile = 'source.whisper.vtt';
 }
 
 // Parse VTT → [{start, end, text}] in seconds
@@ -75,6 +93,25 @@ for (const block of vtt.split(/\n\n+/)) {
   if (cues.length === 0 || !cues[cues.length - 1].text.includes(text)) cues.push(cue);
 }
 console.log(`   ${cues.length} caption cues parsed.`);
+
+// ------------------------------------------------- most-replayed heatmap
+// YouTube's "most replayed" graph is embedded in the public watch page and
+// yt-dlp exposes it as `heatmap` (100 segments, value 0..1). Real audience
+// data on which moments people rewind to — the strongest clip signal we have.
+let heatPeaks = [];
+try {
+  const info = JSON.parse(execFileSync('yt-dlp', ['--skip-download', '--dump-json', videoUrl],
+    { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] }));
+  if (Array.isArray(info.heatmap) && info.heatmap.length > 0) {
+    heatPeaks = [...info.heatmap]
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 10)
+      .sort((a, b) => a.start_time - b.start_time)
+      .map((h) => ({ start: Math.round(h.start_time), end: Math.round(h.end_time), value: Number(h.value.toFixed(3)) }));
+    console.log('   Most-replayed peaks (audience data):');
+    for (const h of heatPeaks) console.log(`     ${h.start}s-${h.end}s  intensity ${h.value}`);
+  }
+} catch { /* heatmap is best-effort — not all videos have one */ }
 
 // ------------------------------------------------------------- pick moments
 // --plan <file> skips the Claude call and uses a pre-curated selection
@@ -136,6 +173,11 @@ const response = await client.messages.stream({
     role: 'user',
     content:
       `Transcripción con marcas de tiempo del video ${videoUrl}:\n\n${transcript}\n\n` +
+      (heatPeaks.length
+        ? 'DATOS REALES DE AUDIENCIA — los momentos más re-vistos del video según YouTube ' +
+          '(prioriza clips que se solapen con estos picos, especialmente los de mayor intensidad):\n' +
+          heatPeaks.map((h) => `  ${h.start}s-${h.end}s (intensidad ${h.value})`).join('\n') + '\n\n'
+        : '') +
       `Elige los ${maxClips} mejores momentos para Shorts. Los tiempos deben caer en límites ` +
       'de frase según las marcas. En cada descripción incluye "Curso gratis completo en https://www.biialab.org".',
   }],
