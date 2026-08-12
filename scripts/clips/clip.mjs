@@ -243,7 +243,10 @@ function assTime(sec) {
 }
 const assEscape = (t) => t.replace(/[{}\\]/g, '').replace(/\n/g, '\\N');
 
-// Two-style ASS track: Hook (top, first 3s) + Caption (short chunks, lower third)
+// Two-style ASS track rendered with the bundled display fonts (fonts/):
+//   Hook — Anton, uppercase, yellow, top of frame, first 3s, slight pop-in
+//   Caption — Archivo Black, white with heavy outline + soft shadow
+const fontsDir = path.join(import.meta.dirname, 'fonts');
 function buildAss(hook, chunks) {
   const header = `[Script Info]
 ScriptType: v4.00+
@@ -252,14 +255,17 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Hook,Arial,64,&H0000E8FF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,4,1,8,60,60,290,1
-Style: Caption,Arial,62,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,60,60,430,1
+Style: Hook,Anton,78,&H0000E8FF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,1,0,1,5,2,8,70,70,280,1
+Style: Caption,Archivo Black,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,5,2,2,70,70,420,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 `;
   const lines = [];
-  if (hook) lines.push(`Dialogue: 1,0:00:00.00,0:00:03.00,Hook,,0,0,0,,${assEscape(hook)}`);
+  if (hook) {
+    // \fad pop-in + uppercase — the standard Shorts hook treatment
+    lines.push(`Dialogue: 1,0:00:00.00,0:00:03.20,Hook,,0,0,0,,{\\fad(120,200)}${assEscape(hook.toUpperCase())}`);
+  }
   for (const c of chunks) {
     lines.push(`Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Caption,,0,0,0,,${assEscape(c.text)}`);
   }
@@ -319,7 +325,7 @@ clips.forEach((clip, i) => {
     const assFile = path.join(outDir, `clip-${n}.ass`);
     fs.writeFileSync(assFile, buildAss(clip.hook, chunks));
     execFileSync('ffmpeg', [
-      '-y', '-i', rawFile, '-vf', `ass=${assFile}`,
+      '-y', '-i', rawFile, '-vf', `ass=${assFile}:fontsdir=${fontsDir}`,
       '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '21',
       clipFile,
     ], { stdio: ['ignore', 'ignore', 'inherit'] });
