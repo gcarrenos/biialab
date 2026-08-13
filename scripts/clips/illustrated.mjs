@@ -19,7 +19,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 // The Schindler pin story — 5_s7M859KCk 2106-2165 (59s)
 const SOURCE = path.join(here, 'out', '5_s7M859KCk', 'source.mp4');
-const START = 2106, END = 2165;
+const START = 2106, END = 2176;
 const HOOK = 'SALVÓ 5.000 VIDAS.\\NMURIÓ LLORANDO POR UN PIN.';
 const ACCENT = 'Jürgen Klarić';
 
@@ -33,8 +33,8 @@ const BEATS = [
   { dur: 10, prompt: 'tense negotiation across a wooden desk between a businessman in a suit and a stern military officer in a plain dark uniform, papers and a ledger between them, harsh single lamp' },
   { dur: 10, prompt: 'extreme close-up of an ornate golden lapel pin on a dark suit jacket, glinting warm orange light, shallow depth' },
   { dur: 10, prompt: 'military officer in plain dark uniform pointing at the lapel pin of a businessman, the businessman clutching his lapel protectively, tense faces in profile' },
-  { dur: 12, prompt: 'a man alone on his knees weeping, holding a tiny golden pin in his open palm, dramatic shaft of light from above, dark background with faint silhouettes of a grateful crowd' },
-  { dur: 7, prompt: 'a large crowd of men women and children standing together in warm dawn light on a hillside, hopeful, seen from behind, one small golden glint in the foreground' },
+  { dur: 17, prompt: 'a man alone on his knees weeping, holding a tiny golden pin in his open palm, dramatic shaft of light from above, dark background with faint silhouettes of a grateful crowd' },
+  { dur: 13, prompt: 'a large crowd of men women and children standing together in warm dawn light on a hillside, hopeful, seen from behind, one small golden glint in the foreground' },
 ];
 
 async function generate(prompt, file) {
@@ -92,7 +92,7 @@ execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i',
 console.log('3/4 Audio + captions…');
 const audio = path.join(outDir, 'audio.m4a');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(START), '-to', String(END), '-i', SOURCE,
-  '-vn', '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-c:a', 'aac', '-ar', '48000', audio]);
+  '-vn', '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st=67.5:d=2.5', '-c:a', 'aac', '-ar', '48000', audio]);
 
 const wav = path.join(outDir, 'audio.wav');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', audio, '-ar', '16000', '-ac', '1', wav]);
@@ -128,7 +128,7 @@ Dialogue: 1,0:00:00.20,0:00:03.80,Hook,,0,0,0,,{\\fad(120,200)}${HOOK}
 console.log('4/4 Final mux…');
 const final = path.join(outDir, 'schindler-pin.mp4');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', visual, '-i', audio,
-  '-vf', `ass=${assFile}:fontsdir=${fontsDir}`,
+  '-vf', `ass=${assFile}:fontsdir=${fontsDir},fade=t=out:st=68.6:d=1.4`,
   '-map', '0:v', '-map', '1:a', '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20',
   '-shortest', final]);
 console.log(`Done: ${final}`);
