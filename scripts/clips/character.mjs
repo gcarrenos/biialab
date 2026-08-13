@@ -102,13 +102,19 @@ const wav = path.join(outDir, 'audio.wav');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', joined, '-vn', '-ar', '16000', '-ac', '1', wav]);
 execFileSync('whisper-cli', ['-m', model, '-f', wav, '-l', 'es', '-ml', '22', '-sow', '-ovtt', '-of', path.join(outDir, 'captions')], { stdio: 'ignore' });
 fs.unlinkSync(wav);
+const totalDur = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', joined], { encoding: 'utf8' }).trim());
 const vtt = fs.readFileSync(path.join(outDir, 'captions.vtt'), 'utf8');
 const chunks = [];
 for (const block of vtt.split(/\n\n+/)) {
   const m = block.match(/([\d:.]+) --> ([\d:.]+)/);
   if (!m) continue;
   const t = block.slice(block.indexOf('\n') + 1).replace(/\s+/g, ' ').trim();
-  if (t) chunks.push({ start: parseTime(m[1]), end: parseTime(m[2]), text: t.replace(/[{}]/g, '') });
+  if (t) {
+    // Whisper writes the spoken URL phonetically — normalize every variant
+    const clean = t.replace(/[{}]/g, '')
+      .replace(/(b[ií]+a?\s*-?\s*lab|v[ií]a\s*lab|bialab|biialab)[\s.,]*(punto|\.)\s*org/gi, 'biialab.org');
+    chunks.push({ start: parseTime(m[1]), end: parseTime(m[2]), text: clean });
+  }
 }
 const assFile = path.join(outDir, 'overlay.ass');
 fs.writeFileSync(assFile, `[Script Info]
@@ -120,10 +126,12 @@ PlayResY: 1920
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Accent,Permanent Marker,52,&H001AD9FF,&H00FFFFFF,&H001A1A1A,&H001A1A1A,0,0,0,0,100,100,0,3,1,4,0,8,70,70,120,1
 Style: Caption,Archivo Black,66,&H00FFFFFF,&H00FFFFFF,&H001A1A1A,&HA0000000,0,0,0,0,100,100,0,0,1,6,2,2,70,70,300,1
+Style: Url,Anton,92,&H00144DFF,&H00FFFFFF,&H00FFFFFF,&H641A1A1A,0,0,0,0,100,100,1,0,1,7,3,2,60,60,520,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 2,0:00:00.00,0:00:04.00,Accent,,0,0,0,,{\\fad(100,150)\\frz-3}El Catrín de BiiA LAB
+Dialogue: 2,${assTime(Math.max(0, totalDur - 5))},${assTime(totalDur)},Url,,0,0,0,,{\\fad(200,0)}biialab.org
 ` + chunks.map((c) => `Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Caption,,0,0,0,,${c.text}`).join('\n') + '\n');
 
 const final = path.join(outDir, 'catrin-miedo.mp4');
