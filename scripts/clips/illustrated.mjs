@@ -60,7 +60,8 @@ for (const [i, beat] of cfg.beats.entries()) {
   }
 }
 
-console.log('2/4 Animating beats…');
+console.log('2/4 (deferred — beats animate after audio tightening)');
+function animateBeats() {
 const parts = [];
 cfg.beats.forEach((beat, i) => {
   const img = path.join(outDir, `beat-${i + 1}.jpg`);
@@ -77,15 +78,52 @@ cfg.beats.forEach((beat, i) => {
 
 const listFile = path.join(outDir, 'concat.txt');
 fs.writeFileSync(listFile, parts.map((p) => `file '${p}'`).join('\n'));
-const visual = path.join(outDir, 'visual.mp4');
-execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', visual]);
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', path.join(outDir, 'visual.mp4')]);
+}
 
-console.log('3/4 Audio + captions…');
-const audio = path.join(outDir, 'audio.m4a');
-const fadeStart = Math.max(0, audioDur - 2.5);
+console.log('3/4 Audio (tighten dead air) + captions…');
+// Detect silences in the raw segment, then rebuild the audio keeping a short
+// natural breath (0.15s) where each long pause was.
+const rawAudio = path.join(outDir, 'audio-raw.wav');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(cfg.start), '-to', String(cfg.end), '-i', cfg.source,
-  '-vn', '-af', `loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st=${fadeStart}:d=2.5`, '-c:a', 'aac', '-ar', '48000', audio]);
+  '-vn', '-ar', '48000', '-ac', '2', rawAudio]);
+const stderrText = execFileSync('sh', ['-c', `ffmpeg -i '${rawAudio}' -af silencedetect=noise=-35dB:d=0.45 -f null - 2>&1 | grep silence`], { encoding: 'utf8' });
+const silences = [];
+{
+  let start = null;
+  for (const line of stderrText.split('\n')) {
+    const ms = line.match(/silence_start: ([\d.]+)/);
+    const me = line.match(/silence_end: ([\d.]+)/);
+    if (ms) start = Number(ms[1]);
+    if (me && start !== null) { silences.push([start, Number(me[1])]); start = null; }
+  }
+}
+const BREATH = 0.15;
+const keeps = [];
+let pos = 0;
+for (const [s0, s1] of silences) {
+  if (s0 - pos > 0.05) keeps.push([pos, Math.min(s0 + BREATH, s1)]);
+  pos = s1;
+}
+if (audioDur - pos > 0.05) keeps.push([pos, audioDur]);
+const tightDur = keeps.reduce((t, [a, b]) => t + (b - a), 0);
+console.log(`   dead air: ${(audioDur - tightDur).toFixed(1)}s removed (${audioDur}s -> ${tightDur.toFixed(1)}s)`);
 
+const audio = path.join(outDir, 'audio.m4a');
+const fadeStart = Math.max(0, tightDur - 2.5);
+const trimChain = keeps.map(([a, b], i) => `[0:a]atrim=${a}:${b},asetpts=PTS-STARTPTS[a${i}]`).join(';');
+const concatIn = keeps.map((_, i) => `[a${i}]`).join('');
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', rawAudio,
+  '-filter_complex', `${trimChain};${concatIn}concat=n=${keeps.length}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st=${fadeStart}:d=2.5[out]`,
+  '-map', '[out]', '-c:a', 'aac', '-ar', '48000', audio]);
+fs.unlinkSync(rawAudio);
+
+// Rescale beat durations proportionally to the tightened audio
+const scale = tightDur / totalBeats;
+cfg.beats.forEach((b) => { b.dur = b.dur * scale; });
+
+animateBeats();
+const visual = path.join(outDir, 'visual.mp4');
 const wav = path.join(outDir, 'audio.wav');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', audio, '-ar', '16000', '-ac', '1', wav]);
 execFileSync('whisper-cli', ['-m', model, '-f', wav, '-l', 'es', '-ml', '22', '-sow', '-ovtt', '-of', path.join(outDir, 'captions')], { stdio: 'ignore' });
@@ -119,7 +157,7 @@ Dialogue: 1,0:00:00.20,0:00:03.80,Hook,,0,0,0,,{\\fad(120,200)}${cfg.hook}
 
 console.log('4/4 Final mux…');
 const final = path.join(outDir, `${cfg.name}.mp4`);
-const vFade = Math.max(0, audioDur - 1.4);
+const vFade = Math.max(0, tightDur - 1.4);
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', visual, '-i', audio,
   '-vf', `ass=${assFile}:fontsdir=${fontsDir},fade=t=out:st=${vFade}:d=1.4`,
   '-map', '0:v', '-map', '1:a', '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20',
