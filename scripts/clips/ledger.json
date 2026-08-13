@@ -233,6 +233,18 @@
       "style": "comic",
       "publishAt": "2026-08-14T15:00:00Z",
       "uploadedAt": "2026-08-13"
+    },
+    {
+      "sourceVideo": "compilation",
+      "segment": [
+        0,
+        645
+      ],
+      "youtubeId": "4RSJzvrYShA",
+      "title": "Jürgen Klarić: los 9 momentos que te enseñan a vender | Lo mejor de BiiA LAB",
+      "style": "compilation",
+      "publishAt": "private",
+      "uploadedAt": "2026-08-13"
     }
   ]
 }
