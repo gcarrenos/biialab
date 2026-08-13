@@ -51,7 +51,7 @@ function assTime(sec) {
 const esc = (t) => t.replace(/[{}]/g, '');
 
 // Comic palette (ASS colours are &HAABBGGRR)
-// ink #1A1A1A, red #E0161E -> &H001E16E0, yellow #FFD91A -> &H001AD9FF,
+// ink #1A1A1A, red #E0161E -> &H00144DFF, yellow #FFD91A -> &H001AD9FF,
 // cream #F2E9D8 -> &H00D8E9F2
 function buildAss(demo, chunks) {
   const header = `[Script Info]
@@ -62,7 +62,7 @@ PlayResY: 1920
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Accent,Permanent Marker,58,&H001AD9FF,&H00FFFFFF,&H001A1A1A,&H001A1A1A,0,0,0,0,100,100,0,3,1,4,0,8,70,70,300,1
-Style: Hook,Anton,88,&H001E16E0,&H00FFFFFF,&H001A1A1A,&H641A1A1A,0,0,0,0,100,100,1,0,1,6,3,8,60,60,370,1
+Style: Hook,Anton,88,&H00144DFF,&H00FFFFFF,&H001A1A1A,&H641A1A1A,0,0,0,0,100,100,1,0,1,6,3,8,60,60,370,1
 Style: Caption,Archivo Black,70,&H001A1A1A,&H00FFFFFF,&H00D8E9F2,&H00D8E9F2,0,0,0,0,100,100,0,0,1,3,0,2,70,70,560,1
 
 [Events]
@@ -87,7 +87,7 @@ for (const demo of DEMOS) {
   // centered: x=38, y=673. Red shadow panel offset +16px.
   const filter =
     `color=c=0xF2E9D8:s=1080x1920:d=1[base];` +
-    `[base][1:v]overlay=0:0,drawbox=x=54:y=689:w=1004:h=574:color=0xE0161E@1:t=fill[bg];` +
+    `[base][1:v]overlay=0:0,drawbox=x=54:y=689:w=1004:h=574:color=0xFF4D14@1:t=fill[bg];` +
     `[0:v]scale=984:-2,eq=saturation=0.78:contrast=1.14,noise=alls=7:allf=t,` +
     `pad=w=iw+20:h=ih+20:x=10:y=10:color=0x1A1A1A[panel];` +
     `[bg][panel]overlay=38:673[comic]`;
