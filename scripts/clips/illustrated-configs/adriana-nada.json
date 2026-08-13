@@ -1,16 +1,39 @@
 {
   "name": "adriana-nada",
   "source": "scripts/clips/out/PlOPtrZBv6s/source.m4a",
-  "start": 5326, "end": 5418,
+  "start": 5326,
+  "end": 5418,
   "hook": "\"JAMÁS TE QUEDES\\NSIN HACER NADA\"",
   "accent": "Adriana Macías",
   "style": "layered paper cutout collage illustration, torn paper edges, soft pastel colors with warm orange accents, handcrafted texture, gentle dimensional shadows, tender and hopeful mood, no text",
   "beats": [
-    { "dur": 16, "prompt": "a young woman at a crossroads between two paper paths, one leading to a school building and one to a hammock, seen from behind" },
-    { "dur": 15, "prompt": "a school bus made of paper driving away with silhouettes of teenagers waving, one girl standing alone watching it leave" },
-    { "dur": 15, "prompt": "a girl sitting alone by a window in an empty paper room, muted grey-blue tones, rain outside the window" },
-    { "dur": 16, "prompt": "dark grey paper clouds swirling above a small seated figure, the clouds shaped like tangled thoughts, heavy atmosphere" },
-    { "dur": 15, "prompt": "a family of paper figures embracing a young woman, warm light breaking through torn grey clouds above them" },
-    { "dur": 15, "prompt": "a young woman helping other paper figures climb a hill toward a bright paper sun, hopeful, warm colors returning" }
+    {
+      "dur": 16,
+      "prompt": "a young woman at a crossroads between two paper paths, one leading to a school building and one to a hammock, seen from behind",
+      "animate": true,
+      "motion": "paper grass rustles softly, the young woman turns her head slowly from one path to the other, clouds drift"
+    },
+    {
+      "dur": 15,
+      "prompt": "a school bus made of paper driving away with silhouettes of teenagers waving, one girl standing alone watching it leave"
+    },
+    {
+      "dur": 15,
+      "prompt": "a girl sitting alone by a window in an empty paper room, muted grey-blue tones, rain outside the window"
+    },
+    {
+      "dur": 16,
+      "prompt": "dark grey paper clouds swirling above a small seated figure, the clouds shaped like tangled thoughts, heavy atmosphere"
+    },
+    {
+      "dur": 15,
+      "prompt": "a family of paper figures embracing a young woman, warm light breaking through torn grey clouds above them",
+      "animate": true,
+      "motion": "the family gently embraces closer, the torn grey paper clouds slowly part, warm light rays grow brighter"
+    },
+    {
+      "dur": 15,
+      "prompt": "a young woman helping other paper figures climb a hill toward a bright paper sun, hopeful, warm colors returning"
+    }
   ]
 }

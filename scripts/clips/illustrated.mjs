@@ -48,6 +48,24 @@ async function generate(prompt, file) {
   fs.writeFileSync(file, Buffer.from(await img.arrayBuffer()));
 }
 
+async function animateImage(imgFile, motion, outFile) {
+  const dataUri = 'data:image/jpeg;base64,' + fs.readFileSync(imgFile).toString('base64');
+  const res = await fetch('https://fal.run/fal-ai/kling-video/v2.1/standard/image-to-video', {
+    method: 'POST',
+    headers: { Authorization: `Key ${FAL_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      prompt: `subtle gentle animation, illustration style strictly preserved, ${motion}`,
+      image_url: dataUri,
+      duration: '5',
+    }),
+    signal: AbortSignal.timeout(600_000),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(JSON.stringify(data).slice(0, 200));
+  const v = await fetch(data.video?.url ?? data.videos?.[0]?.url);
+  fs.writeFileSync(outFile, Buffer.from(await v.arrayBuffer()));
+}
+
 function parseTime(t) { const [h, m, s] = t.split(':'); return +h * 3600 + +m * 60 + +s.replace(',', '.'); }
 function assTime(sec) { const s = Math.max(0, sec), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60); return `${h}:${String(m).padStart(2, '0')}:${(s % 60).toFixed(2).padStart(5, '0')}`; }
 
@@ -58,6 +76,13 @@ for (const [i, beat] of cfg.beats.entries()) {
     await generate(beat.prompt, file);
     console.log(`   beat ${i + 1}/${cfg.beats.length} ok`);
   }
+  if (beat.animate) {
+    const animFile = path.join(outDir, `beat-${i + 1}.anim.mp4`);
+    if (!fs.existsSync(animFile)) {
+      console.log(`   animating beat ${i + 1} (kling i2v)…`);
+      await animateImage(file, beat.motion ?? 'slow camera push in, elements move gently', animFile);
+    }
+  }
 }
 
 console.log('2/4 (deferred — beats animate after audio tightening)');
@@ -66,13 +91,32 @@ const parts = [];
 cfg.beats.forEach((beat, i) => {
   const img = path.join(outDir, `beat-${i + 1}.jpg`);
   const clip = path.join(outDir, `beat-${i + 1}.mp4`);
-  const frames = Math.round(beat.dur * 30);
-  const zoom = i % 2 === 0
-    ? `'min(1+0.12*on/${frames},1.12)'`
-    : `'max(1.12-0.12*on/${frames},1.0)'`;
-  execFileSync('ffmpeg', ['-y', '-v', 'error', '-loop', '1', '-framerate', '30', '-t', String(beat.dur), '-i', img,
-    '-vf', `scale=-2:3840,crop=2160:3840,zoompan=z=${zoom}:x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s=1080x1920:fps=30`,
-    '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', '-an', clip]);
+  const animFile = path.join(outDir, `beat-${i + 1}.anim.mp4`);
+  if (beat.animate && fs.existsSync(animFile)) {
+    // Fit the ~5s animated clip to the beat: slow it down, and boomerang
+    // (forward + reverse) when the stretch would exceed ~2.5x.
+    const srcDur = 5;
+    const factor = beat.dur / srcDur;
+    const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30';
+    if (factor <= 2.5) {
+      execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', animFile,
+        '-vf', `setpts=${factor.toFixed(4)}*PTS,${vf}`,
+        '-t', String(beat.dur), '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', clip]);
+    } else {
+      const f2 = beat.dur / (srcDur * 2);
+      execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', animFile,
+        '-filter_complex', `[0:v]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,setpts=${f2.toFixed(4)}*PTS,${vf}[out]`,
+        '-map', '[out]', '-t', String(beat.dur), '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', clip]);
+    }
+  } else {
+    const frames = Math.round(beat.dur * 30);
+    const zoom = i % 2 === 0
+      ? `'min(1+0.12*on/${frames},1.12)'`
+      : `'max(1.12-0.12*on/${frames},1.0)'`;
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-loop', '1', '-framerate', '30', '-t', String(beat.dur), '-i', img,
+      '-vf', `scale=-2:3840,crop=2160:3840,zoompan=z=${zoom}:x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s=1080x1920:fps=30`,
+      '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', '-an', clip]);
+  }
   parts.push(clip);
 });
 

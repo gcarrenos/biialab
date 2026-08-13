@@ -1,15 +1,35 @@
 {
   "name": "alejandra-toxicas",
   "source": "scripts/clips/out/K_CzwBUxMBc/source.m4a",
-  "start": 4795, "end": 4845,
+  "start": 4795,
+  "end": 4845,
   "hook": "ASÍ TE MANIPULA\\NUNA PERSONA TÓXICA",
   "accent": "Alejandra Huerta",
   "style": "bold mid-century modern poster illustration, flat geometric shapes, limited palette of orange black and cream, strong negative space, conceptual minimalist design, grain texture, no text",
   "beats": [
-    { "dur": 10, "prompt": "two abstract human figures, one pointing an oversized accusing finger at the other who shrinks back, hard shadows" },
-    { "dur": 10, "prompt": "a human figure entangled in puppet strings held by a large hand from above, marionette concept" },
-    { "dur": 10, "prompt": "a person looking into a cracked mirror, their reflection distorted, doubting themselves, head bowed" },
-    { "dur": 10, "prompt": "a figure standing firm with an open palm raised in a stop gesture, strong confident posture, radiating lines" },
-    { "dur": 10, "prompt": "a person walking away toward a bright orange sun cutting a string behind them with scissors, liberation concept" }
+    {
+      "dur": 10,
+      "prompt": "two abstract human figures, one pointing an oversized accusing finger at the other who shrinks back, hard shadows"
+    },
+    {
+      "dur": 10,
+      "prompt": "a human figure entangled in puppet strings held by a large hand from above, marionette concept",
+      "animate": true,
+      "motion": "the large hand slowly tilts, the puppet strings sway gently, the silhouetted figure sways like a marionette, slow camera push in"
+    },
+    {
+      "dur": 10,
+      "prompt": "a person looking into a cracked mirror, their reflection distorted, doubting themselves, head bowed"
+    },
+    {
+      "dur": 10,
+      "prompt": "a figure standing firm with an open palm raised in a stop gesture, strong confident posture, radiating lines"
+    },
+    {
+      "dur": 10,
+      "prompt": "a person walking away toward a bright orange sun cutting a string behind them with scissors, liberation concept",
+      "animate": true,
+      "motion": "the figure walks steadily toward the orange sun, the scissors close and the string falls away behind them, gentle wind"
+    }
   ]
 }
