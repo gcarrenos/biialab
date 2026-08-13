@@ -83,6 +83,14 @@ export default async function HomePage() {
 
   return (
     <div className="bg-background">
+      {/* Diplomado presale announcement */}
+      <Link
+        href="/diplomado"
+        className="block bg-accent text-white text-center text-sm font-medium px-4 py-2.5 hover:bg-accent/90 transition-colors"
+      >
+        Preventa: Diplomado en Neuroventas — precio de fundador por tiempo limitado. Reserva tu lugar
+      </Link>
+
       {/* Hero: full-bleed dark band */}
       <section className="bg-[#17181c] px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 md:py-28 min-h-[520px]">

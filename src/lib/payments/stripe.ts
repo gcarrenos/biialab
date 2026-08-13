@@ -75,3 +75,32 @@ export async function createCertificateCheckout(opts: {
 export async function retrieveCheckoutSession(sessionId: string): Promise<CheckoutSession> {
   return stripeRequest(`/checkout/sessions/${encodeURIComponent(sessionId)}`);
 }
+
+// ---------------------------------------------------------------- diplomado
+// Presale checkout for the Diplomado program. Independent of the certificate
+// flag: requires only STRIPE_SECRET_KEY. Price via DIPLOMADO_PRICE_USD
+// (default 49 — founding price).
+
+export function diplomadoPriceUsd(): number {
+  const price = Number(process.env.DIPLOMADO_PRICE_USD);
+  return Number.isFinite(price) && price > 0 ? price : 49;
+}
+
+export function diplomadoEnabled(): boolean {
+  return Boolean(process.env.STRIPE_SECRET_KEY);
+}
+
+export async function createDiplomadoCheckout(origin: string): Promise<CheckoutSession> {
+  return stripeRequest('/checkout/sessions', {
+    mode: 'payment',
+    'line_items[0][quantity]': '1',
+    'line_items[0][price_data][currency]': 'usd',
+    'line_items[0][price_data][unit_amount]': String(Math.round(diplomadoPriceUsd() * 100)),
+    'line_items[0][price_data][product_data][name]': 'Diplomado en Neuroventas — Precio de fundador',
+    'line_items[0][price_data][product_data][description]':
+      'Programa completo de BiiA LAB · acceso desde el 1 de septiembre de 2026 · biialab.org/diplomado',
+    'metadata[type]': 'diplomado_presale',
+    success_url: `${origin}/api/checkout/diplomado/confirm?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/diplomado`,
+  });
+}
