@@ -96,6 +96,14 @@ export default function CoursesAdmin() {
         <h1 className="text-3xl font-bold text-text-primary">Courses</h1>
         <div className="flex items-center gap-3">
           <button
+            onClick={handleMigrate}
+            disabled={migrateStatus === 'running'}
+            title="Aplica las migraciones de base de datos pendientes (idempotente)"
+            className="px-4 py-2 border border-gray-300 text-text-secondary rounded-md text-sm font-medium hover:border-accent hover:text-accent transition-colors disabled:opacity-50"
+          >
+            {migrateStatus === 'running' ? 'Migrando…' : migrateStatus === 'done' ? '✓ Migraciones al día' : migrateStatus === 'error' ? 'Error — reintentar' : 'Migraciones'}
+          </button>
+          <button
             onClick={handleTestCertificate}
             disabled={certTestStatus === 'running'}
             title="Emite un certificado de prueba para el primer curso filtrado y abre su página de verificación con el botón de LinkedIn"
