@@ -331,6 +331,10 @@ export const certificates = pgTable('certificates', {
   certificateNumber: varchar('certificate_number', { length: 50 }).notNull().unique(),
   issuedAt: timestamp('issued_at').defaultNow().notNull(),
   pdfUrl: text('pdf_url'),
+  // Paid-certificate flow: null while payment is pending. When payments are
+  // disabled (no STRIPE_SECRET_KEY) every certificate behaves as unlocked.
+  paidAt: timestamp('paid_at'),
+  stripeSessionId: text('stripe_session_id'),
 });
 
 // ============================================

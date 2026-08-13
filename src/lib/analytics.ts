@@ -12,7 +12,8 @@ export type AnalyticsEvent =
   | 'exam_start'
   | 'exam_submit' // params: { passed, score }
   | 'certificate_linkedin_share'
-  | 'certificate_download';
+  | 'certificate_download'
+  | 'certificate_checkout_start';
 
 type Gtag = (command: 'event', eventName: string, params?: Record<string, unknown>) => void;
 

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { getCertificateByNumber } from '@/lib/db/actions/certificates';
 import { DownloadPdfButton } from '@/components/certificates/DownloadPdfButton';
 import { LinkedInAddButton } from '@/components/certificates/LinkedInAddButton';
+import { UnlockCertificateButton } from '@/components/certificates/UnlockCertificateButton';
 
 export const metadata: Metadata = {
   title: 'Verificación de certificado | BiiALab',
@@ -54,18 +55,39 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
     <div className="bg-background min-h-screen py-16 px-4">
       <div className="mx-auto max-w-4xl">
         {/* Validity banner (hidden on print) */}
-        <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-300">
-          <span className="text-green-700 text-2xl">✓</span>
-          <div>
-            <p className="text-green-700 font-semibold">Certificado verificado</p>
-            <p className="text-text-secondary text-sm">
-              Emitido por BiiA LAB · Credencial {certificate.certificateNumber}
-            </p>
+        {certificate.unlocked ? (
+          <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-300">
+            <span className="text-green-700 text-2xl">✓</span>
+            <div>
+              <p className="text-green-700 font-semibold">Certificado verificado</p>
+              <p className="text-text-secondary text-sm">
+                Emitido por BiiA LAB · Credencial {certificate.certificateNumber}
+              </p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="print:hidden mb-8 flex items-center gap-3 p-4 rounded-xl bg-amber-50 border border-amber-300">
+            <span className="text-amber-700 text-2xl">!</span>
+            <div>
+              <p className="text-amber-700 font-semibold">Certificado pendiente de activación</p>
+              <p className="text-text-secondary text-sm">
+                {certificate.isOwner
+                  ? 'Aprobaste el examen final. Activa tu certificado para descargarlo en PDF y añadirlo a LinkedIn.'
+                  : 'Esta credencial existe pero aún no ha sido activada por su titular.'}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* The certificate — mirrors the downloadable PDF layout */}
-        <div className="border border-accent bg-white shadow-sm p-1.5 print:border-black">
+        <div className="relative border border-accent bg-white shadow-sm p-1.5 print:border-black">
+          {!certificate.unlocked && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none overflow-hidden">
+              <p className="font-display uppercase text-5xl md:text-7xl font-bold text-text-primary/10 -rotate-12 whitespace-nowrap select-none">
+                Vista previa
+              </p>
+            </div>
+          )}
           <div className="border border-accent/30 flex flex-col md:flex-row">
             {/* Main panel */}
             <div className="flex-1 p-8 md:p-12 text-left">
@@ -131,8 +153,18 @@ export default async function VerifyPage({ params }: { params: Promise<{ code: s
 
         {/* Actions (hidden on print) */}
         <div className="print:hidden mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <LinkedInAddButton href={linkedInAddUrl(certificate)} courseSlug={certificate.courseSlug} />
-          <DownloadPdfButton certificateNumber={certificate.certificateNumber} courseSlug={certificate.courseSlug} />
+          {certificate.unlocked ? (
+            <>
+              <LinkedInAddButton href={linkedInAddUrl(certificate)} courseSlug={certificate.courseSlug} />
+              <DownloadPdfButton certificateNumber={certificate.certificateNumber} courseSlug={certificate.courseSlug} />
+            </>
+          ) : certificate.isOwner && certificate.priceUsd !== null ? (
+            <UnlockCertificateButton
+              certificateNumber={certificate.certificateNumber}
+              courseSlug={certificate.courseSlug}
+              priceUsd={certificate.priceUsd}
+            />
+          ) : null}
           <Link
             href={`/courses/${certificate.courseSlug}`}
             className="px-6 py-3 rounded-lg border border-gray-300 text-text-primary hover:border-accent font-medium transition-colors"

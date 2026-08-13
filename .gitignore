@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# clips pipeline artifacts
+/scripts/clips/out/
+/scripts/clips/.youtube-token.json
+/scripts/clips/corpus/
+/scripts/clips/models/

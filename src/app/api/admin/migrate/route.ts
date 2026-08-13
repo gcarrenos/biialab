@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
-import { MIGRATION_SQL, MIGRATION_SQL_0001, MIGRATION_SQL_0002 } from '@/lib/db/migration-sql';
+import { MIGRATION_SQL, MIGRATION_SQL_0001, MIGRATION_SQL_0002, MIGRATION_SQL_0003 } from '@/lib/db/migration-sql';
 
 export const maxDuration = 60;
 
@@ -62,6 +62,16 @@ export async function POST(request: Request) {
 
     // 0002: idempotent quiz alterations (duplicate constraint errors are skipped)
     results.push(...await runStatements(MIGRATION_SQL_0002));
+
+    // 0003 guard: its UPDATE grandfathers pre-existing certificates as paid,
+    // so it must never re-run once the paid_at column exists.
+    const paidAtCol = await sql.query(
+      `SELECT 1 FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'certificates' AND column_name = 'paid_at'`
+    );
+    const paidAtRows = Array.isArray(paidAtCol) ? paidAtCol : (paidAtCol as { rows: unknown[] }).rows;
+    if (!paidAtRows || paidAtRows.length === 0) {
+      results.push(...await runStatements(MIGRATION_SQL_0003));
+    }
 
     const failed = results.filter((r) => r.status === 'failed');
     return NextResponse.json({
