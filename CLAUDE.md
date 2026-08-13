@@ -64,10 +64,9 @@ passes it to these:
 `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `ADMIN_PASSWORD`,
 `NEXT_PUBLIC_YOUTUBE_API_KEY`, `NEXT_PUBLIC_YOUTUBE_CHANNEL_ID` (channel `UCNV3OUmerDvoj-PQIArnTkw`, @BiiALAB),
 `RESEND_API_KEY` (NOT yet set — password reset fails until it is; verify biialab.org domain in Resend first),
-`NEXT_PUBLIC_GA_ID` (GA4 measurement id — analytics code no-ops until it is set),
-`STRIPE_SECRET_KEY` + `CERTIFICATE_PRICE_USD` (paid-certificate flow — while EITHER is unset,
-certificates stay free/unlocked exactly as before; setting both turns on the paywall. Requires
-running `/api/admin/migrate` once first — migration 0003 adds `paid_at` and grandfathers existing certs).
+`NEXT_PUBLIC_GA_ID` (GA4 measurement id — SET, analytics live),
+`STRIPE_SECRET_KEY` + `CERTIFICATE_PRICE_USD` (paid-certificate flow — SET; migration 0003 ran
+2026-08-13, paywall verified live: fresh certs render watermarked pending state, PDF gated 402).
 Env changes require a redeploy. The Vercel CLI (`npx vercel`) has been used with `env add` from this repo.
 
 ## Conventions
@@ -87,8 +86,5 @@ Env changes require a redeploy. The Vercel CLI (`npx vercel`) has been used with
 - Lesson player page still has the old dark design + client-only notes + mock quiz tab; no auto
   watch-progress (`lesson_progress.watched_seconds` unused).
 - No "continue learning" section for signed-in users on the homepage.
-- GA4 wired (`src/lib/analytics.ts` + `GoogleAnalytics` in root layout, custom events on auth/lessons/exams/certs) but `NEXT_PUBLIC_GA_ID` is not set yet. Waitlist subscribers never got a launch email.
-- `/certificate/[id]` is an unreferenced legacy page with pre-rebrand "BiiAMind" branding — `/verify/[code]`
-  is the real one; consider deleting.
-- Google Search Console: verify biialab.org + submit `/sitemap.xml`.
+- Waitlist subscribers never got a launch email (draft ready in docs/launch-email.md; Klaviyo re-auth pending).
 - Legal drafts at `/privacidad` + `/terminos` should get an owner read-through.

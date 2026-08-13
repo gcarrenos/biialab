@@ -21,7 +21,7 @@ export default function AdminLayout({
       {/* Sidebar */}
       <div className="w-64 bg-background-light text-text-primary border-r border-gray-800">
         <div className="p-6 border-b border-gray-800">
-          <h1 className="text-xl font-bold text-accent">BiiAMind Admin</h1>
+          <h1 className="text-xl font-bold text-accent">BiiALab Admin</h1>
         </div>
         <nav className="p-4">
           <ul className="space-y-2">
