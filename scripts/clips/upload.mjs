@@ -269,11 +269,11 @@ for (const [i, clip] of metadata.entries()) {
     ? JSON.parse(fs.readFileSync(ledgerFile, 'utf8'))
     : { uploads: [] };
   ledger.uploads.push({
-    sourceVideo: videoId,
+    sourceVideo: clip.sourceVideoId ?? videoId,
     segment: [clip.start, clip.end],
     youtubeId: result.id,
     title: clip.title,
-    style: clip.hook ? 'captioned' : 'clean',
+    style: clip.style ?? (clip.hook ? 'captioned' : 'clean'),
     publishAt: slot ? slot.toISOString() : privacy,
     uploadedAt: new Date().toISOString().slice(0, 10),
   });

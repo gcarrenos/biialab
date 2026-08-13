@@ -197,6 +197,42 @@
       "style": "captioned",
       "publishAt": "2026-08-28T15:00:00.000Z",
       "uploadedAt": "2026-08-12"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "segment": [
+        714,
+        772
+      ],
+      "youtubeId": "aewuyK7VwXI",
+      "title": "No engañes a tus hijos: enséñales a vender | Jürgen Klarić",
+      "style": "comic",
+      "publishAt": "2026-08-29T15:00:00.000Z",
+      "uploadedAt": "2026-08-13"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        2365,
+        2423
+      ],
+      "youtubeId": "qZLVIzVkK0A",
+      "title": "Si piensas esto, jamás tendrás un Ferrari | Jürgen Klarić",
+      "style": "comic",
+      "publishAt": "2026-08-30T15:00:00.000Z",
+      "uploadedAt": "2026-08-13"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        5880,
+        5938
+      ],
+      "youtubeId": "uS9fjS67bGk",
+      "title": "Tu trabajo no es tener emociones | Mary Cardona",
+      "style": "comic",
+      "publishAt": "2026-08-31T15:00:00.000Z",
+      "uploadedAt": "2026-08-13"
     }
   ]
 }
