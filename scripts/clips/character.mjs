@@ -3,7 +3,7 @@
 // per-scene text-to-video generations with native voice + lip-sync (Veo via
 // fal), concatenated and captioned in the house style.
 //
-//   FAL_KEY=... node scripts/clips/character.mjs
+//   FAL_KEY=... node scripts/clips/character.mjs [episode-config.json]
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -14,7 +14,9 @@ if (!FAL_KEY) { console.error('Set FAL_KEY.'); process.exit(1); }
 
 const here = import.meta.dirname;
 const fontsDir = path.join(here, 'fonts');
-const outDir = path.join(here, 'out', 'character-catrin');
+const episodeCfg = process.argv[2] ? JSON.parse(fs.readFileSync(process.argv[2], 'utf8')) : null;
+const EPISODE = episodeCfg?.name ?? 'character-catrin';
+const outDir = path.join(here, 'out', EPISODE);
 const model = path.join(here, 'models', 'ggml-large-v3-turbo.bin');
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -28,7 +30,7 @@ const CATRIN =
 
 const VOICE = 'He speaks natural Latin American Spanish, energetic charismatic young male voice, clear lip sync.';
 
-const SCENES = [
+const SCENES = episodeCfg?.scenes?.map((sc) => ({ prompt: `${CATRIN}, ${sc.setting}. ${VOICE} He says: "${sc.line}"` })) ?? [
   {
     prompt: `${CATRIN}, sitting at a modern warm kitchen table, leaning toward the camera like a vlogger filming himself. ${VOICE} He says: "¿Sabías que TODO lo que compras... lo compras por miedo? Todo. Y te lo voy a probar."`,
   },
@@ -134,7 +136,7 @@ Dialogue: 2,0:00:00.00,0:00:04.00,Accent,,0,0,0,,{\\fad(100,150)\\frz-3}El Catr�
 Dialogue: 2,${assTime(Math.max(0, totalDur - 5))},${assTime(totalDur)},Url,,0,0,0,,{\\fad(200,0)}biialab.org
 ` + chunks.map((c) => `Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Caption,,0,0,0,,${c.text}`).join('\n') + '\n');
 
-const final = path.join(outDir, 'catrin-miedo.mp4');
+const final = path.join(outDir, `${EPISODE}.mp4`);
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', joined,
   '-vf', `ass=${assFile}:fontsdir=${fontsDir}`,
   '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', final]);
