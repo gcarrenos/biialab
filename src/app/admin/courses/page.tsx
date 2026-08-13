@@ -13,18 +13,22 @@ export default function CoursesAdmin() {
   const [migrateStatus, setMigrateStatus] = useState<'idle' | 'running' | 'done' | 'error'>('idle');
   const [certTestStatus, setCertTestStatus] = useState<'idle' | 'running' | 'error'>('idle');
 
-  const handleTestCertificate = async () => {
+  // reissue: drop the test user's existing cert for the course first, so the
+  // fresh one starts unpaid and the paywall can be exercised repeatedly. When
+  // the endpoint returns a Stripe checkoutUrl, open it (test the payment);
+  // otherwise open the verify page.
+  const handleTestCertificate = async (courseSlug?: string, reissue = false) => {
     setCertTestStatus('running');
     try {
       const password = sessionStorage.getItem('biialab_admin_auth');
       const res = await fetch('/api/admin/test-certificate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password, courseSlug: filteredCourses[0]?.slug }),
+        body: JSON.stringify({ password, courseSlug: courseSlug ?? filteredCourses[0]?.slug, reissue }),
       });
       const data = await res.json();
       if (data.success && data.url) {
-        window.open(data.url, '_blank', 'noopener');
+        window.open(data.checkoutUrl ?? data.url, '_blank', 'noopener');
         setCertTestStatus('idle');
       } else {
         setCertTestStatus('error');
@@ -104,7 +108,7 @@ export default function CoursesAdmin() {
             {migrateStatus === 'running' ? 'Migrando…' : migrateStatus === 'done' ? '✓ Migraciones al día' : migrateStatus === 'error' ? 'Error — reintentar' : 'Migraciones'}
           </button>
           <button
-            onClick={handleTestCertificate}
+            onClick={() => handleTestCertificate()}
             disabled={certTestStatus === 'running'}
             title="Emite un certificado de prueba para el primer curso filtrado y abre su página de verificación con el botón de LinkedIn"
             className="px-4 py-2 border border-gray-300 text-text-primary rounded-md text-sm font-medium hover:border-accent hover:text-accent transition-colors disabled:opacity-50"
@@ -234,6 +238,17 @@ export default function CoursesAdmin() {
                   </div>
                   <div className="col-span-2 text-right">
                     <div className="flex justify-end gap-2">
+                      <button
+                        className="p-1.5 bg-background hover:bg-accent/10 rounded text-text-secondary hover:text-accent transition-colors disabled:opacity-50"
+                        onClick={() => handleTestCertificate(course.slug, true)}
+                        disabled={certTestStatus === 'running'}
+                        title="Probar certificado de este curso (reemite y abre el checkout si el pago está activo)"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14v7m-6-4.5V9.5m12 7V9.5" />
+                        </svg>
+                      </button>
                       <Link
                         href={`/courses/${course.slug}`}
                         target="_blank"
