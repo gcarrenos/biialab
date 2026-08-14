@@ -281,6 +281,54 @@
       "style": "character",
       "publishAt": "2026-08-28T20:00:00.000Z",
       "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "a6iP8Z0IEbw",
+      "segment": [
+        5490,
+        5578
+      ],
+      "youtubeId": "cS9PYg0Ubg8",
+      "title": "\"Si usted no para, la van a parar\" | Mary Cardona",
+      "style": "illustrated",
+      "publishAt": "2026-09-01T15:00:00.000Z",
+      "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "K_CzwBUxMBc",
+      "segment": [
+        4795,
+        4845
+      ],
+      "youtubeId": "d94OEdj2uQI",
+      "title": "Así te manipula una persona tóxica | Alejandra Huerta",
+      "style": "illustrated",
+      "publishAt": "2026-09-02T15:00:00.000Z",
+      "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "PlOPtrZBv6s",
+      "segment": [
+        5326,
+        5418
+      ],
+      "youtubeId": "tAumJVmEcTg",
+      "title": "\"Jamás te quedes sin hacer nada\" | Adriana Macías",
+      "style": "illustrated",
+      "publishAt": "2026-09-03T15:00:00.000Z",
+      "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "5_s7M859KCk",
+      "segment": [
+        2106,
+        2176
+      ],
+      "youtubeId": "z4NvJJDCjsM",
+      "title": "La historia del pin de Schindler | Jürgen Klarić (ilustrada)",
+      "style": "illustrated",
+      "publishAt": "2026-09-04T15:00:00.000Z",
+      "uploadedAt": "2026-08-14"
     }
   ]
 }
