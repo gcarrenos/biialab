@@ -230,6 +230,7 @@ for (const [i, clip] of metadata.entries()) {
     status: {
       privacyStatus: privacy,
       selfDeclaredMadeForKids: false,
+      ...(clip.syntheticMedia ? { containsSyntheticMedia: true } : {}),
       ...(slot ? { publishAt: slot.toISOString() } : {}),
     },
   };

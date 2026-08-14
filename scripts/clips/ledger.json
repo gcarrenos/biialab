@@ -245,6 +245,42 @@
       "style": "compilation",
       "publishAt": "private",
       "uploadedAt": "2026-08-13"
+    },
+    {
+      "sourceVideo": "catrin-series",
+      "segment": [
+        0,
+        32
+      ],
+      "youtubeId": "lqxd6Tor2L8",
+      "title": "Todo lo que compras es por MIEDO | El Catrín de BiiA LAB ep. 1",
+      "style": "character",
+      "publishAt": "2026-08-14T20:00:00.000Z",
+      "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "catrin-series",
+      "segment": [
+        0,
+        32
+      ],
+      "youtubeId": "-wROVxPePlU",
+      "title": "¿Persigues el dinero? Eso es ser pobre | El Catrín de BiiA LAB ep. 2",
+      "style": "character",
+      "publishAt": "2026-08-21T20:00:00.000Z",
+      "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "catrin-series",
+      "segment": [
+        0,
+        32
+      ],
+      "youtubeId": "_qwXh2zH3JA",
+      "title": "Morimos más de envidia que de cáncer | El Catrín de BiiA LAB ep. 3",
+      "style": "character",
+      "publishAt": "2026-08-28T20:00:00.000Z",
+      "uploadedAt": "2026-08-14"
     }
   ]
 }
