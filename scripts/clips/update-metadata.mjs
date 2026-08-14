@@ -57,7 +57,8 @@ for (const [id, chapterBlock] of Object.entries(chapters)) {
     continue;
   }
 
-  const description = `${FUNNEL}\n\n${chapterBlock}\n\n————————————\n${snippet.description}`;
+  const safeChapters = chapterBlock.replace(/[<>]/g, '');
+  const description = `${FUNNEL}\n\n${safeChapters}\n\n————————————\n${snippet.description}`;
   if (description.length > 4900) {
     console.log(`${id}: SKIP — combined description too long (${description.length})`);
     continue;
