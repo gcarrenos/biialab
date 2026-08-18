@@ -99,7 +99,7 @@ for (const [i, shot] of cfg.shots.entries()) {
     let done = false;
     if (!DRY && FAL_KEY) {
       try {
-        const d = await fal('fal-ai/elevenlabs/tts/multilingual-v2', { text: shot.vo, voice: cfg.elevenVoice ?? 'Daniel', stability: 0.5, similarity_boost: 0.8, speed: 0.95 }, 120_000);
+        const d = await fal('fal-ai/elevenlabs/tts/eleven-v3', { text: shot.vo, voice: cfg.elevenVoice ?? 'George', stability: 0.5, language_code: 'es' }, 120_000);
         const tmp = path.join(outDir, `vo-${i + 1}.src`);
         await download(d.audio.url, tmp);
         execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', tmp, '-ar', '48000', '-ac', '2', f]);
