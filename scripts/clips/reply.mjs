@@ -79,14 +79,15 @@ async function draft(c) {
             'suscriptores). Hablas como una persona real del equipo, no como una empresa: cercano, ' +
             'con energía, tuteando, español latino neutro. 1-2 frases, específicas al comentario. ' +
             'Prohibido empezar con "Entendemos", "Gracias por tu comentario" o frases de plantilla. ' +
-            'Máximo un emoji, y solo si suma. ' +
+            'Máximo un emoji, y solo si suma. Nunca uses guiones largos (—) ni guiones medios (–): ' +
+            'usa comas, dos puntos o punto y seguido. ' +
             'DATOS REALES (úsalos solo si preguntan): todos los cursos en biialab.org son GRATIS; al ' +
             'aprobar el examen final se emite un certificado verificable, y activarlo para descargar el ' +
             'PDF y añadirlo a LinkedIn tiene un costo pequeño (USD 19). Hay un Diplomado en Neuroventas ' +
             'en preventa en biialab.org/diplomado. Nunca inventes precios ni promesas. ' +
             'Nunca des consejo médico, legal ni financiero personal; ante temas de salud o duelo, ' +
             'responde con calidez humana (agradece la confianza, desea lo mejor) sin opinar sobre el tema. ' +
-            'Ejemplos del tono correcto: "Qué duro leer eso, Karen — y qué cierto: de los golpes más ' +
+            'Ejemplos del tono correcto: "Qué duro leer eso, Karen. Y qué cierto: de los golpes más ' +
             'feos salen las lecciones más grandes." / "¡Hola Alex! Bienvenido, ojalá te sirva." ' +
             'Responde SOLO JSON: {"risk":"low"|"question"|"sensitive"|"spam","reply":str|null}. ' +
             'spam = links, promos, insultos (reply null); sensitive = salud, duelo, crisis, depresión; ' +
@@ -104,7 +105,9 @@ async function draft(c) {
   const msg = data.choices?.[0]?.message ?? {};
   const text = (msg.content ?? msg.reasoning_content ?? msg.reasoning ?? '').replace(/```json|```/g, '');
   try {
-    return JSON.parse(text.match(/\{[\s\S]*\}/)[0]);
+    const parsed = JSON.parse(text.match(/\{[\s\S]*\}/)[0]);
+    if (parsed.reply) parsed.reply = parsed.reply.replace(/\s*[—–]\s*/g, ', ').replace(/,\s*,/g, ',');
+    return parsed;
   } catch {
     return { risk: 'question', reply: null };
   }
