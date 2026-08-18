@@ -1,0 +1,50 @@
+{
+  "name": "novela-ep1-la-carta",
+  "series": "EL EMPRENDEDOR",
+  "episode": "Capítulo 1: La carta",
+  "title": "Lo despidieron un martes a las 4 | El Emprendedor, cap. 1",
+  "voice": "Paulina",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm teal and orange color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Diego Ramírez, a 34-year-old Colombian man, medium brown skin, short black hair slightly messy, three-day stubble, tired but warm brown eyes, light blue office shirt with sleeves rolled up, loosened dark tie, office lanyard around his neck, wedding ring, lean build",
+  "characterSheet": "front-facing three-quarter portrait of Diego Ramírez, neutral office background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 5,
+      "vo": "Once años en la misma empresa. Un martes a las cuatro de la tarde, le entregaron una carta.",
+      "prompt": "Diego sitting alone at a glass conference table in a Bogotá office, rain streaking the window behind him, holding a single white letter with both hands, his face frozen between disbelief and calm, a manager's blurred silhouette leaving the room",
+      "motion": "rain slides down the window, Diego slowly lowers the letter, his eyes stay fixed forward"
+    },
+    {
+      "dur": 5,
+      "vo": "Once años. En una caja de cartón.",
+      "prompt": "Diego walking down a wet Bogotá sidewalk at dusk carrying a cardboard box with a small plant, a framed photo and a coffee mug inside, red brick buildings and city buses blurred behind him, rain on his shoulders, no umbrella",
+      "motion": "slow tracking shot following Diego walking, rain falling, city lights flicker in the puddles"
+    },
+    {
+      "dur": 5,
+      "vo": "Su hija le preguntó por qué llegó temprano. Hoy empiezo algo nuevo, le dijo. No sabía qué.",
+      "prompt": "Diego crouching in a small warm apartment doorway to hug his eight-year-old daughter with curly hair and a school uniform, the cardboard box on the floor beside them, a modest kitchen visible behind, warm lamp light, his smile brave and slightly broken",
+      "motion": "the daughter wraps her arms around him, Diego closes his eyes for a moment, gentle camera push in"
+    },
+    {
+      "dur": 5,
+      "vo": "Esa noche no durmió. Escribió una sola pregunta en un cuaderno.",
+      "prompt": "Diego at a small kitchen table at 2am, laptop glow on his face, an open spiral notebook and a pen, a cold cup of coffee, the cardboard box in the corner, the apartment dark except for the laptop and a single bulb over the stove",
+      "motion": "Diego rubs his eyes, then leans forward and starts writing in the notebook, laptop glow flickers softly"
+    },
+    {
+      "dur": 5,
+      "vo": "¿Qué sé hacer, que otros necesitan?",
+      "prompt": "extreme close-up of an open spiral notebook on a wooden kitchen table under warm light, Diego's hand holding a blue pen, handwritten in Spanish in clear blue ink the words: ¿Qué sé hacer que otros necesitan?  and nothing else on the page, coffee ring stain on the corner",
+      "motion": "very slow push in on the handwritten words, the pen taps once against the page"
+    },
+    {
+      "dur": 5,
+      "vo": "La respuesta le iba a costar todo lo que tenía.",
+      "prompt": "Diego standing at the apartment window at dawn, first orange sunlight on his face, the notebook in one hand, the sleeping city of Bogotá and the mountains behind, his expression changed: not happy, but decided",
+      "motion": "sunlight slowly grows on his face, Diego takes a slow breath, subtle wind in the curtain",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Diego llevaba once años en la misma empresa. Un martes a las 4 de la tarde le entregaron una carta.\n\nEL EMPRENDEDOR es una serie animada de BiiA LAB sobre lo que de verdad pasa cuando decides emprender. Nuevo capítulo cada semana.\n\nAnimación generada con IA.\nCursos gratis con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=shorts&utm_campaign=novela\n#biialab #emprendedor #shorts"
+}
