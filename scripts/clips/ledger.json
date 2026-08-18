@@ -497,6 +497,18 @@
       "style": "illustrated",
       "publishAt": "private",
       "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        38
+      ],
+      "youtubeId": "Nbi-kMedBIM",
+      "title": "Lo despidieron un martes a las 4 | El Emprendedor, cap. 1",
+      "style": "novela",
+      "publishAt": "2026-08-19T01:00:00.000Z",
+      "uploadedAt": "2026-08-18"
     }
   ]
 }
