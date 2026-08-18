@@ -46,3 +46,4 @@ next-env.d.ts
 /scripts/clips/.youtube-token.json
 /scripts/clips/corpus/
 /scripts/clips/models/
+/scripts/clips/replied.json
