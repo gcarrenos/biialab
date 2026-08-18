@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/contact`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/social-impact`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/casos/planvoyager`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/transparencia`, changeFrequency: 'daily', priority: 0.7 },
     { url: `${BASE_URL}/privacidad`, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${BASE_URL}/terminos`, changeFrequency: 'yearly', priority: 0.2 },
   ];
