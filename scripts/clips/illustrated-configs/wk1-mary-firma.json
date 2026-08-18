@@ -1,0 +1,8 @@
+{"name":"wk1-mary-firma","source":"scripts/clips/out/a6iP8Z0IEbw/source.mp4","start":3902,"end":3960,"hook":"\"PÓNGALE LA FIRMA:\\NESTO ES UN CÁNCER\"","accent":"Mary Cardona","style":"soft watercolor storybook illustration, loose expressive brushstrokes, warm golden and terracotta palette with deep teal shadows, textured watercolor paper, gentle light, emotional and humane, no text",
+"beats":[
+{"dur":12,"prompt":"a woman sitting alone in a doctor's waiting room, hands folded tightly, muted watercolor blues and greys"},
+{"dur":12,"prompt":"a doctor across a desk holding an x-ray up to the light, serious expression, the woman watching his face","animate":true,"motion":"the doctor slowly lowers the x-ray, light shifts across his face"},
+{"dur":11,"prompt":"close-up of a woman's hand hovering over a document with a pen, trembling slightly, warm lamplight"},
+{"dur":12,"prompt":"the woman standing at a window looking out at rain, quiet, a single warm orange light in the far distance"},
+{"dur":11,"prompt":"the same woman on a stage in warm spotlight, telling her story to an audience, radiant and strong, watercolor light blooming around her","animate":true,"motion":"the spotlight brightens, she raises a hand as she speaks, audience silhouettes lean in"}
+]}

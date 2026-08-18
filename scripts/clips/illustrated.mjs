@@ -131,7 +131,10 @@ console.log('3/4 Audio (tighten dead air) + captions…');
 const rawAudio = path.join(outDir, 'audio-raw.wav');
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(cfg.start), '-to', String(cfg.end), '-i', cfg.source,
   '-vn', '-ar', '48000', '-ac', '2', rawAudio]);
-const stderrText = execFileSync('sh', ['-c', `ffmpeg -i '${rawAudio}' -af silencedetect=noise=-35dB:d=0.45 -f null - 2>&1 | grep silence`], { encoding: 'utf8' });
+let stderrText = '';
+try {
+  stderrText = execFileSync('sh', ['-c', `ffmpeg -i '${rawAudio}' -af silencedetect=noise=-35dB:d=0.45 -f null - 2>&1 | grep silence`], { encoding: 'utf8' });
+} catch { /* no silences at all — nothing to tighten */ }
 const silences = [];
 {
   let start = null;

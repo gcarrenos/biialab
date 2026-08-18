@@ -1,0 +1,8 @@
+{"name":"wk1-klaric-limonada","source":"scripts/clips/out/K1A0ua1Xhok/source.mp4","start":879,"end":960,"hook":"EL PUESTO DE LIMONADA\\NQUE ME HIZO VENDEDOR","accent":"Jürgen Klarić","style":"vintage comic book ink illustration, heavy black ink linework, halftone dot shading, cream aged paper background, dramatic chiaroscuro lighting, single orange accent color, film noir graphic novel style, no text, no symbols",
+"beats":[
+{"dur":16,"prompt":"a small boy behind a homemade lemonade stand on a 1980s American suburban sidewalk, hand-painted sign, hopeful expression"},
+{"dur":16,"prompt":"the same lemonade stand from behind, three or four neighbors walking past without stopping, the boy watching them go","animate":true,"motion":"the neighbors walk past slowly, the boy turns his head following them, gentle breeze on the sign"},
+{"dur":16,"prompt":"a jolly uncle in a hat kneeling down at the lemonade stand handing coins to the beaming boy, warm afternoon light"},
+{"dur":17,"prompt":"the boy counting a small pile of coins with enormous pride, jars of lemonade half full behind him"},
+{"dur":16,"prompt":"a grown man in a dark suit on a conference stage, spotlight, and behind him a faint ghostly image of the boy at the lemonade stand","animate":true,"motion":"slow camera push in on the man, the ghostly boy image gently brightens"}
+]}
