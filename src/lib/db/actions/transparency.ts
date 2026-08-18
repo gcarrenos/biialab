@@ -97,24 +97,30 @@ export async function getTransparencyMetrics(): Promise<TransparencyMetrics> {
       .orderBy(desc(certificates.issuedAt))
       .limit(5),
     db
-      .select({
-        slug: courses.slug,
-        title: courses.title,
-        lessons: sql<number>`(
-          select count(*) from ${lessons}
-          inner join ${modules} on ${lessons.moduleId} = ${modules.id}
-          where ${modules.courseId} = ${courses.id}
-        )`.mapWith(Number),
-        students: sql<number>`(
-          select count(*) from ${enrollments} where ${enrollments.courseId} = ${courses.id}
-        )`.mapWith(Number),
-        certificates: sql<number>`(
-          select count(*) from ${certificates} where ${certificates.courseId} = ${courses.id}
-        )`.mapWith(Number),
-      })
-      .from(courses)
-      .where(published)
-      .orderBy(courses.title),
+      .execute(
+        sql`
+          select
+            c.slug,
+            c.title,
+            (select count(*)::int from lessons l
+               inner join modules m on l.module_id = m.id
+             where m.course_id = c.id) as lessons,
+            (select count(*)::int from enrollments e where e.course_id = c.id) as students,
+            (select count(*)::int from certificates ce where ce.course_id = c.id) as certificates
+          from courses c
+          where c.status = 'published'
+          order by c.title
+        `,
+      )
+      .then((r) =>
+        (r.rows as Array<Record<string, unknown>>).map((row) => ({
+          slug: String(row.slug),
+          title: String(row.title),
+          lessons: Number(row.lessons),
+          students: Number(row.students),
+          certificates: Number(row.certificates),
+        })),
+      ),
     db
       .select({
         month: sql<string>`to_char(date_trunc('month', ${enrollments.enrolledAt}), 'YYYY-MM')`,
