@@ -65,6 +65,12 @@ for (const r of rows) {
   const s = meta.get(r.video)?.style ?? '?';
   (groups[s] ??= []).push(r);
 }
+const kinds = {};
+for (const r of rows) { const k = meta.get(r.video)?.kind; if (k) (kinds[k] ??= []).push(r); }
+if (Object.keys(kinds).length) {
+  console.log('\nBy kind (story vs concept):');
+  for (const [k, rs] of Object.entries(kinds)) { const v = rs.reduce((x, r) => x + r.views, 0); console.log(`  ${k.padEnd(8)} n=${rs.length} views ${v} avg ${(rs.reduce((x, r) => x + r.averageViewPercentage * r.views, 0) / v).toFixed(0)}%`); }
+}
 console.log('\nBy style (views-weighted avg view %):');
 for (const [s, rs] of Object.entries(groups)) {
   const v = rs.reduce((a, r) => a + r.views, 0);

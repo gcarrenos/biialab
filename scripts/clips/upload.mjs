@@ -277,6 +277,7 @@ for (const [i, clip] of metadata.entries()) {
     youtubeId: result.id,
     title: clip.title,
     style: clip.style ?? (clip.hook ? 'captioned' : 'clean'),
+    ...(clip.kind ? { kind: clip.kind } : {}),
     publishAt: slot ? slot.toISOString() : privacy,
     uploadedAt: new Date().toISOString().slice(0, 10),
   });
