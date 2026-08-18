@@ -509,6 +509,18 @@
       "style": "novela",
       "publishAt": "2026-08-19T01:00:00.000Z",
       "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        58
+      ],
+      "youtubeId": "dZH4DNQ_0g8",
+      "title": "Gastó su liquidación en 3 días | El Emprendedor, cap. 2",
+      "style": "novela",
+      "publishAt": "2026-08-21T01:00:00.000Z",
+      "uploadedAt": "2026-08-18"
     }
   ]
 }
