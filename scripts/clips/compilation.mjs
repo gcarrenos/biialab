@@ -3,7 +3,7 @@
 // into a chaptered 1080p video with comic-style title cards between segments
 // and an end-card CTA. Output crosses the 8-minute mid-roll threshold.
 //
-//   node scripts/clips/compilation.mjs
+//   node scripts/clips/compilation.mjs [config.json]
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -11,12 +11,13 @@ import path from 'node:path';
 
 const here = import.meta.dirname;
 const fontsDir = path.join(here, 'fonts');
-const outDir = path.join(here, 'out', 'compilation-1');
+const cfg = process.argv[2] ? JSON.parse(fs.readFileSync(process.argv[2], 'utf8')) : null;
+const outDir = path.join(here, 'out', cfg?.name ?? 'compilation-1');
 fs.mkdirSync(outDir, { recursive: true });
 
 // Ordered for narrative arc: hook story -> mindset -> money psychology ->
 // practical selling -> the live pitch as climax -> kids/legacy close.
-const SEGMENTS = [
+const SEGMENTS = cfg?.segments ?? [
   { src: 'K1A0ua1Xhok', start: 437, end: 568, title: 'Un policía en mi propia oficina' },
   { src: '5_s7M859KCk', start: 31, end: 85, title: 'Somos mentalmente pobres' },
   { src: '5_s7M859KCk', start: 413, end: 470, title: 'Piensa como millonario' },
@@ -68,8 +69,8 @@ function renderCard(name, assLines, seconds) {
 // Opening card
 renderCard('card-open', [
   `Dialogue: 1,0:00:00.00,0:00:03.50,Num,,0,0,0,,{\\fad(150,200)\\frz-3}BiiA LAB presenta`,
-  `Dialogue: 0,0:00:00.30,0:00:03.50,Title,,0,0,0,,{\\fad(150,250)}LO MEJOR DE\\NJÜRGEN KLARIĆ`,
-  `Dialogue: 0,0:00:00.60,0:00:03.50,Sub,,0,0,0,,Neuroventas y mentalidad`,
+  `Dialogue: 0,0:00:00.30,0:00:03.50,Title,,0,0,0,,{\\fad(150,250)}${cfg?.openTitle ?? 'LO MEJOR DE\\NJÜRGEN KLARIĆ'}`,
+  `Dialogue: 0,0:00:00.60,0:00:03.50,Sub,,0,0,0,,${cfg?.openSub ?? 'Neuroventas y mentalidad'}`,
 ], 3.5);
 
 SEGMENTS.forEach((seg, i) => {
@@ -78,7 +79,7 @@ SEGMENTS.forEach((seg, i) => {
   chapters.push({ at: cursor, title: seg.title });
 
   renderCard(`card-${n}`, [
-    `Dialogue: 1,0:00:00.00,0:00:02.50,Num,,0,0,0,,{\\fad(120,150)\\frz-3}${String(n).padStart(2, '0')}`,
+    `Dialogue: 1,0:00:00.00,0:00:02.50,Num,,0,0,0,,{\\fad(120,150)\\frz-3}${seg.speaker ?? String(n).padStart(2, '0')}`,
     `Dialogue: 0,0:00:00.20,0:00:02.50,Title,,0,0,0,,{\\fad(120,200)}${seg.title.toUpperCase()}`,
   ], 2.5);
 
@@ -101,14 +102,14 @@ renderCard('card-end', [
 // Concat
 const listFile = path.join(outDir, 'concat.txt');
 fs.writeFileSync(listFile, parts.map((p) => `file '${p}'`).join('\n'));
-const finalFile = path.join(outDir, 'lo-mejor-de-jurgen-klaric.mp4');
+const finalFile = path.join(outDir, `${cfg?.name ?? 'lo-mejor-de-jurgen-klaric'}.mp4`);
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile,
   '-c', 'copy', finalFile]);
 
 // Chapters + description
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 const chapterText = ['0:00 Introducción', ...chapters.map((c) => `${fmt(c.at)} ${c.title}`)].join('\n');
-const description = `Los 9 momentos más poderosos de Jürgen Klarić en BiiA LAB: neuroventas, mentalidad de abundancia y cómo venderle al cerebro.
+const description = `${cfg?.intro ?? 'Los 9 momentos más poderosos de Jürgen Klarić en BiiA LAB: neuroventas, mentalidad de abundancia y cómo venderle al cerebro.'}
 
 🎓 Curso gratis completo con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=description&utm_campaign=compilation
 
@@ -116,14 +117,13 @@ const description = `Los 9 momentos más poderosos de Jürgen Klarić en BiiA LA
 ${chapterText}
 
 Conferencias completas:
-· Cómo Vender Más: https://www.youtube.com/watch?v=K1A0ua1Xhok
-· Neuro Riqueza: https://www.youtube.com/watch?v=5_s7M859KCk
+${cfg?.sources ?? '· Cómo Vender Más: https://www.youtube.com/watch?v=K1A0ua1Xhok\n· Neuro Riqueza: https://www.youtube.com/watch?v=5_s7M859KCk'}
 
-#neuroventas #jurgenklaric #ventas`;
+${cfg?.hashtags ?? '#neuroventas #jurgenklaric #ventas'}`;
 
 fs.writeFileSync(path.join(outDir, 'metadata.json'), JSON.stringify([{
   file: path.basename(finalFile),
-  title: 'Jürgen Klarić: los 9 momentos que te enseñan a vender | Lo mejor de BiiA LAB',
+  title: cfg?.title ?? 'Jürgen Klarić: los 9 momentos que te enseñan a vender | Lo mejor de BiiA LAB',
   description,
   style: 'compilation',
   sourceVideoId: 'compilation',

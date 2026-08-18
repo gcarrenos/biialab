@@ -329,6 +329,18 @@
       "style": "illustrated",
       "publishAt": "2026-09-04T15:00:00.000Z",
       "uploadedAt": "2026-08-14"
+    },
+    {
+      "sourceVideo": "compilation",
+      "segment": [
+        0,
+        764
+      ],
+      "youtubeId": "7zm5W0-re2o",
+      "title": "3 mujeres que te cambian la vida en 12 minutos | Lo mejor de BiiA LAB",
+      "style": "compilation",
+      "publishAt": "private",
+      "uploadedAt": "2026-08-18"
     }
   ]
 }
