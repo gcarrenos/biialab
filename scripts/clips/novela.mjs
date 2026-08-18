@@ -134,7 +134,7 @@ for (const [i, shot] of cfg.shots.entries()) {
 }
 const dur = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f], { encoding: 'utf8' }).trim());
 // Each shot lasts max(config dur, VO + 0.6s breathing room)
-const shotDur = cfg.shots.map((s, i) => Math.max(s.dur, dur(voFiles[i]) + 0.4));
+const shotDur = cfg.shots.map((s, i) => Math.max(s.dur, dur(voFiles[i]) + 0.5));
 const TITLE = 2.0, END = 3.5;
 
 // ---------------------------------------------------------------- 4. visuals
