@@ -97,7 +97,23 @@ for (const [i, shot] of cfg.shots.entries()) {
   const f = path.join(outDir, `vo-${i + 1}.wav`);
   if (!fs.existsSync(f)) {
     let done = false;
-    if (!DRY && FAL_KEY) {
+    if (!DRY && process.env.ELEVEN_API_KEY) {
+      // Direct ElevenLabs (paid plan: library voices allowed). cfg.elevenVoiceId e.g. Alberto l1zE9xgNpUTaQCZzpNJa
+      try {
+        const r = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${cfg.elevenVoiceId ?? "l1zE9xgNpUTaQCZzpNJa"}`, {
+          method: "POST", headers: { "xi-api-key": process.env.ELEVEN_API_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify({ text: shot.vo, model_id: "eleven_multilingual_v2", voice_settings: { stability: 0.45, similarity_boost: 0.8, style: 0.3 } }),
+          signal: AbortSignal.timeout(120_000),
+        });
+        if (!r.ok) throw new Error(await r.text());
+        const tmp = path.join(outDir, `vo-${i + 1}.src`);
+        fs.writeFileSync(tmp, Buffer.from(await r.arrayBuffer()));
+        execFileSync("ffmpeg", ["-y", "-v", "error", "-i", tmp, "-ar", "48000", "-ac", "2", f]);
+        fs.unlinkSync(tmp);
+        done = true;
+      } catch (e) { console.log(`   (elevenlabs direct failed) ${e.message.slice(0, 80)}`); }
+    }
+    if (!done && !DRY && FAL_KEY) {
       try {
         const d = await fal('fal-ai/elevenlabs/tts/eleven-v3', { text: shot.vo, voice: cfg.elevenVoice ?? 'George', stability: 0.5, language_code: 'es' }, 120_000);
         const tmp = path.join(outDir, `vo-${i + 1}.src`);
