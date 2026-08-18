@@ -17,7 +17,7 @@ const plan = JSON.parse(fs.readFileSync(path.join(batchDir, 'plan.json'), 'utf8'
 
 function parseTime(t) { const [h, m, s] = t.split(':'); return +h * 3600 + +m * 60 + +s.replace(',', '.'); }
 function assTime(sec) { const s = Math.max(0, sec), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60); return `${h}:${String(m).padStart(2, '0')}:${(s % 60).toFixed(2).padStart(5, '0')}`; }
-const esc = (t) => t.replace(/[{}\\]/g, '');
+const esc = (t) => t.replace(/[{}]/g, '').replace(/\\(?!N)/g, '');
 
 const metadata = [];
 plan.clips.forEach((clip, i) => {
@@ -71,7 +71,7 @@ Dialogue: 1,0:00:00.00,0:00:03.20,Hook,,0,0,0,,{\\fad(120,200)}${esc(clip.hook.t
     sourceVideo: `https://www.youtube.com/watch?v=${clip.src}`,
     start: clip.start, end: clip.end, title: clip.title,
     description: `${clip.description}\n\nVideo completo: https://www.youtube.com/watch?v=${clip.src}`,
-    hook: clip.hook, style: 'clean',
+    hook: clip.hook, style: 'clean', kind: clip.kind,
   });
 });
 fs.writeFileSync(path.join(batchDir, 'metadata.json'), JSON.stringify(metadata, null, 2));

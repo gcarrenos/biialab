@@ -521,6 +521,71 @@
       "style": "novela",
       "publishAt": "2026-08-20T01:00:00.000Z",
       "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "zm3hr74Ki40",
+      "segment": [
+        265,
+        332
+      ],
+      "youtubeId": "2J1WK6Q-i-4",
+      "title": "Le pregunté a mi jefe si me alcanzaba para vivir | Mauricio Benoist",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-08-26T15:00:00.000Z",
+      "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "zm3hr74Ki40",
+      "segment": [
+        622,
+        678
+      ],
+      "youtubeId": "rhFskhor1VU",
+      "title": "\"Si me voy, no regreso\": le dijo a su papá y cumplió | Mauricio Benoist",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-08-27T01:00:00.000Z",
+      "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "uGuUMPvCG90",
+      "segment": [
+        1923,
+        1975
+      ],
+      "youtubeId": "kYXRCg_oMTY",
+      "title": "\"Mi esposa cocina con las patas, pero le queda bueno\" | Adriana Macías",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-08-27T15:00:00.000Z",
+      "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "uGuUMPvCG90",
+      "segment": [
+        2552,
+        2619
+      ],
+      "youtubeId": "7ebt0lF5i7s",
+      "title": "La señora de la panadería que le tuvo lástima | Adriana Macías",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-08-28T01:00:00.000Z",
+      "uploadedAt": "2026-08-18"
+    },
+    {
+      "sourceVideo": "K1A0ua1Xhok",
+      "segment": [
+        769,
+        801
+      ],
+      "youtubeId": "7OY3kivFPhQ",
+      "title": "Renuncié a mi único trabajo con esta frase | Jürgen Klarić",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-08-28T15:00:00.000Z",
+      "uploadedAt": "2026-08-18"
     }
   ]
 }
