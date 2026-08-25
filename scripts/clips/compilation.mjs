@@ -66,6 +66,24 @@ function renderCard(name, assLines, seconds) {
   cursor += seconds;
 }
 
+// Cold open: when cfg.coldOpen, the first segment plays BEFORE the title card
+// (retention data: viewers bail during an opening card; hook them first).
+function renderSeg(seg, n) {
+  const source = path.join(here, 'out', seg.src, 'source.mp4');
+  const file = path.join(outDir, `seg-${n}.mp4`);
+  execFileSync('ffmpeg', ['-y', '-v', 'error',
+    '-ss', String(seg.start), '-to', String(seg.end), '-i', source,
+    '-vf', 'scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black',
+    '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', ...ENC, file]);
+  parts.push(file);
+  cursor += seg.end - seg.start;
+}
+let COLD = null;
+if (cfg?.coldOpen) {
+  COLD = SEGMENTS.shift();
+  chapters.push({ at: 0, title: COLD.title });
+  renderSeg(COLD, 0);
+}
 // Opening card
 renderCard('card-open', [
   `Dialogue: 1,0:00:00.00,0:00:03.50,Num,,0,0,0,,{\\fad(150,200)\\frz-3}BiiA LAB presenta`,
@@ -83,14 +101,7 @@ SEGMENTS.forEach((seg, i) => {
     `Dialogue: 0,0:00:00.20,0:00:02.50,Title,,0,0,0,,{\\fad(120,200)}${seg.title.toUpperCase()}`,
   ], 2.5);
 
-  const source = path.join(here, 'out', seg.src, 'source.mp4');
-  const file = path.join(outDir, `seg-${n}.mp4`);
-  execFileSync('ffmpeg', ['-y', '-v', 'error',
-    '-ss', String(seg.start), '-to', String(seg.end), '-i', source,
-    '-vf', 'scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black',
-    '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', ...ENC, file]);
-  parts.push(file);
-  cursor += seg.end - seg.start;
+  renderSeg(seg, n);
 });
 
 // End card CTA
@@ -108,7 +119,7 @@ execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i',
 
 // Chapters + description
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-const chapterText = ['0:00 Introducción', ...chapters.map((c) => `${fmt(c.at)} ${c.title}`)].join('\n');
+const chapterText = [...(cfg?.coldOpen ? [] : ['0:00 Introducción']), ...chapters.map((c) => `${fmt(c.at)} ${c.title}`)].join('\n');
 const description = `${cfg?.intro ?? 'Los 9 momentos más poderosos de Jürgen Klarić en BiiA LAB: neuroventas, mentalidad de abundancia y cómo venderle al cerebro.'}
 
 🎓 Curso gratis completo con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=description&utm_campaign=compilation

@@ -1,0 +1,20 @@
+{
+  "name": "klaric-dinero-mentalidad",
+  "coldOpen": true,
+  "openTitle": "KLARIĆ: DINERO\\NY MENTALIDAD",
+  "openSub": "Neuro riqueza: por qué piensas así del dinero",
+  "title": "Jürgen Klarić: por qué tu mente te mantiene pobre | Lo mejor de BiiA LAB",
+  "intro": "Rico pero quebrado, el miedo latino al dinero y cómo reprogramar tu mentalidad. Los mejores momentos de Jürgen Klarić sobre dinero y mente, en 10 minutos.",
+  "sources": "· Neuro Riqueza completa: https://www.youtube.com/watch?v=5_s7M859KCk\n· Cómo Vender Más: https://www.youtube.com/watch?v=K1A0ua1Xhok",
+  "hashtags": "#jurgenklaric #dinero #mentalidad #biialab",
+  "segments": [
+    { "src": "5_s7M859KCk", "start": 668, "end": 730, "title": "Rico pero quebrado" },
+    { "src": "5_s7M859KCk", "start": 730, "end": 792, "title": "¿La pobreza es física o mental?" },
+    { "src": "5_s7M859KCk", "start": 2894, "end": 2956, "title": "7 de cada 10 latinos le temen al dinero" },
+    { "src": "5_s7M859KCk", "start": 3080, "end": 3140, "title": "Las eternas excusas" },
+    { "src": "5_s7M859KCk", "start": 3291, "end": 3355, "title": "¿Le tienes miedo al dinero?" },
+    { "src": "5_s7M859KCk", "start": 4001, "end": 4050, "title": "Las cosas valen por lo que significan" },
+    { "src": "K1A0ua1Xhok", "start": 3238, "end": 3300, "title": "Steve Jobs, mi sensei" },
+    { "src": "K1A0ua1Xhok", "start": 2381, "end": 2443, "title": "Lo que vender me enseñó" }
+  ]
+}
