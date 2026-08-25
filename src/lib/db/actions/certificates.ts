@@ -6,6 +6,10 @@ import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { certificates, courses, users, instructors } from '@/lib/db/schema';
 import { paymentsEnabled, certificatePriceUsd } from '@/lib/payments/stripe';
+import betaEmails from '@/lib/data/beta-emails.json';
+
+// Beta cohort (waitlist invite, Aug 2026): their certificates come pre-paid.
+const BETA_EMAILS = new Set((betaEmails as string[]).map((e) => e.toLowerCase()));
 
 async function getSessionUser() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -26,10 +30,15 @@ export async function issueCertificateForUser(userId: string, courseId: string) 
   });
   if (existing) return existing;
 
+  // Beta-cohort users get the certificate already activated (no paywall)
+  const owner = await db.query.users.findFirst({ where: eq(users.id, userId) });
+  const isBeta = owner?.email ? BETA_EMAILS.has(owner.email.toLowerCase()) : false;
+
   const [created] = await db.insert(certificates).values({
     userId,
     courseId,
     certificateNumber: generateCertificateNumber(),
+    ...(isBeta ? { paidAt: new Date() } : {}),
   }).returning();
   return created;
 }
