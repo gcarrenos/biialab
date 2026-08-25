@@ -32,6 +32,11 @@ export default function Footer() {
                   Caso de estudio: PlanVoyager
                 </Link>
               </li>
+              <li>
+                <Link href="/transparencia" className="text-sm leading-6 text-gray-400 hover:text-accent">
+                  Transparencia
+                </Link>
+              </li>
             </ul>
           </div>
 
