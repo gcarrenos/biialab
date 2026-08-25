@@ -1,0 +1,51 @@
+{
+  "name": "ia-piloto-carmen",
+  "series": "IA DESDE CERO",
+  "episode": "¿Qué es ChatGPT? Explicado para adultos",
+  "title": "Doña Carmen, 61 años, le perdió el miedo a la IA | IA desde cero",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "characterSheet": "front-facing three-quarter portrait of doña Carmen, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7,
+      "vo": "Doña Carmen tiene 61 años y una tienda de postres. Cuando su nieto le habló de inteligencia artificial, ella dijo: eso no es para mí.",
+      "prompt": "doña Carmen behind the counter of a cozy dessert shop with cakes and flans in a glass display, waving her hand dismissively at a teenage boy holding a smartphone toward her, warm afternoon light",
+      "motion": "the boy holds the phone up hopefully, doña Carmen waves her hand no with a skeptical smile"
+    },
+    {
+      "dur": 7,
+      "vo": "Pero una noche, sola con las cuentas, lo intentó. Escribió en el teléfono, como si fuera un mensaje: ayúdame a responder a mis clientes.",
+      "prompt": "doña Carmen at her kitchen table at night with a calculator, receipts and a notebook spread out, holding her phone close to her reading glasses, typing slowly with one finger, warm lamp light",
+      "motion": "she types slowly with one finger, adjusts her glasses, the phone screen glows on her face"
+    },
+    {
+      "dur": 7,
+      "vo": "Y el teléfono le contestó. Con palabras claras, amables, como una persona. No había que saber nada de computación. Solo escribir, como ella escribía.",
+      "prompt": "close-up over doña Carmen's shoulder of a smartphone in her hands showing a chat conversation, her face softening into surprised delight in the warm light, the kitchen blurred behind",
+      "motion": "her eyebrows lift, a slow smile spreads, she brings the phone slightly closer"
+    },
+    {
+      "dur": 7,
+      "vo": "Esa semana la IA le escribió los mensajes para sus clientes, le organizó los pedidos, y hasta le inventó una promoción para los flanes del viernes.",
+      "prompt": "doña Carmen in her dessert shop in the morning showing her phone proudly to a middle-aged customer, a handwritten sign on the display case, trays of flan, both women laughing, bright cheerful light",
+      "motion": "doña Carmen points at the phone screen, the customer laughs, morning light fills the shop"
+    },
+    {
+      "dur": 7,
+      "vo": "Doña Carmen no aprendió computación. Aprendió a pedir ayuda. Y eso es todo lo que es la inteligencia artificial: un ayudante que ya está en tu teléfono.",
+      "prompt": "doña Carmen sitting relaxed in her shop after closing, feet up on a stool, sipping coffee and chatting on her phone with a calm confident smile, golden evening light through the shop window",
+      "motion": "she sips her coffee, smiles at the phone, golden light glows warmer"
+    },
+    {
+      "dur": 7,
+      "vo": "Si ella pudo a los 61, tú también puedes. En BiiA LAB estamos preparando un curso de inteligencia artificial desde cero, para adultos. Comenta la palabra CURSO si lo quieres.",
+      "prompt": "doña Carmen standing proudly at the door of her dessert shop under a hand-painted sign, arms crossed with a warm confident smile, inviting golden hour light on the street",
+      "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Doña Carmen tiene 61 años, una tienda de postres y le tenía miedo a la inteligencia artificial. Hasta que una noche lo intentó.\n\nIA DESDE CERO es una nueva serie de BiiA LAB para adultos que quieren entender la inteligencia artificial sin tecnicismos. ¿Quieres el curso completo gratis? Comenta CURSO.\n\nAnimación generada con IA.\nMasterclass gratis con certificado: https://www.biialab.org/courses/masterclass-biia-lab-emprende-y-vende?utm_source=youtube&utm_medium=shorts&utm_campaign=ia-desde-cero\n#biialab #inteligenciaartificial #chatgpt #shorts"
+}
