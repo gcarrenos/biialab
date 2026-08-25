@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "ia-desde-cero",
+    "title": "IA desde cero: para los que no nacimos con esto",
+    "shortDescription": "Qué es ChatGPT y cómo usarlo sin tecnicismos: escribirle bien, usarlo en WhatsApp, aplicarlo a tu negocio y detectar estafas. Pensado para adultos que quieren ponerse al día.",
+    "category": "Inteligencia Artificial",
+    "level": "Principiante",
+    "instructorName": "BiiA LAB",
+    "thumbnail": "/coming-soon/ia-desde-cero.jpg"
+  },
+  {
+    "slug": "vende-por-whatsapp",
+    "title": "Vende por WhatsApp: tu negocio en el bolsillo",
+    "shortDescription": "El canal donde ya están tus clientes: catálogo, respuestas que venden, seguimiento sin ser intenso y cierres por chat. Neuroventas aplicadas al teléfono.",
+    "category": "Ventas",
+    "level": "Todos los niveles",
+    "instructorName": "BiiA LAB",
+    "thumbnail": "/coming-soon/vende-por-whatsapp.jpg"
+  },
+  {
+    "slug": "finanzas-sin-miedo",
+    "title": "Finanzas sin miedo: ordena tu plata y sal de deudas",
+    "shortDescription": "El método práctico para dejar de vivir al día: presupuesto real, deudas en orden de ataque, tu primer colchón y el cambio de mentalidad que lo sostiene.",
+    "category": "Finanzas",
+    "level": "Principiante",
+    "instructorName": "BiiA LAB",
+    "thumbnail": "/coming-soon/finanzas-sin-miedo.jpg"
+  },
+  {
+    "slug": "emprender-despues-de-los-40",
+    "title": "Emprender después de los 40: es tu momento",
+    "shortDescription": "Tu experiencia es tu capital. Cómo encontrar el negocio que ya llevas dentro, validarlo sin arriesgar tus ahorros y lanzarlo con la energía de quien no tiene tiempo que perder.",
+    "category": "Emprendimiento",
+    "level": "Todos los niveles",
+    "instructorName": "BiiA LAB",
+    "thumbnail": "/coming-soon/emprender-despues-de-los-40.jpg"
+  },
+  {
+    "slug": "habla-sin-miedo",
+    "title": "Habla en público sin miedo: comunica y convence",
+    "shortDescription": "De la voz temblorosa a la presencia que convence: estructura tu mensaje, domina los nervios y aprende el lenguaje corporal que hace que te crean.",
+    "category": "Comunicación",
+    "level": "Todos los niveles",
+    "instructorName": "BiiA LAB",
+    "thumbnail": "/coming-soon/habla-sin-miedo.jpg"
+  }
+]

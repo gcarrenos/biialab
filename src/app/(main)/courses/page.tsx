@@ -6,6 +6,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCourses, CourseWithDetails } from '@/lib/db/actions/courses';
 import { IconCheck } from '@/components/icons';
+import { ComingSoonCard, type ComingSoonClass } from '@/components/courses/ComingSoonCard';
+import comingSoonData from '@/lib/data/coming-soon.json';
+
+const comingSoonClasses = comingSoonData as ComingSoonClass[];
 
 // Unified course type for display
 interface DisplayCourse {
@@ -286,6 +290,21 @@ function CourseContent() {
                 </p>
               </div>
             )}
+
+            {/* Coming soon: interest test — signups land in waitlist metadata.interests */}
+            <div className="mt-16">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-text-primary">Próximas clases</h2>
+                <p className="mt-1 text-text-secondary">
+                  Estamos preparando estas clases. Dinos cuáles te interesan y te avisamos apenas salgan.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {comingSoonClasses.map((item) => (
+                  <ComingSoonCard key={item.slug} item={item} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
