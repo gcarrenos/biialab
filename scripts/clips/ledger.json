@@ -598,6 +598,30 @@
       "style": "novela",
       "publishAt": "2026-08-29T01:00:00.000Z",
       "uploadedAt": "2026-08-25"
+    },
+    {
+      "sourceVideo": "compilation",
+      "segment": [
+        0,
+        510
+      ],
+      "youtubeId": "6GzmOmlUvMY",
+      "title": "Jürgen Klarić: por qué tu mente te mantiene pobre | Lo mejor de BiiA LAB",
+      "style": "compilation",
+      "publishAt": "2026-08-29T15:00:00.000Z",
+      "uploadedAt": "2026-08-25"
+    },
+    {
+      "sourceVideo": "compilation",
+      "segment": [
+        0,
+        540
+      ],
+      "youtubeId": "2cDcPwX8TT4",
+      "title": "6 historias reales que te cambian la mentalidad en 10 minutos | BiiA LAB",
+      "style": "compilation",
+      "publishAt": "2026-08-31T15:00:00.000Z",
+      "uploadedAt": "2026-08-25"
     }
   ]
 }
