@@ -1,0 +1,63 @@
+{
+  "name": "novela-ep2-la-respuesta",
+  "series": "EL EMPRENDEDOR",
+  "episode": "Capítulo 2: La respuesta equivocada",
+  "title": "Gastó su liquidación en 3 días | El Emprendedor, cap. 2",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm teal and orange color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Diego Ramírez, a 34-year-old Colombian man, medium brown skin, short black hair slightly messy, three-day stubble, tired but warm brown eyes, light blue office shirt with sleeves rolled up, no tie, lean build, wedding ring",
+  "characterSheet": "front-facing three-quarter portrait of Diego Ramírez, neutral office background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 6,
+      "vo": "Diego respondió la pregunta esa misma semana. Y la respondió mal.",
+      "prompt": "Diego at the kitchen table in daylight, the spiral notebook open, now full of arrows, doodles and a big circled word: CAFÉ, a mug of coffee beside it, his face lit up with excitement, morning sun through the window",
+      "motion": "Diego taps the circled word with his pen, leans back grinning, dust floats in the sunbeam"
+    },
+    {
+      "dur": 6,
+      "vo": "Amaba el café. Entonces pensó: voy a vender café. Nadie le preguntó si alguien lo necesitaba.",
+      "prompt": "Diego in a small shop buying a big shiny espresso machine, handing over a thick envelope of cash to a smiling salesman, boxes of coffee bags stacked around, his expression proud and slightly nervous",
+      "motion": "the salesman shakes his hand, Diego glances at the envelope leaving his hand, subtle hesitation"
+    },
+    {
+      "dur": 6,
+      "vo": "En tres días gastó la mitad de su liquidación. Máquina, empaques, logo. Todo menos clientes.",
+      "prompt": "Diego's small apartment living room now crowded with the espresso machine, stacks of branded coffee bags with an orange logo, a printed banner, his wife standing in the doorway with folded arms and a worried face, the daughter peeking behind her",
+      "motion": "the wife slowly shakes her head, Diego raises both hands explaining, the daughter looks between them"
+    },
+    {
+      "dur": 6,
+      "vo": "Puso una mesa en la esquina del barrio. El primer día vendió dos cafés. Uno, a su suegra.",
+      "prompt": "Diego behind a folding table on a Bogotá street corner with a handmade sign, the espresso machine plugged into an extension cord, thermoses and cups neatly arranged, an older woman with a shopping bag holding a small coffee cup and smiling kindly, people walking past without looking",
+      "motion": "pedestrians pass without turning, the older woman raises her cup to him, Diego forces a smile"
+    },
+    {
+      "dur": 6,
+      "vo": "Al tercer día llovió. Recogió la mesa solo, y contó las monedas bajo un techo. No alcanzaba ni para el gas.",
+      "prompt": "Diego alone at night on the same street corner under a small awning, rain pouring, folding the table with one hand, a few coins in his open palm under the yellow streetlight, the espresso machine wrapped in a plastic bag beside him",
+      "motion": "rain falls hard, Diego looks down at the coins in his palm, then closes his hand slowly"
+    },
+    {
+      "dur": 6,
+      "vo": "Su hija le preguntó si el negocio iba bien. Él dijo que sí. Fue la primera vez que le mintió.",
+      "prompt": "Diego sitting on the edge of his daughter's bed at night, the girl in pajamas holding a drawing of a coffee cup with a smiley face, Diego smiling at her with wet eyes, a small nightlight, coffee bags visible stacked in the hallway behind",
+      "motion": "the girl holds up her drawing proudly, Diego nods and touches her hair, his smile trembles slightly"
+    },
+    {
+      "dur": 6,
+      "vo": "Esa noche volvió al cuaderno. Tachó CAFÉ. Y escribió debajo: ¿qué necesitan ELLOS?",
+      "prompt": "extreme close-up of the spiral notebook under warm lamp light, the word CAFÉ crossed out with a hard blue line, and written beneath it in clear handwritten Spanish: ¿Qué necesitan ELLOS?, Diego's hand holding the pen, a cold espresso cup at the edge of the frame",
+      "motion": "very slow push in on the handwritten words, the pen underlines ELLOS"
+    },
+    {
+      "dur": 6,
+      "vo": "Al día siguiente, en vez de vender, se sentó a escuchar. Y una vecina le dijo algo que lo cambió todo.",
+      "prompt": "Diego sitting on a plastic chair at the street corner, coffee table behind him, leaning forward listening intently to a middle-aged woman in a shop apron who is speaking with her hands, other neighbors in the blurred background, golden late afternoon light",
+      "motion": "the woman gestures as she speaks, Diego nods slowly, then his eyebrows lift as if struck by an idea",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Diego respondió la pregunta del cuaderno esa misma semana. Y la respondió mal.\n\nEL EMPRENDEDOR es una serie animada de BiiA LAB sobre lo que de verdad pasa cuando decides emprender. Nuevo capítulo cada semana. Capítulo 1: https://youtube.com/shorts/Nbi-kMedBIM\n\nAnimación generada con IA.\nCursos gratis con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=shorts&utm_campaign=novela\n#biialab #emprendedor #shorts"
+}

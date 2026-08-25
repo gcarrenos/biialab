@@ -1,0 +1,9 @@
+{"name":"wk1-adriana-despertar","source":"scripts/clips/out/PlOPtrZBv6s/source.mp4","start":2890,"end":2975,"hook":"EL MILAGRO QUE HACES\\NCADA MAÑANA SIN NOTARLO","accent":"Adriana Macías","style":"layered paper cutout collage illustration, torn paper edges, soft pastel colors with warm orange accents, handcrafted texture, gentle dimensional shadows, tender and hopeful mood, no text",
+"beats":[
+{"dur":15,"prompt":"a paper cutout bedroom at dawn, a figure under a quilt with eyes just opening, soft pink light through a paper window"},
+{"dur":14,"prompt":"close-up of paper cutout feet at the edge of a bed, toes wiggling, a small orange sunbeam touching them","animate":true,"motion":"the toes wiggle playfully, the sunbeam slides slowly across the feet"},
+{"dur":14,"prompt":"a paper cutout figure sitting up in bed with hands on chest, feeling their own breath, a gentle glow inside the chest"},
+{"dur":14,"prompt":"a paper cutout figure standing at a window stretching arms wide toward a huge paper sun, birds made of paper flying"},
+{"dur":14,"prompt":"a paper cutout figure walking out a front door into a bright day, smiling, tiny paper hearts drifting in the air","animate":true,"motion":"the figure steps forward, paper hearts drift upward slowly, sun brightens"},
+{"dur":14,"prompt":"a wide paper collage of many diverse people waking up in many windows of a city at dawn, all warm and hopeful"}
+]}

@@ -1,0 +1,21 @@
+{
+  "name": "lo-mejor-mujeres-biialab",
+  "openTitle": "3 MUJERES QUE\\NTE CAMBIAN LA VIDA",
+  "openSub": "Mary Cardona · Alejandra Huerta · Adriana Macías",
+  "title": "3 mujeres que te cambian la vida en 12 minutos | Lo mejor de BiiA LAB",
+  "intro": "Los momentos más poderosos de tres de las conferencistas más vistas de BiiA LAB: Mary Cardona (22M de vistas), Alejandra Huerta (inteligencia emocional) y Adriana Macías. Historias reales, lecciones que se quedan.",
+  "sources": "· Mary Cardona, Mapa para triunfadores: https://www.youtube.com/watch?v=a6iP8Z0IEbw\n· Alejandra Huerta, Inteligencia Emocional: https://www.youtube.com/watch?v=K_CzwBUxMBc\n· Adriana Macías, ¿Para qué quejarte?: https://www.youtube.com/watch?v=PlOPtrZBv6s",
+  "hashtags": "#desarrollopersonal #inteligenciaemocional #motivacion",
+  "segments": [
+    { "src": "PlOPtrZBv6s", "start": 0, "end": 95, "speaker": "Adriana Macías", "title": "¿Para qué te quejas?" },
+    { "src": "a6iP8Z0IEbw", "start": 2170, "end": 2226, "speaker": "Mary Cardona", "title": "La sonrisita que preocupó a su mamá" },
+    { "src": "K_CzwBUxMBc", "start": 220, "end": 330, "speaker": "Alejandra Huerta", "title": "La muela y las emociones que ignoras" },
+    { "src": "a6iP8Z0IEbw", "start": 3392, "end": 3450, "speaker": "Mary Cardona", "title": "Aquí nadie usa zapatos" },
+    { "src": "PlOPtrZBv6s", "start": 5326, "end": 5418, "speaker": "Adriana Macías", "title": "Jamás te quedes sin hacer nada" },
+    { "src": "K_CzwBUxMBc", "start": 693, "end": 765, "speaker": "Alejandra Huerta", "title": "El 80% del éxito" },
+    { "src": "a6iP8Z0IEbw", "start": 3902, "end": 3958, "speaker": "Mary Cardona", "title": "Póngale la firma: esto es un cáncer" },
+    { "src": "PlOPtrZBv6s", "start": 2890, "end": 2975, "speaker": "Adriana Macías", "title": "El milagro de despertar" },
+    { "src": "K_CzwBUxMBc", "start": 4795, "end": 4845, "speaker": "Alejandra Huerta", "title": "Cómo cortar con una persona tóxica" },
+    { "src": "a6iP8Z0IEbw", "start": 6355, "end": 6410, "speaker": "Mary Cardona", "title": "Las 2 preguntas para entrar al cielo" }
+  ]
+}

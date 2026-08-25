@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "title": "Masterclass BiiA LAB: Emprende y Vende",
+      "description": "El programa insignia de BiiA LAB: un recorrido curado por las mejores conferencias del canal, ordenado como un curso real. Empieza por la mentalidad (por qué pensamos como pensamos sobre el dinero), sigue con neuroventas (cómo decide de verdad el cerebro que te compra) y cierra con comunicación, emociones y resiliencia con las historias de Mary Cardona, Alejandra Huerta y Adriana Macías. Al aprobar el examen final obtienes un certificado verificable que puedes añadir a LinkedIn.",
+      "shortDescription": "Lo mejor de BiiA LAB en un solo programa: mentalidad, neuroventas y comunicación, con examen final y certificado verificable.",
+      "category": "Emprendimiento",
+      "level": "Todos los niveles",
+      "instructorName": "Jürgen Klarić y conferencistas BiiA LAB",
+      "instructorTitle": "BiiA LAB",
+      "thumbnail": "https://i.ytimg.com/vi/K1A0ua1Xhok/maxresdefault.jpg",
+      "lessons": [
+        {"youtubeVideoId": "zm3hr74Ki40", "title": "Mente pobre: cómo se programó tu relación con el dinero — Mauricio Benoist", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "o8tvc9hiUAs", "title": "Economía y ego: por qué gastas para demostrar — Mauricio Benoist", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "5_s7M859KCk", "title": "Neuro Riqueza: el miedo latino al dinero — Jürgen Klarić", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "K1A0ua1Xhok", "title": "Cómo vender más: técnicas científicas — Jürgen Klarić", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "9yyghPpx2pg", "title": "La ciencia de la percepción en las ventas", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "a6iP8Z0IEbw", "title": "Mapa para triunfadores: PNL aplicada — Mary Cardona", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "K_CzwBUxMBc", "title": "Inteligencia emocional: no ignores tus emociones — Alejandra Huerta", "channel": "BiiA LAB"},
+        {"youtubeVideoId": "uGuUMPvCG90", "title": "Tu verdadero límite mental — Adriana Macías", "channel": "BiiA LAB"}
+      ]
+    }
+  ]
+}

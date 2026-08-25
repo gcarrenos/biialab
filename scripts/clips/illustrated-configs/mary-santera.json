@@ -1,0 +1,39 @@
+{
+  "name": "mary-santera",
+  "source": "scripts/clips/out/a6iP8Z0IEbw/source.mp4",
+  "start": 5490,
+  "end": 5578,
+  "hook": "\"SI USTED NO PARA,\\NLA VAN A PARAR\"",
+  "accent": "Mary Cardona",
+  "style": "soft watercolor storybook illustration, loose expressive brushstrokes, warm golden and terracotta palette with deep teal shadows, textured watercolor paper, gentle light, emotional and humane, no text",
+  "beats": [
+    {
+      "dur": 12,
+      "prompt": "a woman speaker on a warm stage telling a story to an audience, seen from the side, warm spotlight"
+    },
+    {
+      "dur": 14,
+      "prompt": "colonial church of El Cobre in Cuba on a hillside, golden afternoon light, palm trees, pilgrims walking up",
+      "animate": true,
+      "motion": "golden afternoon light shifts over the church, palm trees sway gently in the breeze, pilgrims walk slowly up the hill"
+    },
+    {
+      "dur": 16,
+      "prompt": "an old woman dressed entirely in white standing outside a church door, serene and mysterious, watching"
+    },
+    {
+      "dur": 16,
+      "prompt": "interior of a small church, a woman kneeling in prayer placing sunflowers at an altar, candlelight"
+    },
+    {
+      "dur": 18,
+      "prompt": "the old woman in white whispering gravely to a younger woman outside the church, the younger woman's face turning serious, dusk",
+      "animate": true,
+      "motion": "the old woman in white leans in whispering, the younger woman's expression slowly turns grave, dusk light deepens, slow camera push in"
+    },
+    {
+      "dur": 12,
+      "prompt": "the younger woman walking away alone down a road, storm clouds gathering above her, small and vulnerable in the frame"
+    }
+  ]
+}

@@ -163,13 +163,15 @@ const schema = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['start_seconds', 'end_seconds', 'title', 'description', 'hook'],
+        required: ['start_seconds', 'end_seconds', 'title', 'description', 'hook', 'kind', 'scene_score'],
         properties: {
           start_seconds: { type: 'integer', description: 'Clip start, at a natural sentence boundary' },
           end_seconds: { type: 'integer', description: 'Clip end; 30-60s after start' },
           title: { type: 'string', description: 'YouTube Shorts title in Spanish, <90 chars, high CTR, no clickbait falso' },
           description: { type: 'string', description: 'Spanish description, 2-3 lines, ends with hashtags' },
           hook: { type: 'string', description: 'One-line hook in Spanish shown as on-screen text, <60 chars' },
+          kind: { type: 'string', enum: ['story', 'concept'], description: 'story = anécdota en primera persona con escena concreta (personas, lugar, diálogo); concept = idea o consejo abstracto' },
+          scene_score: { type: 'integer', description: '0-10: qué tan concreta y visual es la escena en los primeros 8 segundos' },
         },
       },
     },
@@ -184,7 +186,15 @@ const response = await client.messages.stream({
     'neuromarketing, desarrollo personal). Seleccionas momentos de videos largos que ' +
     'funcionan como Shorts virales: ideas contraintuitivas, frases citables, historias ' +
     'con giro, consejos accionables. Cada clip debe sostenerse solo, empezar en una ' +
-    'frase completa con gancho inmediato y durar 30-60 segundos.',
+    'frase completa con gancho inmediato y durar 30-60 segundos. ' +
+    'DATOS DE RETENCIÓN DEL CANAL (agosto 2026): las HISTORIAS en primera persona con una escena concreta ' +
+    '(un lugar, personas, un diálogo, un momento: "llegué a mi oficina y un policía...") retienen 95% y las ' +
+    'ideas abstractas o consejos genéricos retienen 60-70%. Los espectadores se van en los primeros 8 ' +
+    'segundos si no hay escena. Por eso: (1) prioriza anécdotas/historias sobre conceptos; al menos 2 de ' +
+    'cada 3 clips deben ser kind=story; (2) el clip debe EMPEZAR dentro de la acción, en la primera frase ' +
+    'que ya sitúa la escena, nunca en la introducción o el contexto previo; (3) el hook en pantalla debe ' +
+    'nombrar la escena o el conflicto, no la moraleja; (4) termina justo después del giro o remate, sin ' +
+    'explicación posterior. Los clips concept solo si son muy contraintuitivos y citables.',
   messages: [{
     role: 'user',
     content:
@@ -358,6 +368,7 @@ clips.forEach((clip, i) => {
     start: clip.start_seconds,
     end: clip.end_seconds,
     title: clip.title,
+    kind: clip.kind, sceneScore: clip.scene_score,
     description: `${clip.description}\n\nVideo completo: ${videoUrl}`,
     hook: clip.hook,
   });

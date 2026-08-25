@@ -1,0 +1,8 @@
+{"name":"wk1-klaric-tres-cerebros","source":"scripts/clips/out/K1A0ua1Xhok/source.mp4","start":1997,"end":2065,"hook":"TIENES 3 CEREBROS.\\NUNO ES UN COCODRILO.","accent":"Jürgen Klarić","style":"vintage comic book ink illustration, heavy black ink linework, halftone dot shading, cream aged paper background, dramatic chiaroscuro lighting, single orange accent color, film noir graphic novel style, no text, no symbols",
+"beats":[
+{"dur":14,"prompt":"a cross-section of a human head showing three nested layers of brain, dramatic ink shading, orange highlight on the innermost core"},
+{"dur":13,"prompt":"a crocodile eye in extreme close-up, ancient and unblinking, reptilian scales, orange glint","animate":true,"motion":"the crocodile eye slowly blinks once, the pupil narrows"},
+{"dur":14,"prompt":"a lone caveman crouched at a fire in a dark cave, alert, wide eyes reflecting flames"},
+{"dur":13,"prompt":"a mother animal curled protectively around her young, tender, soft ink lines, warm orange glow"},
+{"dur":14,"prompt":"a modern person at a desk deep in thought, geometric thought lines rising from the head, the reptile silhouette faintly visible in the shadow behind them","animate":true,"motion":"thought lines slowly rise and swirl, the reptile shadow subtly shifts"}
+]}

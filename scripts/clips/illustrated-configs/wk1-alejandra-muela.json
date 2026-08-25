@@ -1,0 +1,8 @@
+{"name":"wk1-alejandra-muela","source":"scripts/clips/out/K_CzwBUxMBc/source.m4a","start":220,"end":282,"hook":"IGNORAS TUS EMOCIONES\\NCOMO IGNORAS UNA MUELA","accent":"Alejandra Huerta","style":"bold mid-century modern poster illustration, flat geometric shapes, limited palette of orange black and cream, strong negative space, conceptual minimalist design, grain texture, no text",
+"beats":[
+{"dur":12,"prompt":"a stylized human profile with a small glowing orange spot at the jaw, a tiny hand waving it away dismissively"},
+{"dur":13,"prompt":"a giant pill floating above an open hand, geometric, the orange spot on the jaw dimmer but still there"},
+{"dur":12,"prompt":"the same profile with the orange spot now grown into a large jagged shape, cracks radiating outward across the face","animate":true,"motion":"the orange shape slowly pulses and grows, cracks extend outward"},
+{"dur":13,"prompt":"a dentist chair silhouette under a harsh spotlight, dramatic, a figure lying back, geometric instruments above"},
+{"dur":12,"prompt":"a human silhouette with a small orange flame inside the chest, one hand cupping it gently, calm and attentive, soft glow","animate":true,"motion":"the small flame flickers gently, the hand cups it closer, warm glow breathes"}
+]}

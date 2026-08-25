@@ -25,7 +25,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
-import { execFile } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 
 const argv = process.argv.slice(2);
 const flag = (name) => (argv.includes(name) ? argv[argv.indexOf(name) + 1] : null);
@@ -34,6 +34,9 @@ const TOKEN_FILE = path.join(import.meta.dirname, '.youtube-token.json');
 const SCOPES = [
   'https://www.googleapis.com/auth/youtube.upload',
   'https://www.googleapis.com/auth/youtube',
+  'https://www.googleapis.com/auth/youtube.force-ssl', // comment replies
+  'https://www.googleapis.com/auth/yt-analytics.readonly', // retention / traffic reports
+  'https://www.googleapis.com/auth/yt-analytics-monetary.readonly', // ad revenue (income-analyzer)
 ].join(' ');
 
 // ------------------------------------------------------------- credentials
@@ -230,6 +233,7 @@ for (const [i, clip] of metadata.entries()) {
     status: {
       privacyStatus: privacy,
       selfDeclaredMadeForKids: false,
+      ...(clip.syntheticMedia ? { containsSyntheticMedia: true } : {}),
       ...(slot ? { publishAt: slot.toISOString() } : {}),
     },
   };
@@ -251,14 +255,19 @@ for (const [i, clip] of metadata.entries()) {
     continue;
   }
   const uploadUrl = init.headers.get('location');
-  const put = await fetch(uploadUrl, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'video/mp4' },
-    body: fs.readFileSync(file),
-  });
-  const result = await put.json();
-  if (!put.ok) {
-    console.error(`  upload failed: ${put.status} ${JSON.stringify(result)}`);
+  // curl streams from disk and has no header-timeout, unlike fetch (large files
+  // on slow uplinks hit undici HeadersTimeoutError at 5 min).
+  let result;
+  try {
+    const out = execFileSync('curl', ['-sS', '-X', 'PUT', '-H', 'Content-Type: video/mp4',
+      '--data-binary', `@${file}`, uploadUrl], { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
+    result = JSON.parse(out);
+  } catch (error) {
+    console.error(`  upload failed: ${String(error.message).slice(0, 200)}`);
+    continue;
+  }
+  if (!result.id) {
+    console.error(`  upload failed: ${JSON.stringify(result).slice(0, 200)}`);
     continue;
   }
   console.log(`  → https://youtube.com/shorts/${result.id}`);
@@ -269,11 +278,12 @@ for (const [i, clip] of metadata.entries()) {
     ? JSON.parse(fs.readFileSync(ledgerFile, 'utf8'))
     : { uploads: [] };
   ledger.uploads.push({
-    sourceVideo: videoId,
+    sourceVideo: clip.sourceVideoId ?? videoId,
     segment: [clip.start, clip.end],
     youtubeId: result.id,
     title: clip.title,
-    style: clip.hook ? 'captioned' : 'clean',
+    style: clip.style ?? (clip.hook ? 'captioned' : 'clean'),
+    ...(clip.kind ? { kind: clip.kind } : {}),
     publishAt: slot ? slot.toISOString() : privacy,
     uploadedAt: new Date().toISOString().slice(0, 10),
   });

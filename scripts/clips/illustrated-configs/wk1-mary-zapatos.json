@@ -1,0 +1,8 @@
+{"name":"wk1-mary-zapatos","source":"scripts/clips/out/a6iP8Z0IEbw/source.mp4","start":3392,"end":3452,"hook":"\"AQUÍ NADIE USA ZAPATOS\"\\N¿PROBLEMA U OPORTUNIDAD?","accent":"Mary Cardona","style":"soft watercolor storybook illustration, loose expressive brushstrokes, warm golden and terracotta palette with deep teal shadows, textured watercolor paper, gentle light, emotional and humane, no text",
+"beats":[
+{"dur":12,"prompt":"a shoe factory owner in a suit at a desk with a world map, pointing at a distant island, two young salesmen standing before him"},
+{"dur":12,"prompt":"a tropical island shore, villagers walking barefoot on warm sand between palm huts, bright sun","animate":true,"motion":"palm fronds sway, villagers walk slowly along the shore, gentle waves"},
+{"dur":12,"prompt":"a dejected salesman in a wrinkled suit slumped at a telegraph office writing a message, head in hand, defeated"},
+{"dur":12,"prompt":"a second salesman on the same beach grinning widely, arms spread toward the barefoot crowd, eyes shining with excitement","animate":true,"motion":"the salesman spreads his arms wider, the crowd turns toward him, sunlight flares"},
+{"dur":12,"prompt":"two telegram papers side by side on a wooden desk, one crumpled and one held proudly, warm lamplight, no legible text"}
+]}

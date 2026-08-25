@@ -12,6 +12,7 @@ import path from 'node:path';
 const KEY = process.env.FINDCLIX_API_KEY;
 if (!KEY) { console.error('Set FINDCLIX_API_KEY.'); process.exit(1); }
 const MODEL = '@openai/gpt-oss-120b';
+const FALLBACK_MODEL = '@meta/llama-4-scout-17b-16e-instruct';
 
 const here = import.meta.dirname;
 const corpusDir = path.join(here, 'corpus');
@@ -71,13 +72,13 @@ for (const file of files) {
   const { sampled, duration } = condensed;
   const transcript = sampled.map((w) => `[${Math.round(w.start)}s] ${w.text.slice(0, 300)}`).join('\n');
 
-  try {
+  async function requestChapters(model) {
     const res = await fetch('https://ai.findclix.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 2000,
+        model,
+        max_tokens: 5000,
         messages: [
           {
             role: 'system',
@@ -97,7 +98,14 @@ for (const file of files) {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(JSON.stringify(data).slice(0, 150));
-    let text = (data.choices?.[0]?.message?.content ?? '').replace(/```json|```/g, '').trim();
+    const msg = data.choices?.[0]?.message ?? {};
+    // some backends put output in `reasoning`/`reasoning_content` with content null
+    return (msg.content ?? msg.reasoning_content ?? msg.reasoning ?? '').replace(/```json|```/g, '').trim();
+  }
+
+  try {
+    let text = await requestChapters(MODEL);
+    if (!/\{[\s\S]*"chapters"[\s\S]*\}/.test(text)) text = await requestChapters(FALLBACK_MODEL);
     const parsed = JSON.parse(text.match(/\{[\s\S]*\}/)[0]);
     const chapters = parsed.chapters
       .filter((c) => Number.isFinite(c.seconds) && c.seconds >= 0 && c.seconds < duration && c.title)

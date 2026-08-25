@@ -1,0 +1,8 @@
+{"name":"wk1-klaric-harv-eker","source":"scripts/clips/out/5_s7M859KCk/source.mp4","start":413,"end":470,"hook":"EL CONSEJO QUE LO\\NVOLVIÓ MILLONARIO","accent":"Neuro Riqueza","style":"vintage comic book ink illustration, heavy black ink linework, halftone dot shading, cream aged paper background, dramatic chiaroscuro lighting, single orange accent color, film noir graphic novel style, no text, no symbols",
+"beats":[
+{"dur":12,"prompt":"a young shop clerk in an apron behind the counter of a sporting goods store, rows of sneakers and tennis rackets, fluorescent light"},
+{"dur":12,"prompt":"a wealthy older man in a fine coat entering the sporting goods store, the young clerk looking up with sudden determination","animate":true,"motion":"the wealthy man walks slowly through the door, the clerk straightens up, subtle camera push"},
+{"dur":11,"prompt":"close-up of the young clerk leaning across the counter earnestly asking the wealthy man a question, the man listening with an amused smile"},
+{"dur":11,"prompt":"the wealthy man tapping his own temple with one finger, a knowing look, the young clerk absorbing every word"},
+{"dur":11,"prompt":"the same young man years later, older, in a study surrounded by stacks of his own published books, looking out a window at a city skyline","animate":true,"motion":"slow zoom out revealing the stacks of books, city lights twinkling"}
+]}

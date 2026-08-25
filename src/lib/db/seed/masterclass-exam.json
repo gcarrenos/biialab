@@ -1,0 +1,214 @@
+{
+  "exams": [
+    {
+      "courseSlug": "masterclass-biia-lab-emprende-y-vende",
+      "title": "Examen final — Masterclass Emprende y Vende",
+      "description": "20 preguntas sobre mentalidad, neuroventas y comunicación. Necesitas 70% para aprobar y obtener tu certificado.",
+      "passingScore": 70,
+      "questions": [
+        {
+          "question": "Según Mauricio Benoist, ¿por qué muchas personas sienten miedo al emprender?",
+          "options": [
+            "Porque el cerebro reinterpreta castigos del pasado y asocia arriesgarse con dolor",
+            "Porque no tienen suficiente dinero inicial",
+            "Porque emprender requiere estudios universitarios",
+            "Porque la economía siempre está en crisis"
+          ],
+          "correctIndex": 0,
+          "explanation": "Benoist explica que el cerebro reinterpreta aprendizajes del pasado: si te castigaron por intentar, hoy asocia el riesgo con dolor."
+        },
+        {
+          "question": "Cuando Benoist preguntó a su jefe si el sueldo le alcanzaba para vivir, la respuesta fue \"de hambre no te vas a morir\". ¿Qué lección ilustra esta historia en el curso?",
+          "options": [
+            "Hay que aceptar el sueldo que te ofrezcan",
+            "Los jefes siempre pagan poco",
+            "Nadie va a diseñar tu abundancia por ti: esa decisión es tuya",
+            "Es mejor no preguntar sobre dinero"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "¿Qué error cometió Benoist en su primer negocio (el gimnasio)?",
+          "options": [
+            "Eligió un mal local",
+            "Emprendió sin haber trabajado su mentalidad y su preparación para manejar dinero",
+            "No consiguió socio",
+            "Invirtió demasiado en publicidad"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Según Jürgen Klarić, ¿la pobreza es principalmente…?",
+          "options": [
+            "Física: falta de recursos",
+            "Genética e imposible de cambiar",
+            "Culpa del gobierno de turno",
+            "Mental: creencias y cultura que heredamos sobre el dinero"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "question": "Klarić afirma que aproximadamente 7 de cada 10 latinos…",
+          "options": [
+            "Quieren emprender este año",
+            "Ya tienen un negocio propio",
+            "Le tienen miedo al dinero",
+            "Ahorran más del 20% de su ingreso"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "En Neuro Riqueza, ¿qué determina el valor de las cosas según Klarić?",
+          "options": [
+            "Lo que significan para las personas",
+            "Su precio de mercado",
+            "El costo de producirlas",
+            "La marca que las fabrica"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "question": "¿Cuál fue la primera y única experiencia de Klarić como empleado?",
+          "options": [
+            "Diez años en una multinacional",
+            "Un año como vendedor de seguros",
+            "Nunca fue empleado",
+            "Seis meses con el dueño de una boutique importante, de quien aprendió antes de renunciar para hacer su propia \"silla\""
+          ],
+          "correctIndex": 3
+        },
+        {
+          "question": "Según Klarić, ¿cuál es la \"muerte #1\" de los emprendedores?",
+          "options": [
+            "No saber administrar",
+            "No saber vender",
+            "No tener socios",
+            "No tener capital"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Klarić cuenta que Apple no siempre tuvo el mejor producto. ¿Qué explica su éxito según el curso?",
+          "options": [
+            "Saben vender: conectan con la mente del consumidor",
+            "Sus precios bajos",
+            "Su publicidad masiva en televisión",
+            "La suerte de llegar primero"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "question": "En el modelo de los tres cerebros que enseña Klarić, ¿cuál toma la decisión final de compra?",
+          "options": [
+            "El córtex racional",
+            "El cerebro límbico exclusivamente",
+            "El cerebro reptil (instintivo)",
+            "Los tres por igual"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "¿Por qué \"aquí todo es buenísimo\" es un mal argumento de venta según Klarić?",
+          "options": [
+            "Porque es demasiado corto",
+            "Porque no diferencia ni responde a la necesidad concreta del cliente",
+            "Porque suena informal",
+            "Porque los clientes prefieren productos caros"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Según Klarić, la mayoría de nuestras compras están motivadas por…",
+          "options": [
+            "La lógica y la comparación de precios",
+            "La publicidad",
+            "La costumbre",
+            "El miedo"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "question": "¿Qué recomienda Klarić enseñar a los hijos, en lugar de \"engañarlos\" sobre cómo funciona la vida?",
+          "options": [
+            "A ahorrar únicamente",
+            "A evitar los negocios",
+            "A vender y ganarse la vida resolviendo problemas",
+            "A buscar un empleo estable"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "En la ciencia de la percepción aplicada a ventas, ¿qué papel juega la primera impresión (postura, presentación, sonrisa)?",
+          "options": [
+            "Configura cómo el cliente percibe todo lo demás: vendes antes de hablar",
+            "Es secundaria frente al precio",
+            "Solo importa en ventas de lujo",
+            "No influye en decisiones racionales"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "question": "¿Qué enseña Mary Cardona con la pregunta \"¿aquí nadie usa zapatos: problema u oportunidad?\"",
+          "options": [
+            "Que hay mercados imposibles",
+            "Que hay que investigar antes de viajar",
+            "Que el calzado es un mal negocio",
+            "Que la misma realidad puede leerse como obstáculo o como mercado por conquistar: depende de tu marco mental"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "question": "Según Mary Cardona, ¿por qué es importante \"tener clara tu misión\"?",
+          "options": [
+            "Para escribirla en el currículum",
+            "Porque sin un para qué claro, las decisiones diarias pierden dirección y energía",
+            "Porque lo piden los inversionistas",
+            "Para publicarla en redes"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Alejandra Huerta compara ignorar las emociones con ignorar una muela que duele. ¿Qué significa?",
+          "options": [
+            "El malestar emocional que aplazas no desaparece: se infecta y cobra más caro después",
+            "Las emociones desaparecen solas con el tiempo",
+            "Hay que ir al dentista con frecuencia",
+            "Las emociones son una debilidad"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "question": "¿Qué demuestra la historia de Adriana Macías sobre aprender a cocinar para su esposo?",
+          "options": [
+            "Que la cocina es fácil",
+            "Que hay que casarse tarde",
+            "Que los límites que asumimos como físicos suelen ser mentales: las herramientas se construyen",
+            "Que es mejor pedir comida"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "Cuando la señora de la panadería le dijo a Adriana \"si yo estuviera como usted, estaría llorando en mi casa\", ¿qué lección extrae Adriana?",
+          "options": [
+            "Hay que evitar las panaderías",
+            "La postura ante la vida no depende de las circunstancias: habla de nosotros, no de lo que nos pasó",
+            "Nunca hay que responder a extraños",
+            "La lástima es una forma de cariño"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Hilando todo el programa: ¿cuál es la pregunta correcta para encontrar un negocio, según el enfoque BiiA LAB?",
+          "options": [
+            "¿Qué me gusta vender a mí?",
+            "¿Qué producto está de moda?",
+            "¿Qué requiere menos inversión?",
+            "¿Qué sé hacer que otros necesitan?"
+          ],
+          "correctIndex": 3,
+          "explanation": "El hilo del programa: el negocio nace de cruzar lo que sabes hacer con lo que la gente de verdad necesita, no de tus gustos personales."
+        }
+      ]
+    }
+  ]
+}

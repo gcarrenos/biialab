@@ -1,0 +1,20 @@
+{
+  "name": "historias-que-cambian",
+  "coldOpen": true,
+  "openTitle": "HISTORIAS QUE TE\\NCAMBIAN EL CHIP",
+  "openSub": "Momentos reales de los conferencistas de BiiA LAB",
+  "title": "6 historias reales que te cambian la mentalidad en 10 minutos | BiiA LAB",
+  "intro": "Un policía que no lo dejó entrar a su propia oficina. Un puesto de limonada. Una señora que le tuvo lástima. Historias reales de Jürgen Klarić, Mauricio Benoist y Adriana Macías que valen más que cualquier teoría.",
+  "sources": "· Cómo Vender Más (Klarić): https://www.youtube.com/watch?v=K1A0ua1Xhok\n· Mente Millonaria (Benoist): https://www.youtube.com/watch?v=zm3hr74Ki40\n· Tu verdadero límite (Adriana Macías): https://www.youtube.com/watch?v=uGuUMPvCG90\n· Mapa para triunfadores (Mary Cardona): https://www.youtube.com/watch?v=a6iP8Z0IEbw",
+  "hashtags": "#biialab #historias #motivacion #emprender",
+  "segments": [
+    { "src": "K1A0ua1Xhok", "start": 437, "end": 497, "speaker": "Jürgen Klarić", "title": "Un policía en mi propia oficina" },
+    { "src": "zm3hr74Ki40", "start": 265, "end": 335, "speaker": "Mauricio Benoist", "title": "Llegué a México con 6 mil pesos" },
+    { "src": "zm3hr74Ki40", "start": 622, "end": 680, "speaker": "Mauricio Benoist", "title": "Quebrado, sin visa y sin volver a casa" },
+    { "src": "K1A0ua1Xhok", "start": 879, "end": 960, "speaker": "Jürgen Klarić", "title": "El puesto de limonada" },
+    { "src": "uGuUMPvCG90", "start": 1923, "end": 1978, "speaker": "Adriana Macías", "title": "El platillo favorito de Juan" },
+    { "src": "uGuUMPvCG90", "start": 2552, "end": 2620, "speaker": "Adriana Macías", "title": "La señora de la panadería" },
+    { "src": "a6iP8Z0IEbw", "start": 3392, "end": 3452, "speaker": "Mary Cardona", "title": "\"Aquí nadie usa zapatos\"" },
+    { "src": "K1A0ua1Xhok", "start": 769, "end": 830, "speaker": "Jürgen Klarić", "title": "\"Jaime, me voy: quiero tu silla\"" }
+  ]
+}

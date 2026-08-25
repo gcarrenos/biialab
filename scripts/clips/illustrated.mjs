@@ -1,0 +1,212 @@
+#!/usr/bin/env node
+// Illustrated audio Short: real talk audio over AI-illustrated beats,
+// ken-burns motion, whisper captions + hook overlay. Config-driven:
+//
+//   FAL_KEY=... node scripts/clips/illustrated.mjs <config.json>
+//
+// config: { name, source, start, end, hook, accent, style, beats: [{dur, prompt}] }
+// Output: out/illustrated/<name>/<name>.mp4  (images cached per beat)
+
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const FAL_KEY = process.env.FAL_KEY;
+const configFile = process.argv[2];
+if (!FAL_KEY || !configFile) { console.error('Usage: FAL_KEY=... node illustrated.mjs <config.json>'); process.exit(1); }
+const cfg = JSON.parse(fs.readFileSync(configFile, 'utf8'));
+
+const here = import.meta.dirname;
+const fontsDir = path.join(here, 'fonts');
+const outDir = path.join(here, 'out', 'illustrated', cfg.name);
+const model = path.join(here, 'models', 'ggml-large-v3-turbo.bin');
+fs.mkdirSync(outDir, { recursive: true });
+
+const totalBeats = cfg.beats.reduce((s, b) => s + b.dur, 0);
+const audioDur = cfg.end - cfg.start;
+if (Math.abs(totalBeats - audioDur) > 0.5) {
+  console.error(`Beat durations (${totalBeats}s) must match audio ${audioDur}s`);
+  process.exit(1);
+}
+
+async function generate(prompt, file) {
+  const res = await fetch('https://fal.run/fal-ai/flux/dev', {
+    method: 'POST',
+    headers: { Authorization: `Key ${FAL_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      prompt: `${cfg.style}, ${prompt}`,
+      image_size: { width: 768, height: 1344 },
+      num_inference_steps: 28,
+      guidance_scale: 3.5,
+      enable_safety_checker: true,
+    }),
+    signal: AbortSignal.timeout(180_000),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(JSON.stringify(data).slice(0, 200));
+  const img = await fetch(data.images[0].url);
+  fs.writeFileSync(file, Buffer.from(await img.arrayBuffer()));
+}
+
+async function animateImage(imgFile, motion, outFile) {
+  const dataUri = 'data:image/jpeg;base64,' + fs.readFileSync(imgFile).toString('base64');
+  const res = await fetch('https://fal.run/fal-ai/kling-video/v2.1/standard/image-to-video', {
+    method: 'POST',
+    headers: { Authorization: `Key ${FAL_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      prompt: `subtle gentle animation, illustration style strictly preserved, ${motion}`,
+      image_url: dataUri,
+      duration: '5',
+    }),
+    signal: AbortSignal.timeout(600_000),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(JSON.stringify(data).slice(0, 200));
+  const v = await fetch(data.video?.url ?? data.videos?.[0]?.url);
+  fs.writeFileSync(outFile, Buffer.from(await v.arrayBuffer()));
+}
+
+function parseTime(t) { const [h, m, s] = t.split(':'); return +h * 3600 + +m * 60 + +s.replace(',', '.'); }
+function assTime(sec) { const s = Math.max(0, sec), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60); return `${h}:${String(m).padStart(2, '0')}:${(s % 60).toFixed(2).padStart(5, '0')}`; }
+
+console.log('1/4 Generating illustrations…');
+for (const [i, beat] of cfg.beats.entries()) {
+  const file = path.join(outDir, `beat-${i + 1}.jpg`);
+  if (!fs.existsSync(file)) {
+    await generate(beat.prompt, file);
+    console.log(`   beat ${i + 1}/${cfg.beats.length} ok`);
+  }
+  if (beat.animate) {
+    const animFile = path.join(outDir, `beat-${i + 1}.anim.mp4`);
+    if (!fs.existsSync(animFile)) {
+      console.log(`   animating beat ${i + 1} (kling i2v)…`);
+      await animateImage(file, beat.motion ?? 'slow camera push in, elements move gently', animFile);
+    }
+  }
+}
+
+console.log('2/4 (deferred — beats animate after audio tightening)');
+function animateBeats() {
+const parts = [];
+cfg.beats.forEach((beat, i) => {
+  const img = path.join(outDir, `beat-${i + 1}.jpg`);
+  const clip = path.join(outDir, `beat-${i + 1}.mp4`);
+  const animFile = path.join(outDir, `beat-${i + 1}.anim.mp4`);
+  if (beat.animate && fs.existsSync(animFile)) {
+    // Fit the ~5s animated clip to the beat: slow it down, and boomerang
+    // (forward + reverse) when the stretch would exceed ~2.5x.
+    const srcDur = 5;
+    const factor = beat.dur / srcDur;
+    const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30';
+    if (factor <= 2.5) {
+      execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', animFile,
+        '-vf', `setpts=${factor.toFixed(4)}*PTS,${vf}`,
+        '-t', String(beat.dur), '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', clip]);
+    } else {
+      const f2 = beat.dur / (srcDur * 2);
+      execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', animFile,
+        '-filter_complex', `[0:v]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,setpts=${f2.toFixed(4)}*PTS,${vf}[out]`,
+        '-map', '[out]', '-t', String(beat.dur), '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', clip]);
+    }
+  } else {
+    const frames = Math.round(beat.dur * 30);
+    const zoom = i % 2 === 0
+      ? `'min(1+0.12*on/${frames},1.12)'`
+      : `'max(1.12-0.12*on/${frames},1.0)'`;
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-loop', '1', '-framerate', '30', '-t', String(beat.dur), '-i', img,
+      '-vf', `scale=-2:3840,crop=2160:3840,zoompan=z=${zoom}:x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s=1080x1920:fps=30`,
+      '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-r', '30', '-pix_fmt', 'yuv420p', '-an', clip]);
+  }
+  parts.push(clip);
+});
+
+const listFile = path.join(outDir, 'concat.txt');
+fs.writeFileSync(listFile, parts.map((p) => `file '${p}'`).join('\n'));
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', path.join(outDir, 'visual.mp4')]);
+}
+
+console.log('3/4 Audio (tighten dead air) + captions…');
+// Detect silences in the raw segment, then rebuild the audio keeping a short
+// natural breath (0.15s) where each long pause was.
+const rawAudio = path.join(outDir, 'audio-raw.wav');
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(cfg.start), '-to', String(cfg.end), '-i', cfg.source,
+  '-vn', '-ar', '48000', '-ac', '2', rawAudio]);
+let stderrText = '';
+try {
+  stderrText = execFileSync('sh', ['-c', `ffmpeg -i '${rawAudio}' -af silencedetect=noise=-35dB:d=0.45 -f null - 2>&1 | grep silence`], { encoding: 'utf8' });
+} catch { /* no silences at all — nothing to tighten */ }
+const silences = [];
+{
+  let start = null;
+  for (const line of stderrText.split('\n')) {
+    const ms = line.match(/silence_start: ([\d.]+)/);
+    const me = line.match(/silence_end: ([\d.]+)/);
+    if (ms) start = Number(ms[1]);
+    if (me && start !== null) { silences.push([start, Number(me[1])]); start = null; }
+  }
+}
+const BREATH = 0.15;
+const keeps = [];
+let pos = 0;
+for (const [s0, s1] of silences) {
+  if (s0 - pos > 0.05) keeps.push([pos, Math.min(s0 + BREATH, s1)]);
+  pos = s1;
+}
+if (audioDur - pos > 0.05) keeps.push([pos, audioDur]);
+const tightDur = keeps.reduce((t, [a, b]) => t + (b - a), 0);
+console.log(`   dead air: ${(audioDur - tightDur).toFixed(1)}s removed (${audioDur}s -> ${tightDur.toFixed(1)}s)`);
+
+const audio = path.join(outDir, 'audio.m4a');
+const fadeStart = Math.max(0, tightDur - 2.5);
+const trimChain = keeps.map(([a, b], i) => `[0:a]atrim=${a}:${b},asetpts=PTS-STARTPTS[a${i}]`).join(';');
+const concatIn = keeps.map((_, i) => `[a${i}]`).join('');
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', rawAudio,
+  '-filter_complex', `${trimChain};${concatIn}concat=n=${keeps.length}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st=${fadeStart}:d=2.5[out]`,
+  '-map', '[out]', '-c:a', 'aac', '-ar', '48000', audio]);
+fs.unlinkSync(rawAudio);
+
+// Rescale beat durations proportionally to the tightened audio
+const scale = tightDur / totalBeats;
+cfg.beats.forEach((b) => { b.dur = b.dur * scale; });
+
+animateBeats();
+const visual = path.join(outDir, 'visual.mp4');
+const wav = path.join(outDir, 'audio.wav');
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', audio, '-ar', '16000', '-ac', '1', wav]);
+execFileSync('whisper-cli', ['-m', model, '-f', wav, '-l', 'es', '-ml', '22', '-sow', '-ovtt', '-of', path.join(outDir, 'captions')], { stdio: 'ignore' });
+fs.unlinkSync(wav);
+const vtt = fs.readFileSync(path.join(outDir, 'captions.vtt'), 'utf8');
+const chunks = [];
+for (const block of vtt.split(/\n\n+/)) {
+  const m = block.match(/([\d:.]+) --> ([\d:.]+)/);
+  if (!m) continue;
+  const t = block.slice(block.indexOf('\n') + 1).replace(/\s+/g, ' ').trim();
+  if (t) chunks.push({ start: parseTime(m[1]), end: parseTime(m[2]), text: t.replace(/[{}]/g, '') });
+}
+
+const assFile = path.join(outDir, 'overlay.ass');
+fs.writeFileSync(assFile, `[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Accent,Permanent Marker,56,&H001AD9FF,&H00FFFFFF,&H001A1A1A,&H001A1A1A,0,0,0,0,100,100,0,3,1,4,0,8,70,70,240,1
+Style: Hook,Anton,84,&H00144DFF,&H00FFFFFF,&H00F2E9D8,&H641A1A1A,0,0,0,0,100,100,1,0,1,6,3,8,60,60,310,1
+Style: Caption,Archivo Black,66,&H00FFFFFF,&H00FFFFFF,&H001A1A1A,&HA0000000,0,0,0,0,100,100,0,0,1,6,2,2,70,70,260,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:03.80,Accent,,0,0,0,,{\\fad(100,150)\\frz-4}${cfg.accent}
+Dialogue: 1,0:00:00.20,0:00:03.80,Hook,,0,0,0,,{\\fad(120,200)}${cfg.hook}
+` + chunks.map((c) => `Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Caption,,0,0,0,,${c.text}`).join('\n') + '\n');
+
+console.log('4/4 Final mux…');
+const final = path.join(outDir, `${cfg.name}.mp4`);
+const vFade = Math.max(0, tightDur - 1.4);
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', visual, '-i', audio,
+  '-vf', `ass=${assFile}:fontsdir=${fontsDir},fade=t=out:st=${vFade}:d=1.4`,
+  '-map', '0:v', '-map', '1:a', '-c:a', 'copy', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20',
+  '-shortest', final]);
+console.log(`Done: ${final}`);
