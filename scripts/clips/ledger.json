@@ -622,6 +622,18 @@
       "style": "compilation",
       "publishAt": "2026-08-31T15:00:00.000Z",
       "uploadedAt": "2026-08-25"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        66
+      ],
+      "youtubeId": "GG7L1gCpLYo",
+      "title": "Doña Carmen, 61 años, le perdió el miedo a la IA | IA desde cero",
+      "style": "novela",
+      "publishAt": "2026-08-26T20:00:00.000Z",
+      "uploadedAt": "2026-08-25"
     }
   ]
 }
