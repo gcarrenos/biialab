@@ -1,0 +1,63 @@
+{
+  "name": "novela-ep3-la-vecina",
+  "series": "EL EMPRENDEDOR",
+  "episode": "Capítulo 3: Lo que dijo la vecina",
+  "title": "Vendió la máquina y ganó su primer cliente | El Emprendedor, cap. 3",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm teal and orange color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Diego Ramírez, a 34-year-old Colombian man, medium brown skin, short black hair slightly messy, three-day stubble, tired but warm brown eyes, light blue office shirt with sleeves rolled up, no tie, lean build, wedding ring",
+  "characterSheet": "front-facing three-quarter portrait of Diego Ramírez, neutral office background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7.2,
+      "vo": "La vecina se llamaba doña Gloria. Tenía una tienda hace veinte años. Y le dijo: mijo, aquí nadie necesita más café.",
+      "prompt": "doña Gloria, a sturdy middle-aged Colombian woman in a shop apron, standing at the counter of a small neighborhood tienda full of shelves with bread, eggs, sodas and snacks, speaking frankly to Diego who stands on the other side of the counter listening, warm afternoon light through the doorway",
+      "motion": "doña Gloria gestures around the shop, Diego listens without moving, a fan turns slowly overhead"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Lo que necesitamos, dijo, es alguien que nos traiga el pedido. Yo pierdo media mañana yendo por mercancía.",
+      "prompt": "doña Gloria pointing at a handwritten list of supplies taped to the wall behind the counter, a heavy sack of rice at her feet, her hand on her lower back as if it hurts, Diego looking at the list with sudden attention",
+      "motion": "doña Gloria taps the list, shifts her weight and rubs her back, Diego leans in toward the list"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Diego preguntó en la tienda de al lado. Y en la otra. Y en la otra. Doce tiendas. Doce veces la misma respuesta.",
+      "prompt": "Diego walking down a Bogotá barrio street with small tiendas one after another, colorful storefronts, talking to a shopkeeper at each door, notebook in hand, taking notes, afternoon light, people and a stray dog in the street",
+      "motion": "slow tracking shot along the street, Diego moves from one storefront to the next, writing as he walks"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Esa noche llenó una página entera. Por primera vez, no era lo que él quería vender. Era lo que ellos querían comprar.",
+      "prompt": "close-up of the spiral notebook under warm lamp light, a full page of handwritten Spanish notes in blue ink: a list of tienda names with times and products, and at the top underlined the words: LO QUE NECESITAN, Diego's hand resting on the page",
+      "motion": "very slow push in on the page, Diego's finger runs down the list of names"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Al día siguiente hizo lo más difícil de su vida. Vendió la máquina de café. A mitad de precio.",
+      "prompt": "Diego handing over the shiny espresso machine to a young man loading it into the back of a small van on the street, Diego's face tight, one hand still resting on the machine as if saying goodbye, his wife watching from the apartment window above",
+      "motion": "the young man closes the van door, Diego's hand slides off the machine slowly, he exhales"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Con esa plata compró una moto usada y un canasto grande. Su hija le pintó el nombre en el canasto: DIEGO TE LO TRAE.",
+      "prompt": "Diego and his eight-year-old daughter with curly hair kneeling on the sidewalk beside an old red motorcycle, the daughter painting with a brush on a big wicker delivery basket the words in bright orange handwritten letters: DIEGO TE LO TRAE, both smiling, paint on the girl's fingers",
+      "motion": "the daughter finishes a letter and looks up at him, Diego laughs, sunlight flickers through the trees"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Lunes, seis de la mañana. Primer pedido: doña Gloria. Dos bultos de arroz, aceite, huevos. La entrega llegó a las seis y media.",
+      "prompt": "Diego at dawn parking the red motorcycle in front of doña Gloria's tienda, the big basket loaded with sacks and egg trays, doña Gloria in the doorway with a surprised, delighted expression, checking her watch, blue early morning light",
+      "motion": "Diego lifts a sack from the basket, doña Gloria raises both hands in delighted surprise, morning light grows"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Ese día ganó doce mil pesos. Casi nada. Pero por primera vez, alguien le había pagado por resolver un problema. Y doña Gloria le dijo algo más.",
+      "prompt": "Diego sitting on the motorcycle outside the tienda holding a few folded bills, looking at them with a small stunned smile, doña Gloria leaning in the doorway with a knowing look about to say something, morning sun on the street",
+      "motion": "Diego looks up from the bills toward doña Gloria, she folds her arms and starts to speak, warm light shifts",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Doña Gloria le dijo la verdad: aquí nadie necesita más café. Lo que necesitamos es que alguien nos traiga el pedido.\n\nEL EMPRENDEDOR es una serie animada de BiiA LAB sobre lo que de verdad pasa cuando decides emprender. Nuevo capítulo cada semana. Capítulo 1: https://youtube.com/shorts/Nbi-kMedBIM · Capítulo 2: https://youtube.com/shorts/dZH4DNQ_0g8\n\nAnimación generada con IA.\nCursos gratis con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=shorts&utm_campaign=novela\n#biialab #emprendedor #shorts"
+}
