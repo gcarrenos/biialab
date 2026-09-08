@@ -47,3 +47,7 @@ next-env.d.ts
 /scripts/clips/corpus/
 /scripts/clips/models/
 /scripts/clips/replied.json
+
+# third-party transcripts (not ours to ship) + compiled analyzer binary
+scripts/clips/corpus-ext/
+scripts/clips/income-analyzer

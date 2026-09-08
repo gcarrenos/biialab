@@ -1,0 +1,54 @@
+{
+  "name": "ia-cap5-el-nieto",
+  "series": "IA DESDE CERO",
+  "episode": "Cap. 5: El nieto",
+  "title": "Su nieto le enseñó la IA. Ahora ella le enseña a él | IA desde cero, cap. 5",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "titleOverlay": true,
+  "endSeconds": 2.5,
+  "endCard": { "top": "Comenta CURSO", "url": "biialab.org", "small": "te avisamos cuando salga el curso gratis" },
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "characterSheet": "front-facing three-quarter portrait of doña Carmen, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7,
+      "vo": "Mateo, el nieto de doña Carmen, llegó a la tienda con la cara larga. Tenía que entregar un resumen de veinte páginas al otro día. Y no había leído ni una.",
+      "prompt": "a teenage boy of about fifteen with curly dark hair and a hoodie slumped on a stool at the dessert shop counter with a thick book and a school notebook, doña Carmen looking at him from behind the counter with a knowing smile, warm afternoon light",
+      "motion": "the boy drops his head onto the book, doña Carmen tilts her head with an amused smile"
+    },
+    {
+      "dur": 7,
+      "vo": "Él le pidió al teléfono: hazme el resumen. Y le salió algo largo, frío, que sonaba a robot. La abuela se asomó por encima del hombro.",
+      "prompt": "over-the-shoulder view of the teenage boy showing his phone with a long wall of text, doña Carmen leaning in beside him with her reading glasses on, reading the screen with a skeptical raised eyebrow, warm shop light",
+      "motion": "the boy scrolls the long text, doña Carmen leans in closer and raises an eyebrow"
+    },
+    {
+      "dur": 8,
+      "vo": "Pregúntale bien, le dijo. Dile para quién es, cuántas páginas quieres, y que te explique cada capítulo como si tuvieras quince años. Y después lo lees, porque tú firmas.",
+      "prompt": "doña Carmen sitting beside her grandson at the counter, pointing at his phone screen with one finger while she talks, the boy listening with surprise, a flan and two cups of coffee beside them, warm golden light",
+      "motion": "she points at the screen and talks, the boy turns to look at her surprised"
+    },
+    {
+      "dur": 7,
+      "vo": "Mateo la miró. ¿Y tú cuándo aprendiste eso, abuela? Ella se encogió de hombros. Una noche, sola con las cuentas.",
+      "prompt": "the teenage boy looking at doña Carmen with wide surprised eyes, doña Carmen shrugging with a modest playful smile, the dessert shop counter between them, soft warm light",
+      "motion": "the boy stares at her, doña Carmen shrugs and gives a small playful smile"
+    },
+    {
+      "dur": 7,
+      "vo": "El resumen quedó en dos páginas, con sus palabras. Sacó la mejor nota del curso. Y esa tarde, por primera vez, fue el nieto el que le dijo gracias.",
+      "prompt": "the teenage boy hugging doña Carmen at the door of the dessert shop, his backpack on, she is laughing with her eyes closed, hand-painted shop sign above them, golden evening light",
+      "motion": "the boy hugs her, she laughs and pats his back, light glows warmer"
+    },
+    {
+      "dur": 8,
+      "vo": "La inteligencia artificial no tiene edad. Tiene preguntas. Si doña Carmen pudo a los 61, tú también. Comenta la palabra CURSO y te avisamos cuando esté listo el curso gratis.",
+      "prompt": "doña Carmen standing at the door of her dessert shop under a hand-painted sign, arms crossed with a warm confident smile, golden hour light on the street",
+      "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Mateo tenía que entregar un resumen de 20 páginas y le pidió al teléfono que lo hiciera. Le salió algo que sonaba a robot. Su abuela se asomó por encima del hombro.\n\nIA DESDE CERO es la serie de BiiA LAB para adultos que quieren usar la inteligencia artificial sin tecnicismos. Cap. 5: el nieto.\n\n¿Quieres el curso completo gratis? Comenta CURSO.\n\nAnimación generada con IA.\nDeja tu correo y te avisamos cuando salga el curso: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=ia-desde-cero#proximas-clases\n#biialab #inteligenciaartificial #chatgpt #shorts"
+}

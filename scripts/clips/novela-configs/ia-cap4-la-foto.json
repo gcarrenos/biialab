@@ -1,0 +1,54 @@
+{
+  "name": "ia-cap4-la-foto",
+  "series": "IA DESDE CERO",
+  "episode": "Cap. 4: La foto",
+  "title": "Una foto le trajo 14 pedidos en un fin de semana | IA desde cero, cap. 4",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "titleOverlay": true,
+  "endSeconds": 2.5,
+  "endCard": { "top": "Comenta CURSO", "url": "biialab.org", "small": "te avisamos cuando salga el curso gratis" },
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "characterSheet": "front-facing three-quarter portrait of doña Carmen, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7,
+      "vo": "Doña Carmen hace los mejores flanes del barrio. Pero en las fotos que manda por WhatsApp, parecen tristes. Oscuros. Nadie los pide por foto.",
+      "prompt": "doña Carmen in her dim kitchen at night holding her phone over a flan on a dark plate, the phone screen showing a blurry dark photo, disappointed face, weak overhead light",
+      "motion": "she looks at the phone screen, frowns, lowers the phone and looks at the flan"
+    },
+    {
+      "dur": 7,
+      "vo": "Su nieto siempre le decía: abuela, es la foto. Pero él no estaba. Así que le preguntó a la inteligencia artificial: ¿cómo tomo una buena foto con este teléfono?",
+      "prompt": "doña Carmen sitting at her kitchen table typing on her phone with one finger, the sad flan photo still on the table beside her, reading glasses on, curious expression, warm lamp light",
+      "motion": "she types slowly, looks up thinking, then types again"
+    },
+    {
+      "dur": 8,
+      "vo": "La IA le dijo cuatro cosas: junto a una ventana, en la mañana, plato blanco, y de cerca. Nada de aplicaciones. Nada que comprar.",
+      "prompt": "close-up of doña Carmen's phone screen with a short chat reply visible as a soft blur, her face reading it with a slow nod, morning light beginning to come through the kitchen window behind her",
+      "motion": "she reads, nods slowly, glances toward the window with a small smile"
+    },
+    {
+      "dur": 7,
+      "vo": "Al día siguiente puso el flan en un plato blanco, junto a la ventana, a las nueve de la mañana. Y tomó la foto de cerca.",
+      "prompt": "doña Carmen leaning over a golden flan on a white plate beside a bright window, holding her phone close to it with both hands, soft morning light making the caramel shine, focused and happy",
+      "motion": "she steadies the phone with both hands, leans in closer, the caramel glistens in the light"
+    },
+    {
+      "dur": 8,
+      "vo": "La subió a su estado de WhatsApp a las nueve y media. Ese fin de semana le llegaron catorce pedidos. Catorce. Con la misma receta de siempre.",
+      "prompt": "doña Carmen in her dessert shop looking at her phone with a growing incredulous smile as notifications pile up, one hand covering her mouth, trays of flan behind her, bright cheerful light",
+      "motion": "she stares at the phone, covers her mouth, laughs and shakes her head in disbelief"
+    },
+    {
+      "dur": 8,
+      "vo": "La inteligencia artificial no hace el postre. Te enseña a mostrarlo. Si doña Carmen pudo, tú también. Comenta la palabra CURSO y te avisamos cuando esté listo el curso gratis.",
+      "prompt": "doña Carmen standing at the door of her dessert shop under a hand-painted sign, holding up her phone with the bright flan photo on the screen, warm confident smile, golden hour light on the street",
+      "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Doña Carmen hace los mejores flanes del barrio, pero en las fotos parecían tristes. Le preguntó a la IA cómo tomar una buena foto con su teléfono. Cuatro consejos. Catorce pedidos.\n\nIA DESDE CERO es la serie de BiiA LAB para adultos que quieren usar la inteligencia artificial sin tecnicismos. Cap. 4: la foto.\n\n¿Quieres el curso completo gratis? Comenta CURSO.\n\nAnimación generada con IA.\nDeja tu correo y te avisamos cuando salga el curso: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=ia-desde-cero#proximas-clases\n#biialab #inteligenciaartificial #chatgpt #shorts"
+}

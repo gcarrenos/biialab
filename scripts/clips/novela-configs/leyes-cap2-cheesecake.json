@@ -1,0 +1,55 @@
+{
+  "name": "leyes-cap2-cheesecake",
+  "series": "LEYES DE LA MENTE",
+  "episode": "Cap. 2: Eso no lo cuento",
+  "title": "\"Sí, pero eso no lo cuento\" | Leyes de la mente, cap. 2",
+  "voice": "Paulina",
+  "elevenVoiceId": "80lPKtzJMPh1vjYMUgwe",
+  "elevenModel": "eleven_v3",
+  "voiceSettings": { "stability": 0.4, "similarity_boost": 0.8 },
+  "titleOverlay": true,
+  "endSeconds": 0,
+  "style": "photorealistic cinematic film still, shot on 35mm anamorphic lens, natural skin texture and pores, real Latin American locations, practical light sources, shallow depth of field, subtle film grain, color graded like a prestige drama, looks like a frame from a real movie, vertical 9:16 composition, no text unless specified",
+  "character": "Jairo, a real 45-year-old Colombian man, heavyset, thick dark mustache, receding hairline, warm mischievous eyes, light blue polo shirt stretched at the belly, silver wedding ring",
+  "characterSheet": "front-facing three-quarter portrait photograph of Jairo, neutral warm background, soft natural window light, full upper body visible, casting-photo quality, same face to be reused as reference",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "Jairo llevaba tres semanas a dieta. Lo encontré en el almuerzo... con dos porciones de cheesecake.",
+      "prompt": "Jairo at a table in a busy lunch restaurant, two generous slices of cheesecake on plates in front of him, fork in hand mid-bite, caught looking up at the camera with his mouth full, midday window light, other diners blurred",
+      "motion": "he freezes mid-bite, eyes go to the camera, slowly lowers the fork"
+    },
+    {
+      "dur": 8,
+      "vo": "¿No estabas a dieta? Y él, sin soltar el tenedor: sí... pero eso no lo cuento.",
+      "prompt": "close-up of Jairo shrugging with a guilty grin, fork still raised with a piece of cheesecake on it, one eyebrow up, restaurant background blurred, warm light on his face",
+      "motion": "he shrugs, grins, and takes the bite anyway"
+    },
+    {
+      "dur": 9,
+      "vo": "Me reí. Hasta que me di cuenta de que yo hago lo mismo. Con la plata: ese gasto no lo cuento. Con el tiempo: esas dos horas en el celular... no las cuento.",
+      "prompt": "a man in his late thirties alone on a sofa at night, face lit blue by his phone, a paid receipt and a credit card on the coffee table, a wall clock showing almost midnight, the TV on with nobody watching",
+      "motion": "he scrolls the phone without looking up, the clock hand moves, the TV light flickers on the wall"
+    },
+    {
+      "dur": 8,
+      "vo": "Con el negocio: ese cliente que no llamé... no lo cuento. Todos tenemos un cheesecake que no contamos.",
+      "prompt": "the same man at a small office desk in the morning, a sticky note reading LLAMAR on the monitor, his hand hovering over the phone but reaching for the coffee instead, morning light through blinds",
+      "motion": "his hand moves toward the phone, stops, and picks up the coffee cup instead"
+    },
+    {
+      "dur": 8,
+      "vo": "El problema es que la naturaleza sí lo cuenta. Todo. Cada porción. Cada hora. Cada llamada que no hiciste.",
+      "prompt": "Jairo standing on a bathroom scale in the morning looking down at the number with a resigned face, towel over his shoulder, hard overhead light, tiles slightly worn",
+      "motion": "he looks down at the scale, exhales slowly, shakes his head once"
+    },
+    {
+      "dur": 9,
+      "vo": "No recibes lo que dices que haces. Recibes lo que haces. Esa es la ley de causa y efecto. Y no acepta excepciones... ni cheesecake.",
+      "prompt": "Jairo at the same restaurant table, one slice of cheesecake pushed to the side untouched, a glass of water in front of him, looking at the camera with a rueful half-smile, midday light",
+      "motion": "he slides the plate away with one finger, looks at the camera, half-smiles",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Jairo llevaba tres semanas a dieta. Lo encontré almorzando con dos porciones de cheesecake. ¿No estabas a dieta? Sí... pero eso no lo cuento. Todos tenemos un cheesecake que no contamos. El problema es que la naturaleza sí lo cuenta.\n\nLEYES DE LA MENTE es una serie de BiiA LAB: siete leyes que gobiernan tu vida, creas en ellas o no. Cap. 2: la ley de causa y efecto.\n\nHistoria inspirada en una anécdota contada por Brian Tracy en The Psychology of Achievement. Imágenes y narración generadas con IA.\n\nCursos gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=leyes-mente\n#biialab #mentalidad #disciplina #shorts"
+}

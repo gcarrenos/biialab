@@ -1,0 +1,58 @@
+{
+  "name": "leyes-cap2-aguacero",
+  "series": "LEYES DE LA MENTE",
+  "episode": "Cap. 2: El aguacero",
+  "title": "Sin plata y expulsado del colegio: la noche en que se asustó de verdad | Leyes de la mente, cap. 2",
+  "voice": "Paulina",
+  "elevenVoiceId": "80lPKtzJMPh1vjYMUgwe",
+  "elevenModel": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.4,
+    "similarity_boost": 0.8
+  },
+  "titleOverlay": true,
+  "endSeconds": 0,
+  "style": "photorealistic cinematic film still, Bogotá Colombia on a cold rainy night, shot on 35mm anamorphic lens, natural skin texture, practical light sources, cold blue rain-soaked exteriors against weak warm tungsten interiors, shallow depth of field, subtle film grain, color graded like a prestige Latin American drama, looks like a frame from a real movie, vertical 9:16 composition, no text unless specified",
+  "character": "Julián, a real 21-year-old Colombian young man from Antioquia, light olive mestizo skin, lean and wiry from construction work, short dark brown hair, tired serious hazel-brown eyes, faint stubble, a worn dark blue canvas work jacket with a frayed collar over a faded sweater, a gray wool ruana over his shoulders at night",
+  "characterSheet": "front-facing three-quarter portrait photograph of Julián, plain damp wall background, weak tungsten light, full upper body visible, casting-photo quality, same face to be reused as reference",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "Julián tiene 21 años. Afuera, un aguacero de esos que no paran en toda la noche. Adentro, un cuarto en una terraza, techo de zinc... y una cobija que no calienta.",
+      "prompt": "Julián sitting on the edge of a narrow bed in a tiny rented rooftop room at night, gray ruana over his shoulders, rain hammering on a corrugated zinc roof, a plastic bucket on the floor catching a drip, one bare bulb, a small window streaked with rain and the orange glow of Bogotá below",
+      "motion": "rain streaks down the window, a drop falls into the bucket, he pulls the ruana tighter"
+    },
+    {
+      "dur": 8,
+      "vo": "Trabaja en construcción. No tiene carro. No tiene un peso en el banco. La chaqueta es la misma de hace cuatro años.",
+      "prompt": "Julián walking alone at dawn along a wet street in south Bogotá toward a construction site with scaffolding, hands deep in the pockets of his frayed work jacket, shoulders hunched, a crowded bus passing him and spraying water from a puddle, gray drizzle, brick houses",
+      "motion": "he walks into the drizzle, the bus passes and sprays water near his feet, he keeps walking without looking up"
+    },
+    {
+      "dur": 9,
+      "vo": "Lo echaron del colegio. No terminó. Esa noche se sienta en la cama y mira el cuarto: la pared con humedad, la gotera en el balde, la maleta que lleva un año sin desempacar.",
+      "prompt": "Julián's point of view from the bed: a wall stained with damp and peeling paint, the plastic bucket with the drip, and an old worn suitcase on the floor still closed with a jacket thrown over it, the bare bulb's weak light, rain sound implied by the wet window",
+      "motion": "the camera drifts slowly across the damp wall to the bucket to the suitcase and holds"
+    },
+    {
+      "dur": 8,
+      "vo": "Y busca. A quién culpar. A su papá. Al colegio. A la lluvia. Al país. A la suerte.",
+      "prompt": "extreme close-up of Julián's face in the weak tungsten light, jaw tight, eyes moving as if going through a list, a muscle in his cheek working, the rain-streaked window out of focus behind him",
+      "motion": "his eyes shift from side to side, his jaw tightens, he swallows"
+    },
+    {
+      "dur": 8,
+      "vo": "Y no encuentra a nadie. Y por primera vez en su vida... se asusta de verdad.",
+      "prompt": "Julián leaning forward on the edge of the bed with his elbows on his knees and both hands over his mouth, staring at the floor, the realization landing on his face, the bulb's weak warm light on one side, cold blue window light on the other, ruana slipping off one shoulder",
+      "motion": "his hands slide slowly down from his mouth, he stares at the floor, very still, a drop falls into the bucket"
+    },
+    {
+      "dur": 9,
+      "vo": "Se lo dice en voz alta, para oírlo. Si algo va a cambiar... me toca a mí.",
+      "prompt": "Julián standing now in the middle of the tiny room without the ruana, jacket zipped, looking straight into the camera, the rain-streaked window behind him, the suitcase at his feet finally open, the same tired eyes but steady, weak bulb light on his face",
+      "motion": "he looks straight into the camera and gives the smallest nod, the light holds steady",
+      "cliffhanger": true
+    }
+  ],
+  "description": "A los 21 años: un cuarto en una terraza, un aguacero que no para, trabajo en construcción, sin carro, sin un peso en el banco, expulsado del colegio. Esa noche buscó a quién culpar. No encontró a nadie. Y dijo en voz alta: si algo va a cambiar, me toca a mí.\n\nLEYES DE LA MENTE es una serie de BiiA LAB: siete leyes que gobiernan tu vida, creas en ellas o no. Cap. 2: la ley de la responsabilidad.\n\nAdaptación de una historia real contada por Brian Tracy en The Psychology of Achievement (a los 21, a 35 grados bajo cero, dijo exactamente eso). Imágenes y narración generadas con IA.\n\nCursos gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=leyes-mente\n#biialab #mentalidad #responsabilidad #shorts"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "ia-cap2-la-carta",
+  "series": "IA DESDE CERO",
+  "episode": "Cap. 2: La carta al banco",
+  "title": "Doña Carmen le escribió al banco sin pedirle ayuda a nadie | IA desde cero, cap. 2",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "titleOverlay": true,
+  "endSeconds": 2.5,
+  "endCard": { "top": "Comenta CURSO", "url": "biialab.org", "small": "te avisamos cuando salga el curso gratis" },
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "characterSheet": "front-facing three-quarter portrait of doña Carmen, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7,
+      "vo": "El banco le cobró a doña Carmen una cuota que no era suya. Ochenta mil pesos. Y para reclamar, había que escribir una carta formal.",
+      "prompt": "doña Carmen at her dessert shop counter holding a printed bank statement close to her reading glasses, frowning at one highlighted line, a flan display case behind her, late afternoon light",
+      "motion": "she squints at the paper, taps one line with her finger, her frown deepens"
+    },
+    {
+      "dur": 7,
+      "vo": "Toda la vida le pidió ese favor a su sobrino. Le daba pena. Esta vez el sobrino no contestó el teléfono.",
+      "prompt": "doña Carmen at her kitchen table at night holding her phone to her ear, waiting, a blank sheet of paper and a pen in front of her, warm lamp light, slightly worried face",
+      "motion": "she waits with the phone at her ear, lowers it slowly, looks at the blank paper"
+    },
+    {
+      "dur": 8,
+      "vo": "Entonces abrió la inteligencia artificial y le contó, con sus palabras: me cobraron ochenta mil que no debo, ayúdame a escribirle al banco.",
+      "prompt": "close-up of doña Carmen's hands typing slowly on her phone at the kitchen table, a chat app open, her face lit by the screen glow, determined expression, warm night kitchen blurred behind",
+      "motion": "she types with one finger, pauses, nods to herself and keeps typing"
+    },
+    {
+      "dur": 8,
+      "vo": "En segundos tenía una carta formal, con fecha, número de cuenta y todo. Ella la leyó, cambió una palabra: quedaba muy seria. Y la mandó.",
+      "prompt": "doña Carmen reading her phone screen with a small proud smile, one eyebrow raised, adjusting her glasses, then pressing the screen with her finger, warm lamp light, kitchen at night",
+      "motion": "she reads, tilts her head, gives a small approving smile and presses send"
+    },
+    {
+      "dur": 7,
+      "vo": "Tres días después, el banco le devolvió la plata. Sin sobrino, sin abogado, sin pena.",
+      "prompt": "doña Carmen in her dessert shop in the morning looking at a notification on her phone, laughing out loud with relief, one hand on her chest, sunlight through the shop window, trays of flan beside her",
+      "motion": "she reads the phone, gasps softly, laughs and puts a hand on her chest"
+    },
+    {
+      "dur": 8,
+      "vo": "La inteligencia artificial escribe. Pero tú decides qué dice. Si doña Carmen pudo, tú también. Comenta la palabra CURSO y te avisamos cuando esté listo el curso gratis.",
+      "prompt": "doña Carmen standing at the door of her dessert shop under a hand-painted sign, holding her phone up with a warm confident smile, golden hour light on the street",
+      "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "El banco le cobró a doña Carmen 80.000 pesos que no eran suyos. Toda la vida le pidió a su sobrino que le escribiera las cartas. Esta vez no contestó.\n\nIA DESDE CERO es la serie de BiiA LAB para adultos que quieren usar la inteligencia artificial sin tecnicismos. Cap. 2: la carta al banco.\n\n¿Quieres el curso completo gratis? Comenta CURSO.\n\nAnimación generada con IA.\nDeja tu correo y te avisamos cuando salga el curso: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=ia-desde-cero#proximas-clases\n#biialab #inteligenciaartificial #chatgpt #shorts"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "ia-cap3-los-precios",
+  "series": "IA DESDE CERO",
+  "episode": "Cap. 3: Los precios",
+  "title": "Vendía flanes perdiendo plata y no lo sabía | IA desde cero, cap. 3",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "titleOverlay": true,
+  "endSeconds": 2.5,
+  "endCard": { "top": "Comenta CURSO", "url": "biialab.org", "small": "te avisamos cuando salga el curso gratis" },
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "characterSheet": "front-facing three-quarter portrait of doña Carmen, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7,
+      "vo": "Doña Carmen vende el flan grande a doce mil pesos desde hace tres años. Vende muchos. Y al final del mes, nunca sobra nada.",
+      "prompt": "doña Carmen at the end of the day in her dessert shop counting a small stack of bills and coins on the counter, an empty flan tray beside her, tired but puzzled expression, warm evening light",
+      "motion": "she counts the bills slowly, stops, looks at the empty tray and sighs"
+    },
+    {
+      "dur": 7,
+      "vo": "Una noche le preguntó a la inteligencia artificial: ¿cuánto debo cobrar por un flan? Y la IA le contestó con otra pregunta: ¿cuánto te cuesta hacerlo?",
+      "prompt": "doña Carmen at her kitchen table at night with her phone propped against a sugar jar, reading the screen with a surprised expression, eggs, milk cans and a bag of sugar on the table, warm lamp light",
+      "motion": "she reads the phone, raises her eyebrows, glances at the eggs and milk on the table"
+    },
+    {
+      "dur": 8,
+      "vo": "Ella no sabía. Nunca lo había sumado. Así que fueron juntas, paso a paso: los huevos, la leche, el azúcar, el gas, el molde, las dos horas de su tiempo.",
+      "prompt": "close-up of doña Carmen writing numbers in a notebook with a pencil while glancing at her phone, ingredient receipts spread around, reading glasses low on her nose, concentrated and calm, warm night kitchen",
+      "motion": "she writes a number, checks the phone, writes another, nods"
+    },
+    {
+      "dur": 7,
+      "vo": "El flan grande le costaba trece mil ochocientos. Lo vendía a doce mil. Tres años regalando mil ochocientos pesos en cada uno.",
+      "prompt": "doña Carmen leaning back in her kitchen chair with a hand on her forehead, staring at the notebook with wide eyes, half laughing half shocked, the phone glowing on the table, warm lamp light",
+      "motion": "she leans back, puts a hand to her forehead, shakes her head with a disbelieving laugh"
+    },
+    {
+      "dur": 7,
+      "vo": "Subió el precio a dieciocho mil. Y nadie dejó de comprar. Ese mes, por primera vez, sobró.",
+      "prompt": "doña Carmen in her dessert shop in the morning handing a boxed flan to a smiling customer, a new handwritten price card on the display case, both women cheerful, bright sunlight through the window",
+      "motion": "she hands the box over with a proud smile, the customer nods happily"
+    },
+    {
+      "dur": 8,
+      "vo": "No hay que saber de números. Hay que saber preguntar. Si doña Carmen pudo, tú también. Comenta la palabra CURSO y te avisamos cuando esté listo el curso gratis.",
+      "prompt": "doña Carmen standing at the door of her dessert shop under a hand-painted sign, arms crossed with a warm confident smile, golden hour light on the street",
+      "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Doña Carmen vendía el flan grande a 12.000 pesos desde hace tres años. Hacerlo le costaba 13.800. Nunca lo había sumado.\n\nIA DESDE CERO es la serie de BiiA LAB para adultos que quieren usar la inteligencia artificial sin tecnicismos. Cap. 3: los precios.\n\n¿Quieres el curso completo gratis? Comenta CURSO.\n\nAnimación generada con IA.\nDeja tu correo y te avisamos cuando salga el curso: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=ia-desde-cero#proximas-clases\n#biialab #inteligenciaartificial #chatgpt #shorts"
+}
