@@ -634,6 +634,192 @@
       "style": "novela",
       "publishAt": "2026-08-26T20:00:00.000Z",
       "uploadedAt": "2026-08-25"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        72
+      ],
+      "youtubeId": "BYBrhqv_kFs",
+      "title": "Prometió 8 entregas y la moto se varó | El Emprendedor, cap. 4",
+      "style": "novela",
+      "publishAt": "2026-09-05T01:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "lLdKur610yo",
+      "segment": [
+        158,
+        229
+      ],
+      "youtubeId": "iEbu3C-pTeM",
+      "title": "Su primera oficina: frente a la universidad, con 6 empleados a los 22 | Jürgen Klarić",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-01T15:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "zm3hr74Ki40",
+      "segment": [
+        1022,
+        1077
+      ],
+      "youtubeId": "wsXJqDaxTEI",
+      "title": "Viajaba en camión a hoteles de 3 estrellas, hasta que un día dijo basta | Mauricio Benoist",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-02T15:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "lLdKur610yo",
+      "segment": [
+        418,
+        508
+      ],
+      "youtubeId": "3JegIXJ4wcM",
+      "title": "Se sentía solo en México y creó una revista para pertenecer | Jürgen Klarić",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-03T15:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "uGuUMPvCG90",
+      "segment": [
+        580,
+        627
+      ],
+      "youtubeId": "KsM-1qpo4EY",
+      "title": "Llegó a la escuela sin sus prótesis y un amigo le hizo la broma perfecta | Adriana Macías",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-02T01:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "uGuUMPvCG90",
+      "segment": [
+        652,
+        749
+      ],
+      "youtubeId": "NyjUfGJ8kSs",
+      "title": "La primera vez que comió con los pies frente a su jefe | Adriana Macías",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-03T01:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "lLdKur610yo",
+      "segment": [
+        1226,
+        1299
+      ],
+      "youtubeId": "6Z72zDp4_xE",
+      "title": "«Vivo casi en un avión»: la decisión que tomó por sus hijos | Jürgen Klarić",
+      "style": "clean",
+      "kind": "story",
+      "publishAt": "2026-09-04T01:00:00.000Z",
+      "uploadedAt": "2026-08-31"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        68
+      ],
+      "youtubeId": "hU0j9Ut1Rzo",
+      "title": "Le ofrecieron sueldo fijo y moto nueva | El Emprendedor, cap. 5",
+      "style": "novela",
+      "publishAt": "2026-09-12T01:00:00.000Z",
+      "uploadedAt": "2026-09-01"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        60
+      ],
+      "youtubeId": "WmJMa2Hu8TU",
+      "title": "Doña Carmen le escribió al banco sin pedirle ayuda a nadie | IA desde cero, cap. 2",
+      "style": "novela",
+      "publishAt": "2026-09-07T01:00:00.000Z",
+      "uploadedAt": "2026-09-06"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        62
+      ],
+      "youtubeId": "UjR9xhP0OeI",
+      "title": "Vendía flanes perdiendo plata y no lo sabía | IA desde cero, cap. 3",
+      "style": "novela",
+      "publishAt": "2026-09-09T01:00:00.000Z",
+      "uploadedAt": "2026-09-06"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        60
+      ],
+      "youtubeId": "5CxZyJ22vjY",
+      "title": "Una foto le trajo 14 pedidos en un fin de semana | IA desde cero, cap. 4",
+      "style": "novela",
+      "publishAt": "2026-09-11T01:00:00.000Z",
+      "uploadedAt": "2026-09-06"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        62
+      ],
+      "youtubeId": "qDk8F0-5j5w",
+      "title": "Su nieto le enseñó la IA. Ahora ella le enseña a él | IA desde cero, cap. 5",
+      "style": "novela",
+      "publishAt": "2026-09-13T01:00:00.000Z",
+      "uploadedAt": "2026-09-06"
+    },
+    {
+      "sourceVideo": "lesson",
+      "segment": [
+        0,
+        163
+      ],
+      "youtubeId": "d9A_TgjQMrc",
+      "title": "Qué es la IA y cómo abrirla en tu teléfono | IA desde cero, lección 1",
+      "style": "lesson",
+      "publishAt": "public",
+      "uploadedAt": "2026-09-08"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        58
+      ],
+      "youtubeId": "zxdncjXm_k4",
+      "title": "Le mintieron... y se volvió millonario | Leyes de la mente, cap. 1",
+      "style": "novela",
+      "publishAt": "2026-09-10T01:00:00.000Z",
+      "uploadedAt": "2026-09-08"
+    },
+    {
+      "sourceVideo": "novela",
+      "segment": [
+        0,
+        56
+      ],
+      "youtubeId": "2WhFGkKOqKI",
+      "title": "Sin plata y expulsado del colegio: la noche en que se asustó de verdad | Leyes de la mente, cap. 2",
+      "style": "novela",
+      "publishAt": "2026-09-14T01:00:00.000Z",
+      "uploadedAt": "2026-09-08"
     }
   ]
 }

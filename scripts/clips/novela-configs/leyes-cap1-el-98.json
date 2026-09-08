@@ -1,0 +1,54 @@
+{
+  "name": "leyes-cap1-el-98",
+  "series": "LEYES DE LA MENTE",
+  "episode": "Cap. 1: El 98",
+  "title": "Un 98 casi le arruina la vida a este muchacho | Leyes de la mente, cap. 1",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "titleOverlay": true,
+  "endSeconds": 2.5,
+  "endCard": { "top": "¿Qué crees de ti?", "url": "biialab.org", "small": "cursos gratis con certificado" },
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Andrés, a 17-year-old Colombian boy, slim, short dark curly hair, light brown skin, big expressive dark eyes, white school polo shirt with a small crest, thin silver chain, looks younger than his age",
+  "characterSheet": "front-facing three-quarter portrait of Andrés, neutral warm background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "Andrés, 17 años, abrió la carta de la universidad en la cocina. Un solo número: noventa y ocho. Su tío miró por encima del hombro y dijo: eso es el coeficiente, mijo. Eres del montón.",
+      "prompt": "Andrés standing at a small kitchen table holding an opened envelope and a letter, a heavyset uncle in a tank top leaning over his shoulder reading it with a dismissive smirk, morning light through a window with a plant, modest Colombian kitchen",
+      "motion": "Andrés stares at the letter, the uncle shrugs and waves a hand dismissively, Andrés's face falls"
+    },
+    {
+      "dur": 8,
+      "vo": "Y Andrés le creyó. Ese semestre no levantó la mano ni una vez. Si soy del montón, pensó, para qué. Perdió cuatro materias de cinco.",
+      "prompt": "Andrés slumped in the back row of a university classroom, hood of a gray hoodie pulled up over his school polo, staring at the desk while other students raise their hands, cold fluorescent light, a returned exam with a red grade face-down in front of him",
+      "motion": "other students' hands go up, Andrés pulls the hood lower and looks down at the desk"
+    },
+    {
+      "dur": 8,
+      "vo": "Su mamá no entendía. Toda la vida había sido el mejor del salón. Ahora se sentaba atrás, con la capucha puesta, esperando que la clase terminara.",
+      "prompt": "Andrés's mother, a tired woman in her forties in a work uniform, standing in the doorway of his small bedroom at night looking at him with worry, Andrés lying on the bed facing the wall with headphones on, an old trophy and school medals on a shelf catching the lamp light",
+      "motion": "the mother lingers in the doorway, her hand on the frame, Andrés does not turn around, the lamp flickers softly"
+    },
+    {
+      "dur": 9,
+      "vo": "Hasta que una profesora le pidió la carta. La leyó dos veces y se rió. Andrés, esto no es un coeficiente. Es un percentil. Sacaste más que el noventa y ocho por ciento del país.",
+      "prompt": "a warm middle-aged female professor with glasses and a colorful scarf at her desk after class, holding the letter up and laughing kindly, Andrés standing across the desk stunned with his mouth slightly open, afternoon sunlight through tall classroom windows",
+      "motion": "the professor laughs and taps the number on the letter, Andrés's eyes widen and he leans in"
+    },
+    {
+      "dur": 8,
+      "vo": "Nada cambió en su cerebro esa tarde. Cambió lo que creía de él. Al semestre siguiente estaba en primera fila. Dos años después, entre los diez mejores de treinta mil.",
+      "prompt": "Andrés in the front row of a large lecture hall, hood down, sitting up straight with his hand raised high and a confident half-smile, sunlight across the room, dozens of students behind him slightly blurred",
+      "motion": "Andrés raises his hand decisively, the professor at the front points to him, he sits up taller"
+    },
+    {
+      "dur": 9,
+      "vo": "No recibes lo que quieres. Recibes lo que crees. Cuidado con quién te dice lo que eres. Esta es la ley de la creencia. Si quieres las otras seis, entra a biialab punto org.",
+      "prompt": "Andrés standing at the gate of a university campus at golden hour, backpack on one shoulder, looking straight at the camera with a calm confident smile, the letter folded in his shirt pocket, students passing blurred behind him",
+      "motion": "he looks at the camera, nods once slowly, a breeze moves his hair, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Andrés abrió la carta de la universidad y vio un solo número: 98. Su tío le dijo que era su coeficiente y que era del montón. Le creyó. Perdió cuatro materias de cinco. Hasta que una profesora leyó la carta.\n\nLEYES DE LA MENTE es una serie animada de BiiA LAB: siete leyes que gobiernan tu vida, creas en ellas o no. Cap. 1: la ley de la creencia.\n\nHistoria inspirada en una anécdota contada por Brian Tracy en The Psychology of Achievement. Animación y narración generadas con IA.\n\nCursos gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=leyes-mente\n#biialab #mentalidad #creencias #shorts"
+}

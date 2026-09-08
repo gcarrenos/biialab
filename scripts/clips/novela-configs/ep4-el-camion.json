@@ -1,0 +1,63 @@
+{
+  "name": "novela-ep4-el-camion",
+  "series": "EL EMPRENDEDOR",
+  "episode": "Capítulo 4: El día que prometió demasiado",
+  "title": "Prometió 8 entregas y la moto se varó | El Emprendedor, cap. 4",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm teal and orange color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Diego Ramírez, a 34-year-old Colombian man, medium brown skin, short black hair slightly messy, three-day stubble, tired but warm brown eyes, light blue office shirt with sleeves rolled up, no tie, lean build, wedding ring",
+  "characterSheet": "front-facing three-quarter portrait of Diego Ramírez, neutral office background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7.2,
+      "vo": "Doña Gloria contó los billetes. Mijo, esto apenas empieza. Pero óigame: el que queda mal una vez, no vuelve a vender.",
+      "prompt": "doña Gloria, a sturdy middle-aged Colombian woman in a shop apron, counting a few folded peso bills at the counter of her small tienda, looking up at Diego with a serious warning expression, one finger raised, Diego listening attentively still holding his motorcycle helmet, warm morning light",
+      "motion": "doña Gloria raises her finger slowly, Diego nods once, dust motes drift in the light"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Esa semana, ocho tiendas le pidieron pedido. Y Diego dijo que sí. A todas. Todas para el mismo martes.",
+      "prompt": "Diego on a barrio sidewalk shaking hands with a shopkeeper in front of a tienda, his spiral notebook under his arm crowded with handwritten orders, three other small storefronts visible down the street with shopkeepers waving at him, bright optimistic afternoon light",
+      "motion": "Diego shakes hands and turns to wave at the next shopkeeper, flipping his notebook open as he walks"
+    },
+    {
+      "dur": 7.2,
+      "vo": "El martes amaneció lloviendo. A la tercera entrega, la moto tosió dos veces. Y se varó. Con cinco pedidos encima.",
+      "prompt": "Diego in a soaked rain poncho crouched beside the old red motorcycle stopped on a rainy Bogotá street, smoke coming from the engine, the big wicker basket labeled DIEGO TE LO TRAE stacked with five bulky grocery bags wrapped in plastic, grey heavy rain, puddles reflecting the storefronts",
+      "motion": "rain falls steadily, Diego tries the kickstart twice, the engine puffs smoke and dies, he lowers his head"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Llamó a su esposa. No para quejarse. Para pedirle ayuda. Ella llegó en el bus. Con los dos canastos del mercado.",
+      "prompt": "Diego's wife, a Colombian woman in her early thirties with dark hair in a practical bun and a yellow raincoat, stepping down from a city bus into the rain carrying two large empty market baskets, Diego waiting at the bus stop drenched, looking at her with gratitude and relief",
+      "motion": "she steps down and hands him one basket without a word, he holds her look for a beat, bus pulls away behind them"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Entregaron a pie. Empapados. Uno por uno. La última tienda recibió su pedido a las siete de la noche.",
+      "prompt": "Diego and his wife walking side by side through the rainy barrio at dusk each carrying a loaded basket, street lamps turning on, delivering a plastic-wrapped bag to a shopkeeper at a lit doorway, both soaked and exhausted, warm light from the tienda door against the blue evening",
+      "motion": "slow tracking shot, they trade a tired glance, the shopkeeper takes the bag, rain thins to a drizzle"
+    },
+    {
+      "dur": 7.2,
+      "vo": "El tendero no pagó completo. Usted prometió mediodía, le dijo. Diego no discutió. Solo anotó: nunca prometas lo que no controlas.",
+      "prompt": "close-up of the spiral notebook on the kitchen table under warm lamp light, rain-wrinkled pages, Diego's hand writing in blue ink the underlined Spanish words: NUNCA PROMETAS LO QUE NO CONTROLAS, a mug of coffee and wet gloves beside the notebook",
+      "motion": "very slow push in on the pen finishing the underline, steam rises from the mug"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Esa noche hizo cuentas. Una moto no alcanzaba. Necesitaba rutas, horarios, un sistema. Escribió hasta las dos de la mañana.",
+      "prompt": "Diego at the kitchen table late at night surrounded by notebook pages taped to the wall behind him forming a hand-drawn delivery route map of the barrio with tienda names and times, his wife asleep on the couch behind, he draws a line connecting two points, single warm lamp in the dark apartment",
+      "motion": "Diego tapes one more page to the wall and steps back looking at the map, the lamp flickers slightly"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Al otro día, frente a la tienda parqueó un camión blanco. Bajó un hombre de uniforme. Y preguntó por Diego.",
+      "prompt": "a clean white delivery truck with a corporate logo parked in front of doña Gloria's tienda in bright morning light, a tall man in a crisp company uniform and clipboard stepping down from the cab, doña Gloria in her doorway with arms crossed and a worried expression, Diego's red motorcycle visible small at the end of the street",
+      "motion": "the man closes the truck door and turns toward the tienda, doña Gloria glances down the street toward the motorcycle, hold on her worried face",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Ocho tiendas le pidieron pedido y Diego dijo que sí a todas. El martes amaneció lloviendo.\n\nEL EMPRENDEDOR es una serie animada de BiiA LAB sobre lo que de verdad pasa cuando decides emprender. Nuevo capítulo cada semana. Capítulo 1: https://youtube.com/shorts/Nbi-kMedBIM · Capítulo 2: https://youtube.com/shorts/dZH4DNQ_0g8 · Capítulo 3: https://youtube.com/shorts/6Odp_adKxEY\n\nAnimación generada con IA.\nCursos gratis con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=shorts&utm_campaign=novela\n#biialab #emprendedor #shorts"
+}

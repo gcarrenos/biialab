@@ -1,0 +1,55 @@
+{
+  "name": "leyes-cap1-napoleon",
+  "series": "LEYES DE LA MENTE",
+  "episode": "Cap. 1: Napoleón",
+  "title": "Le mintieron... y se volvió millonario | Leyes de la mente, cap. 1",
+  "voice": "Paulina",
+  "elevenVoiceId": "80lPKtzJMPh1vjYMUgwe",
+  "elevenModel": "eleven_v3",
+  "voiceSettings": { "stability": 0.4, "similarity_boost": 0.8 },
+  "titleOverlay": true,
+  "endSeconds": 0,
+  "style": "photorealistic cinematic film still, shot on 35mm anamorphic lens, natural skin texture and pores, real Latin American locations, practical light sources, shallow depth of field, subtle film grain, color graded like a prestige drama, looks like a frame from a real movie, vertical 9:16 composition, no text unless specified",
+  "character": "Rafael, a real 22-year-old Colombian young man, thin, short black hair, light brown skin, soft uncertain eyes, worn beige button shirt one size too big, cheap steel watch on his left wrist",
+  "characterSheet": "front-facing three-quarter portrait photograph of Rafael, neutral warm background, soft natural window light, full upper body visible, casting-photo quality, same face to be reused as reference",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "Tenía 22 años... y no se creía capaz de nada. Sin plata, sin estudios, sin confianza. Un día, por curiosidad, entró donde una adivina.",
+      "prompt": "Rafael with hunched shoulders and hands in his pockets pausing at the doorway of a tiny fortune-teller shop on a narrow rainy street at dusk, a small hand-painted sign with a palm and stars that reads only the word ADIVINA, purple light spilling from inside, he looks in hesitantly",
+      "motion": "rain falls softly, Rafael hesitates at the doorway, then steps inside"
+    },
+    {
+      "dur": 8,
+      "vo": "La mujer le tomó las manos y le dijo, muy seria: tú... eres la reencarnación de Napoleón.",
+      "prompt": "upright vertical portrait framing, camera at eye level and perfectly level with the horizon: Rafael seated facing the camera at a small round table with a candle and tarot cards, an old fortune-teller with a headscarf and heavy rings seated across from him seen over her shoulder, holding both his hands and staring into his eyes with total conviction, Rafael leaning back surprised, deep purple and gold candlelight",
+      "motion": "static level camera, the candle flame flickers, she grips his hands and leans in slightly, his eyebrows rise slowly"
+    },
+    {
+      "dur": 8,
+      "vo": "Él no sabía quién era Napoleón. Así que fue a la biblioteca. Y leyó. Cómo caminaba. Cómo hablaba. Cómo decidía.",
+      "prompt": "Rafael at a long wooden table in an old public library surrounded by open history books with paintings of Napoleon, reading intensely with his finger on a page, sitting a little straighter than before, green lamp light",
+      "motion": "he turns a page, glances at a painting of Napoleon, unconsciously straightens his back"
+    },
+    {
+      "dur": 9,
+      "vo": "Y empezó a hacerlo igual. Entraba a una sala como Napoleón. Pedía un aumento como Napoleón. Lo ascendieron. Y otra vez. Y otra vez.",
+      "prompt": "Rafael walking confidently through a busy office toward a glass-walled manager's office, chin up, shoulders back, one hand tucked inside his jacket like Napoleon, coworkers turning to look, bright daylight, a new tailored jacket",
+      "motion": "he strides forward with chin up, hand tucked in his jacket, coworkers turn their heads as he passes"
+    },
+    {
+      "dur": 9,
+      "vo": "Años después alguien le contó la verdad: la adivina le decía lo mismo a todo el mundo. Era mentira. Pero ya era dueño de su propia empresa.",
+      "prompt": "Rafael now in his thirties in a sharp suit standing at the window of his own corner office with his company name on the glass door, holding a phone to his ear and starting to laugh in disbelief, city skyline at golden hour behind him",
+      "motion": "he listens on the phone, his face goes from surprise to a slow laugh, he shakes his head and looks out the window"
+    },
+    {
+      "dur": 10,
+      "vo": "No importaba de quién era la vida. Importaba lo que él creyó que podía hacer. Cuidado con lo que crees de ti... porque tu mente te lo va a cumplir.",
+      "prompt": "Rafael standing at the entrance of his company building at golden hour, hand resting on the door, looking straight at the camera with a calm knowing smile, the old cheap watch still on his wrist",
+      "motion": "he looks at the camera, gives a small knowing smile and a slow nod, light flares gently",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Tenía 22 años, sin plata y sin confianza. Una adivina le dijo que era la reencarnación de Napoleón. Le creyó. Estudió a Napoleón, caminó como él, decidió como él. Lo ascendieron una y otra vez. Cuando supo que era mentira, ya era dueño de su empresa.\n\nLEYES DE LA MENTE es una serie animada de BiiA LAB: siete leyes que gobiernan tu vida, creas en ellas o no. Cap. 1: la ley de la creencia.\n\nHistoria inspirada en una anécdota contada por Brian Tracy en The Psychology of Achievement. Animación y narración generadas con IA.\n\nCursos gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=leyes-mente\n#biialab #mentalidad #creencias #shorts"
+}

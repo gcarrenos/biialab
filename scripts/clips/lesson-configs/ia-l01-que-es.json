@@ -1,0 +1,83 @@
+{
+  "name": "ia-l01-que-es",
+  "series": "IA DESDE CERO",
+  "lesson": 1,
+  "lessonTitle": "Qué es la IA y cómo abrirla en tu teléfono",
+  "title": "Qué es la IA y cómo abrirla en tu teléfono | IA desde cero, lección 1",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm golden and teal color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, widescreen 16:9 composition, no text unless specified",
+  "character": "doña Carmen, a warm 61-year-old Latin American woman, silver-streaked dark hair in a low bun, reading glasses on a chain, floral blouse and cardigan, kind expressive face with laugh lines, medium build",
+  "opener": {
+    "shots": [
+      {
+        "vo": "Doña Carmen tiene 61 años, una tienda de postres, y hasta hace un mes pensaba que la inteligencia artificial era cosa de ingenieros.",
+        "prompt": "doña Carmen behind the counter of a cozy dessert shop, wide shot, glass display with flans and cakes, warm afternoon light through the window, she looks at a smartphone on the counter with polite suspicion",
+        "motion": "she glances at the phone, raises an eyebrow, goes back to wiping the counter"
+      },
+      {
+        "vo": "Hoy la usa todos los días. Para responder clientes, para sacar cuentas, para escribirle al banco. Y no aprendió computación. Aprendió a preguntar.",
+        "prompt": "doña Carmen at her kitchen table at night, warm lamp light, typing slowly on her phone with one finger, a notebook and a cup of coffee beside her, calm confident expression, medium shot",
+        "motion": "she types with one finger, pauses, smiles slightly at the screen"
+      },
+      {
+        "vo": "En esta primera lección vamos a hacer exactamente lo que hizo ella la primera noche. Sin instalar nada. Sin pagar nada. Con el teléfono que ya tienes.",
+        "prompt": "doña Carmen standing at the door of her dessert shop, arms crossed, warm confident smile looking at the camera, golden hour light on the street, wide shot",
+        "motion": "she nods once at the camera with a warm smile, subtle breeze in her cardigan"
+      }
+    ]
+  },
+  "screen": {
+    "recording": "screen.mp4",
+    "steps": [
+      {
+        "label": "Paso 1 · Abre el navegador",
+        "vo": "Abre el navegador de tu teléfono. El que usas para buscar cosas: Safari, Chrome, el que sea. No hay que instalar ninguna aplicación.",
+        "type": null
+      },
+      {
+        "label": "Paso 2 · Escribe chatgpt.com",
+        "vo": "Arriba, donde se escriben las direcciones, escribe: chatgpt punto com. Y dale a ir.",
+        "type": "chatgpt.com"
+      },
+      {
+        "label": "Paso 3 · No inicies sesión",
+        "vo": "Va a aparecer un botón que dice iniciar sesión. No lo toques. No necesitas cuenta, ni correo, ni contraseña para empezar. Mira abajo: dice pregúntale a ChatGPT. Ahí es.",
+        "type": null
+      },
+      {
+        "label": "Paso 4 · Escribe como hablas",
+        "vo": "Toca esa cajita y escribe como si le hablaras a una persona. Sin acentos, con errores, no importa: la inteligencia artificial entiende. Doña Carmen escribió esto.",
+        "type": "Tengo una tienda de postres y no se nada de computadores. Que me puedes ayudar a hacer?"
+      },
+      {
+        "label": "Paso 5 · Toca la flecha",
+        "vo": "Ahora toca la flecha para enviar. Y espera un momento.",
+        "type": null
+      },
+      {
+        "label": "Paso 6 · Lee la respuesta",
+        "vo": "Eso que está apareciendo es la inteligencia artificial contestándote. No es magia: es un programa que leyó millones de textos y aprendió a escribir. Léelo con calma. Si algo no te sirve, se lo dices y te da otra cosa.",
+        "type": null
+      },
+      {
+        "label": "Paso 7 · Pide algo concreto",
+        "vo": "Ahora pidámosle algo de verdad. Doña Carmen escribió: escríbeme un mensaje corto para avisarle a mis clientes que el viernes hay flan de coco.",
+        "type": "Escribeme un mensaje corto para avisarle a mis clientes que el viernes hay flan de coco."
+      },
+      {
+        "label": "Paso 8 · Ya tienes tu primer mensaje",
+        "vo": "Y ahí está. Un mensaje listo para copiar y mandar por WhatsApp. Eso es la inteligencia artificial: un ayudante que escribe lo que tú le pides, con tus palabras.",
+        "type": null
+      }
+    ]
+  },
+  "recap": {
+    "vo": "Lo que aprendiste hoy. Uno: no hay que instalar nada, entras por el navegador. Dos: no necesitas cuenta para empezar. Tres: se le escribe como se le habla a una persona. Y cuatro: si no te gusta la respuesta, pídele otra.",
+    "lines": ["No hay que instalar nada", "No necesitas cuenta", "Escríbele como hablas", "¿No te gustó? Pide otra"]
+  },
+  "outro": {
+    "vo": "En la próxima lección: cómo pedirle bien, para que la respuesta salga como tú la quieres. Si quieres el certificado de este curso, entra a biialab punto org. Nos vemos en la lección dos.",
+    "lines": ["Lección 2: cómo pedirle bien", "biialab.org · certificado"]
+  },
+  "description": "Lección 1 de IA desde cero, el curso de BiiA LAB para adultos que quieren usar la inteligencia artificial sin tecnicismos. Hoy: qué es, cómo abrirla en tu teléfono sin instalar nada y tu primera pregunta.\n\nCurso completo gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=video&utm_campaign=ia-desde-cero#proximas-clases\n\nLa pantalla del teléfono es real (ChatGPT en Safari). La animación de doña Carmen está generada con IA.\n\n#biialab #inteligenciaartificial #chatgpt #cursogratis"
+}

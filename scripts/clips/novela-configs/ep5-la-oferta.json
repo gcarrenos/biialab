@@ -1,0 +1,63 @@
+{
+  "name": "novela-ep5-la-oferta",
+  "series": "EL EMPRENDEDOR",
+  "episode": "Capítulo 5: La oferta",
+  "title": "Le ofrecieron sueldo fijo y moto nueva | El Emprendedor, cap. 5",
+  "voice": "Paulina",
+  "elevenVoiceId": "HJmys3t5KLr6DUWl0kSe",
+  "style": "cinematic 3D animated film still in the style of a modern Pixar drama, warm teal and orange color grading, soft volumetric light, shallow depth of field, detailed textures, emotional realism, vertical 9:16 composition, no text unless specified",
+  "character": "Diego Ramírez, a 34-year-old Colombian man, medium brown skin, short black hair slightly messy, three-day stubble, tired but warm brown eyes, light blue office shirt with sleeves rolled up, no tie, lean build, wedding ring",
+  "characterSheet": "front-facing three-quarter portrait of Diego Ramírez, neutral office background, soft studio light, full upper body visible, reference sheet quality",
+  "shots": [
+    {
+      "dur": 7.2,
+      "vo": "El hombre del camión se llamaba Andrés. Y no venía a quejarse. Venía con una oferta: la distribuidora quería contratar a Diego.",
+      "prompt": "a tall man in a crisp corporate delivery uniform holding a tablet, standing in front of the white truck outside doña Gloria's tienda, extending a hand to Diego who has just arrived on his old red motorcycle, doña Gloria watching from her doorway with crossed arms, bright morning light",
+      "motion": "Andrés extends his hand, Diego takes off his helmet slowly and shakes it, doña Gloria watches without moving"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Sueldo fijo. Moto nueva. Seguro. Todo lo que perdió un martes a las cuatro. Pero con mejor paga.",
+      "prompt": "close-up of the tablet screen Andrés holds up showing a formal job offer document with a salary figure and a photo of a brand new delivery motorcycle, Diego's face reflected faintly in the screen looking at it, the old red motorcycle blurred in the background",
+      "motion": "slow push in on the tablet, Diego's eyes move down the screen, the reflection shifts"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Esa tarde su esposa puso las cuentas sobre la mesa. El arriendo. El colegio. La moto varada. Los números no mentían.",
+      "prompt": "Diego and his wife at the kitchen table in the evening, bills and receipts spread between them, a calculator, her hand resting on his, both looking at the papers with tired faces, their daughter doing homework on the couch behind, warm lamp light",
+      "motion": "the wife slides one bill toward Diego, he rubs his forehead, the daughter glances up briefly"
+    },
+    {
+      "dur": 7.2,
+      "vo": "¿Usted qué haría, doña Gloria? Ella siguió acomodando latas. Mijo: veinte años sin jefe. Y aquí sigo.",
+      "prompt": "inside doña Gloria's tienda, doña Gloria on a small step stool placing cans on a high shelf while speaking over her shoulder, Diego leaning on the counter below listening, shelves full of goods around them, warm afternoon light through the doorway",
+      "motion": "doña Gloria places a can and looks down over her shoulder at Diego, he looks up at her"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Pero le dijo la verdad: ellos cobran menos. Tienen camiones. Y vendrán por sus doce tiendas. Con usted o sin usted.",
+      "prompt": "doña Gloria now at the counter face to face with Diego, pointing out the doorway toward the street where the white truck is parked in the distance, her expression serious and honest, Diego turning to look at the truck",
+      "motion": "doña Gloria points to the street, Diego turns his head toward the truck, a customer passes the doorway"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Esa noche Diego miró su mapa. Doce tiendas. Un canasto pintado a mano. Contra una flota de camiones.",
+      "prompt": "Diego standing alone at night in the dark kitchen facing the wall covered in taped notebook pages forming his hand-drawn delivery route map, lit by the single lamp, his shoulders heavy, the painted basket DIEGO TE LO TRAE sitting on the floor beside him",
+      "motion": "slow dolly toward Diego's back as he studies the map, the lamp flickers, he touches one page"
+    },
+    {
+      "dur": 7.2,
+      "vo": "Su hija se levantó por agua. Miró el mapa. Y preguntó: papi, ¿por qué tu mapa tiene nombres y el camión no?",
+      "prompt": "Diego's eight-year-old daughter with curly hair in pajamas holding a glass of water, standing beside him pointing at the wall map where handwritten names are visible on the pages, Diego crouching down to her eye level, both lit warmly by the lamp in the dark kitchen",
+      "motion": "the daughter points at a name on the map, Diego turns from the map to her face, his expression slowly changes"
+    },
+    {
+      "dur": 7.2,
+      "vo": "El camión tenía rutas. Diego tenía nombres. Al otro día dio su respuesta. Y no fue la que Andrés esperaba.",
+      "prompt": "extreme close-up of the notebook page on the wall with a handwritten list of tienda owners' names in blue ink, Diego's finger sliding down the names, then Diego at dawn putting on his helmet beside the red motorcycle with a calm determined face, morning light breaking over the barrio rooftops",
+      "motion": "his finger slides down the list, cut to him closing the helmet strap and looking up, sunrise light grows on his face",
+      "cliffhanger": true
+    }
+  ],
+  "description": "El hombre del camión no venía a quejarse. Venía con una oferta: sueldo fijo, moto nueva, seguro. Todo lo que Diego perdió un martes a las cuatro.\n\nEL EMPRENDEDOR es una serie animada de BiiA LAB sobre lo que de verdad pasa cuando decides emprender. Nuevo capítulo cada semana. Capítulo 1: https://youtube.com/shorts/Nbi-kMedBIM · Capítulo 2: https://youtube.com/shorts/dZH4DNQ_0g8 · Capítulo 3: https://youtube.com/shorts/6Odp_adKxEY · Capítulo 4: https://youtube.com/shorts/BYBrhqv_kFs\n\nAnimación generada con IA.\nCursos gratis con certificado: https://www.biialab.org/?utm_source=youtube&utm_medium=shorts&utm_campaign=novela\n#biialab #emprendedor #shorts"
+}
