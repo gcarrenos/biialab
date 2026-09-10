@@ -63,16 +63,17 @@ if (flag('--top')) {
 if (!ids.length) { console.error('nothing to do: pass ids or --top N'); process.exit(1); }
 console.log('ids:', ids.length, ids.slice(0, 3).join(' '), '…');
 
+const TARGET = flag('--privacy') ?? 'public'; // 'unlisted' = playable on biialab.org, invisible on the channel (course lessons)
 let done = 0;
 for (const v of await fetchVideos(ids)) {
   const tag = `${v.id}  ${v.snippet.title.slice(0, 55)}`;
   if (v.status.privacyStatus !== 'private' || v.status.publishAt) { console.log(`  skip (${v.status.privacyStatus}${v.status.publishAt ? ', scheduled' : ''}): ${tag}`); continue; }
   if (v.status.uploadStatus !== 'processed') { console.log(`  skip (${v.status.uploadStatus} ${v.status.rejectionReason ?? ''}): ${tag}`); continue; }
   try {
-    await setPrivacy(v, 'public');
-    log.push({ id: v.id, title: v.snippet.title, restoredAt: new Date().toISOString() });
+    await setPrivacy(v, TARGET);
+    log.push({ id: v.id, title: v.snippet.title, to: TARGET, restoredAt: new Date().toISOString() });
     done++;
-    console.log(`  public: ${tag}`);
+    console.log(`  ${TARGET}: ${tag}`);
   } catch (e) { console.log(`  FAILED: ${tag} — ${e.message}`); }
 }
 fs.writeFileSync(logFile, JSON.stringify(log, null, 2));

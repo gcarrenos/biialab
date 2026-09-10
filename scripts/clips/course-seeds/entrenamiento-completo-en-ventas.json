@@ -1,0 +1,227 @@
+{
+  "course": {
+    "title": "Entrenamiento Completo en Ventas",
+    "description": "Un entrenamiento en ventas grabado en tres días con Jorge Martínez, inspirado en la felicidad como base del vendedor. El Día 1 trabaja la mentalidad: la rueda de la felicidad, el programa de productividad propio y la prospección natural. El Día 2 recorre el ciclo de la venta: inspirar confianza, descubrir la verdadera necesidad y el valor del cliente, identificar a los actores de la compra y presentar con el Método AIDA. El Día 3 se dedica a las objeciones y al cierre: por qué una objeción es una oportunidad, cómo clasificarlas, los seis pasos para tratarlas y las técnicas de cierre.\n\nAl terminar, el estudiante podrá diseñar su propio plan de productividad, conseguir clientes sin rogar, hacer preguntas que descubran lo que de verdad tiene valor para el cliente, construir una cotización o presentación en formato AIDA, tratar una objeción de precio sin rebajar y reconocer las señales de compra para cerrar con seguridad. Incluye examen final y certificado.",
+    "shortDescription": "Tres días con Jorge Martínez: prospección, confianza, Método AIDA, tratamiento de objeciones y técnicas de cierre, inspirado en la felicidad.",
+    "category": "Ventas",
+    "level": "Principiante",
+    "instructorName": "Jorge Martínez",
+    "instructorTitle": "Entrenador en ventas y conferencista de felicidad, BiiA LAB",
+    "lessons": [
+      {
+        "youtubeVideoId": "IpQfNnuo3M8",
+        "title": "Día 1 · Introducción",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "JrFc2dH76OY",
+        "title": "Día 1 · La rueda de la felicidad",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "iK6JNfLG5tM",
+        "title": "Día 1 · Diseña tu programa de productividad",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "V28H5edqblQ",
+        "title": "Día 1 · Fortalecimiento en ventas: el ciclo de la venta y la prospección",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "HNT-sZLgG-E",
+        "title": "Día 2 · Introducción: el poder de la confianza",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "g8utDDbZOZI",
+        "title": "Día 2 · Qué acciones debemos tomar",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "f_km1ZsMqRw",
+        "title": "Día 2 · Fortalecimiento en ventas: descubrir necesidades",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "Y0HE0Lclyj8",
+        "title": "Día 2 · Actores de la compra",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "58G_ejGq0OE",
+        "title": "Día 2 · Método AIDA",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "2bQdxAW1tk8",
+        "title": "Día 2 · Consideraciones generales para los argumentos de ventas",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "Ouw65ZpbUoU",
+        "title": "Día 3 · Introducción: perderle el miedo a las objeciones",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "B7HWTYMWp8Q",
+        "title": "Día 3 · Una objeción es una oportunidad",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "0S1nPWcWhcA",
+        "title": "Día 3 · Clasificaciones de las objeciones",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "17qcMjJ2UTQ",
+        "title": "Día 3 · Técnicas para el tratamiento de objeciones",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "pb2YUAPhAjY",
+        "title": "Día 3 · El cierre es el principio",
+        "channel": "BiiA LAB"
+      }
+    ]
+  },
+  "exam": {
+    "title": "Examen final — Entrenamiento Completo en Ventas",
+    "description": "Doce preguntas sobre los tres días del entrenamiento de Jorge Martínez: mentalidad del vendedor, ciclo de la venta, Método AIDA, objeciones y cierre.",
+    "passingScore": 70,
+    "questions": [
+      {
+        "question": "Según Jorge Martínez, ¿qué es vender?",
+        "options": [
+          "Convencer al cliente de que necesita el producto más costoso",
+          "Llevar a una persona del punto A al punto B, más feliz",
+          "Explicar todas las características técnicas del producto",
+          "Cumplir el presupuesto que fija la compañía cada mes"
+        ],
+        "correctIndex": 1,
+        "explanation": "En La rueda de la felicidad, Jorge define vender como transportar a una persona del punto A al punto B más feliz, y dice que casi todos los clientes lo que piden es que los hagan felices."
+      },
+      {
+        "question": "¿Qué recomienda Jorge sobre guardar ventas de un mes para el mes siguiente (el llamado colchón)?",
+        "options": [
+          "Guardar siempre una parte para no arrancar en cero",
+          "Guardarlas solo cuando el mes fue muy bueno",
+          "Jamás guardarlas, porque eso es distribuir pobreza para el mes siguiente",
+          "Guardarlas si el gerente lo autoriza"
+        ],
+        "correctIndex": 2,
+        "explanation": "En Diseña tu programa de productividad, Jorge dice que el colchón es para dormir y que guardar ventas para el otro mes es repartir pobreza, porque la mente arranca creyendo que ya tiene ventas que no hizo."
+      },
+      {
+        "question": "En el ciclo de la venta, ¿cómo define Jorge la prospección?",
+        "options": [
+          "Prospectar es decidir cuánto me quiero ganar",
+          "Prospectar es hacer una buena presentación del producto",
+          "Prospectar es responder las objeciones del cliente",
+          "Prospectar es cumplir con la base de datos que entrega la empresa"
+        ],
+        "correctIndex": 0,
+        "explanation": "Tanto en el Fortalecimiento del Día 1 como en la introducción del Día 2, Jorge repite que prospectar es decidir cuánto me quiero ganar, y que esa decisión la toma solo el vendedor."
+      },
+      {
+        "question": "En el ejemplo del vendedor de autos que mostró el baúl más profundo del mercado a una clienta que sufría de la columna, ¿cuál fue el error según Jorge?",
+        "options": [
+          "No le ofreció un descuento a tiempo",
+          "Mostró un beneficio sin haber investigado antes si tenía valor para ella",
+          "Habló demasiado poco durante la presentación",
+          "No le mostró el motor ni los frenos del auto"
+        ],
+        "correctIndex": 1,
+        "explanation": "En la introducción del Día 2, Jorge explica que los beneficios están mandados a recoger: lo que importa es descubrir el verdadero valor para cada cliente antes de presentar, y el vendedor perdió la venta por no haberlo investigado."
+      },
+      {
+        "question": "En la lección Actores de la compra, ¿qué porcentaje de la venta dice Jorge que ya tiene el vendedor cuando descubre que el producto tiene valor para el cliente?",
+        "options": [
+          "El 20 por ciento",
+          "El 50 por ciento",
+          "El 75 por ciento",
+          "El 90 por ciento"
+        ],
+        "correctIndex": 3,
+        "explanation": "Jorge afirma que si usted descubre que el producto tiene valor para el cliente ya tiene un 90 por ciento de la venta; lo que sigue es saberlo presentar bien."
+      },
+      {
+        "question": "En el Método AIDA, ¿con qué recomienda Jorge llamar la atención del cliente al iniciar una presentación o una cotización?",
+        "options": [
+          "Con la misión, visión y valores de la compañía",
+          "Con una pregunta inquietante y emocional",
+          "Con la lista de precios y plazos",
+          "Con los beneficios del producto"
+        ],
+        "correctIndex": 1,
+        "explanation": "En la lección Método AIDA, Jorge dice que casi siempre llamar la atención es válido con una pregunta emocional y atractiva, y propone dedicar la primera página de la cotización a una sola pregunta inquietante."
+      },
+      {
+        "question": "Según la estructura de cotización en AIDA que propone Jorge, ¿qué debe ir en la última página?",
+        "options": [
+          "La explicación del producto y sus precios",
+          "El título del producto o servicio",
+          "Una frase que invite a tomar acción, con un cierre fácil",
+          "Los beneficios que provocan el deseo"
+        ],
+        "correctIndex": 2,
+        "explanation": "Jorge propone cinco páginas: pregunta, título, explicación con precios y plazos, beneficios, y en la última una invitación a la acción, un cierre fácil como llámenos o compre hoy y obtenga."
+      },
+      {
+        "question": "En Consideraciones generales para los argumentos de ventas, ¿qué porcentaje retiene el ser humano de lo que escucha y observa a la vez?",
+        "options": [
+          "El 20 por ciento",
+          "El 50 por ciento",
+          "El 80 por ciento",
+          "El 96 por ciento"
+        ],
+        "correctIndex": 1,
+        "explanation": "Jorge recuerda que el ser humano retiene solo el 20 por ciento de lo que escucha pero el 50 por ciento de lo que escucha y observa, y por eso son tan importantes las demostraciones."
+      },
+      {
+        "question": "En la introducción del Día 3, ¿con qué compara Jorge la objeción de precio?",
+        "options": [
+          "Con una fiebre: es un síntoma de que algo le está molestando al cliente, no la enfermedad",
+          "Con una puerta cerrada que no se puede abrir",
+          "Con una prueba de que el producto es demasiado caro",
+          "Con una señal de que el cliente ya decidió comprar"
+        ],
+        "correctIndex": 0,
+        "explanation": "Jorge explica que la palabra precio no siempre es precio: es fiebre, un síntoma de que algo le molesta al cliente, y que la mayoría de las objeciones que dicen ser precio no son precio."
+      },
+      {
+        "question": "En los seis pasos para manejar objeciones que enseña Jorge en Clasificaciones de las objeciones, ¿cuál es el primer paso?",
+        "options": [
+          "Ofrecer opciones al cliente",
+          "Calmarse",
+          "Capturar la objeción verdadera",
+          "Rebajar el precio"
+        ],
+        "correctIndex": 1,
+        "explanation": "Los pasos son: calmarse, extraer el mayor número de objeciones, capturar la verdadera con una pregunta capciosa (cuál pesa más), entenderla, ofrecer opciones y celebrar. El primero es calmarse, respirando y sonriendo."
+      },
+      {
+        "question": "En Técnicas para el tratamiento de objeciones, ¿cómo define Jorge el precio en la balanza del cliente?",
+        "options": [
+          "El costo de producción más la utilidad del vendedor",
+          "El esfuerzo que el cliente tiene que hacer para obtener aquello que para él tiene valor",
+          "El promedio de lo que cobra la competencia",
+          "La cifra que aparece en la cotización"
+        ],
+        "correctIndex": 1,
+        "explanation": "Jorge dice que el cerebro del cliente siempre hace una balanza entre precio y valor: el precio es el esfuerzo, económico o físico, que hace para lograr lo que tiene valor; si el esfuerzo pesa más le parece caro, si pesa más el valor le parece barato."
+      },
+      {
+        "question": "En la técnica de cierre por punto menor, ¿cómo cerró la vendedora de autos la venta de la camioneta de 40 mil dólares cuando el cliente dudó en el último minuto?",
+        "options": [
+          "Le ofreció un descuento del 10 por ciento",
+          "Le explicó cuánto interés pagaría un banco por ese dinero",
+          "Le preguntó si le ponía un moño rojo o un moño azul",
+          "Le pidió que volviera otro día con su hijo"
+        ],
+        "correctIndex": 2,
+        "explanation": "En Técnicas para el tratamiento de objeciones, Jorge cuenta que la vendedora lo sacó de la decisión grande a una pequeña, el color del moño, y lo conectó de nuevo con la emoción; eso es el cierre por punto menor."
+      }
+    ]
+  }
+}

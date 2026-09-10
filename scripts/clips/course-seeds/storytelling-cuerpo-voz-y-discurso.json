@@ -1,0 +1,217 @@
+{
+  "course": {
+    "title": "Storytelling: cuerpo, voz y discurso",
+    "description": "Un entrenamiento práctico para pasar del miedo al placer de hablar en público. En el Módulo 1, dedicado a la proyección y el empoderamiento corporal, el estudiante aprenderá a identificar su línea base frente a una audiencia y a aplicar técnicas concretas de piernas, brazos y cabeza (traslados con talón, simetría, posición de acción a 90 grados, posiciones de descanso, saludo con inclinación, parpadeo lento y mirada uno a uno), además de técnicas de empoderamiento para la mente como la respiración 5-5-7-5, la autosugestión, la imaginería y agotar los nervios fuera del escenario.\n\nEn el Módulo 2, dedicado a la verbalidad, trabajará la para-verbalidad con las cuatro intensidades del discurso (tranquila, acelerada, silencio y fuerte) y aprenderá a construir una historia corta con la secuencia historia y mensaje, sumando personajes concretos para que el público se conecte con la anécdota. Cada lección incluye ejercicios para repetir en casa.",
+    "shortDescription": "Aprende a proyectar seguridad con el cuerpo, manejar las intensidades de la voz y construir historias breves con mensaje para hablar en público.",
+    "category": "Comunicación",
+    "level": "Principiante",
+    "instructorName": "Miguel Figueroa",
+    "instructorTitle": "Comunicador y entrenador en hablar en público y storytelling, con un enfoque evolutivo de la comunicación no verbal",
+    "lessons": [
+      {
+        "youtubeVideoId": "fGMS7EezVdQ",
+        "title": "Módulo 1 · Introducción",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "EDYsxE92rOA",
+        "title": "Módulo 1 · Cuál es mi línea base",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "32mpnG7QzSA",
+        "title": "Módulo 1 · Cómo aplicar técnicas de proyección en mis piernas",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "CO0L-q0LXqc",
+        "title": "Módulo 1 · Cómo aplicar técnicas de proyección en mis brazos",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "bpLXsk6Omwk",
+        "title": "Módulo 1 · Cómo aplicar técnicas de proyección en mi cabeza",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "urU8bq3Nrm8",
+        "title": "Módulo 1 · Aplica estas técnicas de proyección alternativas",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "Q-u6sxx32mY",
+        "title": "Módulo 1 · Cómo aplicar técnicas de empoderamiento en mis brazos y piernas",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "bcXn3nizoVw",
+        "title": "Módulo 1 · Cómo aplicar técnicas de empoderamiento en mi cabeza",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "44gXSLAioOI",
+        "title": "Módulo 1 · Cómo aplicar técnicas de empoderamiento en mi mente",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "kE3HMz-irqI",
+        "title": "Módulo 2 · Introducción",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "OLw0ect3HWY",
+        "title": "Módulo 2 · La para-verbalidad: cómo aplicar las intensidades en mi discurso",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "eSEF7PFjptI",
+        "title": "Módulo 2 · La verbalidad: cómo construir una historia en mi discurso",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "HpYIs0TIQMo",
+        "title": "Módulo 2 · Conclusión y preguntas",
+        "channel": "BiiA LAB"
+      }
+    ]
+  },
+  "exam": {
+    "title": "Examen final — Storytelling: cuerpo, voz y discurso",
+    "description": "Evalúa las técnicas de proyección, empoderamiento, para-verbalidad y construcción de historias enseñadas en el curso.",
+    "passingScore": 70,
+    "questions": [
+      {
+        "question": "Según el instructor, ¿en qué orden se construye la comunicación cuando hablamos en público?",
+        "options": [
+          "Primero el cuerpo (no verbalidad), luego la tonalidad (para-verbalidad) y al final lo que decimos (verbalidad)",
+          "Primero lo que decimos, luego la tonalidad y al final el cuerpo",
+          "Primero la tonalidad, luego lo que decimos y al final el cuerpo",
+          "Los tres elementos pesan exactamente igual y no hay un orden"
+        ],
+        "correctIndex": 0,
+        "explanation": "En la introducción del Módulo 1 el instructor explica que la comunicación es principalmente no verbal: primero trabaja el cuerpo, después la para-verbalidad y al final la verbalidad."
+      },
+      {
+        "question": "¿Cuál es la diferencia entre técnicas de proyección y técnicas de empoderamiento?",
+        "options": [
+          "Las de proyección sirven para exponer de pie y las de empoderamiento para exponer sentado",
+          "Las de proyección hacen que me vean como quiero lucir; las de empoderamiento hacen que yo me sienta más seguro antes y durante la exposición",
+          "Las de proyección trabajan la voz y las de empoderamiento trabajan el cuerpo",
+          "Son el mismo grupo de técnicas con dos nombres distintos"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor define la proyección como el modo en que quiero mostrarme frente al otro, y el empoderamiento como el modo en que quiero sentirme yo, es decir, perder el miedo a hablar en público."
+      },
+      {
+        "question": "¿Cómo recomienda el instructor trasladarse en el escenario y caminar antes de una presentación?",
+        "options": [
+          "Con la punta de los pies, para dar ligereza al paso",
+          "Con pasos muy rápidos, para transmitir energía",
+          "Apoyando el talón primero, tipo militar, porque caminar con puntas es lo que hace el cuerpo asustado",
+          "Sin moverse nunca del centro del escenario"
+        ],
+        "correctIndex": 2,
+        "explanation": "En la lección de piernas explica que cuando estamos asustados la energía se va a la punta de los pies (listos para escapar), y que caminar talón a punta le dice al cerebro que estamos tranquilos."
+      },
+      {
+        "question": "En el entrenamiento de trayectorias, ¿dónde deben empezar y terminar los traslados y cómo debe estar el cuerpo en los cierres importantes?",
+        "options": [
+          "Empezar en un extremo, terminar en el otro y cerrar con una pierna adelantada",
+          "Empezar y terminar en el centro, cerrando en posición simétrica",
+          "Empezar en el centro, terminar donde se prefiera y cerrar de espaldas al público",
+          "No importa dónde se termine mientras se mire a la cámara"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor marca tres puntos de estabilización, pide siempre empezar y terminar en el centro y recuerda que en los momentos importantes hay que ponerse simétrico, porque la simetría se percibe como estabilidad."
+      },
+      {
+        "question": "¿Cuál es la posición básica de acción de los brazos y cuáles son las tres posiciones de descanso que enseña el instructor?",
+        "options": [
+          "Brazos caídos a los costados; descansos: manos en los bolsillos, brazos cruzados y manos atrás",
+          "Brazos a 90 grados; descansos: piramidal, de rezo y de abrazo",
+          "Brazos extendidos hacia arriba; descansos: piramidal, cruzados y en la cintura",
+          "Manos juntas frente al pecho; descansos: de rezo, de abrazo y brazos caídos"
+        ],
+        "correctIndex": 1,
+        "explanation": "En la lección de brazos la posición básica es la de 90 grados (posición de acción) y las posiciones de descanso son la piramidal, la de rezo y la de abrazo. Los brazos caídos hacen que todo lo que se dice se vuelva flojo."
+      },
+      {
+        "question": "En las técnicas de cabeza, ¿qué elementos componen el saludo básico que el instructor pide practicar?",
+        "options": [
+          "Mirar al fondo de la sala, cruzar los brazos y mantener la cara seria",
+          "Sonreír, inclinarse ligeramente adelante y al costado, parpadear lento y mirar a la gente uno a uno",
+          "Mirar fijamente a la autoridad presente, levantar la barbilla y hablar en voz baja",
+          "Mirar hacia atrás a la pantalla mientras se saluda para no perder el hilo"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor explica que la inclinación al costado muestra el cuello y comunica confianza, que el parpadeo lento le dice al cerebro que todo está bien, y que la mirada debe repartirse de manera aleatoria entre todas las personas."
+      },
+      {
+        "question": "¿En qué consiste el ejercicio de respiración 5-5-7-5 que enseña el instructor en las técnicas de empoderamiento de la mente?",
+        "options": [
+          "Inhalar 5 segundos, mantener 5, exhalar 7 y quedarse sin aire 5, hinchando la barriga y no el pecho, de 5 a 7 veces",
+          "Inhalar 5 segundos, exhalar 5, inhalar 7 y exhalar 5, hinchando el pecho",
+          "Respirar 5 veces rápido, 5 veces lento y 7 veces profundo",
+          "Inhalar 7 segundos, mantener 5, exhalar 5 y quedarse sin aire 5, siempre con los ojos abiertos"
+        ],
+        "correctIndex": 0,
+        "explanation": "En la lección de la mente el instructor detalla el 5-5-7-5 (inhalar, mantener, exhalar, sin aire), pide llevar el aire a la barriga porque hinchar el pecho es un mensaje de lucha, y sugiere repetirlo de 5 a 7 veces."
+      },
+      {
+        "question": "El instructor cita un experimento sobre el prime en el que dos grupos ordenaban palabras desordenadas. ¿Qué ocurrió con el grupo cuyas palabras estaban relacionadas con lento, viejo y cansancio?",
+        "options": [
+          "Ordenó las oraciones con más errores que el otro grupo",
+          "Caminó más lento hacia el ascensor al salir de la prueba",
+          "Se negó a terminar la prueba",
+          "Recordó más palabras que el otro grupo al día siguiente"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor usa este experimento para mostrar que las palabras que repetimos despiertan un estereotipo y cambian nuestro comportamiento, por eso recomienda decirse palabras de tranquilidad y seguridad antes de exponer."
+      },
+      {
+        "question": "Según la lección de para-verbalidad, ¿para qué se usa la intensidad 1 en una historia?",
+        "options": [
+          "Para el gran final, porque es la intensidad más fuerte",
+          "Para el nudo, porque transmite ansiedad y angustia",
+          "Para el planteamiento, porque es tranquila y le da tiempo al público a entender los datos y construir la imagen",
+          "Para crear suspenso, porque es un silencio total"
+        ],
+        "correctIndex": 2,
+        "explanation": "El instructor explica que la intensidad 1 es tranquila y se usa al plantear la historia (había una vez), porque lo lento le da tiempo a la gente para decodificar la información como imagen."
+      },
+      {
+        "question": "En el sistema de cuatro intensidades del instructor, ¿qué es la intensidad 0 y qué efecto produce?",
+        "options": [
+          "Es un susurro apenas audible que relaja al público",
+          "Es un silencio sin información que hace que la gente se concentre más en lo que viene",
+          "Es la voz más fuerte, usada para el mensaje final",
+          "Es hablar a velocidad normal, sin subidas ni bajadas"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor describe la intensidad 0 como un silencio donde hay escasez de datos, y por esa escasez el público se concentra más en lo que viene. Debe ser notoria, no disimulada."
+      },
+      {
+        "question": "En la lección de verbalidad, el instructor pide respetar dos bloques al narrar. ¿Cuáles son y para qué sirve el segundo?",
+        "options": [
+          "Bloque de saludo y bloque de despedida; el segundo sirve para agradecer",
+          "Bloque de historia y bloque de mensaje o reflexión; el segundo sirve para asegurarse de que todos entendieron la enseñanza",
+          "Bloque de datos y bloque de estadísticas; el segundo sirve para dar credibilidad",
+          "Bloque de pregunta y bloque de respuesta; el segundo sirve para cerrar con humor"
+        ],
+        "correctIndex": 1,
+        "explanation": "El instructor insiste en la secuencia historia y mensaje: la historia se cierra y luego viene la reflexión (por eso, amigos...), que da tiempo para asegurarse de que el público captó el mensaje."
+      },
+      {
+        "question": "¿Qué paso indica el instructor para convertir una situación general (suele pasarnos que...) en una historia?",
+        "options": [
+          "Alargarla a más de cinco minutos con muchos detalles",
+          "Contarla en intensidad 3 de principio a fin",
+          "Ponerle un personaje concreto con nombre, por ejemplo Susana, porque la gente se conecta con la persona",
+          "Eliminar el mensaje final para que sea más elegante"
+        ],
+        "correctIndex": 2,
+        "explanation": "En la segunda parte del ejercicio de verbalidad el instructor pide que la anécdota le pase a otra persona con nombre y características notorias, porque así la historia se vuelve más real, cercana y replicable."
+      }
+    ]
+  }
+}
