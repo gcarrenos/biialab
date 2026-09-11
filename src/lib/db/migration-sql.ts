@@ -318,3 +318,16 @@ UPDATE "certificates" SET "paid_at" = "issued_at" WHERE "paid_at" IS NULL;`;
 // Migration 0004: per-course certificate price. NULL means "use the platform
 // default" (CERTIFICATE_PRICE_USD), so existing courses are untouched.
 export const MIGRATION_SQL_0004 = `ALTER TABLE "courses" ADD COLUMN IF NOT EXISTS "certificate_price_usd" integer;`;
+
+// Migration 0005: re-engagement email. `email_optout` gates anything that is not
+// transactional; `email_sends` records what actually went out, and its unique
+// index is what stops a recurring job from mailing the same person twice.
+export const MIGRATION_SQL_0005 = `ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "email_optout" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "email_sends" (
+  "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+  "user_id" uuid NOT NULL REFERENCES "users"("id") ON DELETE cascade,
+  "kind" varchar(40) NOT NULL,
+  "course_id" uuid REFERENCES "courses"("id") ON DELETE cascade,
+  "sent_at" timestamp DEFAULT now() NOT NULL
+);--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "email_sends_user_kind_course_idx" ON "email_sends" ("user_id","kind","course_id");`;

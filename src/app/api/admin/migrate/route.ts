@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
-import { MIGRATION_SQL, MIGRATION_SQL_0001, MIGRATION_SQL_0002, MIGRATION_SQL_0003, MIGRATION_SQL_0004 } from '@/lib/db/migration-sql';
+import { MIGRATION_SQL, MIGRATION_SQL_0001, MIGRATION_SQL_0002, MIGRATION_SQL_0003, MIGRATION_SQL_0004, MIGRATION_SQL_0005 } from '@/lib/db/migration-sql';
 
 export const maxDuration = 60;
 
@@ -75,6 +75,9 @@ export async function POST(request: Request) {
 
     // 0004 is a plain ADD COLUMN IF NOT EXISTS — safe to run every time.
     results.push(...await runStatements(MIGRATION_SQL_0004));
+
+    // 0005 is IF NOT EXISTS throughout — safe to run every time.
+    results.push(...await runStatements(MIGRATION_SQL_0005));
 
     const failed = results.filter((r) => r.status === 'failed');
     return NextResponse.json({
