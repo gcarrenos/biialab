@@ -116,7 +116,7 @@ export async function getCertificateByNumber(certificateNumber: string) {
         issuedAt: cert.issuedAt.toISOString(),
         unlocked,
         isOwner: viewer?.id === cert.userId,
-        priceUsd: unlocked ? null : certificatePriceUsd(),
+        priceUsd: unlocked ? null : (course.certificatePriceUsd ?? certificatePriceUsd()),
         courseTitle: course.title,
         courseSlug: course.slug,
         courseCategory: course.category,

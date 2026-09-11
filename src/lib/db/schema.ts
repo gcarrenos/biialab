@@ -195,6 +195,10 @@ export const courses = pgTable('courses', {
   // Pricing
   price: integer('price').default(0), // In cents, 0 = free
   currency: varchar('currency', { length: 3 }).default('USD'),
+  // What this course's verified certificate costs, in whole USD. NULL falls back
+  // to CERTIFICATE_PRICE_USD, so only courses that differ need a value (the
+  // Diplomado is $49 against the platform default of $19).
+  certificatePriceUsd: integer('certificate_price_usd'),
   
   // Status
   status: varchar('status', { length: 20 }).default('draft'), // draft, published, archived
