@@ -8,7 +8,8 @@ import {
   uuid,
   jsonb,
   serial,
-  primaryKey
+  primaryKey,
+  uniqueIndex
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -38,9 +39,25 @@ export const users = pgTable('users', {
   emailVerified: boolean('email_verified').notNull().default(false),
   image: text('image'),
   role: varchar('role', { length: 50 }).default('user'), // user, admin, instructor
+  // Opted out of non-transactional email. Receipts and password resets still
+  // go out; reminders and anything marketing-shaped must check this first.
+  emailOptout: boolean('email_optout').notNull().default(false),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+// One row per non-transactional email actually sent. The unique index is the
+// hard guarantee that an always-on job can never mail the same person the same
+// thing twice for the same course, no matter how often it runs.
+export const emailSends = pgTable('email_sends', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  kind: varchar('kind', { length: 40 }).notNull(), // 'start_course' | 'resume_course'
+  courseId: uuid('course_id').references(() => courses.id, { onDelete: 'cascade' }),
+  sentAt: timestamp('sent_at').defaultNow().notNull(),
+}, (t) => ({
+  onceEach: uniqueIndex('email_sends_user_kind_course_idx').on(t.userId, t.kind, t.courseId),
+}));
 
 // OAuth accounts linked to users
 export const accounts = pgTable('accounts', {
