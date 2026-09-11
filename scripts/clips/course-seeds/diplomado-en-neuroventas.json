@@ -1,0 +1,375 @@
+{
+  "course": {
+    "title": "Diplomado en Neuroventas",
+    "description": "El Diplomado en Neuroventas reúne en un solo programa los cuatro cursos de ventas de BiiA LAB: persuasión y neuromarketing, ventas que funcionan, marketing y ventas digitales, y emprender con estrategia. Las 27 clases recorren cómo decide el cerebro del cliente, cómo conducir una conversación comercial hasta el cierre, cómo atraer clientes y construir marca en canales digitales, y cómo ordenar el negocio con sistemas y equipos para que las ventas no dependan de una sola persona.\n\nAl terminar, el egresado podrá preparar y conducir una reunión de ventas, manejar objeciones y cerrar con argumentos basados en la percepción y las emociones del cliente, estructurar mensajes persuasivos y planes de marketing dirigidos a un público definido, medir los resultados de sus campañas y ajustar lo que no funciona, y documentar su proceso comercial para poder delegarlo. El programa cierra con un examen final integrador que cruza las cuatro áreas y con un certificado del diplomado.",
+    "shortDescription": "Los 4 cursos de ventas de BiiA LAB en un solo programa: persuasión, ventas, digital y estrategia, con examen integrador.",
+    "category": "Ventas",
+    "level": "Intermedio",
+    "instructorName": "BiiA LAB",
+    "instructorTitle": "Programa integrado de neuroventas",
+    "lessons": [
+      {
+        "youtubeVideoId": "9yyghPpx2pg",
+        "title": "Persuasión · Cómo vender más y mejor: la ciencia de la percepción en las ventas — Jorge Martínez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "JBq4v4_FjAw",
+        "title": "Persuasión · Cómo escribir para persuadir y vender más en 7 pasos — Rosal Morel",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "Nj831sU9LXU",
+        "title": "Persuasión · Cómo conseguir más ventas utilizando el método AIDA",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "TJ5VtJgwdG8",
+        "title": "Persuasión · Cómo saber negociar y lograr lo que quieras — José Karlos",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "eegICU-JauM",
+        "title": "Persuasión · Networking profesional — Beatriz Arroyave",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "N0389X9kw7Y",
+        "title": "Ventas · Técnicas de ventas: el mejor curso de ventas — Jorge Martínez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "K1A0ua1Xhok",
+        "title": "Ventas · Cómo vender más: técnicas científicas — Jürgen Klarić",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "_zt6C7PxO5I",
+        "title": "Ventas · Los mejores tips para cerrar ventas — Marcos Parra",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "KihaOt8Olgg",
+        "title": "Ventas · Convierte un no en una venta — Raúl Galindo",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "o2hc0K0v6Z0",
+        "title": "Ventas · Coaching empresarial y PNL para aumentar tus ventas — Mauricio Bock",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "WyeKpqzqNdQ",
+        "title": "Ventas · Cómo vender más y tener más éxito en multinivel — Marcos Parra Saavedra",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "7_RhyOVXxFI",
+        "title": "Ventas · Cómo lograr citas de ventas efectivas — Raúl Galindo",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "OoDc-nyrxjI",
+        "title": "Ventas · ¿Cómo vender apartamentos con neurociencia? — Jürgen Klarić",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "SM59mF9zxgI",
+        "title": "Ventas · Cómo ser un vendedor poderoso, exitoso y feliz — Juan Carlos Cañón",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "U7pXoKT4C8w",
+        "title": "Ventas · Cómo comprar bienes raíces sin usar los bancos — Carlos Devis",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "yCf0DyZXGZQ",
+        "title": "Ventas · Conferencia Véndele a la mente, no a la gente — Jürgen Klarić",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "jSoGHzQiBH0",
+        "title": "Ventas · Cómo fortalecer tus ventas y aumentar resultados para ganar más",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "tGM0_sSy2Kc",
+        "title": "Digital · Los 10 errores de ventas y marketing que están afectando tu negocio — Titto Gálvez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "ujknZndxHGg",
+        "title": "Digital · Monetiza y consigue seguidores en Instagram — Lilypat",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "R3XWX5pK7n0",
+        "title": "Digital · Neuromarketing electoral y marketing político",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "lSZL2l2dvaE",
+        "title": "Digital · Cómo crear un plan de marketing para tu emprendimiento — Titto Gálvez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "pstY7KxPdSc",
+        "title": "Digital · Secretos para que tu negocio funcione sin ti, capítulo 3: sistematizar — Titto Gálvez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "m3bSqEoNpV4",
+        "title": "Digital · Secretos para que tu negocio funcione sin ti, capítulo 2: mundos — Titto Gálvez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "8XGrGTPHFCE",
+        "title": "Digital · Secretos para que tu negocio funcione sin ti, capítulo 1: mindset — Titto Gálvez",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "shO3F8Xmynw",
+        "title": "Estrategia · Aceleración comercial — Mauricio Benoist",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "nyHrdLAZWpo",
+        "title": "Estrategia · Lo que tienes que aprender para tener éxito en tus negocios — Judit Català",
+        "channel": "BiiA LAB"
+      },
+      {
+        "youtubeVideoId": "AelrWpqWVTA",
+        "title": "Estrategia · Cómo iniciar un negocio por internet — Luis Eduardo Barón",
+        "channel": "BiiA LAB"
+      }
+    ]
+  },
+  "exam": {
+    "title": "Examen final integrador — Diplomado en Neuroventas",
+    "description": "Evalúa la aplicación conjunta de persuasión, ventas, marketing digital y estrategia en situaciones comerciales reales.",
+    "passingScore": 70,
+    "questions": [
+      {
+        "question": "Una tienda online recibe muchas visitas pero casi nadie compra. La página de producto abre con una lista de especificaciones técnicas, no explica para qué sirve el producto y no muestra ninguna experiencia de otros compradores. ¿Qué ajuste combina mejor lo aprendido en persuasión y en marketing digital?",
+        "options": [
+          "Bajar el precio hasta que alguien compre, sin tocar el contenido de la página",
+          "Ordenar la página para captar atención, generar interés y deseo y terminar con una acción clara, e incluir testimonios reales de clientes",
+          "Aumentar la inversión en publicidad para llevar más visitas a la misma página",
+          "Quitar toda referencia emocional y dejar solo la ficha técnica ampliada"
+        ],
+        "correctIndex": 1,
+        "explanation": "Integra persuasión y digital: la secuencia del método AIDA organiza el mensaje y la prueba social reduce la incertidumbre del comprador. Más tráfico sobre una página que no persuade no resuelve el problema."
+      },
+      {
+        "question": "Un negocio genera contactos desde Instagram, pero al llamarlos el vendedor arranca de inmediato con la presentación completa del producto y la mayoría de las llamadas terminan sin avanzar. ¿Cuál es la corrección más consistente con el diplomado?",
+        "options": [
+          "Dejar de llamar y atender solo por mensajes escritos",
+          "Repetir la presentación con más energía y más veces en la misma llamada",
+          "Abrir la llamada con preguntas y escucha activa para detectar la necesidad real antes de presentar la oferta",
+          "Pedir el cierre en el primer minuto para no perder tiempo con quien no va a comprar"
+        ],
+        "correctIndex": 2,
+        "explanation": "Integra digital y ventas: el canal digital trae el contacto, pero el proceso de venta sigue exigiendo escuchar y entender la necesidad antes de proponer una solución."
+      },
+      {
+        "question": "Un negocio factura bien, pero el dueño atiende personalmente cada cliente, cotiza y cierra todas las ventas. Cuando se enferma o viaja, las ventas se detienen. ¿Qué debería hacer primero según el enfoque del diplomado?",
+        "options": [
+          "Documentar el proceso comercial y formar un equipo con roles claros para que el negocio no dependa de una sola persona",
+          "Subir los precios para trabajar con menos clientes y sostener la misma facturación",
+          "Contratar más publicidad para compensar los días en que no puede atender",
+          "Mantener el modelo actual, porque un negocio que vende no necesita cambios"
+        ],
+        "correctIndex": 0,
+        "explanation": "Integra estrategia y ventas: sistematizar el proceso comercial y delegar es lo que permite pasar de emprendedor a empresario y escalar sin multiplicar el esfuerzo del dueño."
+      },
+      {
+        "question": "Una marca lanza una campaña digital con un mensaje muy emocional que recibe muchos comentarios positivos, pero nadie en el equipo revisa cuántos contactos o ventas generó. El mes siguiente repiten la misma campaña con más presupuesto. ¿Qué error están cometiendo?",
+        "options": [
+          "Usar emoción en el mensaje, ya que la publicidad debe ser exclusivamente racional",
+          "Publicar en un canal digital en lugar de un medio tradicional",
+          "Haber definido un público objetivo antes de lanzar la campaña",
+          "Escalar la inversión sin medir resultados, por lo que no saben qué parte de la campaña funciona y cuál ajustar"
+        ],
+        "correctIndex": 3,
+        "explanation": "Integra neuromarketing y digital: la carga emocional ayuda a conectar, pero sin medición no hay forma de distinguir alcance de resultados ni de corregir lo que no está funcionando."
+      },
+      {
+        "question": "En una reunión con un comprador corporativo, el cliente pide un descuento importante y el vendedor tiene margen limitado. ¿Qué enfoque corresponde a una negociación efectiva aplicada al cierre?",
+        "options": [
+          "Ceder siempre al descuento pedido para no perder la operación",
+          "Explorar qué le importa realmente al cliente, como plazos, volumen o servicio, y construir un acuerdo que funcione para ambas partes",
+          "Sostener el precio sin explicar nada y dar la conversación por terminada",
+          "Prometer condiciones que la empresa probablemente no podrá cumplir con tal de cerrar hoy"
+        ],
+        "correctIndex": 1,
+        "explanation": "Integra persuasión y ventas: negociar bien es buscar un acuerdo que atienda los intereses de las dos partes, y un cierre sólido nace del valor percibido, no de una concesión automática ni de una promesa incumplible."
+      },
+      {
+        "question": "Una emprendedora quiere lanzar su servicio la próxima semana. Su plan consiste en publicar todos los días en redes sociales y esperar mensajes, sin haber definido a quién le habla ni qué resultado espera. ¿Qué le recomendaría el diplomado antes de publicar?",
+        "options": [
+          "Publicar igual y decidir el público según quién le escriba",
+          "Empezar por contratar publicidad pagada y definir el resto después",
+          "Definir el cliente ideal, los objetivos y las acciones concretas en un plan de marketing que ordene la ejecución",
+          "Copiar el contenido de un competidor grande hasta conseguir seguidores"
+        ],
+        "correctIndex": 2,
+        "explanation": "Integra estrategia y digital: el plan de marketing ordena público, objetivos y acciones, y sin esa claridad la constancia en redes se convierte en esfuerzo sin dirección."
+      },
+      {
+        "question": "Un vendedor conoce el producto a la perfección y habla durante casi toda la reunión. El cliente responde con monosílabos y al final dice que lo va a pensar. ¿Qué debió hacer distinto?",
+        "options": [
+          "Hablar todavía más rápido para cubrir más beneficios en el mismo tiempo",
+          "Preguntar y escuchar para entender qué le preocupa al cliente y ajustar la propuesta a eso",
+          "Evitar mencionar el precio hasta una segunda reunión",
+          "Terminar la reunión antes para no incomodar al cliente"
+        ],
+        "correctIndex": 1,
+        "explanation": "Área de persuasión: la escucha activa revela objeciones y necesidades reales, y hablar más que el cliente no aumenta la capacidad de persuadir."
+      },
+      {
+        "question": "Un asesor debe escribir el correo con el que presentará su servicio a una lista de contactos fríos. ¿Qué estructura responde mejor a los principios de escritura persuasiva del programa?",
+        "options": [
+          "Un texto sin orden particular, porque la secuencia de las ideas no influye en la decisión",
+          "Un correo que empiece con la historia completa de la empresa y sus certificaciones",
+          "Una secuencia que capte la atención desde el inicio, mantenga el interés, muestre el beneficio y cierre con una acción concreta",
+          "Un mensaje deliberadamente ambiguo para que el lector pregunte de qué se trata"
+        ],
+        "correctIndex": 2,
+        "explanation": "Área de persuasión: la escritura persuasiva organiza las ideas en una secuencia que sostiene el interés y conduce al lector hacia la acción deseada."
+      },
+      {
+        "question": "Un vendedor llega tarde, desordenado y sin material a su primera reunión con un prospecto importante, aunque su propuesta es sólida. ¿Cómo debe interpretar el peso de esa primera impresión?",
+        "options": [
+          "No influye en nada, porque solo cuenta el contenido de la propuesta",
+          "Define de forma absoluta e irreversible el resultado de la venta",
+          "Solo importaría si se tratara de una entrevista de trabajo",
+          "Afecta la disposición inicial del prospecto hacia la conversación, aunque no decide por sí sola el resultado"
+        ],
+        "correctIndex": 3,
+        "explanation": "Área de persuasión: la primera impresión predispone al interlocutor y condiciona el clima de la conversación, sin determinar por sí sola el cierre."
+      },
+      {
+        "question": "Para cerrar más rápido, un vendedor exagera los beneficios del servicio y promete resultados que sabe que el cliente no va a obtener. Firma el contrato ese mismo día. ¿Qué consecuencia advierte el programa?",
+        "options": [
+          "El cliente será más leal porque recibió una promesa ambiciosa",
+          "Ninguna, porque una venta cerrada siempre justifica el método usado",
+          "Cuando el cliente note la diferencia se perderá la confianza y la relación a largo plazo quedará dañada, pese a la venta puntual",
+          "La reputación de la empresa mejorará gracias al contrato firmado"
+        ],
+        "correctIndex": 2,
+        "explanation": "Área de persuasión: usar la persuasión de forma manipuladora puede producir una venta inmediata, pero erosiona la confianza y la relación futura con el cliente."
+      },
+      {
+        "question": "Ante la propuesta, el cliente responde: está muy caro. ¿Cuál es el primer paso recomendado por el área de ventas?",
+        "options": [
+          "Ofrecer de inmediato el mayor descuento disponible",
+          "Preguntar con qué lo está comparando y qué esperaba, para entender si es un tema de presupuesto o de valor percibido",
+          "Cambiar de tema y seguir con el resto de la presentación",
+          "Explicar que el cliente está equivocado sobre el precio del mercado"
+        ],
+        "correctIndex": 1,
+        "explanation": "Área de ventas: toda objeción tiene una causa real detrás, y entenderla antes de responder permite atender el motivo verdadero en lugar del síntoma."
+      },
+      {
+        "question": "En la primera llamada, un prospecto dice que no le interesa. El vendedor nota que no hizo ninguna pregunta sobre el servicio. ¿Cómo conviene manejar ese no inicial?",
+        "options": [
+          "Darlo por perdido definitivamente y eliminar el contacto",
+          "Insistir con llamadas repetidas hasta que el prospecto cambie de opinión",
+          "Recibirlo con empatía, indagar qué motiva la respuesta y dejar abierta la posibilidad de retomar la conversación",
+          "Enviar la propuesta completa por escrito sin decir nada más"
+        ],
+        "correctIndex": 2,
+        "explanation": "Área de ventas: un no inicial suele ser una puerta para indagar más, siempre que se maneje con empatía y sin presión."
+      },
+      {
+        "question": "Un vendedor tiene mañana una cita con una empresa de la que no sabe nada. Piensa improvisar porque domina su producto. ¿Qué le indicaría el programa?",
+        "options": [
+          "Investigar al cliente y preparar la reunión mejora la conversación y las probabilidades de avanzar",
+          "La preparación previa no cambia el resultado si se conoce bien el producto",
+          "Es preferible llegar sin información para que la conversación sea espontánea",
+          "Preparar la cita solo tiene sentido en ventas de alto valor como bienes raíces"
+        ],
+        "correctIndex": 0,
+        "explanation": "Área de ventas: prepararse permite anticipar preguntas y objeciones y conducir mejor la reunión."
+      },
+      {
+        "question": "El cliente ya entendió el valor de la propuesta, resolvió sus dudas y comenta que le parece justo lo que cuesta. El vendedor guarda silencio y espera. ¿Qué corresponde hacer?",
+        "options": [
+          "Volver a explicar todos los beneficios desde el principio",
+          "Dejar que el cliente escriba cuando quiera, sin proponer ningún paso",
+          "Guiar la conversación hacia una decisión concreta, proponiendo el siguiente paso con claridad",
+          "Agregar un descuento no solicitado para asegurar la firma"
+        ],
+        "correctIndex": 2,
+        "explanation": "Área de ventas: cerrar es conducir al cliente a una decisión clara una vez que ya percibe el valor, no presionarlo ni dejar la conversación sin desenlace."
+      },
+      {
+        "question": "Una semana después de enviar la propuesta, el cliente no ha respondido. ¿Cuál es la conducta recomendada?",
+        "options": [
+          "No volver a contactarlo, porque el silencio equivale a un rechazo",
+          "Escribir o llamar varias veces al día hasta obtener una respuesta",
+          "Esperar indefinidamente, ya que una buena propuesta se defiende sola",
+          "Dar un seguimiento oportuno y respetuoso que aporte algo útil y mantenga viva la oportunidad"
+        ],
+        "correctIndex": 3,
+        "explanation": "Área de ventas: el seguimiento mantiene la relación activa y muestra interés genuino, siempre que sea oportuno y no invasivo."
+      },
+      {
+        "question": "Tras varias semanas sin cerrar, un vendedor llega a sus reuniones desanimado, con poca energía y dudando de su producto. Sus resultados empeoran aún más. ¿Qué explica mejor lo que ocurre?",
+        "options": [
+          "El estado de ánimo del vendedor no tiene relación con el resultado de la venta",
+          "La actitud del vendedor afecta la confianza que percibe el cliente, por lo que trabajar su estado interno es parte del trabajo comercial",
+          "Mostrar desinterés hace que el vendedor luzca más profesional",
+          "El problema solo puede resolverse cambiando el producto que vende"
+        ],
+        "correctIndex": 1,
+        "explanation": "Área de ventas: el programa vincula la actitud y el estado emocional del vendedor con la confianza que transmite, y herramientas como el coaching y la PNL apuntan a ese trabajo."
+      },
+      {
+        "question": "Una cuenta de Instagram compra diez mil seguidores y su número crece de un día para otro, pero casi nadie comenta ni compra. ¿Qué camino propone el área digital?",
+        "options": [
+          "Comprar más seguidores hasta que el volumen genere ventas por sí solo",
+          "Dejar de publicar y esperar a que el algoritmo distribuya el contenido antiguo",
+          "Publicar contenido relevante de forma constante e interactuar con la audiencia para construir una comunidad real",
+          "Desactivar los comentarios para que el perfil se vea más ordenado"
+        ],
+        "correctIndex": 2,
+        "explanation": "Área digital: una comunidad comprometida se construye aportando valor de forma constante, no inflando métricas que no corresponden a personas interesadas."
+      },
+      {
+        "question": "El dueño de un negocio digital responde personalmente cada mensaje, arma cada cotización a mano y no tiene nada escrito sobre cómo se hacen las cosas. Quiere crecer pero ya no tiene horas disponibles. ¿Qué le corresponde hacer?",
+        "options": [
+          "Reducir la cantidad de productos hasta que el tiempo alcance",
+          "Crear procesos y herramientas documentadas que permitan que el negocio opere sin depender solo de él",
+          "Dejar de atender clientes para enfocarse únicamente en publicar contenido",
+          "Aumentar la publicidad pagada sin cambiar nada más en la operación"
+        ],
+        "correctIndex": 1,
+        "explanation": "Área digital: sistematizar significa diseñar procesos repetibles que sostengan la operación y liberen al dueño del trabajo puramente manual."
+      },
+      {
+        "question": "Una agencia escribe sus anuncios con mensajes generales del tipo soluciones para todo tipo de empresas, para no dejar a nadie fuera. Los anuncios tienen alcance pero casi no generan contactos. ¿Cuál es la causa más probable?",
+        "options": [
+          "El mensaje no está dirigido a un cliente concreto, por lo que no le resulta relevante a nadie en particular",
+          "El presupuesto es insuficiente, independientemente del mensaje",
+          "Los mensajes generales siempre funcionan mejor y el problema debe estar en la plataforma",
+          "Conocer el problema específico del cliente no influye en los resultados de un anuncio"
+        ],
+        "correctIndex": 0,
+        "explanation": "Área digital: no definir con claridad a quién se le habla es uno de los errores que más afecta los resultados, porque un mensaje para todos no conecta con nadie."
+      },
+      {
+        "question": "Un negocio con buena demanda acepta todos los pedidos que llegan, aunque su equipo ya no da abasto y los tiempos de entrega se retrasan. El dueño insiste en seguir vendiendo al mismo ritmo. ¿Qué principio de estrategia está ignorando?",
+        "options": [
+          "Que crecer siempre es preferible, sin importar la capacidad instalada",
+          "Que el crecimiento sostenible exige equilibrio entre la demanda, los recursos y la capacidad real del equipo",
+          "Que lo correcto sería dejar de crecer por completo para evitar riesgos",
+          "Que el único límite del crecimiento es la inversión externa disponible"
+        ],
+        "correctIndex": 1,
+        "explanation": "Área de estrategia: el crecimiento sostenible busca que la expansión no supere lo que los sistemas y el equipo pueden sostener con calidad."
+      }
+    ]
+  }
+}

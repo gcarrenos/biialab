@@ -53,8 +53,11 @@ export async function createCertificateCheckout(opts: {
   courseTitle: string;
   customerEmail: string;
   origin: string;
+  // Per-course override (courses.certificate_price_usd). Falls back to the
+  // platform default when the course doesn't set one.
+  priceUsd?: number | null;
 }): Promise<CheckoutSession> {
-  const price = certificatePriceUsd();
+  const price = opts.priceUsd ?? certificatePriceUsd();
   if (price === null) throw new Error('CERTIFICATE_PRICE_USD not configured');
 
   return stripeRequest('/checkout/sessions', {

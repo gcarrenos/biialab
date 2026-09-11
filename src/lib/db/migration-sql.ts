@@ -314,3 +314,7 @@ ALTER TABLE "quizzes" ADD CONSTRAINT "quizzes_course_id_courses_id_fk" FOREIGN K
 export const MIGRATION_SQL_0003 = `ALTER TABLE "certificates" ADD COLUMN IF NOT EXISTS "paid_at" timestamp;--> statement-breakpoint
 ALTER TABLE "certificates" ADD COLUMN IF NOT EXISTS "stripe_session_id" text;--> statement-breakpoint
 UPDATE "certificates" SET "paid_at" = "issued_at" WHERE "paid_at" IS NULL;`;
+
+// Migration 0004: per-course certificate price. NULL means "use the platform
+// default" (CERTIFICATE_PRICE_USD), so existing courses are untouched.
+export const MIGRATION_SQL_0004 = `ALTER TABLE "courses" ADD COLUMN IF NOT EXISTS "certificate_price_usd" integer;`;

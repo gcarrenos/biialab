@@ -45,6 +45,7 @@ export async function POST(request: Request) {
       courseTitle: course?.title ?? 'Curso BiiA LAB',
       customerEmail: user.email,
       origin,
+      priceUsd: course?.certificatePriceUsd ?? null,
     });
 
     await db.update(certificates)
