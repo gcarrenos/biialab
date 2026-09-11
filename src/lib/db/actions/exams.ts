@@ -4,8 +4,10 @@ import { headers } from 'next/headers';
 import { and, eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { auth } from '@/lib/auth';
-import { quizzes, quizQuestions, quizAttempts, courses } from '@/lib/db/schema';
+import { quizzes, quizQuestions, quizAttempts, courses, certificates, users } from '@/lib/db/schema';
 import { issueCertificateForUser } from '@/lib/db/actions/certificates';
+import { sendCertificateReady } from '@/lib/email';
+import { certificatePriceUsd } from '@/lib/payments/stripe';
 
 async function getSessionUser() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -102,8 +104,29 @@ export async function submitExamAttempt(quizId: string, answers: Record<string, 
     let certificateNumber: string | null = null;
     if (passed && quiz.courseId) {
       try {
+        // Was there already a certificate for this course? Retaking a passed
+        // exam must not re-send the "you passed" email.
+        const already = await db.query.certificates.findFirst({
+          where: and(eq(certificates.userId, user.id), eq(certificates.courseId, quiz.courseId)),
+        });
         const cert = await issueCertificateForUser(user.id, quiz.courseId);
         certificateNumber = cert.certificateNumber;
+
+        if (!already) {
+          // First time earning it: tell them, because otherwise nothing does.
+          // Deliberately not awaited-on-failure — the certificate stands either way.
+          const course = await db.query.courses.findFirst({ where: eq(courses.id, quiz.courseId) });
+          const owner = await db.query.users.findFirst({ where: eq(users.id, user.id) });
+          if (course && owner?.email) {
+            await sendCertificateReady({
+              to: owner.email,
+              name: owner.name ?? null,
+              courseTitle: course.title,
+              certificateNumber: cert.certificateNumber,
+              priceUsd: cert.paidAt ? null : (course.certificatePriceUsd ?? certificatePriceUsd()),
+            });
+          }
+        }
       } catch (error) {
         console.error('certificate issuance error:', error);
       }

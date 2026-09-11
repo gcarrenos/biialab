@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
-import { certificates } from '@/lib/db/schema';
+import { certificates, courses, users } from '@/lib/db/schema';
+import { sendCertificateUnlocked } from '@/lib/email';
 
 export const maxDuration = 30;
 // Stripe verifies against the raw body, so this route must never be statically
@@ -107,6 +108,22 @@ export async function POST(request: Request) {
         .set({ paidAt: new Date(), stripeSessionId: String(session.id ?? '') })
         .where(eq(certificates.id, cert.id));
       console.log(`stripe webhook: unlocked ${certificateNumber} via ${session.id}`);
+
+      // Receipt + download link. Sent from here rather than the success_url so
+      // it still arrives when the buyer never comes back to the site, which is
+      // the whole reason this webhook exists.
+      const [course, owner] = await Promise.all([
+        db.query.courses.findFirst({ where: eq(courses.id, cert.courseId) }),
+        db.query.users.findFirst({ where: eq(users.id, cert.userId) }),
+      ]);
+      if (course && owner?.email) {
+        await sendCertificateUnlocked({
+          to: owner.email,
+          name: owner.name ?? null,
+          courseTitle: course.title,
+          certificateNumber: cert.certificateNumber,
+        });
+      }
     }
 
     return NextResponse.json({ received: true, certificateNumber, unlocked: true });
