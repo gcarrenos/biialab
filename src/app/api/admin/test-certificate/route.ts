@@ -55,6 +55,8 @@ export async function POST(request: Request) {
     if (paymentsEnabled() && cert.paidAt === null) {
       try {
         const checkout = await createCertificateCheckout({
+          // Same per-course price the real buyer would see.
+          priceUsd: course.certificatePriceUsd ?? null,
           certificateNumber: cert.certificateNumber,
           courseTitle: course.title,
           customerEmail: TEST_USER_EMAIL,
