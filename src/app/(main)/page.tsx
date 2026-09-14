@@ -83,12 +83,12 @@ export default async function HomePage() {
 
   return (
     <div className="bg-background">
-      {/* Diplomado presale announcement */}
+      {/* Diplomado announcement */}
       <Link
         href="/diplomado"
         className="block bg-accent text-white text-center text-sm font-medium px-4 py-2.5 hover:bg-accent/90 transition-colors"
       >
-        Preventa: Diplomado en Neuroventas — precio de fundador por tiempo limitado. Reserva tu lugar
+        Diplomado en Neuroventas: 27 clases gratis, examen final y certificado verificable. Empieza hoy
       </Link>
 
       {/* Hero: full-bleed dark band */}

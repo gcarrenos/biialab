@@ -25,6 +25,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    serverActions: {
+      // www.biialab.org is served without a redirect; without this, server
+      // actions (enroll, progress) from www are rejected as cross-origin.
+      allowedOrigins: ['biialab.org', 'www.biialab.org'],
+    },
+  },
   typescript: {
     // Warning: This allows production builds to successfully complete even if
     // your project has TypeScript errors.
