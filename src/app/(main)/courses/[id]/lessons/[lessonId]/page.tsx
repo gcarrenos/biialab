@@ -134,7 +134,7 @@ export default function LessonPage({ params }: LessonPageProps) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background text-text-primary">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Loading lesson...</h2>
+          <h2 className="text-2xl font-bold mb-4">Cargando clase...</h2>
           <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto"></div>
         </div>
       </div>
@@ -145,9 +145,9 @@ export default function LessonPage({ params }: LessonPageProps) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background text-text-primary">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Lesson not found</h2>
+          <h2 className="text-2xl font-bold mb-4">Clase no encontrada</h2>
           <Link href={`/courses/${id}`} className="text-accent hover:underline">
-            Back to course
+            Volver al curso
           </Link>
         </div>
       </div>
@@ -284,13 +284,16 @@ export default function LessonPage({ params }: LessonPageProps) {
   
   return (
     <div className="bg-background min-h-screen text-text-primary">
-      <div className="flex flex-col lg:flex-row h-screen">
+      {/* Mobile: natural page scroll with the player first and the syllabus below.
+          A fixed h-screen column let a long syllabus (27 lessons in the Diplomado)
+          take the whole viewport and squeeze the player to 0px. */}
+      <div className="flex flex-col lg:flex-row lg:h-screen">
         {/* Sidebar */}
-        <div className={`${sidebarHidden ? 'hidden' : 'w-full lg:w-80'} bg-background-light border-r border-gray-800 overflow-y-auto`}>
+        <div className={`${sidebarHidden ? 'hidden' : 'w-full lg:w-80'} order-2 lg:order-none bg-background-light border-r border-gray-800 lg:overflow-y-auto`}>
           <div className="p-4 border-b border-gray-800">
             <Link href={`/courses/${courseSlug}`} className="flex items-center text-text-secondary hover:text-text-primary">
               <ChevronLeftIcon className="h-5 w-5 mr-2" />
-              <span>Back to course</span>
+              <span>Volver al curso</span>
             </Link>
           </div>
           
@@ -358,7 +361,7 @@ export default function LessonPage({ params }: LessonPageProps) {
         </div>
         
         {/* Main content */}
-        <div className="flex-1 flex flex-col overflow-y-auto">
+        <div className="flex-1 flex flex-col order-1 lg:order-none lg:overflow-y-auto">
           {/* Video player header */}
           <div className="bg-black p-4 flex items-center justify-between gap-2">
             <button
@@ -381,13 +384,13 @@ export default function LessonPage({ params }: LessonPageProps) {
                 onClick={() => setActiveTab('resources')}
                 className={`px-3 py-1 rounded text-sm ${activeTab === 'resources' ? 'bg-accent text-white' : 'bg-gray-800 text-gray-300'}`}
               >
-                Resources
+                Recursos
               </button>
               <button 
                 onClick={() => setActiveTab('notes')}
                 className={`px-3 py-1 rounded text-sm ${activeTab === 'notes' ? 'bg-accent text-white' : 'bg-gray-800 text-gray-300'}`}
               >
-                Notes
+                Notas
               </button>
               {lessonQuizzes && lessonQuizzes.length > 0 && (
                 <button 
@@ -401,7 +404,7 @@ export default function LessonPage({ params }: LessonPageProps) {
           </div>
           
           {/* Content area */}
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 lg:overflow-y-auto">
             {activeTab === 'video' && (
               <div className="aspect-video bg-black relative">
                 {lessonYoutubeId ? (
@@ -421,11 +424,11 @@ export default function LessonPage({ params }: LessonPageProps) {
                     src={lessonVideoUrl}
                     poster="https://picsum.photos/800/450?random=video"
                   >
-                    Your browser does not support the video tag.
+                    Tu navegador no puede reproducir este video.
                   </video>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-text-secondary">
-                    <p>No video available for this lesson</p>
+                    <p>Esta clase no tiene video disponible</p>
                   </div>
                 )}
               </div>
@@ -433,7 +436,7 @@ export default function LessonPage({ params }: LessonPageProps) {
             
             {activeTab === 'resources' && (
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-6">Resources</h3>
+                <h3 className="text-xl font-bold mb-6">Recursos</h3>
                 {lessonResources && lessonResources.length > 0 ? (
                   <div className="grid gap-4 md:grid-cols-2">
                     {lessonResources.map((resource: any) => (
@@ -462,14 +465,14 @@ export default function LessonPage({ params }: LessonPageProps) {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-text-secondary">No resources available for this lesson.</p>
+                  <p className="text-text-secondary">Esta clase no tiene recursos.</p>
                 )}
               </div>
             )}
             
             {activeTab === 'notes' && (
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-6">Notes</h3>
+                <h3 className="text-xl font-bold mb-6">Notas</h3>
                 <textarea
                   value={userNotes}
                   onChange={(e) => setUserNotes(e.target.value)}
@@ -479,7 +482,7 @@ export default function LessonPage({ params }: LessonPageProps) {
                 <button 
                   className="mt-4 px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors"
                 >
-                  Save Notes
+                  Guardar notas
                 </button>
               </div>
             )}
