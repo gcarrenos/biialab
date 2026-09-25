@@ -47,7 +47,9 @@ const outDir = path.join(here, 'out', 'novela', cfg.name);
 fs.mkdirSync(outDir, { recursive: true });
 
 const ENC = ['-c:v', 'libx264', '-preset', 'fast', '-crf', '19', '-r', '30', '-pix_fmt', 'yuv420p'];
-const VF = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30';
+const ASPECT = cfg.aspect ?? '9:16';
+const [OW, OH] = ASPECT === '16:9' ? [1920, 1080] : [1080, 1920];
+const VF = `scale=${OW}:${OH}:force_original_aspect_ratio=increase,crop=${OW}:${OH},fps=30`;
 
 async function fal(endpoint, body, timeout = 600_000) {
   const res = await fetch(`https://fal.run/${endpoint}`, {
@@ -89,7 +91,7 @@ async function geminiImage(prompt, outFile, refFile) {
   for (const model of ['gemini-3-pro-image-preview', 'gemini-2.5-flash-image']) {
     const res = await gfetch(`${GEMINI}/models/${model}:generateContent`, {
       method: 'POST', headers: gHeaders, signal: AbortSignal.timeout(240_000),
-      body: JSON.stringify({ contents: [{ parts }], generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '9:16' } } }),
+      body: JSON.stringify({ contents: [{ parts }], generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: ASPECT } } }),
     });
     const data = await res.json();
     const img = data.candidates?.[0]?.content?.parts?.find((p) => p.inlineData?.data);
@@ -114,7 +116,7 @@ async function veoAnimate(prompt, imgFile, outFile) {
       method: 'POST', headers: gHeaders, signal: AbortSignal.timeout(120_000),
       body: JSON.stringify({
         instances: [{ prompt, image: { bytesBase64Encoded: b64(imgFile), mimeType: 'image/png' } }],
-        parameters: { aspectRatio: '9:16', resolution: '720p', durationSeconds: 8, negativePrompt: 'blur, distort, morph, extra limbs, text' },
+        parameters: { aspectRatio: ASPECT, resolution: '720p', durationSeconds: 8, negativePrompt: 'blur, distort, morph, extra limbs, text' },
       }),
     });
     const op = await start.json();
@@ -144,7 +146,7 @@ if (!DRY && !fs.existsSync(sheet)) {
     await geminiImage(sheetPrompt, sheet);
   } else {
     console.log('1/5 Character sheet (nano-banana-pro)…');
-    const d = await fal('fal-ai/nano-banana-pro', { prompt: sheetPrompt, aspect_ratio: '9:16', num_images: 1, output_format: 'png' }, 240_000);
+    const d = await fal('fal-ai/nano-banana-pro', { prompt: sheetPrompt, aspect_ratio: ASPECT, num_images: 1, output_format: 'png' }, 240_000);
     await download(d.images[0].url, sheet);
   }
 }
@@ -166,7 +168,7 @@ for (const [i, shot] of cfg.shots.entries()) {
       const model = await geminiImage(shotPrompt, img, sheet);
       console.log(`   shot ${n} image ok (${model})`);
     } else {
-      const d = await fal('fal-ai/nano-banana-pro/edit', { prompt: shotPrompt, image_urls: [dataUri(sheet)], aspect_ratio: '9:16', num_images: 1, output_format: 'png' }, 240_000);
+      const d = await fal('fal-ai/nano-banana-pro/edit', { prompt: shotPrompt, image_urls: [dataUri(sheet)], aspect_ratio: ASPECT, num_images: 1, output_format: 'png' }, 240_000);
       await download(d.images[0].url, img);
       console.log(`   shot ${n} image ok`);
     }
@@ -184,7 +186,7 @@ for (const [i, shot] of cfg.shots.entries()) {
         try {
           d = await fal(ep, {
             prompt: `cinematic animated film, character and style strictly preserved, ${shot.motion}`,
-            image_url: dataUri(img), aspect_ratio: '9:16', duration: '8s', generate_audio: false, resolution: '720p',
+            image_url: dataUri(img), aspect_ratio: ASPECT, duration: '8s', generate_audio: false, resolution: '720p',
           }, 900_000);
           console.log(`   ok via ${ep}`);
           break;
