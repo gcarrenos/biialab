@@ -1,0 +1,61 @@
+{
+  "name": "tio-cap1-cuarenta-ideas",
+  "series": "MI TÍO EL EMPRENDEDOR",
+  "episode": "Cap. 1: Cuarenta ideas",
+  "title": "Mi tío tuvo 40 negocios. Mi vecino tuvo uno. | Mi tío el emprendedor, cap. 1",
+  "voice": "Paulina",
+  "elevenVoiceId": "80lPKtzJMPh1vjYMUgwe",
+  "elevenModel": "eleven_v3",
+  "voiceSettings": { "stability": 0.35, "similarity_boost": 0.8 },
+  "titleOverlay": true,
+  "endSeconds": 0,
+  "style": "photorealistic cinematic film still, shot on 35mm anamorphic lens, natural skin texture and pores, real Latin American locations, practical light sources, shallow depth of field, subtle film grain, warm comedic tone like a Colombian feel-good film, looks like a frame from a real movie, vertical 9:16 composition, no text unless specified",
+  "character": "Fabio, a real 52-year-old Colombian man, round friendly face, thick grey-black mustache, slicked-back thinning hair, a gold chain over a short-sleeve cream guayabera shirt, permanent look of unshakeable optimism, reading glasses pushed up on his forehead",
+  "characterSheet": "front-facing three-quarter portrait photograph of Fabio, neutral warm background, soft natural window light, full upper body visible, casting-photo quality, same face to be reused as reference",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "Mi tío Fabio ha tenido cuarenta negocios en su vida. Todos geniales. Todos duraron exactamente dos semanas.",
+      "prompt": "Fabio standing at the head of a crowded Sunday family lunch table on a patio, arms spread wide mid-announcement, proud beaming face, a hand-drawn business plan on a piece of cardboard beside him, the relatives around the table keep eating without looking up, tropical afternoon light through plants",
+      "motion": "he spreads his arms wider and grins expectantly, nobody at the table looks up, one aunt keeps serving rice"
+    },
+    {
+      "dur": 8,
+      "vo": "Empezó con una heladería. En un pueblo donde llueve once meses al año. Decía que así no había competencia.",
+      "prompt": "Fabio alone behind the counter of a tiny empty ice cream parlour wearing a paper hat, colourful tubs of ice cream untouched, heavy rain pouring outside the glass door, a puddle at the entrance, fluorescent light, he stares out at the rain with a hopeful face",
+      "motion": "he leans on the counter and watches the rain, wipes the clean counter once more, straightens his paper hat"
+    },
+    {
+      "dur": 8,
+      "vo": "Después montó un gimnasio para perros. Llegó a tener dos clientes. Los dos perros eran de él.",
+      "prompt": "Fabio in a converted garage gym holding two leashes, two chubby small dogs sitting still on miniature treadmills that are not moving, a hand-painted sign on the wall, exercise mats, morning light through the open garage door, Fabio gestures encouragingly at the dogs",
+      "motion": "he claps twice to motivate the dogs, both dogs sit down instead, he nods as if this were progress"
+    },
+    {
+      "dur": 8,
+      "vo": "Luego una aplicación. Nunca supo bien qué hacía la aplicación. Pero el logo, el logo estaba hermoso.",
+      "prompt": "Fabio turning a laptop screen toward a skeptical young nephew at a kitchen table, the screen showing one enormous glossy logo and nothing else, the wall behind covered in colourful sticky notes, two coffee cups, evening kitchen light",
+      "motion": "he turns the laptop proudly toward the camera and points at the screen, the nephew slowly leans back"
+    },
+    {
+      "dur": 8,
+      "vo": "Cada domingo llegaba al almuerzo con la idea que sí era. Y cada domingo, yo le creía.",
+      "prompt": "Fabio standing again at the same family lunch table, one finger raised mid-pitch, a folded newspaper under his arm, and one young man at the table listening with genuine bright eyes while everyone else eats, warm patio light, plants and a radio in the background",
+      "motion": "Fabio raises one finger and leans in to make his point, the young man nods along, completely convinced"
+    },
+    {
+      "dur": 8,
+      "vo": "Hasta que mi vecino, que nunca tuvo una idea buena, abrió una panadería. Una sola. Y la abrió todos los días durante seis años.",
+      "prompt": "an ordinary quiet man in a plain apron rolling up the metal shutter of a small neighbourhood bakery before dawn, blue pre-sunrise street empty behind him, warm yellow light spilling out from inside, trays of fresh bread visible on the racks, steam on the glass",
+      "motion": "he pulls the shutter all the way up, the warm light spreads onto the wet street, he steps inside"
+    },
+    {
+      "dur": 9,
+      "vo": "Hoy mi vecino tiene tres locales. Mi tío tiene cuarenta y un ideas. Las ideas no valen nada. Abrir todos los días, sí.",
+      "prompt": "Fabio at the counter of that same bakery now busy with customers, paying for a paper bag of bread, the baker smiling behind the register, and Fabio already leaning in with one hand raised explaining a brand new idea to him, morning light, warm and affectionate",
+      "motion": "he takes the bread, then raises a finger and starts explaining a new idea, the baker laughs and keeps working",
+      "cliffhanger": true
+    }
+  ],
+  "description": "Mi tío Fabio ha tenido cuarenta negocios. Una heladería en un pueblo donde llueve once meses al año. Un gimnasio para perros con dos clientes, que eran sus dos perros. Una app con un logo hermoso y ninguna función. Mi vecino tuvo una sola idea: una panadería. Y la abrió todos los días durante seis años. Hoy tiene tres locales.\n\nMI TÍO EL EMPRENDEDOR es una serie de BiiA LAB sobre las cosas que de verdad hacen o rompen un negocio. Cap. 1: las ideas no valen nada, la constancia sí.\n\nImágenes y narración generadas con IA.\n\nCursos gratis con certificado: https://www.biialab.org/courses?utm_source=youtube&utm_medium=shorts&utm_campaign=mi-tio\n#biialab #emprendimiento #negocios #shorts"
+}
