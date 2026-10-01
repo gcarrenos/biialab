@@ -1,0 +1,68 @@
+{
+  "name": "biialab-en-corto",
+  "series": "BiiA LAB",
+  "episode": "En corto",
+  "title": "BiiA LAB en corto",
+  "aspect": "16:9",
+  "voice": "Paulina",
+  "elevenVoiceId": "80lPKtzJMPh1vjYMUgwe",
+  "elevenModel": "eleven_v3",
+  "voiceSettings": { "stability": 0.45, "similarity_boost": 0.8 },
+  "titleOverlay": true,
+  "endSeconds": 0,
+  "style": "photorealistic cinematic documentary still, shot on 35mm, natural skin texture, real Latin American locations, practical light sources, shallow depth of field, subtle film grain, warm and hopeful colour grade, looks like a frame from a real documentary, horizontal 16:9 composition, no text unless specified",
+  "character": "Daniela, a real 27-year-old Colombian woman, dark curly hair tied back, simple grey t-shirt, expressive attentive eyes, no makeup, the look of someone who works and studies at night",
+  "characterSheet": "front-facing three-quarter portrait photograph of Daniela, neutral warm background, soft natural window light, upper body visible, casting-photo quality, same face to be reused as reference",
+  "shots": [
+    {
+      "dur": 8,
+      "vo": "BiiA LAB son dos cosas. Un canal de YouTube con dos millones de suscriptores, en español, sobre ventas y emprendimiento.",
+      "prompt": "wide shot of a packed auditorium in Latin America seen from the back rows, hundreds of people watching a speaker on a lit stage, warm stage light, a few phones raised recording, cinematic depth",
+      "motion": "slow push in toward the stage, the audience shifts and a few phones rise"
+    },
+    {
+      "dur": 8,
+      "vo": "Y biialab punto org, donde esos mismos videos se vuelven cursos ordenados, con examen y certificado al final.",
+      "prompt": "Daniela at a small kitchen table at night studying on a laptop, a notebook and a cup of coffee beside her, the laptop light on her face, a quiet apartment behind her, warm lamp in the background",
+      "motion": "she writes something in the notebook, looks back up at the screen, nods to herself"
+    },
+    {
+      "dur": 8,
+      "vo": "Los cursos son gratis. Lo que se cobra es el certificado. El canal trae a la gente, la plataforma la convierte en alumnos.",
+      "prompt": "close-up of Daniela's hands holding a freshly printed certificate with a visible seal, her face soft and out of focus smiling behind it, morning window light, a simple home background",
+      "motion": "she turns the certificate slightly toward the light and her smile widens"
+    },
+    {
+      "dur": 8,
+      "vo": "Ahora mismo hay una fábrica de video hecha con inteligencia artificial. Sin cámara, sin locutor, sin editor.",
+      "prompt": "a dark quiet room lit only by two monitors showing rows of video frames being rendered, a desk with headphones and a glass of water, nobody in the chair, blue screen glow on the wall",
+      "motion": "the frames on the monitors advance one by one, the screen light flickers on the empty chair"
+    },
+    {
+      "dur": 8,
+      "vo": "Había conferencias completas guardadas que nadie estaba usando. Se están volviendo cursos de verdad.",
+      "prompt": "a storage room full of shelves of old labelled hard drives and tape boxes, a single work lamp switched on illuminating one shelf, dust in the light beam, the rest of the room in shadow",
+      "motion": "the lamp light grows and spreads slowly across the shelves, dust drifting in the beam"
+    },
+    {
+      "dur": 8,
+      "vo": "Descubrimos que la mayoría de los videos del canal estaban apagados. Incluidos los que más habían dado.",
+      "prompt": "a large wall of small screens in a dark room, almost all of them black and only a handful glowing with video, a person standing small in front of the wall looking up at it, cold light",
+      "motion": "a few more dark screens flicker on one by one, the person takes a step closer"
+    },
+    {
+      "dur": 8,
+      "vo": "Y aprendimos algo caro. Los videos cortos traen gente, no dinero. El ingreso está en las charlas largas.",
+      "prompt": "a split composition, on one side a hand scrolling a phone very fast in the dark, on the other side the same packed auditorium in warm light with the audience sitting still and attentive",
+      "motion": "the thumb scrolls fast and blurred on one side while the audience stays calm and still on the other"
+    },
+    {
+      "dur": 9,
+      "vo": "La audiencia ya está. Dos millones de personas que todavía no saben que esto existe. Ese es el próximo paso.",
+      "prompt": "Daniela standing at a window in the early morning looking out over a Latin American city waking up, holding her phone loosely at her side, warm sunrise light on her face, hopeful and calm",
+      "motion": "she looks out over the city, the morning light rises on her face, she takes a slow breath",
+      "cliffhanger": true
+    }
+  ],
+  "description": "BiiA LAB en corto: qué es, qué estamos construyendo y qué sigue."
+}

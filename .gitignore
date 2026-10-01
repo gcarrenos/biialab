@@ -51,3 +51,7 @@ next-env.d.ts
 # third-party transcripts (not ours to ship) + compiled analyzer binary
 scripts/clips/corpus-ext/
 scripts/clips/income-analyzer
+
+# catalog re-packaging waves: downloaded sources and caption dumps are regenerable
+/scripts/clips/wave*/src/
+/scripts/clips/corpus-wave*/
