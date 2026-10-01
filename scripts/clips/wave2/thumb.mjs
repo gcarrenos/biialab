@@ -13,11 +13,11 @@ const W = 1280, H = 720, ORANGE = '#ff4d14';
 
 // lines: headline lines bottom-up; hot: index of the orange line; crop: [left,top,width,height] on the source frame
 const SPECS = {
-  iHXiaD69ieQ: { lines: ['CÓMO MONTAR', 'UN NEGOCIO DE', 'NEUROMARKETING'], hot: 2, crop: [320, 0, 960, 540] },
-  VcguOueUguA: { lines: ['LA CULTURA', 'MULTIPLICA', 'RESULTADOS'], hot: 1 },
-  o_xZUhvCBUI: { lines: ['NEUROEDUCACIÓN', 'CÓMO APRENDE', 'EL CEREBRO'], hot: 0 },
-  orsYHuNMFW0: { lines: ['NEGOCIAR ES', 'UN JUEGO', 'DE PODER'], hot: 2 },
-  p9nAVOUxIdY: { lines: ['NEGOCIOS', 'PARALELOS AL', 'NEUROMARKETING'], hot: 0, crop: [100, 0, 960, 540] },
+  wPbqnqOIQuQ: { lines: ['VERDADES', 'Y MENTIRAS DEL', 'NEUROMARKETING'], hot: 0 },
+  AwVs2TdHyYA: { lines: ['CÓMO NEGOCIAR', 'LO QUE NO SABES', 'CUÁNTO VALE'], hot: 0 },
+  ho5DBG9hux0: { lines: ['CAMBIA CÓMO COMES,', 'CAMBIA TU VIDA'], hot: 1 },
+  '0ksOZ5iqx0k': { lines: ['EL JEFE', 'QUE NO ES LÍDER'], hot: 1, crop: [0, 60, 640, 360] },
+  Gr9RO7zERqA: { lines: ['EL MIEDO', 'QUE TE MUEVE'], hot: 0 },
 };
 
 const gradient = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
