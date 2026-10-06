@@ -55,3 +55,4 @@ scripts/clips/income-analyzer
 # catalog re-packaging waves: downloaded sources and caption dumps are regenerable
 /scripts/clips/wave*/src/
 /scripts/clips/corpus-wave*/
+/scripts/clips/wave*/shorts/*.mp4
