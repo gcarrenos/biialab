@@ -13,10 +13,11 @@ const W = 1280, H = 720, ORANGE = '#ff4d14';
 
 // lines: headline lines bottom-up; hot: index of the orange line; crop: [left,top,width,height] on the source frame
 const SPECS = {
-  'w3-invertir-ahorros': { lines: ['QUÉ VENDER', 'Y DÓNDE INVERTIR', 'TUS AHORROS'], hot: 1 },
-  'w3-reglas-prestamos': { lines: ['6 REGLAS', 'PARA PEDIR', 'UN PRÉSTAMO'], hot: 0 },
-  'w3-vender-cuando-dicen-no': { lines: ['CUANDO EL CLIENTE', 'DICE NO'], hot: 1 },
-  'w3-salir-de-deudas': { lines: ['SALIR DE DEUDAS', 'NO SIRVE', 'SI NO CAMBIAS ESTO'], hot: 1 },
+  'w3-era-digital': { lines: ['GANAR DINERO', 'EN LA ERA', 'DIGITAL'], hot: 2, crop: [280, 0, 720, 405] },
+  'w3-procrastinar': { lines: ['CÓMO DEJAR DE', 'PROCRASTINAR'], hot: 1, crop: [0, 0, 1280, 600] },
+  'w3-plan-marketing': { lines: ['UN PLAN DE', 'MARKETING QUE', 'SÍ FUNCIONA'], hot: 2 },
+  'w3-4-emociones': { lines: ['LAS 4 EMOCIONES', 'PARA CUMPLIR', 'TUS METAS'], hot: 1 },
+  'w3-rentabilidad': { lines: ['RENTABILIDAD', 'DE UNA', 'INVERSIÓN'], hot: 0, crop: [0, 0, 1280, 600] },
 };
 
 const gradient = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
