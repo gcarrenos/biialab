@@ -13,11 +13,8 @@ const W = 1280, H = 720, ORANGE = '#ff4d14';
 
 // lines: headline lines bottom-up; hot: index of the orange line; crop: [left,top,width,height] on the source frame
 const SPECS = {
-  'w3-era-digital': { lines: ['GANAR DINERO', 'EN LA ERA', 'DIGITAL'], hot: 2, crop: [280, 0, 720, 405] },
-  'w3-procrastinar': { lines: ['CÓMO DEJAR DE', 'PROCRASTINAR'], hot: 1, crop: [0, 0, 1280, 600] },
-  'w3-plan-marketing': { lines: ['UN PLAN DE', 'MARKETING QUE', 'SÍ FUNCIONA'], hot: 2 },
-  'w3-4-emociones': { lines: ['LAS 4 EMOCIONES', 'PARA CUMPLIR', 'TUS METAS'], hot: 1 },
-  'w3-rentabilidad': { lines: ['RENTABILIDAD', 'DE UNA', 'INVERSIÓN'], hot: 0, crop: [0, 0, 1280, 600] },
+  'w4-triangulo-exito': { lines: ['TRABAJAS MUCHO', 'Y NO AVANZAS'], hot: 1, crop: [440, 0, 840, 472] },
+  'w4-sin-miedo-suenos': { lines: ['SIN MIEDO', 'A TUS SUEÑOS'], hot: 0 },
 };
 
 const gradient = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
